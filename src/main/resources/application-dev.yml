@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+<<<<<<< HEAD
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+
+    username: root
+    password: 123456
+=======
+    url: jdbc:mysql://127.0.0.1:3306/blog_jpa?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+
+>>>>>>> d30a2ee (项目第一次提交)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+<<<<<<< HEAD
+=======
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+>>>>>>> d30a2ee (项目第一次提交)
+
+logging:
+  level:
+    root: info
+    com.fzshuai: debug
+  file:
+    name: log/blog-dev.log
+
+<<<<<<< HEAD
+server:
+  port: 8081
+=======
+
+
+>>>>>>> d30a2ee (项目第一次提交)

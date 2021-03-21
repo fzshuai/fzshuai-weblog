@@ -1,0 +1,227 @@
+2021-03-13 09:27:01.077  INFO 9968 --- [restartedMain] com.fzshuai.BlogApplication              : Starting BlogApplication using Java 1.8.0_251 on DESKTOP-5KANSA0 with PID 9968 (F:\Idea Projects\blog-jpa\target\classes started by Fzshuai in F:\Idea Projects\blog-jpa)
+2021-03-13 09:27:01.083 DEBUG 9968 --- [restartedMain] com.fzshuai.BlogApplication              : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-03-13 09:27:01.083  INFO 9968 --- [restartedMain] com.fzshuai.BlogApplication              : The following profiles are active: dev
+2021-03-13 09:27:01.141  INFO 9968 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-03-13 09:27:01.142  INFO 9968 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-03-13 09:27:02.638  INFO 9968 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-13 09:27:02.732  INFO 9968 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 83 ms. Found 5 JPA repository interfaces.
+2021-03-13 09:27:03.600  INFO 9968 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-03-13 09:27:03.609  INFO 9968 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-03-13 09:27:03.609  INFO 9968 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-03-13 09:27:03.612  INFO 9968 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-03-13 09:27:03.613  INFO 9968 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-03-13 09:27:03.613  INFO 9968 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-03-13 09:27:03.637  INFO 9968 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-03-13 09:27:03.737  INFO 9968 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-03-13 09:27:03.737  INFO 9968 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2594 ms
+2021-03-13 09:27:03.925  INFO 9968 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-13 09:27:03.988  INFO 9968 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-03-13 09:27:04.160  INFO 9968 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-03-13 09:27:04.280  INFO 9968 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-03-13 09:27:04.465  INFO 9968 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-03-13 09:27:04.477  INFO 9968 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-03-13 09:27:05.288  INFO 9968 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-13 09:27:05.298  INFO 9968 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-13 09:27:05.352  INFO 9968 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-03-13 09:27:06.161  WARN 9968 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-13 09:27:06.337  INFO 9968 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-13 09:27:06.675  INFO 9968 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-03-13 09:27:08.537  INFO 9968 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-03-13 09:27:08.546  INFO 9968 --- [restartedMain] com.fzshuai.BlogApplication              : Started BlogApplication in 8.244 seconds (JVM running for 9.87)
+2021-03-13 09:27:38.920  INFO 9968 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-13 09:27:38.920  INFO 9968 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-13 09:27:38.922  INFO 9968 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-03-13 09:27:38.962  INFO 9968 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 09:27:39.087  WARN 9968 --- [http-nio-8080-exec-1] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-03-13 09:27:39.119  INFO 9968 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 21:47:33.839  INFO 15172 --- [restartedMain] com.fzshuai.BlogApplication              : Starting BlogApplication using Java 1.8.0_251 on DESKTOP-5KANSA0 with PID 15172 (F:\Idea Projects\blog-jpa\target\classes started by Fzshuai in F:\Idea Projects\blog-jpa)
+2021-03-13 21:47:33.953 DEBUG 15172 --- [restartedMain] com.fzshuai.BlogApplication              : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-03-13 21:47:33.954  INFO 15172 --- [restartedMain] com.fzshuai.BlogApplication              : The following profiles are active: dev
+2021-03-13 21:47:33.996  INFO 15172 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-03-13 21:47:33.997  INFO 15172 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-03-13 21:47:35.169  INFO 15172 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-13 21:47:35.255  INFO 15172 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 5 JPA repository interfaces.
+2021-03-13 21:47:36.033  INFO 15172 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-03-13 21:47:36.042  INFO 15172 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-03-13 21:47:36.042  INFO 15172 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-03-13 21:47:36.044  INFO 15172 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-03-13 21:47:36.044  INFO 15172 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-03-13 21:47:36.044  INFO 15172 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-03-13 21:47:36.069  INFO 15172 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-03-13 21:47:36.155  INFO 15172 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-03-13 21:47:36.155  INFO 15172 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2157 ms
+2021-03-13 21:47:36.338  INFO 15172 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-13 21:47:36.399  INFO 15172 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-03-13 21:47:36.554  INFO 15172 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-03-13 21:47:36.676  INFO 15172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-03-13 21:47:36.893  INFO 15172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-03-13 21:47:36.909  INFO 15172 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-03-13 21:47:37.717  INFO 15172 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-13 21:47:37.726  INFO 15172 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-13 21:47:37.777  INFO 15172 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-03-13 21:47:38.560  WARN 15172 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-13 21:47:38.750  INFO 15172 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-13 21:47:39.018  INFO 15172 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-03-13 21:47:40.787  INFO 15172 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-03-13 21:47:40.796  INFO 15172 --- [restartedMain] com.fzshuai.BlogApplication              : Started BlogApplication in 7.57 seconds (JVM running for 8.871)
+2021-03-13 21:47:48.312  INFO 15172 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-13 21:47:48.312  INFO 15172 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-13 21:47:48.314  INFO 15172 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-03-13 21:47:48.349  INFO 15172 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 21:47:48.461  WARN 15172 --- [http-nio-8080-exec-1] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-03-13 21:47:48.479  INFO 15172 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 22:14:30.243  INFO 15056 --- [restartedMain] com.fzshuai.BlogApplication              : Starting BlogApplication using Java 1.8.0_251 on DESKTOP-5KANSA0 with PID 15056 (F:\Idea Projects\blog-jpa\target\classes started by Fzshuai in F:\Idea Projects\blog-jpa)
+2021-03-13 22:14:30.245 DEBUG 15056 --- [restartedMain] com.fzshuai.BlogApplication              : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-03-13 22:14:30.246  INFO 15056 --- [restartedMain] com.fzshuai.BlogApplication              : The following profiles are active: dev
+2021-03-13 22:14:30.289  INFO 15056 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-03-13 22:14:30.289  INFO 15056 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-03-13 22:14:30.863  INFO 15056 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-13 22:14:30.938  INFO 15056 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 5 JPA repository interfaces.
+2021-03-13 22:14:31.600  INFO 15056 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-03-13 22:14:31.609  INFO 15056 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-03-13 22:14:31.610  INFO 15056 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-03-13 22:14:31.613  INFO 15056 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-03-13 22:14:31.613  INFO 15056 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-03-13 22:14:31.613  INFO 15056 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-03-13 22:14:31.617  INFO 15056 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-03-13 22:14:31.705  INFO 15056 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-03-13 22:14:31.705  INFO 15056 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1415 ms
+2021-03-13 22:14:31.866  INFO 15056 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-13 22:14:31.908  INFO 15056 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-03-13 22:14:32.015  INFO 15056 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-03-13 22:14:32.107  INFO 15056 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-03-13 22:14:32.256  INFO 15056 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-03-13 22:14:32.265  INFO 15056 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-03-13 22:14:32.885  INFO 15056 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-13 22:14:32.892  INFO 15056 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-13 22:14:32.943  INFO 15056 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-03-13 22:14:33.655  WARN 15056 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-13 22:14:33.817  INFO 15056 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-13 22:14:34.054  INFO 15056 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-03-13 22:14:34.422  INFO 15056 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-03-13 22:14:34.430  INFO 15056 --- [restartedMain] com.fzshuai.BlogApplication              : Started BlogApplication in 4.667 seconds (JVM running for 5.697)
+2021-03-13 22:14:48.611  INFO 15056 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-13 22:14:48.611  INFO 15056 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-13 22:14:48.612  INFO 15056 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-03-13 22:14:48.640  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 22:14:48.733  WARN 15056 --- [http-nio-8080-exec-1] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-03-13 22:14:48.747  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 22:14:54.707  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/blog/7', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.blog', args=[7, {}]}
+2021-03-13 22:14:54.791  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : blog
+2021-03-13 22:14:55.311  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/comments/7', ip='127.0.0.1', classMethod='com.fzshuai.controller.CommentController.comments', args=[7, {}]}
+2021-03-13 22:14:55.336  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Result : blog :: commentList
+2021-03-13 22:15:46.752  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 22:15:46.772  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 22:15:58.417  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/-1', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], -1, {}]}
+2021-03-13 22:15:58.432  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:15:58.531  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/57575', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 57575, {}]}
+2021-03-13 22:15:58.538  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:16:04.901  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/2', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 2, {}]}
+2021-03-13 22:16:04.909  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:17:12.146  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/2', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 2, {}]}
+2021-03-13 22:17:12.154  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:17:18.865  INFO 15056 --- [http-nio-8080-exec-6] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/5', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 5, {}]}
+2021-03-13 22:17:18.874  INFO 15056 --- [http-nio-8080-exec-6] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:19:52.519  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 22:19:52.533  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 22:19:59.442  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 22:19:59.455  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Result : index
+2021-03-13 22:20:03.405  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/-1', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], -1, {}]}
+2021-03-13 22:20:03.411  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:03.488  INFO 15056 --- [http-nio-8080-exec-7] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/57575', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 57575, {}]}
+2021-03-13 22:20:03.493  INFO 15056 --- [http-nio-8080-exec-7] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:07.898  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/1', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 1, {}]}
+2021-03-13 22:20:07.907  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:07.999 ERROR 15056 --- [http-nio-8080-exec-8] c.f.handler.ControllerExceptionHandler   : Requst URL : http://127.0.0.1:8080/types/vcxv，Exception : {}
+
+org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "vcxv"
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:133)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:170)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.NumberFormatException: For input string: "vcxv"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:589)
+	at java.lang.Long.valueOf(Long.java:803)
+	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:214)
+	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)
+	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:429)
+	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:402)
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:155)
+	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:73)
+	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:53)
+	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:696)
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:125)
+	... 47 common frames omitted
+
+2021-03-13 22:20:08.000  WARN 15056 --- [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "vcxv"]
+2021-03-13 22:20:10.850  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/2', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 2, {}]}
+2021-03-13 22:20:10.856  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:16.853  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/5', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 5, {}]}
+2021-03-13 22:20:16.860  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:19.671  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/6', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 6, {}]}
+2021-03-13 22:20:19.679  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:21.568  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/4', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 4, {}]}
+2021-03-13 22:20:21.576  INFO 15056 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:24.142  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/7', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 7, {}]}
+2021-03-13 22:20:24.149  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:25.772  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/3', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 3, {}]}
+2021-03-13 22:20:25.779  INFO 15056 --- [http-nio-8080-exec-4] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:25.849  INFO 15056 --- [http-nio-8080-exec-3] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/57575', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 57575, {}]}
+2021-03-13 22:20:25.853  INFO 15056 --- [http-nio-8080-exec-3] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:28.207  INFO 15056 --- [http-nio-8080-exec-6] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/7', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 7, {}]}
+2021-03-13 22:20:28.212  INFO 15056 --- [http-nio-8080-exec-6] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:33.783  INFO 15056 --- [http-nio-8080-exec-7] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/4', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 4, {}]}
+2021-03-13 22:20:33.788  INFO 15056 --- [http-nio-8080-exec-7] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:34.964  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/6', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 6, {}]}
+2021-03-13 22:20:34.968  INFO 15056 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:37.033  INFO 15056 --- [http-nio-8080-exec-3] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/5', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 5, {}]}
+2021-03-13 22:20:37.039  INFO 15056 --- [http-nio-8080-exec-3] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:38.615  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/types/2', ip='127.0.0.1', classMethod='com.fzshuai.controller.TypeShowController.types', args=[Page request [number: 0, size 5, sort: updateTime: DESC], 2, {}]}
+2021-03-13 22:20:38.621  INFO 15056 --- [http-nio-8080-exec-2] com.fzshuai.aspect.LogAspect             : Result : types
+2021-03-13 22:20:43.835  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2021-03-13 22:20:43.849  INFO 15056 --- [http-nio-8080-exec-5] com.fzshuai.aspect.LogAspect             : Result : index

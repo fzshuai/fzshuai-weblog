@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">FzshuaiBlog</h2>
+                <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于</a>
+                <div class="right m-item item m-mobile-hide">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!-- 中间内容 -->
+    <div class="m-container m-padded-tb-big">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <div class="eleven wide column">
+                    <div class="ui segment">
+                        <img src="https://unsplash.it/800/700?image=1005" alt="" class="ui rounded image">
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div class="ui top attached segment">
+                        <div class="ui header">关于</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <p class="m-text">毕业于辽宁石油化工大学，软件工程专业</p>
+                        <p class="m-text">qq微信同步156117106</p>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui orange basic label m-margin-tb-tiny">编程</div>
+                        <div class="ui orange basic label m-margin-tb-tiny">跑步</div>
+                        <div class="ui orange basic label m-margin-tb-tiny">音乐</div>
+                        <div class="ui orange basic label m-margin-tb-tiny">写作</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui teal basic label m-margin-tb-tiny">Java</div>
+                        <div class="ui teal basic label m-margin-tb-tiny">WEB</div>
+                        <div class="ui teal basic label m-margin-tb-tiny">SpringMVC</div>
+                        <div class="ui teal basic label m-margin-tb-tiny">MySQL</div>
+                    </div>
+                    <div class="ui bottom attached segment">
+                        <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
+                        <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+                        <a href="#" class="ui qq circular icon button" data-content="156117106" data-position="bottom center"><i class="qq icon"></i></a>
+                    </div>
+                    
+                    <div class="ui wechat-qr flowing popup transition hidden">
+                        <img src="../static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 100px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- 底部footer -->
+    <footer class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <!-- 一共分为16份 -->
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/wechat.jpg" class="ui rounded image" alt="" style="width: 110px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Email: 156117106@qq.com</a>
+                        <a href="#" class="item">QQ: 156117106</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">FzshuaiBlog</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">我的个人博客，欢迎大家体验，2021年送给自己的一句话：岁月不居，天道酬勤。123456789</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Blog Designed by fzshuai</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+    <script>
+        $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+        });
+
+        $('.wechat').popup({
+            popup: $('.wechat-qr'),
+            position: 'bottom center'
+        });
+
+        $('.qq').popup();
+    </script>
+</body>
+
+=======
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FzshuaiBlog-关于我</title>
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="_fragments :: menu(6)">
+
+</nav>
+
+<!--顶部背景图片-->
+<div class="m-bg-type_outer" style="width: 100%;height: 40%">
+    <img src="../static/images/aboutbg.jpg" th:src="@{/images/aboutbg.jpg}" alt="" class="ui m-bg image"
+         style="width: 100%;height: 100%">
+    <div class="m-bg-class_cover">
+        <div class="ui container" style="position: relative ;bottom: -540px;">
+            <div class="m-font-size-title" align="center" style="font-family:'STXingkai'">关于我</div>
+            <div class="m-font-size-text-init-title m-margin-top" align="center">
+                不是事情多难做，而是内心太脆弱
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--个人资料描述-->
+<div class="ui m-container-mini">
+    <div class="ui teal segment m-margin-top- m-opacity" align="center">
+        <div class="m-margin-top-large" align="center">
+            <img class="ui circular image" align="center" src="../static/images/me.jpg" th:src="@{/images/me.jpg}"
+                 style="width: 150px;height: 150px;">
+        </div>
+        <div class="m-margin-top-small" style="font-size: x-large;font-family: STSong" align="center">Fzshuai</div>
+        <div class="m-margin-top" align="center">
+            <!--<a href="#" class="ui tencent circular icon button"><i class="user icon"></i></a>-->
+            <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+            <a href="#" class="ui qq circular icon button"><i class="qq icon"></i></a>
+            <a href="https://github.com/FuZhanshuai/" target="_blank" class="ui github circular icon button"
+               data-content="点击跳转GitHub" data-position="bottom center"><i class="github icon"></i></a>
+            <a href="https://blog.csdn.net/weixin_44753773/" target="_blank"
+               class="ui csdn circular icon button"
+               data-content="点击跳转CSDN" data-position="bottom center"><i class="copyright icon"></i></a>
+            <a href="#" class="ui email circular icon button" data-content="fzshuai@foxmail.com"
+               data-position="bottom center"><i class="envelope  icon"></i></a>
+        </div>
+        <!--<div class="ui tencent-qr flowing popup transition hidden">
+            <img src="../static/images/oneStar.jpg" th:src="@{/images/oneStar.jpg}" alt="" class="ui rounded image"
+                 style="width: 110px">
+            <div align="center">公众号</div>
+        </div>-->
+        <div class="ui wechat-qr flowing popup transition hidden">
+            <img src="../static/images/oneStarWechat.jpg" th:src="@{/images/wechat.jpg}" alt=""
+                 class="ui rounded image" style="width: 110px">
+            <div align="center">微信</div>
+        </div>
+        <div class="ui qq-qr flowing popup transition hidden">
+            <img src="../static/images/qq.jpg" th:src="@{/images/qq.jpg}" alt="" class="ui rounded image"
+                 style="width: 110px">
+            <div align="center">QQ</div>
+        </div>
+        <hr class="m-margin-top-small" style="width: 30%">
+        <br>
+        <div>
+            <p>95后</p>
+            <p>软件工程专业学生</p>
+            <p>爱编程、爱挑站、爱学习</p>
+            <p>生命力的意义在于拚搏</p>
+            <p>因为世界本身就是一个竞技场</p>
+            <p>就是无数次被礁石击碎又无数闪地扑向礁石</p>
+            <p>生命的绿荫才会越长越茂盛</p>
+            <p>要相信</p>
+            <p>这个世界里美好总要多过阴暗，欢乐总要多过苦难</p>
+            <p>还有很多事，值得你一如既往的相信</p>
+            <p>JUST DO IT！</p>
+        </div>
+        <hr class="m-margin-top-large">
+        <br>
+        <h2 class="m-margin-tb-tiny" style="font-size: xx-large;font-weight: bold;color: #F08047;font-family: STSong">
+            打赏本站</h2>
+        <div class="ui orange basic label m-margin-tb-tiny">
+            <p style="font-size: medium">每一次提笔的我们，就像街边的街头艺人，用笔唱着自己的歌谣。如果有一天你感动了，那么期待您请我们喝一杯咖啡！</p>
+        </div>
+        <div class="ui orange basic label">
+            <div class="ui images" style="font-size: inherit !important;">
+                <div class="image">
+                    <img src="../static/images/zhifupay.jpg" th:src="@{/images/zhifupay.jpg}" alt=""
+                         class="ui rounded bordered image" style="width: 180px">
+                    <div>支付宝</div>
+                </div>
+                <div class="image">
+                    <img src="../static/images/wechatpay.jpg" th:src="@{/images/wechatpay.jpg}" alt=""
+                         class="ui rounded bordered image" style="width: 180px">
+                    <div>微信</div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="hiddenDiv"></div>-->
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<!--底部栏-->
+<footer th:replace="_fragments :: footer">
+
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+
+<!--/*/</th:block>/*/-->
+
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    // 显示公众号
+    // $('.tencent').popup({
+    //     popup: $('.tencent-qr'),
+    //     position: 'bottom center'
+    // });
+
+    // 显示微信
+    $('.wechat').popup({
+        popup: $('.wechat-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示QQ
+    $('.qq').popup({
+        popup: $('.qq-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示邮箱
+    $('.email').popup();
+
+    // 显示CSDN
+    $('.csdn').popup();
+
+    // 显示Github
+    $('.github').popup();
+
+</script>
+</body>
+>>>>>>> d30a2ee (项目第一次提交)
+</html>

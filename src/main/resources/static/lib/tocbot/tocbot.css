@@ -1,0 +1,89 @@
+.toc {
+    overflow-y: auto
+}
+
+<<<<<<< HEAD
+.toc>.toc-list {
+=======
+.toc > ul {
+>>>>>>> d30a2ee (项目第一次提交)
+    overflow: hidden;
+    position: relative
+}
+
+<<<<<<< HEAD
+.toc>.toc-list li {
+=======
+.toc > ul li {
+>>>>>>> d30a2ee (项目第一次提交)
+    list-style: none
+}
+
+.toc-list {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 10px
+}
+
+.toc-list li a {
+    display: block;
+    padding: 4px 0;
+    font-weight: 300;
+}
+<<<<<<< HEAD
+
+.toc-list li a:hover {
+    color:#00B5AD;
+=======
+.toc-list li a:hover {
+    color: #00B5AD;
+>>>>>>> d30a2ee (项目第一次提交)
+}
+
+a.toc-link {
+    color: currentColor;
+    height: 100%
+}
+
+.is-collapsible {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all 300ms ease-in-out
+}
+
+.is-collapsed {
+    max-height: 0
+}
+
+.is-position-fixed {
+    position: fixed !important;
+    top: 0
+}
+
+.is-active-link {
+    font-weight: 700;
+    color: #00B5AD !important;
+}
+
+.toc-link::before {
+<<<<<<< HEAD
+    background-color: #EEE;
+=======
+    /*background-color: #EEE;*/
+>>>>>>> d30a2ee (项目第一次提交)
+    content: ' ';
+    display: inline-block;
+    height: 20px;
+    left: 0;
+    margin-top: -1px;
+    position: absolute;
+    width: 2px
+}
+
+.is-active-link::before {
+    background-color: #54BC4B
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> d30a2ee (项目第一次提交)

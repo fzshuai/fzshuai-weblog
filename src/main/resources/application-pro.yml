@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+<<<<<<< HEAD
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+=======
+    url: jdbc:mysql://39.107.24.31:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: fzshuai
+>>>>>>> d30a2ee (项目第一次提交)
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+<<<<<<< HEAD
+=======
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+>>>>>>> d30a2ee (项目第一次提交)
+
+logging:
+  level:
+    root: warn
+    com.fzshuai: info
+  file:
+<<<<<<< HEAD
+    name: blog-pro.log
+    path: log
+
+server:
+  port: 8081
+=======
+    name: log/blog-pro.log
+
+server:
+  port: 8089
+  ssl:
+    key-store: classpath:www.fzshuai.top.jks
+    key-store-password: 353v8cj82l
+    key-store-type: JKS
+>>>>>>> d30a2ee (项目第一次提交)

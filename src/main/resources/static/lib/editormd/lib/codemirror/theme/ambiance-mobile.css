@@ -1,0 +1,11 @@
+.cm-s-ambiance.CodeMirror {
+<<<<<<< HEAD
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+=======
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+>>>>>>> d30a2ee (项目第一次提交)
+}

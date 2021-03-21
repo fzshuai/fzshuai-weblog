@@ -1,0 +1,13 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+<<<<<<< HEAD
+=======
+  messages:
+    basename: i18n/messages
+
+comment.avatar: /images/visitor_avatar.jpg
+
+>>>>>>> d30a2ee (项目第一次提交)
