@@ -1,5 +1,5 @@
 
-# blog-jpa
+# FzshuaiBlog
 
 基于Spring Boot搭建的个人博客系统，持久层操作使用Spring Data JPA 实现
 =======
