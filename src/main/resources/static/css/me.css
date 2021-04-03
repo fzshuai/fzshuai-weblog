@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-body {
-    background: url("../images/bg.png");
-=======
 body {
     background-image: url("../images/backimg1.jpg");
     background-attachment: fixed;
@@ -13,28 +8,23 @@ body {
     width: 100%;
 }
 
+a, a:visited {
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    /*opacity: 0.6 !important;*/
+    color: #fff;
+}
+
 .m-bg {
     width: 100%;
     height: 650px;
     object-fit: cover;
->>>>>>> d30a2ee (项目第一次提交)
 }
 
 .m-padded-mini {
     padding: 0.2em !important;
 }
-<<<<<<< HEAD
-.m-padded-tiny {
-    padding: 0.3em !important;
-}
-.m-padded {
-    padding: 1em !important;
-}
-.m-padded-tb-mini {
-    padding-top: 0.2em !important;
-    padding-bottom: 0.2em !important;
-}
-=======
 
 .m-padded-tiny {
     padding: 0.3em !important;
@@ -49,57 +39,35 @@ body {
     padding-bottom: 0.1em !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb-tiny {
     padding-top: 0.3em !important;
     padding-bottom: 0.3em !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb-small {
     padding-top: 0.5em !important;
     padding-bottom: 0.5em !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb {
     padding-top: 1em !important;
     padding-bottom: 1em !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb-large {
     padding-top: 2em !important;
     padding-bottom: 2em !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb-big {
     padding-top: 3em !important;
     padding-bottom: 3em !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-tb-huge {
     padding-top: 4em !important;
     padding-bottom: 4em !important;
 }
-<<<<<<< HEAD
-.m-padded-tb-massive {
-    padding-top: 5em !important;
-    padding-bottom: 5em !important;
-}
-=======
 
 .m-padded-tb-hugex {
     padding-top: 60px !important;
@@ -116,24 +84,11 @@ body {
     padding-bottom: 0.5em !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-padded-lr-responsive {
     padding-left: 4em !important;
     padding-right: 4em !important;
 }
 
-<<<<<<< HEAD
-/* margin */
-.m-margin-top-small {
-    margin-top: 0.5em !important;
-}
-.m-margin-top {
-    margin-top: 1em !important;
-}
-.m-margin-top-large {
-    margin-top: 2em !important;
-}
-=======
 /*-------text -----*/
 .m-text {
     font-weight: 300 !important;
@@ -143,25 +98,31 @@ body {
 }
 
 /*文字大小*/
-.m-text-max{
+.m-text-max {
     font-weight: 900 !important;
 }
-.m-text-lfat{
+
+.m-text-lfat {
     font-weight: 800 !important;
 }
-.m-text-fat{
+
+.m-text-fat {
     font-weight: 600 !important;
 }
-.m-text-thin{
+
+.m-text-thin {
     font-weight: 400 !important;
 }
-.m-text-tiny{
+
+.m-text-tiny {
     font-weight: 200 !important;
 }
+
 /*字间距*/
 .m-text-spaced {
     letter-spacing: 1px !important;
 }
+
 /*行间距*/
 .m-text-lined {
     line-height: 1.8;
@@ -193,12 +154,6 @@ body {
 .m-font-size-blog-text {
     font-size: 18px;
     color: #ffffff;
-    font-family: STSong;
-}
-
-.m-font-size-text-friends {
-    font-size: 16px;
-    color: #000000;
     font-family: STSong;
 }
 
@@ -256,40 +211,10 @@ body {
     margin-bottom: 0.7em !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-margin-tb-tiny {
     margin-top: 0.3em !important;
     margin-bottom: 0.3em !important;
 }
-<<<<<<< HEAD
-.m-margin-bottom-small {
-    margin-bottom: 0.5em !important;
-}
-/* .m-margin-bottom-mini {
-    margin-bottom: 0.2em !important;
-} */
-
-/* text */
-.m-text {
-    font-weight: 300 !important;
-    letter-spacing: 1px !important;
-    line-height: 1.8;
-}
-.m-text-thin {
-    font-weight: 300 !important;
-}
-.m-text-spaced {
-    letter-spacing: 1px !important;
-}
-.m-text-lined {
-    line-height: 1.8;
-}
-
-/* opacity */
-.m-opacity-mini {
-    opacity: 0.8 !important;
-}
-=======
 
 .m-margin-top- {
     margin-top: -4em !important;
@@ -326,15 +251,10 @@ body {
     opacity: 0.8 !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-opacity-tiny {
     opacity: 0.6 !important;
 }
 
-<<<<<<< HEAD
-/* position */
-.m-top-right {
-=======
 .m-opacity-small {
     opacity: 0.4 !important;
 }
@@ -342,14 +262,10 @@ body {
 /*------position---*/
 
 .m-right-top {
->>>>>>> d30a2ee (项目第一次提交)
     position: absolute;
     top: 0;
     right: 0;
 }
-<<<<<<< HEAD
-/* display */
-=======
 
 .m-left-top {
     position: absolute;
@@ -358,18 +274,10 @@ body {
 }
 
 /*------display------*/
->>>>>>> d30a2ee (项目第一次提交)
 .m-inline-block {
     display: inline-block !important;
 }
 
-<<<<<<< HEAD
-
-.m-container {
-    max-width: 72em !important;
-    margin: auto !important;
-}
-=======
 /*---container---*/
 .m-container {
     max-width: 100em !important;
@@ -386,21 +294,11 @@ body {
     margin: auto !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-container-small {
     max-width: 60em !important;
     margin: auto !important;
 }
 
-<<<<<<< HEAD
-/* shadow */
-.m-shadow-small {
-    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
-}
-
-/* position */
-=======
 /*------shadow------*/
 .m-shadow-small {
     -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
@@ -409,23 +307,16 @@ body {
 
 /*------positon-----*/
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-fixed {
     position: fixed !important;
     z-index: 10 !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-right-bottom {
     bottom: 0 !important;
     right: 0 !important;
 }
 
-<<<<<<< HEAD
-/* color */
-=======
 .m-title-font {
     font-family: STSong;
     font-weight: 900;
@@ -433,18 +324,14 @@ body {
 }
 
 /*-----color-----*/
->>>>>>> d30a2ee (项目第一次提交)
 .m-black {
     color: #333 !important;
 }
 
-<<<<<<< HEAD
-=======
 .m-teal {
     color: #00B5AD !important;
 }
 
->>>>>>> d30a2ee (项目第一次提交)
 .m-mobile-show {
     display: none !important;
 }
@@ -453,35 +340,20 @@ body {
     .m-mobile-hide {
         display: none !important;
     }
-<<<<<<< HEAD
-    .m-mobile-show {
-        display: block !important;
-    }
-=======
 
     .m-mobile-show {
         display: block !important;
     }
 
->>>>>>> d30a2ee (项目第一次提交)
     .m-padded-lr-responsive {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
     .m-mobile-lr-clear {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-<<<<<<< HEAD
-    .m-mobile-wide {
-        width: 100% !important;
-    }
-}
-=======
 
     .m-mobile-wide {
         width: 100% !important;
@@ -754,4 +626,3 @@ body {
     background-size: 100% 100%;
 }
 
->>>>>>> d30a2ee (项目第一次提交)

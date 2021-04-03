@@ -1,106 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<<<<<<< HEAD
-
-<head th:fragment="head(title)">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:replace="${title}">博客详情</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-=======
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">前台模板</title>
-    <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
->>>>>>> d30a2ee (项目第一次提交)
+    <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon"
+          type="image/x-ico">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
     <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
     <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-<<<<<<< HEAD
-=======
-    <link rel="stylesheet" href="../static/lib/music/css/zplayer.min.css" th:href="@{/lib/music/css/zplayer.min.css}"/>
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css"
+          th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../static/lib/music/css/zplayer.min.css"
+          th:href="@{/lib/music/css/zplayer.min.css}"/>
     <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css"
           th:href="@{/lib/editormd/css/editormd.min.css}">
->>>>>>> d30a2ee (项目第一次提交)
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
 
-<<<<<<< HEAD
-    <!-- 导航栏 -->
-    <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
-        <div class="ui container">
-            <div class="ui inverted secondary stackable menu">
-                <h2 class="ui teal header item">FzshuaiBlog</h2>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="home icon"></i>首页</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="idea icon"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="tags icon"></i>标签</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 4} ? 'active'"><i class="clone icon"></i>归档</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'"><i class="info icon"></i>关于</a>
-                <div class="right m-item item m-mobile-hide">
-                    <div class="ui icon input">
-                        <input type="text" placeholder="Search...">
-                        <i class="search link icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
-            <i class="sidebar icon"></i>
-        </a>
-    </nav>
-
-    <!-- 底部footer -->
-    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
-        <div class="ui center aligned container">
-            <!-- 一共分为16份 -->
-            <div class="ui inverted divided stackable grid">
-                <div class="three wide column">
-                    <div class="ui inverted link list">
-                        <div class="item">
-                            <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image" alt="" style="width: 110px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="three wide column">
-                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-                    <div class="ui inverted link list">
-                        <a href="#" class="item">用户故事</a>
-                        <a href="#" class="item">用户故事</a>
-                        <a href="#" class="item">用户故事</a>
-                    </div>
-                </div>
-                <div class="three wide column">
-                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
-                    <div class="ui inverted link list">
-                        <a href="#" class="item">Email: 156117106@qq.com</a>
-                        <a href="#" class="item">QQ: 156117106</a>
-                    </div>
-                </div>
-                <div class="seven wide column">
-                    <h4 class="ui inverted header m-text-thin m-text-spaced">FzshuaiBlog</h4>
-                    <p class="m-text-thin m-text-spaced m-opacity-mini">我的个人博客，欢迎大家体验，2021年送给自己的一句话：岁月不居，天道酬勤。123456789
-                    </p>
-                </div>
-            </div>
-            <div class="ui inverted section divider"></div>
-            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Blog Designed by fzshuai</p>
-        </div>
-    </footer>
-
-    <th:block th:fragment="script">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-        <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-        <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-        <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-        <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-    </th:block>
-=======
 <!--导航-->
 <nav th:fragment="menu(n)" class="gird-header">
     <div class="ui container">
@@ -123,7 +43,8 @@
             <div class="right m-item item">
                 <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
                     <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
-                        <input style="color: white" type="text" name="query" placeholder="Search...."
+                        <input style="color: white" type="text" name="query"
+                               placeholder="Search...."
                                th:value="${query}">
                         <i onclick="document.forms['search'].submit()" class="search link icon"></i>
                     </div>
@@ -156,7 +77,9 @@
                      class="ui inverted m-text-thin m-text-spaced m-margin-top">联系我
                 </div>
                 <div class="ui inverted link list">
-                    <div class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">Email: fzshuai@foxmail.com</div>
+                    <div class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">Email:
+                        fzshuai@foxmail.com
+                    </div>
                     <div class="m-text-thin m-text-spaced m-opacity-mini">QQ: 156117106</div>
                 </div>
             </div>
@@ -166,28 +89,35 @@
                      class="ui inverted m-text-thin m-text-spaced m-margin-top">座右铭
                 </div>
                 <div class="ui inverted link list">
-                    <p class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">不断创造并提升自身价值，做到无可替代。</p>
+                    <p class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">
+                        不断创造并提升自身价值，做到无可替代。</p>
                 </div>
             </div>
-            <!--博客数据统计-->
+            <!--网站描述-->
             <div class="four wide column">
                 <div style="font-size: large;font-weight: bold"
-                     class="ui inverted m-text-thin m-text-spaced m-margin-top">博客信息
+                     class="ui inverted m-text-thin m-text-spaced m-margin-top">FzshuaiBlog
                 </div>
-                <!--<p id="htmer_time" class="item m-text-thin"></p>-->
                 <div class="ui inverted link list">
-                    <p class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">2021年送给自己的一句话：岁月不居，天道酬勤。JUST DO
-                        IT！</p>
+                    <p class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">
+                        2021年送给自己的一句话：岁月不居，天道酬勤。JUST DO IT！
+                    </p>
                 </div>
 
             </div>
         </div>
+        <!-- 分割线 -->
         <div class="ui inverted section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Blog
-            Designed by Fzshuai</p>
-        <a rel="nofollow" href="http://beian.miit.gov.cn/" target="_blank"
-           class="m-text-thin m-text-spaced m-opacity-tiny">辽ICP备20008029号</a>
+
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">
+            Copyright © 2020 - 2021 <a href="https://www.fzshuai.top/">Fzshuai</a>
+            <a href="http://beian.miit.gov.cn/" target="_blank">辽ICP备20008029号</a>
+        </p>
+
+        <p id="runTime" class="m-text-thin m-text-spaced m-opacity-tiny">
+
     </div>
+
 </footer>
 
 <th:block th:fragment="script">
@@ -218,8 +148,48 @@
         }
     })
 
+    // 网站运行时间统计
+    function secondToDate(second) {
+        if (!second) {
+            return 0;
+        }
+        var time = new Array(0, 0, 0, 0, 0);
+        if (second >= 365 * 24 * 3600) {
+            time[0] = parseInt(second / (365 * 24 * 3600));
+            second %= 365 * 24 * 3600;
+        }
+        if (second >= 24 * 3600) {
+            time[1] = parseInt(second / (24 * 3600));
+            second %= 24 * 3600;
+        }
+        if (second >= 3600) {
+            time[2] = parseInt(second / 3600);
+            second %= 3600;
+        }
+        if (second >= 60) {
+            time[3] = parseInt(second / 60);
+            second %= 60;
+        }
+        if (second > 0) {
+            time[4] = second;
+        }
+        return time;
+    }
+
+    function setTime() {
+        /*此处为网站的创建时间*/
+        var createTime = Math.round(new Date(Date.UTC(2020, 10, 01, 00, 00, 00)).getTime() / 1000);
+        var timeSamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+        currentTime = secondToDate((timeSamp - createTime));
+        currentTimeHtml = '本站已运行：' + currentTime[0] + '年' + currentTime[1] + '天'
+            + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+            + '秒';
+        document.getElementById("runTime").innerHTML = currentTimeHtml;
+    }
+
+    setInterval(setTime, 1000);
+
 </script>
->>>>>>> d30a2ee (项目第一次提交)
 
 </body>
 </html>
