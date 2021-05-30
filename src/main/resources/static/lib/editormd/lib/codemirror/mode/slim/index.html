@@ -18,26 +18,6 @@
 <script src="../ruby/ruby.js"></script>
 <script src="../markdown/markdown.js"></script>
 <script src="slim.js"></script>
-<<<<<<< HEAD
-<style>.CodeMirror {background: #f8f8f8;}</style>
-<div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">SLIM</a>
-  </ul>
-</div>
-
-<article>
-  <h2>SLIM mode</h2>
-  <form><textarea id="code" name="code">
-=======
 <style>.CodeMirror {
     background: #f8f8f8;
 }</style>
@@ -58,7 +38,6 @@
 <article>
     <h2>SLIM mode</h2>
     <form><textarea id="code" name="code">
->>>>>>> d30a2ee (项目第一次提交)
 body
   table
     - for user in users
@@ -79,11 +58,7 @@ h2 [ id = "tagline" ] = page_tagline
   second line
 /! html comment
    second line
-<<<<<<< HEAD
-<!-- html comment -->
-=======
         <!-- html comment -->
->>>>>>> d30a2ee (项目第一次提交)
 <a href="#{'hello' if set}">link</a>
 a.slim href="work" disabled=false running==:atom Text <b>bold</b>
 .clazz data-id="test" == 'hello' unless quark
@@ -99,29 +74,6 @@ a.slim href="work" disabled=false running==:atom Text <b>bold</b>
 .third class=:text,:symbol
 
   </textarea></form>
-<<<<<<< HEAD
-  <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-      lineNumbers: true,
-      theme: "ambiance",
-      mode: "application/x-slim"
-    });
-    $('.CodeMirror').resizable({
-      resize: function() {
-        editor.setSize($(this).width(), $(this).height());
-        //editor.refresh();
-      }
-    });
-  </script>
-
-  <p><strong>MIME types defined:</strong> <code>application/x-slim</code>.</p>
-
-  <p>
-    <strong>Parsing/Highlighting Tests:</strong>
-    <a href="../../test/index.html#slim_*">normal</a>,
-    <a href="../../test/index.html#verbose,slim_*">verbose</a>.
-  </p>
-=======
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
@@ -143,5 +95,4 @@ a.slim href="work" disabled=false running==:atom Text <b>bold</b>
         <a href="../../test/index.html#slim_*">normal</a>,
         <a href="../../test/index.html#verbose,slim_*">verbose</a>.
     </p>
->>>>>>> d30a2ee (项目第一次提交)
 </article>

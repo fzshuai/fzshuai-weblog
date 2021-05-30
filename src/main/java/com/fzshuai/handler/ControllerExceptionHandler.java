@@ -12,24 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author 软件二班傅同学
-<<<<<<< HEAD
- * @date 2021-01-18 11:08
-=======
  * @description TODO
  * @date 2021-02-06 19:26
->>>>>>> d30a2ee (项目第一次提交)
  */
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-<<<<<<< HEAD
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @ExceptionHandler(Exception.class)
-    public ModelAndView exceptionHandler(HttpServletRequest request, Exception e) throws Exception {
-
-        logger.error("Request URL : {}, Exception : {}", request.getRequestURL(), e);
-=======
     //获取日志对象
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -37,7 +25,6 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(Exception.class)      //标识异常的注解
     public ModelAndView exceptionHander(HttpServletRequest request, Exception e) throws Exception {
         logger.error("Requst URL : {}，Exception : {}", request.getRequestURL(), e);
->>>>>>> d30a2ee (项目第一次提交)
 
         if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
             throw e;

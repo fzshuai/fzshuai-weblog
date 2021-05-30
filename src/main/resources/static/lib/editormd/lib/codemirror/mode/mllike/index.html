@@ -9,29 +9,6 @@
 <script src=../../addon/edit/matchbrackets.js></script>
 <script src=mllike.js></script>
 <style type=text/css>
-<<<<<<< HEAD
-  .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
-</style>
-<div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">ML-like</a>
-  </ul>
-</div>
-
-<article>
-<h2>OCaml mode</h2>
-
-
-<textarea id="ocamlCode">
-=======
     .CodeMirror {
         border-top: 1px solid black;
         border-bottom: 1px solid black;
@@ -56,7 +33,6 @@
 
 
     <textarea id="ocamlCode">
->>>>>>> d30a2ee (项目第一次提交)
 (* Summing a list of integers *)
 let rec sum xs =
   match xs with
@@ -161,13 +137,8 @@ let () =
 (* OCaml page on Wikipedia - http://en.wikipedia.org/wiki/OCaml *)
 </textarea>
 
-<<<<<<< HEAD
-<h2>F# mode</h2>
-<textarea id="fsharpCode">
-=======
     <h2>F# mode</h2>
     <textarea id="fsharpCode">
->>>>>>> d30a2ee (项目第一次提交)
 module CodeMirror.FSharp
 
 let rec fib = function
@@ -193,23 +164,6 @@ type Color =
 </textarea>
 
 
-<<<<<<< HEAD
-<script>
-  var ocamlEditor = CodeMirror.fromTextArea(document.getElementById('ocamlCode'), {
-    mode: 'text/x-ocaml',
-    lineNumbers: true,
-    matchBrackets: true
-  });
-
-  var fsharpEditor = CodeMirror.fromTextArea(document.getElementById('fsharpCode'), {
-    mode: 'text/x-fsharp',
-    lineNumbers: true,
-    matchBrackets: true
-  });
-</script>
-
-<p><strong>MIME types defined:</strong> <code>text/x-ocaml</code> (OCaml) and <code>text/x-fsharp</code> (F#).</p>
-=======
     <script>
         var ocamlEditor = CodeMirror.fromTextArea(document.getElementById('ocamlCode'), {
             mode: 'text/x-ocaml',
@@ -225,5 +179,4 @@ type Color =
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-ocaml</code> (OCaml) and <code>text/x-fsharp</code> (F#).</p>
->>>>>>> d30a2ee (项目第一次提交)
 </article>

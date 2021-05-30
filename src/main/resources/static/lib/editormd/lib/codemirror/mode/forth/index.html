@@ -10,25 +10,6 @@
 <script src="../../lib/codemirror.js"></script>
 <script src="forth.js"></script>
 <style>
-<<<<<<< HEAD
-.CodeMirror {
-    font-family: 'Droid Sans Mono', monospace;
-    font-size: 14px;
-}
-</style>
-<div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">Forth</a>
-  </ul>
-=======
     .CodeMirror {
         font-family: 'Droid Sans Mono', monospace;
         font-size: 14px;
@@ -46,20 +27,13 @@
         <li><a href="../index.html">Language modes</a>
         <li><a class=active href="#">Forth</a>
     </ul>
->>>>>>> d30a2ee (项目第一次提交)
 </div>
 
 <article>
 
-<<<<<<< HEAD
-<h2>Forth mode</h2>
-
-<form><textarea id="code" name="code">
-=======
     <h2>Forth mode</h2>
 
     <form><textarea id="code" name="code">
->>>>>>> d30a2ee (项目第一次提交)
 \ Insertion sort
 
 : cell-  1 cells - ;
@@ -80,25 +54,6 @@
   1 ?do
     dup i cells + insert
   loop drop ;</textarea>
-<<<<<<< HEAD
-  </form>
-
-<script>
-  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-    lineNumbers: true,
-    lineWrapping: true,
-    indentUnit: 2,
-    tabSize: 2,
-    autofocus: true,
-    theme: "colorforth",
-    mode: "text/x-forth"
-  });
-</script>
-
-<p>Simple mode that handle Forth-Syntax (<a href="http://en.wikipedia.org/wiki/Forth_%28programming_language%29">Forth on WikiPedia</a>).</p>
-
-<p><strong>MIME types defined:</strong> <code>text/x-forth</code>.</p>
-=======
     </form>
 
     <script>
@@ -117,6 +72,5 @@
         on WikiPedia</a>).</p>
 
     <p><strong>MIME types defined:</strong> <code>text/x-forth</code>.</p>
->>>>>>> d30a2ee (项目第一次提交)
 
 </article>

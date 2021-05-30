@@ -1,15 +1,10 @@
 {
   "name": "codemirror",
-<<<<<<< HEAD
-  "version":"5.0.0",
-  "main": ["lib/codemirror.js", "lib/codemirror.css"],
-=======
   "version": "5.0.0",
   "main": [
     "lib/codemirror.js",
     "lib/codemirror.css"
   ],
->>>>>>> d30a2ee (项目第一次提交)
   "ignore": [
     "**/.*",
     "node_modules",

@@ -3,15 +3,6 @@ package com.fzshuai;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-<<<<<<< HEAD
-@SpringBootApplication
-public class BlogApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(BlogApplication.class, args);
-    }
-
-=======
 /**
  * @author 软件二班傅同学
  * @description TODO
@@ -23,5 +14,4 @@ public class BlogApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BlogApplication.class, args);
 	}
->>>>>>> d30a2ee (项目第一次提交)
 }

@@ -7,26 +7,6 @@
 <link rel="stylesheet" href="../../lib/codemirror.css">
 <script src="../../lib/codemirror.js"></script>
 <script src="smarty.js"></script>
-<<<<<<< HEAD
-<style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
-<div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">Smarty</a>
-  </ul>
-</div>
-
-<article>
-<h2>Smarty mode</h2>
-<form><textarea id="code" name="code">
-=======
 <style type="text/css">.CodeMirror {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -48,7 +28,6 @@
 <article>
     <h2>Smarty mode</h2>
     <form><textarea id="code" name="code">
->>>>>>> d30a2ee (项目第一次提交)
 {extends file="parent.tpl"}
 {include file="template.tpl"}
 
@@ -71,17 +50,6 @@
 {/if}</textarea></form>
 
     <script>
-<<<<<<< HEAD
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        lineNumbers: true,
-        mode: "smarty"
-      });
-    </script>
-
-    <br />
-
-	<h3>Smarty 2, custom delimiters</h3>
-=======
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
             mode: "smarty"
@@ -91,7 +59,6 @@
     <br/>
 
     <h3>Smarty 2, custom delimiters</h3>
->>>>>>> d30a2ee (项目第一次提交)
     <form><textarea id="code2" name="code2">
 {--extends file="parent.tpl"--}
 {--include file="template.tpl"--}
@@ -115,23 +82,6 @@
 {--/if--}</textarea></form>
 
     <script>
-<<<<<<< HEAD
-      var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
-        lineNumbers: true,
-        mode: {
-          name: "smarty",
-          leftDelimiter: "{--",
-          rightDelimiter: "--}"
-        }
-      });
-    </script>
-
-	<br />
-
-	<h3>Smarty 3</h3>
-
-	<textarea id="code3" name="code3">
-=======
         var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
             lineNumbers: true,
             mode: {
@@ -147,16 +97,11 @@
     <h3>Smarty 3</h3>
 
     <textarea id="code3" name="code3">
->>>>>>> d30a2ee (项目第一次提交)
 Nested tags {$foo={counter one=1 two={inception}}+3} are now valid in Smarty 3.
 
 <script>
 function test() {
-<<<<<<< HEAD
-	console.log("Smarty 3 permits single curly braces followed by whitespace to NOT slip into Smarty mode.");
-=======
     console.log("Smarty 3 permits single curly braces followed by whitespace to NOT slip into Smarty mode.");
->>>>>>> d30a2ee (项目第一次提交)
 }
 </script>
 
@@ -179,15 +124,6 @@ Smarty "dot" syntax (note: embedded {} are used to address ambiguities):
 
 {$object->method1($x)->method2($y)}</textarea>
 
-<<<<<<< HEAD
-	<script>
-		var editor = CodeMirror.fromTextArea(document.getElementById("code3"), {
-			lineNumbers: true,
-			mode: "smarty",
-			smartyVersion: 3
-		});
-	</script>
-=======
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code3"), {
             lineNumbers: true,
@@ -195,14 +131,9 @@ Smarty "dot" syntax (note: embedded {} are used to address ambiguities):
             smartyVersion: 3
         });
     </script>
->>>>>>> d30a2ee (项目第一次提交)
 
 
     <p>A plain text/Smarty version 2 or 3 mode, which allows for custom delimiter tags.</p>
 
     <p><strong>MIME types defined:</strong> <code>text/x-smarty</code></p>
-<<<<<<< HEAD
-  </article>
-=======
 </article>
->>>>>>> d30a2ee (项目第一次提交)

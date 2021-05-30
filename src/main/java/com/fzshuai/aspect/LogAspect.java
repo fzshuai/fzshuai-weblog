@@ -1,10 +1,5 @@
 package com.fzshuai.aspect;
 
-<<<<<<< HEAD
-
-import org.aopalliance.intercept.Joinpoint;
-=======
->>>>>>> d30a2ee (项目第一次提交)
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -18,12 +13,8 @@ import java.util.Arrays;
 
 /**
  * @author 软件二班傅同学
-<<<<<<< HEAD
- * @date 2021-01-18 14:26
-=======
  * @description TODO
  * @date 2021-02-03 19:29
->>>>>>> d30a2ee (项目第一次提交)
  */
 @Aspect
 @Component
@@ -31,21 +22,12 @@ public class LogAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-<<<<<<< HEAD
-    @Pointcut("execution(* com.fzshuai.web.*.*(..))")
-    public void log() {}
-
-    @Before("log()")
-    public void doBefore(JoinPoint joinPoint) {
-
-=======
     @Pointcut("execution(* com.fzshuai.controller.*.*(..))")
     public void log() {
     }
 
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {
->>>>>>> d30a2ee (项目第一次提交)
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String url = request.getRequestURL().toString();
@@ -53,20 +35,12 @@ public class LogAspect {
         String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
         RequestLog requestLog = new RequestLog(url, ip, classMethod, args);
-<<<<<<< HEAD
-
-=======
->>>>>>> d30a2ee (项目第一次提交)
         logger.info("Request : {}", requestLog);
     }
 
     @After("log()")
     public void doAfter() {
-<<<<<<< HEAD
-//        logger.info("-----------doAfter-----------");
-=======
         //logger.info("--------doAfter--------");
->>>>>>> d30a2ee (项目第一次提交)
     }
 
     @AfterReturning(returning = "result", pointcut = "log()")
@@ -89,11 +63,7 @@ public class LogAspect {
 
         @Override
         public String toString() {
-<<<<<<< HEAD
-            return "RequestLog{" +
-=======
             return "{" +
->>>>>>> d30a2ee (项目第一次提交)
                     "url='" + url + '\'' +
                     ", ip='" + ip + '\'' +
                     ", classMethod='" + classMethod + '\'' +

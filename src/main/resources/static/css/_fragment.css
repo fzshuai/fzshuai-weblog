@@ -1,0 +1,7 @@
+a, a:visited {
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    /*opacity: 0.6 !important;*/
+    color: #fff;
+}

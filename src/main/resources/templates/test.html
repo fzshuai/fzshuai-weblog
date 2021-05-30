@@ -1,0 +1,66 @@
+<!--miniprogram/pages/home/home.wxml-->
+<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true"
+        circular="true" autoplay="true"
+        interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3"
+        indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}"
+                 bindtap="tointroduction">
+        <view class="swiper-item">
+            <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+
+        </view>
+    </swiper-item>
+</swiper>
+<scroll-view scroll-y class="scrollPage">
+
+    <!-- 滚动条 -->
+    <view class="flex">
+        <view class=" basis-warn-home cuIcon-warnfill1 text-yellow"
+              style="font-size: 35rpx; "></view>
+        <swiper class="rollcontainer" vertical="true" autoplay="true" circular="true"
+                interval="2000">
+
+            <block wx:for="{{msgList}}">
+
+                <swiper-item>
+                    <view class="rollitem">{{item.title}}</view>
+                </swiper-item>
+
+            </block>
+        </swiper>
+    </view>
+
+    <!-- 校内新闻 -->
+    <view class="cu-bar bg-white solid-bottom ">
+        <view class='action'>
+            <text class='cuIcon-titles text-orange '></text>
+            校园通知
+        </view>
+
+        <!-- <view class="cuIcon-more text-orange margin-right" style="font-size:40rpx;" bindtap="tonew"> </view> -->
+
+    </view>
+    <!-- 文章卡片，no finish -->
+    <block wx:if="{{list.length>0}} " wx:for="{{list}}" wx:key="_id">
+        <navigator class="content" hover-class="none" bindtap="go"
+                   data-go="/pages/newdetail/newdetail?scene={{item._id}}">
+            <view class="cu-card article no-card">
+                <view class="cu-item shadow">
+                    <view class="title">
+                        <view class="text-cut">{{item.title}}</view>
+                    </view>
+                    <view class="content">
+                        <view class="desc">
+                            <view class="text-content">{{item.content}}</view>
+                            <view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </block>
+    <!-- 通知公告 -->
+
+
+</scroll-view>

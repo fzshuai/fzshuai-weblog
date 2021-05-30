@@ -42,7 +42,7 @@ public class BlogController {
     private TypeService typeService;
 
     @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String blogs(@PageableDefault(size = 10, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model) {
         // 获取所有已有的博客类别
         // types : 类别结果
@@ -62,7 +62,7 @@ public class BlogController {
      * @return
      */
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 10, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          BlogQuery blog, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         // 这里只刷新结果部分的segment，实现区域刷新
@@ -113,9 +113,9 @@ public class BlogController {
     @PostMapping("/blogs")
     public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
         blog.setUser((User) session.getAttribute("user"));
-        // 获取创建好的博客指定的类别和标签
+        // 获取创建好的博客指定的类别
         blog.setType(typeService.getType(blog.getType().getId()));
-        System.out.println(typeService.getType(blog.getType().getId()));
+        // System.out.println(typeService.getType(blog.getType().getId()));
         Blog b;
         if (blog.getId() == null) {
             b = blogService.saveBlog(blog);

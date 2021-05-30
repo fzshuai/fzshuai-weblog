@@ -7,23 +7,14 @@ import java.util.List;
 
 /**
  * @author 软件二班傅同学
-<<<<<<< HEAD
- * @date 2021-01-20 14:08
-=======
  * @description TODO
  * @date 2021-02-03 18:56
->>>>>>> d30a2ee (项目第一次提交)
  */
 @Entity
 @Table(name = "t_blog")
 public class Blog {
 
     @Id
-<<<<<<< HEAD
-    @GeneratedValue
-    private Long id;
-    private String title;
-=======
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,14 +22,13 @@ public class Blog {
 
     @Basic(fetch = FetchType.LAZY)
     @Lob
->>>>>>> d30a2ee (项目第一次提交)
     private String content;
     private String firstPicture;
     private String flag;
     private Integer views;
     private boolean appreciation;
     private boolean shareStatement;
-    private boolean commentabled;
+    private boolean commentated;
     private boolean published;
     private boolean recommend;
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,21 +39,11 @@ public class Blog {
     @ManyToOne
     private Type type;
 
-<<<<<<< HEAD
-    @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Tag> tags = new ArrayList<>();
-
-
-=======
->>>>>>> d30a2ee (项目第一次提交)
     @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
-
-    @Transient
-    private String tagIds;
 
     private String description;
 
@@ -134,12 +114,12 @@ public class Blog {
         this.shareStatement = shareStatement;
     }
 
-    public boolean isCommentabled() {
-        return commentabled;
+    public boolean isCommentated() {
+        return commentated;
     }
 
-    public void setCommentabled(boolean commentabled) {
-        this.commentabled = commentabled;
+    public void setCommentated(boolean commentated) {
+        this.commentated = commentated;
     }
 
     public boolean isPublished() {
@@ -182,18 +162,6 @@ public class Blog {
         this.type = type;
     }
 
-<<<<<<< HEAD
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-
-=======
->>>>>>> d30a2ee (项目第一次提交)
     public User getUser() {
         return user;
     }
@@ -202,24 +170,12 @@ public class Blog {
         this.user = user;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d30a2ee (项目第一次提交)
     public List<Comment> getComments() {
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public String getTagIds() {
-        return tagIds;
-    }
-
-    public void setTagIds(String tagIds) {
-        this.tagIds = tagIds;
     }
 
     public String getDescription() {
@@ -230,31 +186,6 @@ public class Blog {
         this.description = description;
     }
 
-<<<<<<< HEAD
-    public void init() {
-        this.tagIds = tagsToIds(this.getTags());
-    }
-
-    private String tagsToIds(List<Tag> tags) {
-        if (!tags.isEmpty()) {
-            StringBuffer ids = new StringBuffer();
-            boolean flag = false;
-            for (Tag tag : tags) {
-                if (flag) {
-                    ids.append(",");
-                } else {
-                    flag = true;
-                }
-                ids.append(tag.getId());
-            }
-            return ids.toString();
-        } else {
-            return tagIds;
-        }
-    }
-
-=======
->>>>>>> d30a2ee (项目第一次提交)
     @Override
     public String toString() {
         return "Blog{" +
@@ -266,19 +197,14 @@ public class Blog {
                 ", views=" + views +
                 ", appreciation=" + appreciation +
                 ", shareStatement=" + shareStatement +
-                ", commentabled=" + commentabled +
+                ", commentated=" + commentated +
                 ", published=" + published +
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", type=" + type +
-<<<<<<< HEAD
-                ", tags=" + tags +
-=======
->>>>>>> d30a2ee (项目第一次提交)
                 ", user=" + user +
                 ", comments=" + comments +
-                ", tagIds='" + tagIds + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

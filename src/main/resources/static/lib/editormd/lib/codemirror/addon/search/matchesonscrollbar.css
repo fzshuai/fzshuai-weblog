@@ -1,17 +1,8 @@
 .CodeMirror-search-match {
-<<<<<<< HEAD
-  background: gold;
-  border-top: 1px solid orange;
-  border-bottom: 1px solid orange;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  opacity: .5;
-=======
     background: gold;
     border-top: 1px solid orange;
     border-bottom: 1px solid orange;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     opacity: .5;
->>>>>>> d30a2ee (项目第一次提交)
 }

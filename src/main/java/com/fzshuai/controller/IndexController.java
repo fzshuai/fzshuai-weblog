@@ -27,17 +27,20 @@ public class IndexController {
     private TypeService typeService;
 
     @GetMapping("/")
-    public String index(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String index(@PageableDefault(size = 5, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("types", typeService.listTypeTop(5));
         model.addAttribute("recommendBlogs", blogService.listRecommendBlogTop(8));
         blogService.listBlog(pageable).getNumber();
+        // System.out.println("================================");
+        // System.out.println(blogService.listBlog(pageable).getContent());
+        // System.out.println("================================");
         return "index";
     }
 
     @PostMapping("/search")
-    public String search(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 5, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @RequestParam String query, Model model) {
         model.addAttribute("page", blogService.listBlog("%" + query + "%", pageable));
         model.addAttribute("query", query);

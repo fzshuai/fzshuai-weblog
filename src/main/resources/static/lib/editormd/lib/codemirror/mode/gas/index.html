@@ -7,26 +7,6 @@
 <link rel="stylesheet" href="../../lib/codemirror.css">
 <script src="../../lib/codemirror.js"></script>
 <script src="gas.js"></script>
-<<<<<<< HEAD
-<style>.CodeMirror {border: 2px inset #dee;}</style>
-<div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">Gas</a>
-  </ul>
-</div>
-
-<article>
-<h2>Gas mode</h2>
-<form>
-=======
 <style>.CodeMirror {
     border: 2px inset #dee;
 }</style>
@@ -47,7 +27,6 @@
 <article>
     <h2>Gas mode</h2>
     <form>
->>>>>>> d30a2ee (项目第一次提交)
 <textarea id="code" name="code">
 .syntax unified
 .global main
@@ -68,20 +47,6 @@ main:
         pop     {sp, pc}
 
 message:
-<<<<<<< HEAD
-        .asciz "Hello world!<br />"
-</textarea>
-        </form>
-
-        <script>
-            var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-                lineNumbers: true,
-                mode: {name: "gas", architecture: "ARMv6"},
-            });
-        </script>
-
-        <p>Handles AT&amp;T assembler syntax (more specifically this handles
-=======
         .asciz "Hello world!<br/>"
 </textarea>
     </form>
@@ -94,7 +59,6 @@ message:
     </script>
 
     <p>Handles AT&amp;T assembler syntax (more specifically this handles
->>>>>>> d30a2ee (项目第一次提交)
         the GNU Assembler (gas) syntax.)
         It takes a single optional configuration parameter:
         <code>architecture</code>, which can be one of <code>"ARM"</code>,
@@ -102,10 +66,5 @@ message:
         Including the parameter adds syntax for the registers and special
         directives for the supplied architecture.
 
-<<<<<<< HEAD
-        <p><strong>MIME types defined:</strong> <code>text/x-gas</code></p>
-    </article>
-=======
     <p><strong>MIME types defined:</strong> <code>text/x-gas</code></p>
 </article>
->>>>>>> d30a2ee (项目第一次提交)

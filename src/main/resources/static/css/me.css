@@ -13,7 +13,7 @@ a, a:visited {
     font-weight: 400 !important;
     letter-spacing: 1px !important;
     /*opacity: 0.6 !important;*/
-    color: inherit;
+    color: inherit; //继承父容器color
 }
 
 .m-bg {
@@ -334,6 +334,10 @@ a, a:visited {
 
 .m-mobile-show {
     display: none !important;
+}
+
+.m-blue {
+    color: #4183c4 !important;
 }
 
 @media screen and (max-width: 768px) {

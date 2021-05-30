@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.fzshuai</groupId>
     <artifactId>blog</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.10</version>
     <name>blog</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Blog project for Spring Boot</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,18 +25,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-<<<<<<< HEAD
-=======
         <!-- springdata jpa依赖 -->
->>>>>>> d30a2ee (项目第一次提交)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-<<<<<<< HEAD
-=======
         <!-- thymeleaf模板 -->
->>>>>>> d30a2ee (项目第一次提交)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -49,23 +43,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-<<<<<<< HEAD
-<!--        <dependency>-->
-<!--            <groupId>com.atlassian.commonmark</groupId>-->
-<!--            <artifactId>commonmark</artifactId>-->
-<!--            <version>0.10.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.atlassian.commonmark</groupId>-->
-<!--            <artifactId>commonmark-ext-heading-anchor</artifactId>-->
-<!--            <version>0.10.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.atlassian.commonmark</groupId>-->
-<!--            <artifactId>commonmark-ext-gfm-tables</artifactId>-->
-<!--            <version>0.12.1</version>-->
-<!--        </dependency>-->
-=======
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
@@ -81,42 +58,26 @@
             <artifactId>commonmark-ext-gfm-tables</artifactId>
             <version>0.12.1</version>
         </dependency>
->>>>>>> d30a2ee (项目第一次提交)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-<<<<<<< HEAD
-=======
         <!-- mysql依赖 -->
->>>>>>> d30a2ee (项目第一次提交)
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.49</version>
             <scope>runtime</scope>
         </dependency>
-<<<<<<< HEAD
-=======
         <!-- test -->
->>>>>>> d30a2ee (项目第一次提交)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate.validator</groupId>-->
-<!--            <artifactId>hibernate-validator</artifactId>-->
-<!--            <version>6.0.17.Final</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-=======
 
->>>>>>> d30a2ee (项目第一次提交)
     </dependencies>
 
     <build>

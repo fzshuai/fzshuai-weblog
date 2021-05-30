@@ -2,20 +2,12 @@
     overflow-y: auto
 }
 
-<<<<<<< HEAD
-.toc>.toc-list {
-=======
 .toc > ul {
->>>>>>> d30a2ee (项目第一次提交)
     overflow: hidden;
     position: relative
 }
 
-<<<<<<< HEAD
-.toc>.toc-list li {
-=======
 .toc > ul li {
->>>>>>> d30a2ee (项目第一次提交)
     list-style: none
 }
 
@@ -30,14 +22,8 @@
     padding: 4px 0;
     font-weight: 300;
 }
-<<<<<<< HEAD
-
-.toc-list li a:hover {
-    color:#00B5AD;
-=======
 .toc-list li a:hover {
     color: #00B5AD;
->>>>>>> d30a2ee (项目第一次提交)
 }
 
 a.toc-link {
@@ -66,11 +52,7 @@ a.toc-link {
 }
 
 .toc-link::before {
-<<<<<<< HEAD
-    background-color: #EEE;
-=======
     /*background-color: #EEE;*/
->>>>>>> d30a2ee (项目第一次提交)
     content: ' ';
     display: inline-block;
     height: 20px;
@@ -82,8 +64,4 @@ a.toc-link {
 
 .is-active-link::before {
     background-color: #54BC4B
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d30a2ee (项目第一次提交)

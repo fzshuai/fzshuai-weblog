@@ -36,16 +36,9 @@
             1、继承Spring boot logback设置（可以在appliaction.yml或者application.properties设置logging.*属性）
             2、重写了默认配置，设置日志文件大小在100MB时，按日期切分日志，切分后目录：
 
-<<<<<<< HEAD
-                blog.2021-01-17.0   80MB
-                blog.2021-01-18.1   10MB
-                blog.2021-01-19.0   56MB
-                blog.2021-01-20.0   53MB
-=======
                 blog.2017-08-01.0   80MB
                 blog.2017-08-01.1   10MB
                 blog.2017-08-02.0   56MB
                 blog.2017-08-03.0   53MB
->>>>>>> d30a2ee (项目第一次提交)
                 ......
         -->

@@ -63,6 +63,7 @@ public class CommentController {
         }
         // 最后保存评论，重定向到评论显示部分
         commentService.saveComment(comment);
+        // 重定向到/comments/" + blogId，“/comments/" + blogId”为请求路径，执行comments方法
         return "redirect:/comments/" + blogId;
     }
 }

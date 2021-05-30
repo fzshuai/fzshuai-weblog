@@ -7,23 +7,15 @@ import java.util.List;
 
 /**
  * @author 软件二班傅同学
-<<<<<<< HEAD
- * @date 2021-01-21 12:07
-=======
  * @description TODO
  * @date 2021-02-03 19:29
->>>>>>> d30a2ee (项目第一次提交)
  */
 @Entity
 @Table(name = "t_user")
 public class User {
 
     @Id
-<<<<<<< HEAD
-    @GeneratedValue
-=======
     @GeneratedValue(strategy = GenerationType.IDENTITY)
->>>>>>> d30a2ee (项目第一次提交)
     private Long id;
     private String nickname;
     private String username;
