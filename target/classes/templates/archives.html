@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FzshuaiBlog-归档</title>
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="_fragments :: menu(3)">
+
+</nav>
+
+<!--顶部图片-->
+<div class="m-bg-type_outer" style="width: 100%;height: 40%">
+    <img src="../static/images/archivebg.jpg" th:src="@{/images/archivebg.jpg}" alt="" class="ui m-bg image"
+         style="width: 100%;height: 100%">
+    <div class="m-bg-class_cover">
+        <div class="ui container" style="position: relative ;bottom: -540px;">
+            <div class="m-font-size-title m-right-bottom" align="center" style="font-family:'STXingkai'">文章归档</div>
+            <div class="m-font-size-text-init-title m-margin-top" align="center">
+                我见青山多妩媚，料青山见我应如是
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--中间内容-->
+<div class="m-container-mini">
+    <div class="ui m-margin-top- m-opacity">
+        <!--header-->
+        <div class="ui top teal secondary segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <i class="calendar alternate outline check outline icon"></i>归档
+                </div>
+                <div class="right aligned column">
+                    共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}"> 114 </h2> 篇
+                </div>
+            </div>
+        </div>
+        <!--获取年份和对应的博客列表，依次遍历取出-->
+        <th:block th:each="item : ${archiveMap}">
+            <!--key就是年份-->
+            <h3 class="ui center aligned header" th:text="${item.key}" style="color: #ffffff">2017</h3>
+            <div class="ui fluid vertical menu">
+                <!--value是博客列表，需要遍历一次取出每一篇-->
+                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item"
+                   th:each="blog : ${item.value}">
+                    <span>
+                        <i class="mini teal circle icon"></i><span th:text="${blog.title}">关于刻意练习的清单</span>
+                        <div class="ui teal basic left pointing label m-padded-mini "
+                             th:text="${#dates.format(blog.updateTime,'MM月dd日')}">09月03日</div>
+                    </span>
+                    <div class="ui orange basic left label m-padded-mini " th:text="${blog.flag}">原创</div>
+                </a>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<!--底部栏-->
+<footer th:replace="_fragments :: footer">
+
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+
+<!--/*/</th:block>/*/-->
+
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    // 网站运行时间统计
+    function secondToDate(second) {
+        if (!second) {
+            return 0;
+        }
+        var time = new Array(0, 0, 0, 0, 0);
+        if (second >= 365 * 24 * 3600) {
+            time[0] = parseInt(second / (365 * 24 * 3600));
+            second %= 365 * 24 * 3600;
+        }
+        if (second >= 24 * 3600) {
+            time[1] = parseInt(second / (24 * 3600));
+            second %= 24 * 3600;
+        }
+        if (second >= 3600) {
+            time[2] = parseInt(second / 3600);
+            second %= 3600;
+        }
+        if (second >= 60) {
+            time[3] = parseInt(second / 60);
+            second %= 60;
+        }
+        if (second > 0) {
+            time[4] = second;
+        }
+        return time;
+    }
+
+    function setTime() {
+        /*此处为网站的创建时间*/
+        var createTime = Math.round(new Date(Date.UTC(2020, 10, 01, 00, 00, 00)).getTime() / 1000);
+        var timeSamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+        currentTime = secondToDate((timeSamp - createTime));
+        currentTimeHtml = '本站已运行：' + currentTime[0] + '年' + currentTime[1] + '天'
+            + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+            + '秒';
+        document.getElementById("runTime").innerHTML = currentTimeHtml;
+    }
+
+    setInterval(setTime, 1000);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+</head>
+<body>
+
+<nav th:replace="_fragments :: menu(0)">
+
+</nav>
+
+<br>
+<br>
+<br>
+
+<div class="ui m-opacity m-margin-top-max container">
+    <img src="/static/images/404.jpg" th:src="@{/images/404.jpg}" alt="" class="ui rounded bordered fluid image">
+</div>
+
+<br>
+<br>
+<br>
+
+<!--底部栏-->
+<footer th:replace="_fragments :: footer">
+
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+
+<!--/*/</th:block>/*/-->
+
+</body>
+</html>
