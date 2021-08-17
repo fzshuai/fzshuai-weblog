@@ -27,7 +27,7 @@
 
 - 核心框架：SpringBoot 2.2.5
 - 项目构建：jdk1.8、Maven 3
-- 持久层框架：Mybatis
+- 持久层框架：SpringData JPA
 - 模板框架：Thymeleaf
 - 分页插件：PageHelper
 - 加密：MD5加密
