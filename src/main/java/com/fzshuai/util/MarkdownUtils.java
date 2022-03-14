@@ -54,6 +54,7 @@ public class MarkdownUtils {
                 .extensions(headingAnchorExtensions)
                 .extensions(tableExtension)
                 .attributeProviderFactory(new AttributeProviderFactory() {
+                    @Override
                     public AttributeProvider create(AttributeProviderContext context) {
                         return new CustomAttributeProvider();
                     }

@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 /**
  * @author 软件二班傅同学
- * @description TODO
+ * @description AOP 切面进行拦截方法打印日志
  * @date 2021-02-03 19:29
  */
 @Aspect

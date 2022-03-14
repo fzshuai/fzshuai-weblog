@@ -6,8 +6,9 @@
     <title th:replace="${title}">前台模板</title>
     <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon"
           type="image/x-ico">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!--<link rel="stylesheet"-->
+    <!--      href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">-->
+    <link rel="stylesheet" href="../static/lib/semantic/semantic.min.css" th:href="@{/lib/semantic/semantic.min.css}">
     <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
     <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
     <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css"
           th:href="@{/lib/editormd/css/editormd.min.css}">
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
-<!--    <link rel="stylesheet" href="../static/css/_fragment.css" th:href="@{/css/_fragment.css}">-->
+    <!--    <link rel="stylesheet" href="../static/css/_fragment.css" th:href="@{/css/_fragment.css}">-->
 </head>
 <body>
 
@@ -112,19 +113,26 @@
 
         <p class="m-text-thin m-text-spaced m-opacity-tiny">
             Copyright © 2020 <a class="" href="https://www.fzshuai.top/">Fzshuai.</a>
-            All rights reserved. <a href="http://beian.miit.gov.cn/" target="_blank">辽ICP备20008029号</a>
+            All rights reserved. <a href="http://beian.miit.gov.cn/"
+                                    target="_blank">辽ICP备20008029号</a>
         </p>
 
         <p id="runTime" class="m-text-thin m-text-spaced m-opacity-tiny">
 
     </div>
 
+    <!--点击超链接时鼠标样式-->
+    <span style="cursor:pointer"></span>
+
 </footer>
 
 <th:block th:fragment="script">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>-->
+    <script src="../static/js/jquery-3.6.0.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+    <script src="../static/js/jquery.scrollTo.min.js" th:src="@{/js/jquery.scrollTo.min.js}"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>-->
+    <script src="../static/lib/semantic/semantic.min.js" th:src="@{/lib/semantic/semantic.min.js}"></script>
     <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
     <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
@@ -189,6 +197,30 @@
     }
 
     setInterval(setTime, 1000);
+
+    let body = document.getElementsByTagName('body')[0];
+    body.addEventListener('click', (e) => {
+        let contentArr = ['✊', '😘', '😍', '😊', '😭', '😡', '😋', '👍', '🐷', '😱', '💷', '💵', '×', '🆗', '№', '⭐', '🌙', '♥', '💴', '☀', '🐎', '🐂', '🐏', '√'];
+        let randomNum = function (n) {
+            return Math.floor(Math.random() * n)
+        }
+        let span = document.createElement('span');
+        span.innerHTML = `${contentArr[randomNum(contentArr.length)]}`;
+        span.style.color = `rgb(${randomNum(256)},${randomNum(256)},${randomNum(256)})`;
+        span.style.position = 'absolute';
+        span.style.top = `${e.pageY}px`;
+        span.style.left = `${e.pageX}px`;
+        span.style.transition = 'all 1s ease';
+        span.style.zIndex = 20000;
+        body.appendChild(span)
+        setTimeout(() => {
+            span.style.top = span.offsetTop - 100 + 'px';
+            span.style.opacity = 0;
+            setTimeout(() => {
+                span.remove()
+            }, 700)
+        }, 0)
+    })
 
 </script>
 

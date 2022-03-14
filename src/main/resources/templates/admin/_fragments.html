@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">后台模板</title>
-    <link href="../../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">    <link
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link href="../../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">-->
+    <link rel="stylesheet" href="../../lib/semantic/semantic.min.css" th:href="@{/lib/semantic/semantic.min.css}">
     <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css"
           th:href="@{/lib/editormd/css/editormd.min.css}">
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
@@ -88,14 +89,18 @@
             </div>
         </div>
         <div class="ui inverted section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Blog Designed by Fzshuai</p>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Designed by Fzshuai</p>
         <a rel="nofollow" href="http://beian.miit.gov.cn/" target="_blank">辽ICP备20008029号</a>
     </div>
 </footer>
 
 <th:block th:fragment="script">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>-->
+    <script src="../../static/js/jquery-3.6.0.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+    <script src="../../static/js/jquery.scrollTo.min.js" th:src="@{/js/jquery.scrollTo.min.js}"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>-->
+    <script src="../../static/lib/semantic/semantic.min.js" th:src="@{/lib/semantic/semantic.min.js}"></script>
     <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
 </th:block>
 

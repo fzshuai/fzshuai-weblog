@@ -1,0 +1,76 @@
+2021-07-08 10:45:44.841  INFO 16648 --- [restartedMain] com.fzshuai.BlogApplication              : Starting BlogApplication using Java 1.8.0_251 on DESKTOP-5KANSA0 with PID 16648 (F:\Idea Projects\blog-jpa\target\classes started by Fzshuai in F:\Idea Projects\blog-jpa)
+2021-07-08 10:45:44.846 DEBUG 16648 --- [restartedMain] com.fzshuai.BlogApplication              : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-07-08 10:45:44.846  INFO 16648 --- [restartedMain] com.fzshuai.BlogApplication              : The following profiles are active: dev
+2021-07-08 10:45:44.892  INFO 16648 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-08 10:45:44.893  INFO 16648 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-08 10:45:45.566  INFO 16648 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-07-08 10:45:45.638  INFO 16648 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 5 JPA repository interfaces.
+2021-07-08 10:45:46.277  INFO 16648 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-07-08 10:45:46.323  INFO 16648 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-08 10:45:46.323  INFO 16648 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-07-08 10:45:46.325  INFO 16648 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-07-08 10:45:46.326  INFO 16648 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-07-08 10:45:46.326  INFO 16648 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-07-08 10:45:46.329  INFO 16648 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-07-08 10:45:46.416  INFO 16648 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-08 10:45:46.417  INFO 16648 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1523 ms
+2021-07-08 10:45:46.582  INFO 16648 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-08 10:45:46.626  INFO 16648 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-07-08 10:45:46.738  INFO 16648 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-07-08 10:45:46.823  INFO 16648 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-08 10:45:47.022  INFO 16648 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-08 10:45:47.032  INFO 16648 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-07-08 10:45:47.781  INFO 16648 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-08 10:45:47.789  INFO 16648 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-08 10:45:47.854  INFO 16648 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-07-08 10:45:48.558  WARN 16648 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-08 10:45:48.736  INFO 16648 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-08 10:45:48.841  INFO 16648 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-07-08 10:45:49.358  INFO 16648 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-08 10:45:49.366  INFO 16648 --- [restartedMain] com.fzshuai.BlogApplication              : Started BlogApplication in 4.962 seconds (JVM running for 6.116)
+2021-07-08 10:46:07.857  INFO 16648 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-08 10:46:07.858  INFO 16648 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-08 10:46:07.858  INFO 16648 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2021-07-08 10:46:07.894  INFO 16648 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: createTime: DESC], {}]}
+2021-07-08 10:46:07.984  WARN 16648 --- [http-nio-8080-exec-1] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-07-08 10:46:08.009  INFO 16648 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index
+2021-07-08 10:48:26.338  INFO 16648 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: createTime: DESC], {}]}
+2021-07-08 10:48:26.350  INFO 16648 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index
+2021-07-08 10:48:37.733  INFO 16648 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/about', ip='127.0.0.1', classMethod='com.fzshuai.controller.AboutShowController.about', args=[]}
+2021-07-08 10:48:37.735  INFO 16648 --- [http-nio-8080-exec-9] com.fzshuai.aspect.LogAspect             : Result : about
+2021-07-08 10:52:20.579  INFO 5212 --- [restartedMain] com.fzshuai.BlogApplication              : Starting BlogApplication using Java 1.8.0_251 on DESKTOP-5KANSA0 with PID 5212 (F:\Idea Projects\blog-jpa\target\classes started by Fzshuai in F:\Idea Projects\blog-jpa)
+2021-07-08 10:52:20.582 DEBUG 5212 --- [restartedMain] com.fzshuai.BlogApplication              : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-07-08 10:52:20.583  INFO 5212 --- [restartedMain] com.fzshuai.BlogApplication              : The following profiles are active: dev
+2021-07-08 10:52:20.626  INFO 5212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-08 10:52:20.626  INFO 5212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-08 10:52:21.194  INFO 5212 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-07-08 10:52:21.269  INFO 5212 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 5 JPA repository interfaces.
+2021-07-08 10:52:21.911  INFO 5212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-07-08 10:52:21.920  INFO 5212 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-08 10:52:21.920  INFO 5212 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-07-08 10:52:21.922  INFO 5212 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-07-08 10:52:21.922  INFO 5212 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-07-08 10:52:21.922  INFO 5212 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-07-08 10:52:21.926  INFO 5212 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-07-08 10:52:22.010  INFO 5212 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-08 10:52:22.010  INFO 5212 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1383 ms
+2021-07-08 10:52:22.165  INFO 5212 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-08 10:52:22.202  INFO 5212 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-07-08 10:52:22.298  INFO 5212 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-07-08 10:52:22.568  INFO 5212 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-08 10:52:22.706  INFO 5212 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-08 10:52:22.715  INFO 5212 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-07-08 10:52:23.331  INFO 5212 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-08 10:52:23.339  INFO 5212 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-08 10:52:23.387  INFO 5212 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-07-08 10:52:24.089  WARN 5212 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-08 10:52:24.249  INFO 5212 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-08 10:52:24.533  INFO 5212 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-07-08 10:52:24.933  INFO 5212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-08 10:52:24.941  INFO 5212 --- [restartedMain] com.fzshuai.BlogApplication              : Started BlogApplication in 4.804 seconds (JVM running for 5.977)
+2021-07-08 10:52:32.077  INFO 5212 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-08 10:52:32.077  INFO 5212 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-08 10:52:32.078  INFO 5212 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2021-07-08 10:52:32.105  INFO 5212 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fzshuai.controller.IndexController.index', args=[Page request [number: 0, size 5, sort: createTime: DESC], {}]}
+2021-07-08 10:52:32.191  WARN 5212 --- [http-nio-8080-exec-1] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-07-08 10:52:32.209  INFO 5212 --- [http-nio-8080-exec-1] com.fzshuai.aspect.LogAspect             : Result : index

@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <!--博客列表-->
-                <div class="ui padded segment m-padded-tb-large m-opacity" th:each="blog : ${page.content}">
+                <div class="ui padded segment m-padded-tb-large m-opacity" th:each="blog : ${page}">
                     <div class="ui large aligned mobile reversed stackable grid">
                         <!--博客内容-->
                         <div class="eleven wide column ">
@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="item">
                                             <i class="calendar alternate outline icon"></i>
-                                            <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-01-01</span>
+                                            <span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2021-01-01</span>
                                         </div>
                                         <div class="item">
                                             <i class="eye icon"></i> <span th:text="${blog.views}">2222</span>
@@ -199,8 +199,8 @@
                             <img src="../static/images/aboutbg.jpg" th:src="@{/images/aboutbg.jpg}">
                         </div>
                         <div class="content">
-                            <a href="#" th:href="@{/about}" class="header">Fzshuai</a>
-                            <div class="description">Fzshuai is an Java Programmers living in JinZhou.</div>
+                            <a href="#" th:href="@{/about}" class="header">Fu Zhanshuai</a>
+                            <div class="description">Fu Zhanshuai, a Java engineer, was born in Jinzhou.</div>
                         </div>
                         <div class="extra content" align="center">
                             <a href="https://github.com/fzshuai/" target="_blank"

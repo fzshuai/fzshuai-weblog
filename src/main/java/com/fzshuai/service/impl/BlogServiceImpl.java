@@ -60,28 +60,25 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
         // 这里调用了JpaSpecificationExecutor中的findAll方法，方法的参数为Specification对象
-        return blogRepository.findAll(new Specification<Blog>() {
-            // 重写toPredicate方法，添加查询条件
-            @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                List<Predicate> predicates = new ArrayList<>();
-                // 如果输入了标题信息，则根据标题构建查询语句
-                // 这里使用模糊查询
-                if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
-                    predicates.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
-                }
-                // 如果输入了类型，则获取输入类型对应的类型id，将其作为查询条件
-                if (blog.getTypeId() != null) {
-                    predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
-                }
-                // 如果点了推荐，则同样将其作为查询条件
-                if (blog.isRecommend()) {
-                    predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
-                }
-                // 构建复合查询条件
-                cq.where(predicates.toArray(new Predicate[predicates.size()]));
-                return null;
+        // 重写toPredicate方法，添加查询条件
+        return blogRepository.findAll((Specification<Blog>) (root, cq, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            // 如果输入了标题信息，则根据标题构建查询语句
+            // 这里使用模糊查询
+            if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
+                predicates.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
             }
+            // 如果输入了类型，则获取输入类型对应的类型id，将其作为查询条件
+            if (blog.getTypeId() != null) {
+                predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
+            }
+            // 如果点了推荐，则同样将其作为查询条件
+            if (blog.isRecommend()) {
+                predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
+            }
+            // 构建复合查询条件
+            cq.where(predicates.toArray(new Predicate[predicates.size()]));
+            return null;
         }, pageable);
     }
 
@@ -97,7 +94,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(0, size, sort);
         return blogRepository.findTop(pageable);
     }
