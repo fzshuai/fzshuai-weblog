@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzshuai.blog.mapper.ArticleMapper">
+
+    <resultMap type="com.fzshuai.blog.domain.Article" id="ArticleResult">
+        <result property="articleId" column="article_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="articleCover" column="article_cover"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="articleContent" column="article_content"/>
+        <result property="type" column="type"/>
+        <result property="originalUrl" column="original_url"/>
+        <result property="isTop" column="is_top"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap id="articleHomeResultMap" type="com.fzshuai.blog.domain.dto.ArticleHomeDTO">
+        <id property="articleId" column="article_id"/>
+        <result property="articleCover" column="article_cover"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="articleContent" column="article_content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="type" column="type"/>
+        <result property="isTop" column="is_top"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="tagDTOList" ofType="com.fzshuai.blog.domain.dto.TagDTO">
+            <id property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="articlePreviewResultMap" type="com.fzshuai.blog.domain.dto.ArticlePreviewDTO">
+        <id property="articleId" column="article_id"/>
+        <result property="articleCover" column="article_cover"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="createTime" column="create_time"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="tagDTOList" ofType="com.fzshuai.blog.domain.dto.TagDTO">
+            <id property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="articleResultMap" type="com.fzshuai.blog.domain.dto.ArticleDTO">
+        <id property="articleId" column="article_id"/>
+        <result property="articleCover" column="article_cover"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="articleContent" column="article_content"/>
+        <result property="type" column="type"/>
+        <result property="originalUrl" column="original_url"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="tagDTOList" ofType="com.fzshuai.blog.domain.dto.TagDTO">
+            <id property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="articleBackResultMap" type="com.fzshuai.blog.domain.dto.ArticleBackDTO">
+        <id property="articleId" column="article_id"/>
+        <result property="articleCover" column="article_cover"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="createTime" column="create_time"/>
+        <result property="type" column="type"/>
+        <result property="isTop" column="is_top"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="status" column="status"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="tagDTOList" ofType="com.fzshuai.blog.domain.dto.TagDTO">
+            <id property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="listArticles" resultMap="articleHomeResultMap">
+        SELECT a.article_id,
+               o.url as article_cover,
+               article_title,
+               SUBSTR(article_content, 1, 500) AS article_content,
+               a.create_time,
+               a.type,
+               a.is_top,
+               a.category_id,
+               category_name,
+               t.tag_id,
+               t.tag_name
+        FROM (SELECT article_id,
+                     article_cover,
+                     article_title,
+                     article_content,
+                     type,
+                     is_top,
+                     create_time,
+                     category_id
+              FROM blog_article
+              WHERE is_delete = 0
+                AND status = 1
+              ORDER BY is_top DESC,
+                       article_id DESC
+                  LIMIT #{current}, #{size}) a
+                 JOIN blog_category c ON a.category_id = c.category_id
+                 JOIN blog_article_tag atg ON a.article_id = atg.article_id
+                 JOIN blog_tag t ON t.tag_id = atg.tag_id
+                 JOIN sys_oss o ON  o.oss_id = a.article_cover
+        ORDER BY a.is_top DESC,
+                 a.article_id DESC
+    </select>
+
+    <select id="listArticlesByCondition" resultMap="articlePreviewResultMap">
+        SELECT
+        a.article_id,
+        article_cover,
+        article_title,
+        a.create_time,
+        a.category_id,
+        category_name,
+        t.tag_id,
+        t.tag_name
+        FROM
+        (
+        SELECT
+        article_id,
+        article_cover,
+        article_title,
+        article_content,
+        create_time,
+        category_id
+        FROM
+        blog_article
+        <where>
+            <if test="condition.categoryId != null">
+                category_id = #{condition.categoryId}
+            </if>
+            <if test="condition.tagId != null">
+                article_id IN (
+                SELECT
+                article_id
+                FROM
+                blog_article_tag
+                WHERE
+                tag_id = #{condition.tagId})
+            </if>
+        </where>
+        AND is_delete = 0
+        AND status = 1
+        ORDER BY article_id DESC
+        LIMIT #{current},#{size}
+        ) a
+        JOIN blog_category c ON a.category_id = c.category_id
+        JOIN blog_article_tag atg ON a.article_id = atg.article_id
+        JOIN blog_tag t ON t.tag_id = atg.tag_id
+    </select>
+
+    <select id="getArticleById" resultMap="articleResultMap">
+        SELECT a.article_id,
+               article_cover,
+               article_title,
+               article_content,
+               a.type,
+               a.original_url,
+               a.create_time,
+               a.update_time,
+               a.category_id,
+               category_name,
+               t.tag_id,
+               t.tag_name
+        FROM blog_article a
+                 JOIN blog_category c ON a.category_id = c.category_id
+                 JOIN blog_article_tag atg ON a.article_id = atg.article_id
+                 JOIN blog_tag t ON t.tag_id = atg.tag_id
+        WHERE a.article_id = #{articleId}
+          AND a.is_delete = 0
+          AND a.status = 1
+    </select>
+
+    <select id="listArticleBacks" resultMap="articleBackResultMap">
+        SELECT
+        a.article_id,
+        article_cover,
+        article_title,
+        type,
+        is_top,
+        a.is_delete,
+        a.status,
+        a.create_time,
+        category_name,
+        t.tag_id,
+        t.tag_name
+        FROM
+        (
+        SELECT
+        article_id,
+        article_cover,
+        article_title,
+        type,
+        is_top,
+        is_delete,
+        status,
+        create_time,
+        category_id
+        FROM
+        blog_article
+        <where>
+            is_delete = #{condition.isDelete}
+            <if test="condition.keywords != null">
+                and article_title like concat('%',#{condition.keywords},'%')
+            </if>
+            <if test="condition.status != null">
+                and status = #{condition.status}
+            </if>
+            <if test="condition.categoryId != null">
+                and category_id = #{condition.categoryId}
+            </if>
+            <if test="condition.type != null">
+                and type = #{condition.type}
+            </if>
+            <if test="condition.tagId != null">
+                and article_id in
+                (
+                SELECT
+                article_id
+                FROM
+                blog_article_tag
+                WHERE
+                tag_id = #{condition.tagId}
+                )
+            </if>
+        </where>
+        ORDER BY
+        is_top DESC,
+        article_id DESC
+        LIMIT #{current},#{size}
+        ) a
+        LEFT JOIN blog_category c ON a.category_id = c.category_id
+        LEFT JOIN blog_article_tag atg ON a.article_id = atg.article_id
+        LEFT JOIN blog_tag t ON t.tag_id = atg.tag_id
+        ORDER BY
+        is_top DESC,
+        a.article_id DESC
+    </select>
+
+    <select id="countArticleBacks" resultType="java.lang.Integer">
+        SELECT
+        count(DISTINCT a.article_id)
+        from
+        blog_article a
+        LEFT JOIN blog_article_tag tat on a.article_id = tat.article_id
+        <where>
+            is_delete = #{condition.isDelete}
+            <if test="condition.keywords != null">
+                and article_title like concat('%',#{condition.keywords},'%')
+            </if>
+            <if test="condition.status != null">
+                and `status` = #{condition.status}
+            </if>
+            <if test="condition.categoryId != null">
+                and category_id = #{condition.categoryId}
+            </if>
+            <if test="condition.type != null">
+                and type = #{condition.type}
+            </if>
+            <if test="condition.tagId != null">
+                and tat.tag_id = #{condition.tagId}
+            </if>
+        </where>
+    </select>
+
+    <select id="listRecommendArticles" resultType="com.fzshuai.blog.domain.dto.ArticleRecommendDTO">
+        SELECT a.article_id,
+               article_title,
+               article_cover,
+               create_time
+        FROM (SELECT DISTINCT article_id
+              FROM (SELECT tag_id FROM blog_article_tag WHERE article_id = #{articleId}) t
+                       JOIN blog_article_tag t1 ON t.tag_id = t1.tag_id
+              WHERE article_id != #{articleId}) t2
+                 JOIN blog_article a ON t2.article_id = a.article_id
+        WHERE a.is_delete = 0
+        ORDER BY is_top DESC, article_id DESC LIMIT 6
+    </select>
+
+    <select id="listArticleStatistics" resultType="com.fzshuai.blog.domain.dto.ArticleStatisticsDTO">
+        SELECT DATE_FORMAT(create_time, "%Y-%m-%d") AS date,
+            COUNT( 1 ) AS count
+        FROM
+            blog_article
+        GROUP BY
+            date
+        ORDER BY
+            date DESC
+    </select>
+
+</mapper>
