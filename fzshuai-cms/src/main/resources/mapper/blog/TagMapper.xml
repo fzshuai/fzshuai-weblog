@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzshuai.blog.mapper.TagMapper">
+
+    <resultMap type="com.fzshuai.blog.domain.Tag" id="TagResult">
+        <result property="tagId" column="tag_id"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <select id="selectTagNamesByArticleId" parameterType="long" resultType="String">
+        select tag_name
+        from blog_tag t
+                 join blog_article_tag at
+        on t.tag_id = at.tag_id
+        where article_id = #{articleId}
+    </select>
+
+</mapper>
