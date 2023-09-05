@@ -129,7 +129,7 @@
 </template>
 
 <script>
-import { listAlbum, getAlbum, delAlbum, addAlbum, updateAlbum } from "@/api/album/album";
+import { listAlbum, getAlbum, delAlbum, addAlbum, updateAlbum } from "@/api/blog/album";
 
 export default {
   name: "Album",
