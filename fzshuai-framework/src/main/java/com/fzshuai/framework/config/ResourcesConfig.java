@@ -1,5 +1,5 @@
 package com.fzshuai.framework.config;
-import com.fzshuai.framework.interceptor.PaginationInterceptor;
+import com.fzshuai.framework.interceptor.BlogPaginationInterceptor;
 import com.fzshuai.framework.interceptor.PlusWebInvokeTimeInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class ResourcesConfig implements WebMvcConfigurer {
         // 全局访问性能拦截
         registry.addInterceptor(new PlusWebInvokeTimeInterceptor());
         // 博客页面对象拦截
-        registry.addInterceptor(new PaginationInterceptor());
+        registry.addInterceptor(new BlogPaginationInterceptor());
     }
 
     @Override
