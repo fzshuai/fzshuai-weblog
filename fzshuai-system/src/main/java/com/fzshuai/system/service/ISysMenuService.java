@@ -2,7 +2,7 @@ package com.fzshuai.system.service;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.fzshuai.common.core.domain.entity.SysMenu;
-import com.fzshuai.system.domain.vo.RouterVo;
+import com.fzshuai.system.domain.vo.RouterVO;
 
 import java.util.List;
 import java.util.Set;
@@ -69,7 +69,7 @@ public interface ISysMenuService {
      * @param menus 菜单列表
      * @return 路由列表
      */
-    List<RouterVo> buildMenus(List<SysMenu> menus);
+    List<RouterVO> buildMenus(List<SysMenu> menus);
 
     /**
      * 构建前端所需要下拉树结构

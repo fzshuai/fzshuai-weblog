@@ -2,7 +2,7 @@ package com.fzshuai.blog.mapper;
 
 import com.fzshuai.blog.domain.Category;
 import com.fzshuai.blog.domain.dto.CategoryDTO;
-import com.fzshuai.blog.domain.vo.CategoryVo;
+import com.fzshuai.blog.domain.vo.CategoryVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category, CategoryVo> {
+public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category, CategoryVO> {
 
     /**
      * 查询分类和对应文章数量

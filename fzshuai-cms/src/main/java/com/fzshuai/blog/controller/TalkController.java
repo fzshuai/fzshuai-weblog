@@ -2,10 +2,10 @@ package com.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import com.fzshuai.blog.domain.bo.TalkBo;
+import com.fzshuai.blog.domain.bo.TalkBO;
 import com.fzshuai.blog.domain.dto.TalkDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.TalkVo;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.TalkVO;
 import com.fzshuai.blog.service.ITalkService;
 import com.fzshuai.common.annotation.Log;
 import com.fzshuai.common.annotation.RepeatSubmit;
@@ -59,7 +59,7 @@ public class TalkController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/talks")
-    public R<PageResult<TalkDTO>> listTalks() {
+    public R<PageResultVO<TalkDTO>> listTalks() {
         return R.ok(talkService.listTalks());
     }
 
@@ -68,7 +68,7 @@ public class TalkController extends BaseController {
      */
     @SaCheckPermission("blog:talk:list")
     @GetMapping("/list")
-    public TableDataInfo<TalkVo> list(TalkBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVO> list(TalkBO bo, PageQuery pageQuery) {
         return talkService.queryPageList(bo, pageQuery);
     }
 
@@ -78,9 +78,9 @@ public class TalkController extends BaseController {
     @SaCheckPermission("blog:talk:export")
     @Log(title = "说说", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(TalkBo bo, HttpServletResponse response) {
-        List<TalkVo> list = talkService.queryList(bo);
-        ExcelUtil.exportExcel(list, "说说", TalkVo.class, response);
+    public void export(TalkBO bo, HttpServletResponse response) {
+        List<TalkVO> list = talkService.queryList(bo);
+        ExcelUtil.exportExcel(list, "说说", TalkVO.class, response);
     }
 
     /**
@@ -91,7 +91,7 @@ public class TalkController extends BaseController {
     @SaIgnore
     @SaCheckPermission("blog:talk:query")
     @GetMapping("/{talkId}")
-    public R<TalkVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<TalkVO> getInfo(@NotNull(message = "主键不能为空")
                              @PathVariable Long talkId) {
         return R.ok(talkService.queryById(talkId));
     }
@@ -103,7 +103,7 @@ public class TalkController extends BaseController {
     @Log(title = "说说", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody TalkBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody TalkBO bo) {
         return toAjax(talkService.insertByBo(bo));
     }
 
@@ -114,7 +114,7 @@ public class TalkController extends BaseController {
     @Log(title = "说说", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TalkBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TalkBO bo) {
         return toAjax(talkService.updateByBo(bo));
     }
 

@@ -3,12 +3,12 @@ package com.fzshuai.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fzshuai.blog.domain.Article;
-import com.fzshuai.blog.domain.bo.PageBo;
+import com.fzshuai.blog.domain.bo.PageBO;
 import com.fzshuai.blog.domain.dto.ArticleRankDTO;
-import com.fzshuai.blog.domain.vo.BlogHomeInfoVo;
-import com.fzshuai.blog.domain.vo.BlogInfoVo;
-import com.fzshuai.blog.domain.vo.PageVo;
-import com.fzshuai.blog.domain.vo.WebsiteConfigVo;
+import com.fzshuai.blog.domain.vo.BlogHomeInfoVO;
+import com.fzshuai.blog.domain.vo.BlogInfoVO;
+import com.fzshuai.blog.domain.vo.PageVO;
+import com.fzshuai.blog.domain.vo.WebsiteConfigVO;
 import com.fzshuai.blog.mapper.ArticleMapper;
 import com.fzshuai.blog.mapper.CategoryMapper;
 import com.fzshuai.blog.mapper.TagMapper;
@@ -52,7 +52,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     private final IWebsiteConfigService websiteConfigService;
 
     @Override
-    public BlogHomeInfoVo getBlogHomeInfo() {
+    public BlogHomeInfoVO getBlogHomeInfo() {
         // 查询文章数量
         Long articleCount = articleMapper.selectCount(new LambdaQueryWrapper<Article>()
                 .eq(Article::getStatus, PUBLIC.getStatus())
@@ -65,17 +65,17 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
         Object count = RedisUtils.getCacheObject(BLOG_VIEWS_COUNT);
         String viewsCount = Optional.ofNullable(count).orElse(0).toString();
         // 查询网站配置
-        WebsiteConfigVo websiteConfig = websiteConfigService.getWebsiteConfig();
+        WebsiteConfigVO websiteConfig = websiteConfigService.getWebsiteConfig();
         // 查询页面图片
-        List<PageVo> pageVoList = pageService.queryList(new PageBo());
+        List<PageVO> pageVOList = pageService.queryList(new PageBO());
         // 封装数据
-        return BlogHomeInfoVo.builder()
+        return BlogHomeInfoVO.builder()
                 .articleCount(articleCount.intValue())
                 .categoryCount(categoryCount.intValue())
                 .tagCount(tagCount.intValue())
                 .viewsCount(viewsCount)
                 .websiteConfig(websiteConfig)
-                .pageList(pageVoList)
+                .pageList(pageVOList)
                 .build();
     }
 
@@ -86,7 +86,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     }
 
     @Override
-    public void updateAbout(BlogInfoVo blogInfoVO) {
+    public void updateAbout(BlogInfoVO blogInfoVO) {
         RedisUtils.setCacheObject(ABOUT, blogInfoVO.getAboutContent());
     }
 

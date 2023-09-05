@@ -16,7 +16,7 @@ import com.fzshuai.common.utils.ServletUtils;
 import com.fzshuai.common.utils.StringUtils;
 import com.fzshuai.common.utils.redis.RedisUtils;
 import com.fzshuai.common.utils.spring.SpringUtils;
-import com.fzshuai.system.domain.vo.UserVo;
+import com.fzshuai.system.domain.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +70,7 @@ public class SysRegisterService {
     /**
      * 博客前台用户注册
      */
-    public void blogRegister(UserVo user) {
+    public void blogRegister(UserVO user) {
         // 校验账号是否合法（邮箱是否正确）
         if (checkUser(user)) {
             throw new BaseException("用户名已被注册！");
@@ -133,7 +133,7 @@ public class SysRegisterService {
      * @param user 用户数据
      * @return 结果
      */
-    private Boolean checkUser(UserVo user) {
+    private Boolean checkUser(UserVO user) {
         // 验证码检验
         if (!user.getCode().equals(RedisUtils.getCacheObject(USER_CODE_KEY + user.getEmail()))) {
             throw new BaseException("验证码错误！");

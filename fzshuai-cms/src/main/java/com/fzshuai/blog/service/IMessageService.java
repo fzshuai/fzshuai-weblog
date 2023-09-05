@@ -1,8 +1,8 @@
 package com.fzshuai.blog.service;
 
 import com.fzshuai.blog.domain.dto.MessageDTO;
-import com.fzshuai.blog.domain.vo.MessageVo;
-import com.fzshuai.blog.domain.bo.MessageBo;
+import com.fzshuai.blog.domain.vo.MessageVO;
+import com.fzshuai.blog.domain.bo.MessageBO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -22,7 +22,7 @@ public interface IMessageService {
      *
      * @param messageVo 留言对象
      */
-    void saveMessage(MessageVo messageVo);
+    void saveMessage(MessageVO messageVo);
 
     /**
      * 查看前台留言弹幕
@@ -34,27 +34,27 @@ public interface IMessageService {
     /*
      * 查询留言
      */
-    MessageVo queryById(Long messageId);
+    MessageVO queryById(Long messageId);
 
     /**
      * 查询留言列表
      */
-    TableDataInfo<MessageVo> queryPageList(MessageBo bo, PageQuery pageQuery);
+    TableDataInfo<MessageVO> queryPageList(MessageBO bo, PageQuery pageQuery);
 
     /**
      * 查询留言列表
      */
-    List<MessageVo> queryList(MessageBo bo);
+    List<MessageVO> queryList(MessageBO bo);
 
     /**
      * 新增留言
      */
-    Boolean insertByBo(MessageBo bo);
+    Boolean insertByBo(MessageBO bo);
 
     /**
      * 修改留言
      */
-    Boolean updateByBo(MessageBo bo);
+    Boolean updateByBo(MessageBO bo);
 
     /**
      * 校验并批量删除留言信息

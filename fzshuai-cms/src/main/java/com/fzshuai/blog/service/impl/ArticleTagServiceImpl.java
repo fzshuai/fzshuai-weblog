@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.fzshuai.blog.domain.bo.ArticleTagBo;
-import com.fzshuai.blog.domain.vo.ArticleTagVo;
+import com.fzshuai.blog.domain.bo.ArticleTagBO;
+import com.fzshuai.blog.domain.vo.ArticleTagVO;
 import com.fzshuai.blog.domain.ArticleTag;
 import com.fzshuai.blog.mapper.ArticleTagMapper;
 import com.fzshuai.blog.service.IArticleTagService;
@@ -35,7 +35,7 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
      * 查询文章和文章标签关联
      */
     @Override
-    public ArticleTagVo queryById(Long articleId){
+    public ArticleTagVO queryById(Long articleId){
         return baseMapper.selectVoById(articleId);
     }
 
@@ -43,9 +43,9 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
      * 查询文章和文章标签关联列表
      */
     @Override
-    public TableDataInfo<ArticleTagVo> queryPageList(ArticleTagBo bo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleTagVO> queryPageList(ArticleTagBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<ArticleTag> lqw = buildQueryWrapper(bo);
-        Page<ArticleTagVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<ArticleTagVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -53,12 +53,12 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
      * 查询文章和文章标签关联列表
      */
     @Override
-    public List<ArticleTagVo> queryList(ArticleTagBo bo) {
+    public List<ArticleTagVO> queryList(ArticleTagBO bo) {
         LambdaQueryWrapper<ArticleTag> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<ArticleTag> buildQueryWrapper(ArticleTagBo bo) {
+    private LambdaQueryWrapper<ArticleTag> buildQueryWrapper(ArticleTagBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<ArticleTag> lqw = Wrappers.lambdaQuery();
         return lqw;
@@ -68,7 +68,7 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
      * 新增文章和文章标签关联
      */
     @Override
-    public Boolean insertByBo(ArticleTagBo bo) {
+    public Boolean insertByBo(ArticleTagBO bo) {
         ArticleTag add = BeanUtil.toBean(bo, ArticleTag.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -82,7 +82,7 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
      * 修改文章和文章标签关联
      */
     @Override
-    public Boolean updateByBo(ArticleTagBo bo) {
+    public Boolean updateByBo(ArticleTagBO bo) {
         ArticleTag update = BeanUtil.toBean(bo, ArticleTag.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

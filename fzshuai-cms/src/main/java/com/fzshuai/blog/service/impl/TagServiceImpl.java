@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fzshuai.blog.domain.ArticleTag;
 import com.fzshuai.blog.domain.dto.TagDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import com.fzshuai.blog.mapper.ArticleTagMapper;
 import com.fzshuai.common.exception.ServiceException;
 import com.fzshuai.common.utils.BeanCopyUtils;
@@ -16,8 +16,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.fzshuai.blog.domain.bo.TagBo;
-import com.fzshuai.blog.domain.vo.TagVo;
+import com.fzshuai.blog.domain.bo.TagBO;
+import com.fzshuai.blog.domain.vo.TagVO;
 import com.fzshuai.blog.domain.Tag;
 import com.fzshuai.blog.mapper.TagMapper;
 import com.fzshuai.blog.service.ITagService;
@@ -46,21 +46,21 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * @return
      */
     @Override
-    public PageResult<TagDTO> listTags() {
+    public PageResultVO<TagDTO> listTags() {
         // 查询标签列表
         List<Tag> tagList = baseMapper.selectList(null);
         // 转换DTO
         List<TagDTO> tagDTOList = BeanCopyUtils.copyList(tagList, TagDTO.class);
         // 查询标签数量
         Long count = baseMapper.selectCount(null);
-        return new PageResult<>(tagDTOList, Integer.parseInt(String.valueOf(count)));
+        return new PageResultVO<>(tagDTOList, Integer.parseInt(String.valueOf(count)));
     }
 
     /**
      * 查询文章标签
      */
     @Override
-    public TagVo queryById(Long tagId) {
+    public TagVO queryById(Long tagId) {
         return baseMapper.selectVoById(tagId);
     }
 
@@ -68,9 +68,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 查询文章标签列表
      */
     @Override
-    public TableDataInfo<TagVo> queryPageList(TagBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TagVO> queryPageList(TagBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Tag> lqw = buildQueryWrapper(bo);
-        Page<TagVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<TagVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -78,12 +78,12 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 查询文章标签列表
      */
     @Override
-    public List<TagVo> queryList(TagBo bo) {
+    public List<TagVO> queryList(TagBO bo) {
         LambdaQueryWrapper<Tag> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Tag> buildQueryWrapper(TagBo bo) {
+    private LambdaQueryWrapper<Tag> buildQueryWrapper(TagBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Tag> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getTagName()), Tag::getTagName, bo.getTagName());
@@ -94,7 +94,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 新增文章标签
      */
     @Override
-    public Boolean insertByBo(TagBo bo) {
+    public Boolean insertByBo(TagBO bo) {
         Tag add = BeanUtil.toBean(bo, Tag.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -108,7 +108,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 修改文章标签
      */
     @Override
-    public Boolean updateByBo(TagBo bo) {
+    public Boolean updateByBo(TagBO bo) {
         Tag update = BeanUtil.toBean(bo, Tag.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

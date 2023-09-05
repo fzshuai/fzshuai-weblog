@@ -1,8 +1,8 @@
 package com.fzshuai.blog.service;
 
-import com.fzshuai.blog.domain.bo.AlbumBo;
+import com.fzshuai.blog.domain.bo.AlbumBO;
 import com.fzshuai.blog.domain.dto.AlbumDTO;
-import com.fzshuai.blog.domain.vo.AlbumVo;
+import com.fzshuai.blog.domain.vo.AlbumVO;
 import com.fzshuai.common.core.domain.PageQuery;
 import com.fzshuai.common.core.page.TableDataInfo;
 
@@ -27,27 +27,27 @@ public interface IAlbumService {
     /**
      * 查询相册管理
      */
-    AlbumVo queryById(Long photoAlbumId);
+    AlbumVO queryById(Long photoAlbumId);
 
     /**
      * 查询相册列表
      */
-    TableDataInfo<AlbumVo> queryPageList(AlbumBo bo, PageQuery pageQuery);
+    TableDataInfo<AlbumVO> queryPageList(AlbumBO bo, PageQuery pageQuery);
 
     /**
      * 查询相册列表
      */
-    List<AlbumVo> queryList(AlbumBo bo);
+    List<AlbumVO> queryList(AlbumBO bo);
 
     /**
      * 新增相册
      */
-    Boolean insertByBo(AlbumBo bo);
+    Boolean insertByBo(AlbumBO bo);
 
     /**
      * 修改相册
      */
-    Boolean updateByBo(AlbumBo bo);
+    Boolean updateByBo(AlbumBO bo);
 
     /**
      * 校验并批量删除相册信息

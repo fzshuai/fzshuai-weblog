@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Message;
-import com.fzshuai.blog.domain.bo.MessageBo;
+import com.fzshuai.blog.domain.bo.MessageBO;
 import com.fzshuai.blog.domain.dto.MessageDTO;
-import com.fzshuai.blog.domain.vo.MessageVo;
+import com.fzshuai.blog.domain.vo.MessageVO;
 import com.fzshuai.blog.mapper.MessageMapper;
 import com.fzshuai.blog.service.IMessageService;
 import com.fzshuai.blog.service.IWebsiteConfigService;
@@ -48,7 +48,7 @@ public class MessageServiceImpl implements IMessageService {
      * @param messageVo
      */
     @Override
-    public void saveMessage(MessageVo messageVo) {
+    public void saveMessage(MessageVO messageVo) {
         // 判断是否需要审核
         Integer isReview = websiteConfigService.getWebsiteConfig().getIsMessageReview();
         // 获取用户ip
@@ -79,7 +79,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言
      */
     @Override
-    public MessageVo queryById(Long messageId) {
+    public MessageVO queryById(Long messageId) {
         return baseMapper.selectVoById(messageId);
     }
 
@@ -87,9 +87,9 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public TableDataInfo<MessageVo> queryPageList(MessageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<MessageVO> queryPageList(MessageBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
-        Page<MessageVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<MessageVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -97,12 +97,12 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public List<MessageVo> queryList(MessageBo bo) {
+    public List<MessageVO> queryList(MessageBO bo) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Message> buildQueryWrapper(MessageBo bo) {
+    private LambdaQueryWrapper<Message> buildQueryWrapper(MessageBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Message> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getNickname()), Message::getNickname, bo.getNickname());
@@ -119,7 +119,7 @@ public class MessageServiceImpl implements IMessageService {
      * 新增留言
      */
     @Override
-    public Boolean insertByBo(MessageBo bo) {
+    public Boolean insertByBo(MessageBO bo) {
         Message add = BeanUtil.toBean(bo, Message.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -133,7 +133,7 @@ public class MessageServiceImpl implements IMessageService {
      * 修改留言
      */
     @Override
-    public Boolean updateByBo(MessageBo bo) {
+    public Boolean updateByBo(MessageBO bo) {
         Message update = BeanUtil.toBean(bo, Message.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

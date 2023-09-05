@@ -8,7 +8,7 @@ import com.fzshuai.common.core.controller.BaseController;
 import com.fzshuai.common.core.domain.R;
 import com.fzshuai.common.core.domain.model.RegisterBody;
 import com.fzshuai.common.utils.redis.RedisUtils;
-import com.fzshuai.system.domain.vo.UserVo;
+import com.fzshuai.system.domain.vo.UserVO;
 import com.fzshuai.system.service.ISysConfigService;
 import com.fzshuai.system.service.SysRegisterService;
 import lombok.RequiredArgsConstructor;
@@ -88,7 +88,7 @@ public class SysRegisterController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/blog/register")
-    public R<?> register(@Valid @RequestBody UserVo user) {
+    public R<?> register(@Valid @RequestBody UserVO user) {
         registerService.blogRegister(user);
         return R.ok();
     }

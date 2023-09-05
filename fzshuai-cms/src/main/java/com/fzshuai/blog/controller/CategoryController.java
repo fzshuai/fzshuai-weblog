@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.fzshuai.blog.domain.dto.CategoryDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
@@ -20,8 +20,8 @@ import com.fzshuai.common.core.validate.AddGroup;
 import com.fzshuai.common.core.validate.EditGroup;
 import com.fzshuai.common.enums.BusinessType;
 import com.fzshuai.common.utils.poi.ExcelUtil;
-import com.fzshuai.blog.domain.vo.CategoryVo;
-import com.fzshuai.blog.domain.bo.CategoryBo;
+import com.fzshuai.blog.domain.vo.CategoryVO;
+import com.fzshuai.blog.domain.bo.CategoryBO;
 import com.fzshuai.blog.service.ICategoryService;
 import com.fzshuai.common.core.page.TableDataInfo;
 
@@ -45,7 +45,7 @@ public class CategoryController extends BaseController {
      * @return {@link R<CategoryDTO>} 分类列表
      */
     @GetMapping("/categories")
-    public R<PageResult<CategoryDTO>> listCategories() {
+    public R<PageResultVO<CategoryDTO>> listCategories() {
         return R.ok(categoryService.listCategories());
     }
 
@@ -54,7 +54,7 @@ public class CategoryController extends BaseController {
      */
     @SaCheckPermission("blog:category:list")
     @GetMapping("/list")
-    public TableDataInfo<CategoryVo> list(CategoryBo bo, PageQuery pageQuery) {
+    public TableDataInfo<CategoryVO> list(CategoryBO bo, PageQuery pageQuery) {
         return categoryService.queryPageList(bo, pageQuery);
     }
 
@@ -64,9 +64,9 @@ public class CategoryController extends BaseController {
     @SaCheckPermission("blog:category:export")
     @Log(title = "文章分类", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(CategoryBo bo, HttpServletResponse response) {
-        List<CategoryVo> list = categoryService.queryList(bo);
-        ExcelUtil.exportExcel(list, "文章分类", CategoryVo.class, response);
+    public void export(CategoryBO bo, HttpServletResponse response) {
+        List<CategoryVO> list = categoryService.queryList(bo);
+        ExcelUtil.exportExcel(list, "文章分类", CategoryVO.class, response);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CategoryController extends BaseController {
      */
     @SaCheckPermission("blog:category:query")
     @GetMapping("/{categoryId}")
-    public R<CategoryVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<CategoryVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long categoryId) {
         return R.ok(categoryService.queryById(categoryId));
     }
@@ -88,7 +88,7 @@ public class CategoryController extends BaseController {
     @Log(title = "文章分类", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody CategoryBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody CategoryBO bo) {
         return toAjax(categoryService.insertByBo(bo));
     }
 
@@ -99,7 +99,7 @@ public class CategoryController extends BaseController {
     @Log(title = "文章分类", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CategoryBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CategoryBO bo) {
         return toAjax(categoryService.updateByBo(bo));
     }
 

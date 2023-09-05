@@ -6,13 +6,13 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Comment;
-import com.fzshuai.blog.domain.bo.CommentBo;
+import com.fzshuai.blog.domain.bo.CommentBO;
 import com.fzshuai.blog.domain.dto.CommentDTO;
 import com.fzshuai.blog.domain.dto.ReplyCountDTO;
 import com.fzshuai.blog.domain.dto.ReplyDTO;
-import com.fzshuai.blog.domain.vo.CommentVo;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.WebsiteConfigVo;
+import com.fzshuai.blog.domain.vo.CommentVO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.WebsiteConfigVO;
 import com.fzshuai.blog.mapper.ArticleMapper;
 import com.fzshuai.blog.mapper.CommentMapper;
 import com.fzshuai.blog.service.ICommentService;
@@ -60,7 +60,7 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVO 评论信息
      */
     @Override
-    public PageResult<CommentDTO> listComments(CommentVo commentVO) {
+    public PageResultVO<CommentDTO> listComments(CommentVO commentVO) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
                 .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
@@ -68,12 +68,12 @@ public class CommentServiceImpl implements ICommentService {
                 .isNull(Comment::getParentId)
                 .eq(Comment::getState, STATE));
         if (commentCount == 0) {
-            return new PageResult<>();
+            return new PageResultVO<>();
         }
         // 分页查询评论数据
         List<CommentDTO> commentDTOList = baseMapper.listComments(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
         if (CollectionUtils.isEmpty(commentDTOList)) {
-            return new PageResult<>();
+            return new PageResultVO<>();
         }
         // 查询redis的评论点赞数据
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(COMMENT_LIKE_COUNT);
@@ -97,7 +97,7 @@ public class CommentServiceImpl implements ICommentService {
             item.setReplyDTOList(replyMap.get(item.getCommentId()));
             item.setReplyCount(replyCountMap.get(item.getCommentId()));
         });
-        return new PageResult<>(commentDTOList, Integer.parseInt(String.valueOf(commentCount)));
+        return new PageResultVO<>(commentDTOList, Integer.parseInt(String.valueOf(commentCount)));
     }
 
     /**
@@ -106,9 +106,9 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVo 评论对象
      */
     @Override
-    public void saveComment(CommentVo commentVo) {
+    public void saveComment(CommentVO commentVo) {
         // 判断是否需要审核
-        WebsiteConfigVo websiteConfig = websiteConfigService.getWebsiteConfig();
+        WebsiteConfigVO websiteConfig = websiteConfigService.getWebsiteConfig();
         Integer isReview = websiteConfig.getIsCommentReview();
         // 过滤标签
         commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
@@ -134,7 +134,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论
      */
     @Override
-    public CommentVo queryById(Long commentId) {
+    public CommentVO queryById(Long commentId) {
         return baseMapper.selectVoById(commentId);
     }
 
@@ -142,13 +142,13 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public TableDataInfo<CommentVo> queryPageList(CommentBo bo, PageQuery pageQuery) {
+    public TableDataInfo<CommentVO> queryPageList(CommentBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
-        Page<CommentVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
-        result.getRecords().forEach(commentVo -> {
-            commentVo.setNickname(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getNickName());
-            commentVo.setArticleTitle(articleMapper.selectById(commentVo.getTopicId()).getArticleTitle());
-            commentVo.setReplyUserName(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getUserName());
+        Page<CommentVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        result.getRecords().forEach(commentVO -> {
+            commentVO.setNickname(sysUserMapper.selectVoById(commentVO.getReplyUserId()).getNickName());
+            commentVO.setArticleTitle(articleMapper.selectById(commentVO.getTopicId()).getArticleTitle());
+            commentVO.setReplyUserName(sysUserMapper.selectVoById(commentVO.getReplyUserId()).getUserName());
         });
         return TableDataInfo.build(result);
     }
@@ -157,12 +157,12 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public List<CommentVo> queryList(CommentBo bo) {
+    public List<CommentVO> queryList(CommentBO bo) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Comment> buildQueryWrapper(CommentBo bo) {
+    private LambdaQueryWrapper<Comment> buildQueryWrapper(CommentBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Comment> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Comment::getUserId, bo.getUserId());
@@ -182,7 +182,7 @@ public class CommentServiceImpl implements ICommentService {
      * 新增文章评论
      */
     @Override
-    public Boolean insertByBo(CommentBo bo) {
+    public Boolean insertByBo(CommentBO bo) {
         Comment add = BeanUtil.toBean(bo, Comment.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -196,7 +196,7 @@ public class CommentServiceImpl implements ICommentService {
      * 修改文章评论
      */
     @Override
-    public Boolean updateByBo(CommentBo bo) {
+    public Boolean updateByBo(CommentBO bo) {
         Comment update = BeanUtil.toBean(bo, Comment.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

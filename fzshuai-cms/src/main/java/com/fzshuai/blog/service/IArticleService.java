@@ -1,10 +1,10 @@
 package com.fzshuai.blog.service;
 
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ArticleVo;
-import com.fzshuai.blog.domain.bo.ArticleBo;
-import com.fzshuai.blog.domain.vo.ConditionVo;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.ArticleVO;
+import com.fzshuai.blog.domain.bo.ArticleBO;
+import com.fzshuai.blog.domain.vo.ConditionVO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -31,7 +31,7 @@ public interface IArticleService {
      *
      * @return 文章归档
      */
-    PageResult<ArchiveDTO> listArchives();
+    PageResultVO<ArchiveDTO> listArchives();
 
     /**
      * 查看博客前端首页文章
@@ -54,7 +54,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleSearchDTO> listArticlesBySearch(ConditionVo condition);
+    List<ArticleSearchDTO> listArticlesBySearch(ConditionVO condition);
 
     /**
      * 根据条件查询文章列表
@@ -62,32 +62,32 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    ArticlePreviewListDTO listArticlesByCondition(ConditionVo condition);
+    ArticlePreviewListDTO listArticlesByCondition(ConditionVO condition);
 
     /**
      * 查询文章
      */
-    ArticleVo queryById(Long articleId);
+    ArticleVO queryById(Long articleId);
 
     /**
      * 查询文章列表
      */
-    TableDataInfo<ArticleVo> queryPageList(ArticleBo bo, PageQuery pageQuery);
+    TableDataInfo<ArticleVO> queryPageList(ArticleBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章列表
      */
-    List<ArticleVo> queryList(ArticleBo bo);
+    List<ArticleVO> queryList(ArticleBO bo);
 
     /**
      * 新增文章
      */
-    Boolean insertByBo(ArticleBo bo);
+    Boolean insertByBo(ArticleBO bo);
 
     /**
      * 修改文章
      */
-    Boolean updateByBo(ArticleBo bo);
+    Boolean updateByBo(ArticleBO bo);
 
     /**
      * 校验并批量删除文章信息

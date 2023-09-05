@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.fzshuai.blog.domain.bo.FriendLinkBo;
-import com.fzshuai.blog.domain.vo.FriendLinkVo;
+import com.fzshuai.blog.domain.bo.FriendLinkBO;
+import com.fzshuai.blog.domain.vo.FriendLinkVO;
 import com.fzshuai.blog.domain.FriendLink;
 import com.fzshuai.blog.mapper.FriendLinkMapper;
 import com.fzshuai.blog.service.IFriendLinkService;
@@ -49,7 +49,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接
      */
     @Override
-    public FriendLinkVo queryById(Long friendLinkId) {
+    public FriendLinkVO queryById(Long friendLinkId) {
         return baseMapper.selectVoById(friendLinkId);
     }
 
@@ -57,9 +57,9 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public TableDataInfo<FriendLinkVo> queryPageList(FriendLinkBo bo, PageQuery pageQuery) {
+    public TableDataInfo<FriendLinkVO> queryPageList(FriendLinkBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
-        Page<FriendLinkVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<FriendLinkVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -67,12 +67,12 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public List<FriendLinkVo> queryList(FriendLinkBo bo) {
+    public List<FriendLinkVO> queryList(FriendLinkBO bo) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<FriendLink> buildQueryWrapper(FriendLinkBo bo) {
+    private LambdaQueryWrapper<FriendLink> buildQueryWrapper(FriendLinkBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<FriendLink> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getLinkName()), FriendLink::getLinkName, bo.getLinkName());
@@ -86,7 +86,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 新增友人链接
      */
     @Override
-    public Boolean insertByBo(FriendLinkBo bo) {
+    public Boolean insertByBo(FriendLinkBO bo) {
         FriendLink add = BeanUtil.toBean(bo, FriendLink.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -100,7 +100,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 修改友人链接
      */
     @Override
-    public Boolean updateByBo(FriendLinkBo bo) {
+    public Boolean updateByBo(FriendLinkBO bo) {
         FriendLink update = BeanUtil.toBean(bo, FriendLink.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

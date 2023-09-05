@@ -5,7 +5,7 @@ import com.fzshuai.common.utils.redis.RedisUtils;
 import com.fzshuai.system.mapper.SysOssMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.fzshuai.blog.domain.vo.WebsiteConfigVo;
+import com.fzshuai.blog.domain.vo.WebsiteConfigVO;
 import com.fzshuai.blog.domain.WebsiteConfig;
 import com.fzshuai.blog.mapper.WebsiteConfigMapper;
 import com.fzshuai.blog.service.IWebsiteConfigService;
@@ -34,12 +34,12 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVo getWebsiteConfig() {
-        WebsiteConfigVo websiteConfigVo;
+    public WebsiteConfigVO getWebsiteConfig() {
+        WebsiteConfigVO websiteConfigVo;
         // 获取缓存数据
         Object websiteConfig = RedisUtils.getCacheObject(WEBSITE_CONFIG);
         if (Objects.nonNull(websiteConfig)) {
-            websiteConfigVo = JSON.parseObject(websiteConfig.toString(), WebsiteConfigVo.class);
+            websiteConfigVo = JSON.parseObject(websiteConfig.toString(), WebsiteConfigVO.class);
             // 将图片改为url地址
             websiteConfigVo.setWebsiteAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWebsiteAvatar())).getUrl());
             websiteConfigVo.setAlipayQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getAlipayQRCode())).getUrl());
@@ -49,7 +49,7 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
         } else {
             // 从数据库中加载
             String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
-            websiteConfigVo = JSON.parseObject(config, WebsiteConfigVo.class);
+            websiteConfigVo = JSON.parseObject(config, WebsiteConfigVO.class);
             // 将图片改为url地址
             websiteConfigVo.setWebsiteAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWebsiteAvatar())).getUrl());
             websiteConfigVo.setAlipayQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getAlipayQRCode())).getUrl());
@@ -67,15 +67,15 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVo getAdminWebsiteConfig() {
-        WebsiteConfigVo websiteConfigVo;
+    public WebsiteConfigVO getAdminWebsiteConfig() {
+        WebsiteConfigVO websiteConfigVo;
         String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
-        websiteConfigVo = JSON.parseObject(config, WebsiteConfigVo.class);
+        websiteConfigVo = JSON.parseObject(config, WebsiteConfigVO.class);
         return websiteConfigVo;
     }
 
     @Override
-    public void updateWebsiteConfig(WebsiteConfigVo websiteConfigVo) {
+    public void updateWebsiteConfig(WebsiteConfigVO websiteConfigVo) {
         // 修改网站配置
         WebsiteConfig websiteConfig = WebsiteConfig.builder()
                 .websiteConfigId(1L)

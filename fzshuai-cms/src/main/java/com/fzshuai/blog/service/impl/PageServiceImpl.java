@@ -4,8 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fzshuai.blog.domain.Page;
-import com.fzshuai.blog.domain.bo.PageBo;
-import com.fzshuai.blog.domain.vo.PageVo;
+import com.fzshuai.blog.domain.bo.PageBO;
+import com.fzshuai.blog.domain.vo.PageVO;
 import com.fzshuai.blog.mapper.PageMapper;
 import com.fzshuai.blog.service.IBlogPageService;
 import com.fzshuai.common.core.domain.PageQuery;
@@ -34,7 +34,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面
      */
     @Override
-    public PageVo queryById(Long pageId){
+    public PageVO queryById(Long pageId){
         return baseMapper.selectVoById(pageId);
     }
 
@@ -42,9 +42,9 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面列表
      */
     @Override
-    public TableDataInfo<PageVo> queryPageList(PageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PageVO> queryPageList(PageBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Page> lqw = buildQueryWrapper(bo);
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<PageVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<PageVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -52,12 +52,12 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面列表
      */
     @Override
-    public List<PageVo> queryList(PageBo bo) {
+    public List<PageVO> queryList(PageBO bo) {
         LambdaQueryWrapper<Page> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Page> buildQueryWrapper(PageBo bo) {
+    private LambdaQueryWrapper<Page> buildQueryWrapper(PageBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Page> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getPageName()), Page::getPageName, bo.getPageName());
@@ -70,7 +70,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 新增博客页面
      */
     @Override
-    public Boolean insertByBo(PageBo bo) {
+    public Boolean insertByBo(PageBO bo) {
         Page add = BeanUtil.toBean(bo, Page.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -84,7 +84,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 修改博客页面
      */
     @Override
-    public Boolean updateByBo(PageBo bo) {
+    public Boolean updateByBo(PageBO bo) {
         Page update = BeanUtil.toBean(bo, Page.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

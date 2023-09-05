@@ -3,9 +3,9 @@ package com.fzshuai.blog.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fzshuai.blog.domain.Tag;
 import com.fzshuai.blog.domain.dto.TagDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.TagVo;
-import com.fzshuai.blog.domain.bo.TagBo;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.TagVO;
+import com.fzshuai.blog.domain.bo.TagBO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -25,32 +25,32 @@ public interface ITagService extends IService<Tag> {
      *
      * @return 标签列表
      */
-    PageResult<TagDTO> listTags();
+    PageResultVO<TagDTO> listTags();
 
     /**
      * 查询文章标签
      */
-    TagVo queryById(Long tagId);
+    TagVO queryById(Long tagId);
 
     /**
      * 查询文章标签列表
      */
-    TableDataInfo<TagVo> queryPageList(TagBo bo, PageQuery pageQuery);
+    TableDataInfo<TagVO> queryPageList(TagBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章标签列表
      */
-    List<TagVo> queryList(TagBo bo);
+    List<TagVO> queryList(TagBO bo);
 
     /**
      * 新增文章标签
      */
-    Boolean insertByBo(TagBo bo);
+    Boolean insertByBo(TagBO bo);
 
     /**
      * 修改文章标签
      */
-    Boolean updateByBo(TagBo bo);
+    Boolean updateByBo(TagBO bo);
 
     /**
      * 校验并批量删除文章标签信息

@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ConditionVo;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.ConditionVO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +24,8 @@ import com.fzshuai.common.core.validate.AddGroup;
 import com.fzshuai.common.core.validate.EditGroup;
 import com.fzshuai.common.enums.BusinessType;
 import com.fzshuai.common.utils.poi.ExcelUtil;
-import com.fzshuai.blog.domain.vo.ArticleVo;
-import com.fzshuai.blog.domain.bo.ArticleBo;
+import com.fzshuai.blog.domain.vo.ArticleVO;
+import com.fzshuai.blog.domain.bo.ArticleBO;
 import com.fzshuai.blog.service.IArticleService;
 import com.fzshuai.common.core.page.TableDataInfo;
 
@@ -50,7 +50,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles/archives")
-    public R<PageResult<ArchiveDTO>> listArchives() {
+    public R<PageResultVO<ArchiveDTO>> listArchives() {
         return R.ok(articleService.listArchives());
     }
 
@@ -84,7 +84,7 @@ public class ArticleController extends BaseController {
      * @return {@link R<ArticlePreviewListDTO>} 文章列表
      */
     @GetMapping("/articles/condition")
-    public R<ArticlePreviewListDTO> listArticlesByCondition(ConditionVo condition) {
+    public R<ArticlePreviewListDTO> listArticlesByCondition(ConditionVO condition) {
         return R.ok(articleService.listArticlesByCondition(condition));
     }
 
@@ -96,7 +96,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles/search")
-    public R<List<ArticleSearchDTO>> listArticlesBySearch(ConditionVo condition) {
+    public R<List<ArticleSearchDTO>> listArticlesBySearch(ConditionVO condition) {
         return R.ok(articleService.listArticlesBySearch(condition));
     }
 
@@ -117,7 +117,7 @@ public class ArticleController extends BaseController {
      */
     @SaCheckPermission("blog:article:list")
     @GetMapping("/list")
-    public TableDataInfo<ArticleVo> list(ArticleBo bo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVO> list(ArticleBO bo, PageQuery pageQuery) {
         return articleService.queryPageList(bo, pageQuery);
     }
 
@@ -127,9 +127,9 @@ public class ArticleController extends BaseController {
     @SaCheckPermission("blog:article:export")
     @Log(title = "文章", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(ArticleBo bo, HttpServletResponse response) {
-        List<ArticleVo> list = articleService.queryList(bo);
-        ExcelUtil.exportExcel(list, "文章", ArticleVo.class, response);
+    public void export(ArticleBO bo, HttpServletResponse response) {
+        List<ArticleVO> list = articleService.queryList(bo);
+        ExcelUtil.exportExcel(list, "文章", ArticleVO.class, response);
     }
 
     /**
@@ -139,7 +139,7 @@ public class ArticleController extends BaseController {
      */
     @SaCheckPermission("blog:article:query")
     @GetMapping("/{articleId}")
-    public R<ArticleVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<ArticleVO> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long articleId) {
         return R.ok(articleService.queryById(articleId));
     }
@@ -151,7 +151,7 @@ public class ArticleController extends BaseController {
     @Log(title = "文章", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody ArticleBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody ArticleBO bo) {
         return toAjax(articleService.insertByBo(bo));
     }
 
@@ -162,7 +162,7 @@ public class ArticleController extends BaseController {
     @Log(title = "文章", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody ArticleBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody ArticleBO bo) {
         return toAjax(articleService.updateByBo(bo));
     }
 

@@ -2,9 +2,9 @@ package com.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import com.fzshuai.blog.domain.bo.MessageBo;
+import com.fzshuai.blog.domain.bo.MessageBO;
 import com.fzshuai.blog.domain.dto.MessageDTO;
-import com.fzshuai.blog.domain.vo.MessageVo;
+import com.fzshuai.blog.domain.vo.MessageVO;
 import com.fzshuai.blog.service.IMessageService;
 import com.fzshuai.common.annotation.Log;
 import com.fzshuai.common.annotation.RepeatSubmit;
@@ -46,7 +46,7 @@ public class MessageController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/messages")
-    public R<?> saveMessage(@Valid @RequestBody MessageVo messageVo) {
+    public R<?> saveMessage(@Valid @RequestBody MessageVO messageVo) {
         messageService.saveMessage(messageVo);
         return R.ok();
     }
@@ -67,7 +67,7 @@ public class MessageController extends BaseController {
      */
     @SaCheckPermission("blog:message:list")
     @GetMapping("/list")
-    public TableDataInfo<MessageVo> list(MessageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<MessageVO> list(MessageBO bo, PageQuery pageQuery) {
         return messageService.queryPageList(bo, pageQuery);
     }
 
@@ -77,9 +77,9 @@ public class MessageController extends BaseController {
     @SaCheckPermission("blog:message:export")
     @Log(title = "留言", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(MessageBo bo, HttpServletResponse response) {
-        List<MessageVo> list = messageService.queryList(bo);
-        ExcelUtil.exportExcel(list, "留言", MessageVo.class, response);
+    public void export(MessageBO bo, HttpServletResponse response) {
+        List<MessageVO> list = messageService.queryList(bo);
+        ExcelUtil.exportExcel(list, "留言", MessageVO.class, response);
     }
 
     /**
@@ -89,7 +89,7 @@ public class MessageController extends BaseController {
      */
     @SaCheckPermission("blog:message:query")
     @GetMapping("/{messageId}")
-    public R<MessageVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<MessageVO> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long messageId) {
         return R.ok(messageService.queryById(messageId));
     }
@@ -101,7 +101,7 @@ public class MessageController extends BaseController {
     @Log(title = "留言", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody MessageBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody MessageBO bo) {
         return toAjax(messageService.insertByBo(bo));
     }
 
@@ -112,7 +112,7 @@ public class MessageController extends BaseController {
     @Log(title = "留言", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody MessageBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody MessageBO bo) {
         return toAjax(messageService.updateByBo(bo));
     }
 

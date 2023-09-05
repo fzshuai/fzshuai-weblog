@@ -6,11 +6,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Photo;
 import com.fzshuai.blog.domain.Album;
-import com.fzshuai.blog.domain.bo.PhotoBo;
+import com.fzshuai.blog.domain.bo.PhotoBO;
 import com.fzshuai.blog.domain.dto.FrontPhotoDto;
 import com.fzshuai.blog.domain.dto.PhotoDTO;
 import com.fzshuai.blog.domain.dto.UpdateAlbumDto;
-import com.fzshuai.blog.domain.vo.PhotoVo;
+import com.fzshuai.blog.domain.vo.PhotoVO;
 import com.fzshuai.blog.mapper.AlbumMapper;
 import com.fzshuai.blog.mapper.PhotoMapper;
 import com.fzshuai.blog.service.IPhotoService;
@@ -66,7 +66,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片
      */
     @Override
-    public PhotoVo queryById(Long photoId) {
+    public PhotoVO queryById(Long photoId) {
         return baseMapper.selectVoById(photoId);
     }
 
@@ -74,9 +74,9 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public TableDataInfo<PhotoVo> queryPageList(PhotoBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PhotoVO> queryPageList(PhotoBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
-        Page<PhotoVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<PhotoVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -84,12 +84,12 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public List<PhotoVo> queryList(PhotoBo bo) {
+    public List<PhotoVO> queryList(PhotoBO bo) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Photo> buildQueryWrapper(PhotoBo bo) {
+    private LambdaQueryWrapper<Photo> buildQueryWrapper(PhotoBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Photo> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getAlbumId() != null, Photo::getAlbumId, bo.getAlbumId());
@@ -120,7 +120,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 修改照片
      */
     @Override
-    public Boolean updateByBo(PhotoBo bo) {
+    public Boolean updateByBo(PhotoBO bo) {
         Photo update = BeanUtil.toBean(bo, Photo.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;
