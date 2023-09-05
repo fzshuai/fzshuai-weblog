@@ -13,12 +13,12 @@ import static com.fzshuai.common.constant.BlogConstant.*;
 
 
 /**
- * 分页拦截器
+ * 博客分页拦截器
  *
  * @author fzshuai
  * @date 2023-06-15
  **/
-public class PaginationInterceptor implements HandlerInterceptor {
+public class BlogPaginationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
