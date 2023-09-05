@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import { listPhoto, getPhoto, delPhoto, addPhoto, updatePhoto } from "@/api/photo/photo";
+import { listPhoto, getPhoto, delPhoto, addPhoto, updatePhoto } from "@/api/blog/photo";
 
 export default {
   name: "Photo",

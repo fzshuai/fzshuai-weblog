@@ -235,9 +235,9 @@
 </template>
 
 <script>
-import {getAlbum, listAlbum} from "@/api/album/album";
+import {getAlbum, listAlbum} from "@/api/blog/album";
 import {getToken} from "@/utils/auth";
-import {addPhoto, delPhoto, listPhoto, updatePhoto, updatePhotoAlbum} from "@/api/photo/photo";
+import {addPhoto, delPhoto, listPhoto, updatePhoto} from "@/api/blog/photo";
 export default {
   created() {
     this.getAlbumInfo();

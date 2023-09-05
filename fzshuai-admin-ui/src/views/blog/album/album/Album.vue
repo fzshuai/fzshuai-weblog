@@ -151,7 +151,7 @@ import {
   delAlbum,
   addAlbum,
   updateAlbum,
-} from "@/api/album/album";
+} from "@/api/blog/album";
 import { getToken } from "@/utils/auth";
 export default {
   created() {
