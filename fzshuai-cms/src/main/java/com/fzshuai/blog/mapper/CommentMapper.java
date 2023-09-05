@@ -5,7 +5,7 @@ import com.fzshuai.blog.domain.dto.CommentCountDTO;
 import com.fzshuai.blog.domain.dto.CommentDTO;
 import com.fzshuai.blog.domain.dto.ReplyCountDTO;
 import com.fzshuai.blog.domain.dto.ReplyDTO;
-import com.fzshuai.blog.domain.vo.CommentVo;
+import com.fzshuai.blog.domain.vo.CommentVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, CommentVo> {
+public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, CommentVO> {
 
     /**
      * 查看评论
@@ -27,7 +27,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentVO 评论信息
      * @return 评论集合
      */
-    List<CommentDTO> listComments(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVo commentVO);
+    List<CommentDTO> listComments(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVO commentVO);
 
     /**
      * 查看评论id集合下的回复

@@ -1,9 +1,9 @@
 package com.fzshuai.blog.service;
 
 import com.fzshuai.blog.domain.dto.CommentDTO;
-import com.fzshuai.blog.domain.vo.CommentVo;
-import com.fzshuai.blog.domain.bo.CommentBo;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.CommentVO;
+import com.fzshuai.blog.domain.bo.CommentBO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -23,39 +23,39 @@ public interface ICommentService {
      *
      * @param commentVO 评论信息
      */
-    PageResult<CommentDTO> listComments(CommentVo commentVO);
+    PageResultVO<CommentDTO> listComments(CommentVO commentVO);
 
     /**
      * 博客前台添加评论
      *
      * @param commentVO 评论对象
      */
-    void saveComment(CommentVo commentVO);
+    void saveComment(CommentVO commentVO);
 
     /**
      * 查询文章评论
      */
-    CommentVo queryById(Long commentId);
+    CommentVO queryById(Long commentId);
 
     /**
      * 查询文章评论列表
      */
-    TableDataInfo<CommentVo> queryPageList(CommentBo bo, PageQuery pageQuery);
+    TableDataInfo<CommentVO> queryPageList(CommentBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章评论列表
      */
-    List<CommentVo> queryList(CommentBo bo);
+    List<CommentVO> queryList(CommentBO bo);
 
     /**
      * 新增文章评论
      */
-    Boolean insertByBo(CommentBo bo);
+    Boolean insertByBo(CommentBO bo);
 
     /**
      * 修改文章评论
      */
-    Boolean updateByBo(CommentBo bo);
+    Boolean updateByBo(CommentBO bo);
 
     /**
      * 校验并批量删除文章评论信息

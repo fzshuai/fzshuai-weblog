@@ -1,10 +1,10 @@
 package com.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.fzshuai.blog.domain.bo.TagBo;
+import com.fzshuai.blog.domain.bo.TagBO;
 import com.fzshuai.blog.domain.dto.TagDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.TagVo;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.TagVO;
 import com.fzshuai.blog.service.ITagService;
 import com.fzshuai.common.annotation.Log;
 import com.fzshuai.common.annotation.RepeatSubmit;
@@ -46,7 +46,7 @@ public class TagController extends BaseController {
      * @return {@link R<TagDTO>} 标签列表
      */
     @GetMapping("/tags")
-    public R<PageResult<TagDTO>> listTags() {
+    public R<PageResultVO<TagDTO>> listTags() {
         return R.ok(tagService.listTags());
     }
 
@@ -55,7 +55,7 @@ public class TagController extends BaseController {
      */
     @SaCheckPermission("blog:tag:list")
     @GetMapping("/list")
-    public TableDataInfo<TagVo> list(TagBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TagVO> list(TagBO bo, PageQuery pageQuery) {
         return tagService.queryPageList(bo, pageQuery);
     }
 
@@ -65,9 +65,9 @@ public class TagController extends BaseController {
     @SaCheckPermission("blog:tag:export")
     @Log(title = "文章标签", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(TagBo bo, HttpServletResponse response) {
-        List<TagVo> list = tagService.queryList(bo);
-        ExcelUtil.exportExcel(list, "文章标签", TagVo.class, response);
+    public void export(TagBO bo, HttpServletResponse response) {
+        List<TagVO> list = tagService.queryList(bo);
+        ExcelUtil.exportExcel(list, "文章标签", TagVO.class, response);
     }
 
     /**
@@ -77,7 +77,7 @@ public class TagController extends BaseController {
      */
     @SaCheckPermission("blog:tag:query")
     @GetMapping("/{tagId}")
-    public R<TagVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<TagVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long tagId) {
         return R.ok(tagService.queryById(tagId));
     }
@@ -89,7 +89,7 @@ public class TagController extends BaseController {
     @Log(title = "文章标签", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody TagBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody TagBO bo) {
         return toAjax(tagService.insertByBo(bo));
     }
 
@@ -100,7 +100,7 @@ public class TagController extends BaseController {
     @Log(title = "文章标签", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TagBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TagBO bo) {
         return toAjax(tagService.updateByBo(bo));
     }
 

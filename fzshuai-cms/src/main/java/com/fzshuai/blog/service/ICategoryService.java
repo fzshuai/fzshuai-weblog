@@ -1,9 +1,9 @@
 package com.fzshuai.blog.service;
 
 import com.fzshuai.blog.domain.dto.CategoryDTO;
-import com.fzshuai.blog.domain.vo.CategoryVo;
-import com.fzshuai.blog.domain.bo.CategoryBo;
-import com.fzshuai.blog.domain.vo.PageResult;
+import com.fzshuai.blog.domain.vo.CategoryVO;
+import com.fzshuai.blog.domain.bo.CategoryBO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -23,32 +23,32 @@ public interface ICategoryService {
      *
      * @return 分类列表
      */
-    PageResult<CategoryDTO> listCategories();
+    PageResultVO<CategoryDTO> listCategories();
 
     /**
      * 查询文章分类
      */
-    CategoryVo queryById(Long categoryId);
+    CategoryVO queryById(Long categoryId);
 
     /**
      * 查询文章分类列表
      */
-    TableDataInfo<CategoryVo> queryPageList(CategoryBo bo, PageQuery pageQuery);
+    TableDataInfo<CategoryVO> queryPageList(CategoryBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章分类列表
      */
-    List<CategoryVo> queryList(CategoryBo bo);
+    List<CategoryVO> queryList(CategoryBO bo);
 
     /**
      * 新增文章分类
      */
-    Boolean insertByBo(CategoryBo bo);
+    Boolean insertByBo(CategoryBO bo);
 
     /**
      * 修改文章分类
      */
-    Boolean updateByBo(CategoryBo bo);
+    Boolean updateByBo(CategoryBO bo);
 
     /**
      * 校验并批量删除文章分类信息

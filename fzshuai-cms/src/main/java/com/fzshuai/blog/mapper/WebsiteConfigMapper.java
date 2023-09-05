@@ -1,7 +1,7 @@
 package com.fzshuai.blog.mapper;
 
 import com.fzshuai.blog.domain.WebsiteConfig;
-import com.fzshuai.blog.domain.vo.WebsiteConfigVo;
+import com.fzshuai.blog.domain.vo.WebsiteConfigVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
 
 /**
@@ -10,6 +10,6 @@ import com.fzshuai.common.core.mapper.BaseMapperPlus;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface WebsiteConfigMapper extends BaseMapperPlus<WebsiteConfigMapper, WebsiteConfig, WebsiteConfigVo> {
+public interface WebsiteConfigMapper extends BaseMapperPlus<WebsiteConfigMapper, WebsiteConfig, WebsiteConfigVO> {
 
 }

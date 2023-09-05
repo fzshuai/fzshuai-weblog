@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Album;
 import com.fzshuai.blog.domain.Photo;
-import com.fzshuai.blog.domain.bo.AlbumBo;
+import com.fzshuai.blog.domain.bo.AlbumBO;
 import com.fzshuai.blog.domain.dto.AlbumDTO;
-import com.fzshuai.blog.domain.vo.AlbumVo;
-import com.fzshuai.blog.domain.vo.PhotoVo;
+import com.fzshuai.blog.domain.vo.AlbumVO;
+import com.fzshuai.blog.domain.vo.PhotoVO;
 import com.fzshuai.blog.mapper.AlbumMapper;
 import com.fzshuai.blog.mapper.PhotoMapper;
 import com.fzshuai.blog.service.IAlbumService;
@@ -54,8 +54,8 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册
      */
     @Override
-    public AlbumVo queryById(Long albumId) {
-        AlbumVo albumVo = baseMapper.selectVoById(albumId);
+    public AlbumVO queryById(Long albumId) {
+        AlbumVO albumVo = baseMapper.selectVoById(albumId);
         if (Objects.isNull(albumVo)) {
             throw new BaseException("相册不存在或已被删除");
         }
@@ -67,9 +67,9 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public TableDataInfo<AlbumVo> queryPageList(AlbumBo bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVO> queryPageList(AlbumBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
-        Page<AlbumVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<AlbumVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -77,12 +77,12 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public List<AlbumVo> queryList(AlbumBo bo) {
+    public List<AlbumVO> queryList(AlbumBO bo) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Album> buildQueryWrapper(AlbumBo bo) {
+    private LambdaQueryWrapper<Album> buildQueryWrapper(AlbumBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Album> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getAlbumName()), Album::getAlbumName, bo.getAlbumName());
@@ -97,7 +97,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 新增相册
      */
     @Override
-    public Boolean insertByBo(AlbumBo bo) {
+    public Boolean insertByBo(AlbumBO bo) {
         Album add = BeanUtil.toBean(bo, Album.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -111,7 +111,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 修改相册
      */
     @Override
-    public Boolean updateByBo(AlbumBo bo) {
+    public Boolean updateByBo(AlbumBO bo) {
         Album update = BeanUtil.toBean(bo, Album.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;
@@ -134,7 +134,7 @@ public class AlbumServiceImpl implements IAlbumService {
         }
         // 删除相册当前删除相册内的照片
         // 查询相册内所有照片
-        List<PhotoVo> photoVOList = photoMapper.selectVoList(new LambdaQueryWrapper<Photo>().in(Photo::getAlbumId, ids));
+        List<PhotoVO> photoVOList = photoMapper.selectVoList(new LambdaQueryWrapper<Photo>().in(Photo::getAlbumId, ids));
         List<Long> photoIdList = new ArrayList<>();
         //
         photoVOList.forEach(photoVo -> {

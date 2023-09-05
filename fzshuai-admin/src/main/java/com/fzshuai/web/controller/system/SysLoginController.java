@@ -10,7 +10,7 @@ import com.fzshuai.common.core.domain.model.LoginBody;
 import com.fzshuai.common.core.domain.model.LoginUser;
 import com.fzshuai.common.core.domain.model.SmsLoginBody;
 import com.fzshuai.common.helper.LoginHelper;
-import com.fzshuai.system.domain.vo.RouterVo;
+import com.fzshuai.system.domain.vo.RouterVO;
 import com.fzshuai.system.service.ISysMenuService;
 import com.fzshuai.system.service.ISysUserService;
 import com.fzshuai.system.service.SysLoginService;
@@ -136,7 +136,7 @@ public class SysLoginController {
      * @return 路由信息
      */
     @GetMapping("getRouters")
-    public R<List<RouterVo>> getRouters() {
+    public R<List<RouterVO>> getRouters() {
         Long userId = LoginHelper.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return R.ok(menuService.buildMenus(menus));

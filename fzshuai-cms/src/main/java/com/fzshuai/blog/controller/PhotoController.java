@@ -2,11 +2,11 @@ package com.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import com.fzshuai.blog.domain.bo.PhotoBo;
+import com.fzshuai.blog.domain.bo.PhotoBO;
 import com.fzshuai.blog.domain.dto.FrontPhotoDto;
 import com.fzshuai.blog.domain.dto.PhotoDTO;
 import com.fzshuai.blog.domain.dto.UpdateAlbumDto;
-import com.fzshuai.blog.domain.vo.PhotoVo;
+import com.fzshuai.blog.domain.vo.PhotoVO;
 import com.fzshuai.blog.service.IPhotoService;
 import com.fzshuai.common.annotation.Log;
 import com.fzshuai.common.annotation.RepeatSubmit;
@@ -58,7 +58,7 @@ public class PhotoController extends BaseController {
      */
     @SaCheckPermission("blog:photo:list")
     @GetMapping("/list")
-    public TableDataInfo<PhotoVo> list(PhotoBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PhotoVO> list(PhotoBO bo, PageQuery pageQuery) {
         return photoService.queryPageList(bo, pageQuery);
     }
 
@@ -68,9 +68,9 @@ public class PhotoController extends BaseController {
     @SaCheckPermission("blog:photo:export")
     @Log(title = "照片", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(PhotoBo bo, HttpServletResponse response) {
-        List<PhotoVo> list = photoService.queryList(bo);
-        ExcelUtil.exportExcel(list, "照片", PhotoVo.class, response);
+    public void export(PhotoBO bo, HttpServletResponse response) {
+        List<PhotoVO> list = photoService.queryList(bo);
+        ExcelUtil.exportExcel(list, "照片", PhotoVO.class, response);
     }
 
     /**
@@ -80,7 +80,7 @@ public class PhotoController extends BaseController {
      */
     @SaCheckPermission("blog:photo:query")
     @GetMapping("/{photoId}")
-    public R<PhotoVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<PhotoVO> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long photoId) {
         return R.ok(photoService.queryById(photoId));
     }
@@ -103,7 +103,7 @@ public class PhotoController extends BaseController {
     @Log(title = "照片", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PhotoBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PhotoBO bo) {
         return toAjax(photoService.updateByBo(bo));
     }
 

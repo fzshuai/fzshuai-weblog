@@ -2,13 +2,10 @@ package com.fzshuai.blog.mapper;
 
 import com.fzshuai.blog.domain.Article;
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ArticleVo;
-import com.fzshuai.blog.domain.vo.ConditionVo;
+import com.fzshuai.blog.domain.vo.ArticleVO;
+import com.fzshuai.blog.domain.vo.ConditionVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, ArticleVo> {
+public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, ArticleVO> {
 
     /**
      * 查询首页文章
@@ -45,7 +42,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticlePreviewDTO> listArticlesByCondition(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVo condition);
+    List<ArticlePreviewDTO> listArticlesByCondition(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章
@@ -55,7 +52,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleBackDTO> listArticleBacks(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVo condition);
+    List<ArticleBackDTO> listArticleBacks(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章总量
@@ -63,7 +60,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章总量
      */
-    Integer countArticleBacks(@Param("condition") ConditionVo condition);
+    Integer countArticleBacks(@Param("condition") ConditionVO condition);
 
     /**
      * 查看文章的推荐文章

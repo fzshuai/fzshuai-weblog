@@ -10,8 +10,8 @@ import com.fzshuai.common.core.domain.R;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.validate.QueryGroup;
 import com.fzshuai.common.enums.BusinessType;
-import com.fzshuai.system.domain.bo.SysOssBo;
-import com.fzshuai.system.domain.vo.SysOssVo;
+import com.fzshuai.system.domain.bo.SysOssBO;
+import com.fzshuai.system.domain.vo.SysOssVO;
 import com.fzshuai.system.service.ISysOssService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -45,7 +45,7 @@ public class SysOssController extends BaseController {
      */
     @SaCheckPermission("system:oss:list")
     @GetMapping("/list")
-    public TableDataInfo<SysOssVo> list(@Validated(QueryGroup.class) SysOssBo bo, PageQuery pageQuery) {
+    public TableDataInfo<SysOssVO> list(@Validated(QueryGroup.class) SysOssBO bo, PageQuery pageQuery) {
         return iSysOssService.queryPageList(bo, pageQuery);
     }
 
@@ -56,9 +56,9 @@ public class SysOssController extends BaseController {
      */
     @SaCheckPermission("system:oss:list")
     @GetMapping("/listByIds/{ossIds}")
-    public R<List<SysOssVo>> listByIds(@NotEmpty(message = "主键不能为空")
+    public R<List<SysOssVO>> listByIds(@NotEmpty(message = "主键不能为空")
                                        @PathVariable Long[] ossIds) {
-        List<SysOssVo> list = iSysOssService.listByIds(Arrays.asList(ossIds));
+        List<SysOssVO> list = iSysOssService.listByIds(Arrays.asList(ossIds));
         return R.ok(list);
     }
 
@@ -74,7 +74,7 @@ public class SysOssController extends BaseController {
         if (ObjectUtil.isNull(file)) {
             return R.fail("上传文件不能为空");
         }
-        SysOssVo oss = iSysOssService.upload(file);
+        SysOssVO oss = iSysOssService.upload(file);
         Map<String, String> map = new HashMap<>(2);
         map.put("url", oss.getUrl());
         map.put("fileName", oss.getOriginalName());

@@ -2,8 +2,8 @@ package com.fzshuai.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fzshuai.blog.domain.ArticleTag;
-import com.fzshuai.blog.domain.vo.ArticleTagVo;
-import com.fzshuai.blog.domain.bo.ArticleTagBo;
+import com.fzshuai.blog.domain.vo.ArticleTagVO;
+import com.fzshuai.blog.domain.bo.ArticleTagBO;
 import com.fzshuai.common.core.page.TableDataInfo;
 import com.fzshuai.common.core.domain.PageQuery;
 
@@ -21,27 +21,27 @@ public interface IArticleTagService extends IService<ArticleTag> {
     /**
      * 查询文章和文章标签关联
      */
-    ArticleTagVo queryById(Long articleId);
+    ArticleTagVO queryById(Long articleId);
 
     /**
      * 查询文章和文章标签关联列表
      */
-    TableDataInfo<ArticleTagVo> queryPageList(ArticleTagBo bo, PageQuery pageQuery);
+    TableDataInfo<ArticleTagVO> queryPageList(ArticleTagBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章和文章标签关联列表
      */
-    List<ArticleTagVo> queryList(ArticleTagBo bo);
+    List<ArticleTagVO> queryList(ArticleTagBO bo);
 
     /**
      * 新增文章和文章标签关联
      */
-    Boolean insertByBo(ArticleTagBo bo);
+    Boolean insertByBo(ArticleTagBO bo);
 
     /**
      * 修改文章和文章标签关联
      */
-    Boolean updateByBo(ArticleTagBo bo);
+    Boolean updateByBo(ArticleTagBO bo);
 
     /**
      * 校验并批量删除文章和文章标签关联信息

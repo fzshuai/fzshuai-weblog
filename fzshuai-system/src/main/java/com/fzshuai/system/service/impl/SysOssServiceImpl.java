@@ -20,8 +20,8 @@ import com.fzshuai.oss.entity.UploadResult;
 import com.fzshuai.oss.enumd.AccessPolicyType;
 import com.fzshuai.oss.factory.OssFactory;
 import com.fzshuai.system.domain.SysOss;
-import com.fzshuai.system.domain.bo.SysOssBo;
-import com.fzshuai.system.domain.vo.SysOssVo;
+import com.fzshuai.system.domain.bo.SysOssBO;
+import com.fzshuai.system.domain.vo.SysOssVO;
 import com.fzshuai.system.mapper.SysOssMapper;
 import com.fzshuai.system.service.ISysOssService;
 import lombok.RequiredArgsConstructor;
@@ -52,19 +52,19 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
     private final SysOssMapper baseMapper;
 
     @Override
-    public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
+    public TableDataInfo<SysOssVO> queryPageList(SysOssBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<SysOss> lqw = buildQueryWrapper(bo);
-        Page<SysOssVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
-        List<SysOssVo> filterResult = result.getRecords().stream().map(this::matchingUrl).collect(Collectors.toList());
+        Page<SysOssVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        List<SysOssVO> filterResult = result.getRecords().stream().map(this::matchingUrl).collect(Collectors.toList());
         result.setRecords(filterResult);
         return TableDataInfo.build(result);
     }
 
     @Override
-    public List<SysOssVo> listByIds(Collection<Long> ossIds) {
-        List<SysOssVo> list = new ArrayList<>();
+    public List<SysOssVO> listByIds(Collection<Long> ossIds) {
+        List<SysOssVO> list = new ArrayList<>();
         for (Long id : ossIds) {
-            SysOssVo vo = SpringUtils.getAopProxy(this).getById(id);
+            SysOssVO vo = SpringUtils.getAopProxy(this).getById(id);
             if (ObjectUtil.isNotNull(vo)) {
                 list.add(this.matchingUrl(vo));
             }
@@ -76,7 +76,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
     public String selectUrlByIds(String ossIds) {
         List<String> list = new ArrayList<>();
         for (Long id : StringUtils.splitTo(ossIds, Convert::toLong)) {
-            SysOssVo vo = SpringUtils.getAopProxy(this).getById(id);
+            SysOssVO vo = SpringUtils.getAopProxy(this).getById(id);
             if (ObjectUtil.isNotNull(vo)) {
                 list.add(this.matchingUrl(vo).getUrl());
             }
@@ -84,7 +84,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         return String.join(StringUtils.SEPARATOR, list);
     }
 
-    private LambdaQueryWrapper<SysOss> buildQueryWrapper(SysOssBo bo) {
+    private LambdaQueryWrapper<SysOss> buildQueryWrapper(SysOssBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<SysOss> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getFileName()), SysOss::getFileName, bo.getFileName());
@@ -100,13 +100,13 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
 
     @Cacheable(cacheNames = CacheNames.SYS_OSS, key = "#ossId")
     @Override
-    public SysOssVo getById(Long ossId) {
+    public SysOssVO getById(Long ossId) {
         return baseMapper.selectVoById(ossId);
     }
 
     @Override
     public void download(Long ossId, HttpServletResponse response) throws IOException {
-        SysOssVo sysOss = SpringUtils.getAopProxy(this).getById(ossId);
+        SysOssVO sysOss = SpringUtils.getAopProxy(this).getById(ossId);
         if (ObjectUtil.isNull(sysOss)) {
             throw new ServiceException("文件数据不存在!");
         }
@@ -123,7 +123,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
     }
 
     @Override
-    public SysOssVo upload(MultipartFile file) {
+    public SysOssVO upload(MultipartFile file) {
         String originalfileName = file.getOriginalFilename();
         String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("."), originalfileName.length());
         OssClient storage = OssFactory.instance();
@@ -138,7 +138,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
     }
 
     @Override
-    public SysOssVo upload(File file) {
+    public SysOssVO upload(File file) {
         String originalfileName = file.getName();
         String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("."), originalfileName.length());
         OssClient storage = OssFactory.instance();
@@ -147,7 +147,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         return buildResultEntity(originalfileName, suffix, storage.getConfigKey(), uploadResult);
     }
 
-    private SysOssVo buildResultEntity(String originalfileName, String suffix, String configKey, UploadResult uploadResult) {
+    private SysOssVO buildResultEntity(String originalfileName, String suffix, String configKey, UploadResult uploadResult) {
         SysOss oss = new SysOss();
         oss.setUrl(uploadResult.getUrl());
         oss.setFileSuffix(suffix);
@@ -155,7 +155,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         oss.setOriginalName(originalfileName);
         oss.setService(configKey);
         baseMapper.insert(oss);
-        SysOssVo sysOssVo = BeanUtil.toBean(oss, SysOssVo.class);
+        SysOssVO sysOssVo = BeanUtil.toBean(oss, SysOssVO.class);
         return this.matchingUrl(sysOssVo);
     }
 
@@ -178,7 +178,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
      * @param oss OSS对象
      * @return oss 匹配Url的OSS对象
      */
-    private SysOssVo matchingUrl(SysOssVo oss) {
+    private SysOssVO matchingUrl(SysOssVO oss) {
         OssClient storage = OssFactory.instance(oss.getService());
         // 仅修改桶类型为 private 的URL，临时URL时长为120s
         if (AccessPolicyType.PRIVATE == storage.getAccessPolicy()) {

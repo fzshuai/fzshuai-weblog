@@ -18,8 +18,8 @@ import com.fzshuai.common.core.validate.AddGroup;
 import com.fzshuai.common.core.validate.EditGroup;
 import com.fzshuai.common.enums.BusinessType;
 import com.fzshuai.common.utils.poi.ExcelUtil;
-import com.fzshuai.blog.domain.vo.PageVo;
-import com.fzshuai.blog.domain.bo.PageBo;
+import com.fzshuai.blog.domain.vo.PageVO;
+import com.fzshuai.blog.domain.bo.PageBO;
 import com.fzshuai.blog.service.IBlogPageService;
 import com.fzshuai.common.core.page.TableDataInfo;
 
@@ -42,7 +42,7 @@ public class PageController extends BaseController {
      */
     @SaCheckPermission("blog:page:list")
     @GetMapping("/list")
-    public TableDataInfo<PageVo> list(PageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PageVO> list(PageBO bo, PageQuery pageQuery) {
         return iBlogPageService.queryPageList(bo, pageQuery);
     }
 
@@ -52,9 +52,9 @@ public class PageController extends BaseController {
     @SaCheckPermission("blog:page:export")
     @Log(title = "页面", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(PageBo bo, HttpServletResponse response) {
-        List<PageVo> list = iBlogPageService.queryList(bo);
-        ExcelUtil.exportExcel(list, "页面", PageVo.class, response);
+    public void export(PageBO bo, HttpServletResponse response) {
+        List<PageVO> list = iBlogPageService.queryList(bo);
+        ExcelUtil.exportExcel(list, "页面", PageVO.class, response);
     }
 
     /**
@@ -64,7 +64,7 @@ public class PageController extends BaseController {
      */
     @SaCheckPermission("blog:page:query")
     @GetMapping("/{pageId}")
-    public R<PageVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<PageVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long pageId) {
         return R.ok(iBlogPageService.queryById(pageId));
     }
@@ -76,7 +76,7 @@ public class PageController extends BaseController {
     @Log(title = "页面", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody PageBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody PageBO bo) {
         return toAjax(iBlogPageService.insertByBo(bo));
     }
 
@@ -87,7 +87,7 @@ public class PageController extends BaseController {
     @Log(title = "页面", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PageBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PageBO bo) {
         return toAjax(iBlogPageService.updateByBo(bo));
     }
 

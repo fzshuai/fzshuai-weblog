@@ -11,8 +11,8 @@ import com.fzshuai.common.core.validate.AddGroup;
 import com.fzshuai.common.core.validate.EditGroup;
 import com.fzshuai.common.core.validate.QueryGroup;
 import com.fzshuai.common.enums.BusinessType;
-import com.fzshuai.system.domain.bo.SysOssConfigBo;
-import com.fzshuai.system.domain.vo.SysOssConfigVo;
+import com.fzshuai.system.domain.bo.SysOssConfigBO;
+import com.fzshuai.system.domain.vo.SysOssConfigVO;
 import com.fzshuai.system.service.ISysOssConfigService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -42,7 +42,7 @@ public class SysOssConfigController extends BaseController {
      */
     @SaCheckPermission("system:oss:list")
     @GetMapping("/list")
-    public TableDataInfo<SysOssConfigVo> list(@Validated(QueryGroup.class) SysOssConfigBo bo, PageQuery pageQuery) {
+    public TableDataInfo<SysOssConfigVO> list(@Validated(QueryGroup.class) SysOssConfigBO bo, PageQuery pageQuery) {
         return iSysOssConfigService.queryPageList(bo, pageQuery);
     }
 
@@ -53,7 +53,7 @@ public class SysOssConfigController extends BaseController {
      */
     @SaCheckPermission("system:oss:query")
     @GetMapping("/{ossConfigId}")
-    public R<SysOssConfigVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<SysOssConfigVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long ossConfigId) {
         return R.ok(iSysOssConfigService.queryById(ossConfigId));
     }
@@ -65,7 +65,7 @@ public class SysOssConfigController extends BaseController {
     @Log(title = "对象存储配置", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody SysOssConfigBo bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody SysOssConfigBO bo) {
         return toAjax(iSysOssConfigService.insertByBo(bo));
     }
 
@@ -76,7 +76,7 @@ public class SysOssConfigController extends BaseController {
     @Log(title = "对象存储配置", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody SysOssConfigBo bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody SysOssConfigBO bo) {
         return toAjax(iSysOssConfigService.updateByBo(bo));
     }
 
@@ -99,7 +99,7 @@ public class SysOssConfigController extends BaseController {
     @SaCheckPermission("system:oss:edit")
     @Log(title = "对象存储状态修改", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
-    public R<Void> changeStatus(@RequestBody SysOssConfigBo bo) {
+    public R<Void> changeStatus(@RequestBody SysOssConfigBO bo) {
         return toAjax(iSysOssConfigService.updateOssConfigStatus(bo));
     }
 }

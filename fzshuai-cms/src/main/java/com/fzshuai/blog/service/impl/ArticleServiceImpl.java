@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.*;
-import com.fzshuai.blog.domain.bo.ArticleBo;
+import com.fzshuai.blog.domain.bo.ArticleBO;
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ArticleVo;
-import com.fzshuai.blog.domain.vo.ConditionVo;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.TagVo;
+import com.fzshuai.blog.domain.vo.ArticleVO;
+import com.fzshuai.blog.domain.vo.ConditionVO;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.TagVO;
 import com.fzshuai.blog.mapper.*;
 import com.fzshuai.blog.service.IArticleService;
 import com.fzshuai.blog.service.IArticleTagService;
@@ -77,7 +77,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public PageResult<ArchiveDTO> listArchives() {
+    public PageResultVO<ArchiveDTO> listArchives() {
         Page<Article> page = new Page<>(BlogPageUtils.getCurrent(), BlogPageUtils.getSize());
         // 获取分页数据
         Page<Article> articlePage = baseMapper.selectPage(page, new LambdaQueryWrapper<Article>()
@@ -86,7 +86,7 @@ public class ArticleServiceImpl implements IArticleService {
             .eq(Article::getIsDelete, FALSE)
             .eq(Article::getStatus, PUBLIC.getStatus()));
         List<ArchiveDTO> archiveDTOList = BeanCopyUtils.copyList(articlePage.getRecords(), ArchiveDTO.class);
-        return new PageResult<>(archiveDTOList, (int) articlePage.getTotal());
+        return new PageResultVO<>(archiveDTOList, (int) articlePage.getTotal());
     }
 
     @Override
@@ -167,12 +167,12 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<ArticleSearchDTO> listArticlesBySearch(ConditionVo condition) {
+    public List<ArticleSearchDTO> listArticlesBySearch(ConditionVO condition) {
         return searchStrategyContext.executeSearchStrategy(condition.getKeywords());
     }
 
     @Override
-    public ArticlePreviewListDTO listArticlesByCondition(ConditionVo condition) {
+    public ArticlePreviewListDTO listArticlesByCondition(ConditionVO condition) {
         // 查询文章
         List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.listArticlesByCondition(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
         // 搜索条件对应名(标签或分类名)
@@ -200,7 +200,7 @@ public class ArticleServiceImpl implements IArticleService {
      * @param articleBo 文章信息
      * @return {@link Category} 文章分类
      */
-    private Category saveArticleCategory(ArticleBo articleBo) {
+    private Category saveArticleCategory(ArticleBO articleBo) {
         // 判断分类是否存在
         Category category = categoryMapper.selectOne(new LambdaQueryWrapper<Category>()
             .eq(Category::getCategoryName, articleBo.getCategoryName()));
@@ -229,16 +229,16 @@ public class ArticleServiceImpl implements IArticleService {
         // List<String> tagNameList = articleVO.getTagNameList();
         if (CollectionUtils.isNotEmpty(tagNameList)) {
             // 查询已存在的标签
-            List<TagVo> existTagVoList = tagMapper.selectVoList(new LambdaQueryWrapper<Tag>()
+            List<TagVO> existTagVOList = tagMapper.selectVoList(new LambdaQueryWrapper<Tag>()
                 .in(Tag::getTagName, tagNameList));
 
             // List<Tag> existTagList = tagService.list(new LambdaQueryWrapper<Tag>()
             //     .in(Tag::getTagName, tagNameList));
-            List<String> existTagNameList = existTagVoList.stream()
-                .map(TagVo::getTagName)
+            List<String> existTagNameList = existTagVOList.stream()
+                .map(TagVO::getTagName)
                 .collect(Collectors.toList());
-            List<Long> existTagIdList = existTagVoList.stream()
-                .map(TagVo::getTagId)
+            List<Long> existTagIdList = existTagVOList.stream()
+                .map(TagVO::getTagId)
                 .collect(Collectors.toList());
             // 对比新增不存在的标签
             tagNameList.removeAll(existTagNameList);
@@ -266,29 +266,29 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public ArticleVo queryById(Long articleId) {
+    public ArticleVO queryById(Long articleId) {
         return baseMapper.selectVoById(articleId);
     }
 
     @Override
-    public TableDataInfo<ArticleVo> queryPageList(ArticleBo articleBo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVO> queryPageList(ArticleBO articleBo, PageQuery pageQuery) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(articleBo);
-        Page<ArticleVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
-        result.getRecords().forEach(articleVo -> {
-            articleVo.setUserName(sysUserMapper.selectVoById(articleVo.getUserId()).getUserName());
-            articleVo.setCategoryName(categoryMapper.selectNameById(articleVo.getCategoryId()));
-            articleVo.setTagNameList(tagMapper.selectTagNamesByArticleId(articleVo.getArticleId()));
+        Page<ArticleVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        result.getRecords().forEach(articleVO -> {
+            articleVO.setUserName(sysUserMapper.selectVoById(articleVO.getUserId()).getUserName());
+            articleVO.setCategoryName(categoryMapper.selectNameById(articleVO.getCategoryId()));
+            articleVO.setTagNameList(tagMapper.selectTagNamesByArticleId(articleVO.getArticleId()));
         });
         return TableDataInfo.build(result);
     }
 
     @Override
-    public List<ArticleVo> queryList(ArticleBo bo) {
+    public List<ArticleVO> queryList(ArticleBO bo) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Article> buildQueryWrapper(ArticleBo bo) {
+    private LambdaQueryWrapper<Article> buildQueryWrapper(ArticleBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Article> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Article::getUserId, bo.getUserId());
@@ -306,7 +306,7 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean insertByBo(ArticleBo bo) {
+    public Boolean insertByBo(ArticleBO bo) {
         bo.setUserId(LoginHelper.getUserId());
         // 没有传值默认分配
         if (StringUtils.isEmpty(bo.getCategoryName())) {
@@ -361,7 +361,7 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateByBo(ArticleBo bo) {
+    public Boolean updateByBo(ArticleBO bo) {
         Category category = saveArticleCategory(bo);
         bo.setCategoryId(category.getCategoryId());
         articleTagMapper.delete(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, bo.getArticleId()));

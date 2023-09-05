@@ -25,7 +25,7 @@ import com.fzshuai.common.utils.StringUtils;
 import com.fzshuai.system.domain.SysPost;
 import com.fzshuai.system.domain.SysUserPost;
 import com.fzshuai.system.domain.SysUserRole;
-import com.fzshuai.system.domain.vo.UserInfoVo;
+import com.fzshuai.system.domain.vo.UserInfoVO;
 import com.fzshuai.system.mapper.*;
 import com.fzshuai.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +56,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
     private final SysUserPostMapper userPostMapper;
 
     @Override
-    public void updateBlogUserInfo(UserInfoVo userInfoVo) {
+    public void updateBlogUserInfo(UserInfoVO userInfoVo) {
 
     }
 

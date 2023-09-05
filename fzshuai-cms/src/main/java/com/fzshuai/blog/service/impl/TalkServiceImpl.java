@@ -4,11 +4,11 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fzshuai.blog.domain.Talk;
-import com.fzshuai.blog.domain.bo.TalkBo;
+import com.fzshuai.blog.domain.bo.TalkBO;
 import com.fzshuai.blog.domain.dto.CommentCountDTO;
 import com.fzshuai.blog.domain.dto.TalkDTO;
-import com.fzshuai.blog.domain.vo.PageResult;
-import com.fzshuai.blog.domain.vo.TalkVo;
+import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.TalkVO;
 import com.fzshuai.blog.mapper.CommentMapper;
 import com.fzshuai.blog.mapper.TalkMapper;
 import com.fzshuai.blog.service.ITalkService;
@@ -65,11 +65,11 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public PageResult<TalkDTO> listTalks() {
+    public PageResultVO<TalkDTO> listTalks() {
         // 查询说说总量
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
-            return new PageResult<>();
+            return new PageResultVO<>();
         }
         // 分页查询说说
         List<TalkDTO> result = baseMapper.listTalks(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
@@ -100,15 +100,15 @@ public class TalkServiceImpl implements ITalkService {
 
             }
         });
-        return new PageResult<>(result, Integer.parseInt(String.valueOf(count)));
+        return new PageResultVO<>(result, Integer.parseInt(String.valueOf(count)));
     }
 
     /**
      * 查询说说
      */
     @Override
-    public TalkVo queryById(Long talkId) {
-        TalkVo result = baseMapper.BackTalks(talkId);
+    public TalkVO queryById(Long talkId) {
+        TalkVO result = baseMapper.BackTalks(talkId);
         if (Objects.nonNull(result.getImages())) {
             List<String> list = Arrays.asList(result.getImages().split(","));
             // 将图片转换为url路径
@@ -121,12 +121,12 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public TableDataInfo<TalkVo> queryPageList(TalkBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVO> queryPageList(TalkBO bo, PageQuery pageQuery) {
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
             return new TableDataInfo<>();
         }
-        List<TalkVo> result = baseMapper.listBackTalks();
+        List<TalkVO> result = baseMapper.listBackTalks();
         result.forEach(item -> {
             if (Objects.nonNull(item.getImages())) {
                 List<String> list = Arrays.asList(item.getImages().split(","));
@@ -148,12 +148,12 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public List<TalkVo> queryList(TalkBo bo) {
+    public List<TalkVO> queryList(TalkBO bo) {
         LambdaQueryWrapper<Talk> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Talk> buildQueryWrapper(TalkBo bo) {
+    private LambdaQueryWrapper<Talk> buildQueryWrapper(TalkBO bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Talk> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Talk::getUserId, bo.getUserId());
@@ -167,7 +167,7 @@ public class TalkServiceImpl implements ITalkService {
      * 新增说说
      */
     @Override
-    public Boolean insertByBo(TalkBo bo) {
+    public Boolean insertByBo(TalkBO bo) {
         bo.setUserId(LoginHelper.getUserId());
         if (Objects.nonNull(bo.getImages())) {
             List<String> list = Arrays.asList(bo.getImages().split(","));
@@ -187,7 +187,7 @@ public class TalkServiceImpl implements ITalkService {
      * 修改说说
      */
     @Override
-    public Boolean updateByBo(TalkBo bo) {
+    public Boolean updateByBo(TalkBO bo) {
         bo.setUserId(LoginHelper.getUserId());
         if (Objects.nonNull(bo.getImages())) {
             List<String> list = Arrays.asList(bo.getImages().split(","));

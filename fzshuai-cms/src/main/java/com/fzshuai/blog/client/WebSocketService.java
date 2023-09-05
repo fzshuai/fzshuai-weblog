@@ -7,7 +7,7 @@ import com.fzshuai.blog.domain.ChatRecord;
 import com.fzshuai.blog.domain.dto.ChatRecordDTO;
 import com.fzshuai.blog.domain.dto.RecallMessageDTO;
 import com.fzshuai.blog.domain.dto.WebsocketMessageDTO;
-import com.fzshuai.blog.domain.vo.VoiceVo;
+import com.fzshuai.blog.domain.vo.VoiceVO;
 import com.fzshuai.blog.mapper.ChatRecordMapper;
 import com.fzshuai.blog.utils.HTMLUtils;
 import com.fzshuai.common.utils.BeanCopyUtils;
@@ -247,7 +247,7 @@ public class WebSocketService {
      *
      * @param voiceVo 语音路径
      */
-    public void sendVoice(VoiceVo voiceVo) {
+    public void sendVoice(VoiceVO voiceVo) {
         // 上传语音文件
         String content = sysOssService.upload(voiceVo.getFile()).getUrl();
         voiceVo.setContent(content);

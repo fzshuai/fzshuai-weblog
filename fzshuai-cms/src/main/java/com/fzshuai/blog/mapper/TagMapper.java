@@ -1,7 +1,7 @@
 package com.fzshuai.blog.mapper;
 
 import com.fzshuai.blog.domain.Tag;
-import com.fzshuai.blog.domain.vo.TagVo;
+import com.fzshuai.blog.domain.vo.TagVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface TagMapper extends BaseMapperPlus<TagMapper, Tag, TagVo> {
+public interface TagMapper extends BaseMapperPlus<TagMapper, Tag, TagVO> {
 
     /**
      * 根据文章Id查询标签名称

@@ -1,7 +1,7 @@
 package com.fzshuai.blog.mapper;
 
 import com.fzshuai.blog.domain.ArticleTag;
-import com.fzshuai.blog.domain.vo.ArticleTagVo;
+import com.fzshuai.blog.domain.vo.ArticleTagVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
 
 /**
@@ -10,6 +10,6 @@ import com.fzshuai.common.core.mapper.BaseMapperPlus;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, ArticleTag, ArticleTagVo> {
+public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, ArticleTag, ArticleTagVO> {
 
 }

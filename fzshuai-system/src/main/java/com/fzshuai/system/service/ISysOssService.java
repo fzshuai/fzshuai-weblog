@@ -2,8 +2,8 @@ package com.fzshuai.system.service;
 
 import com.fzshuai.common.core.domain.PageQuery;
 import com.fzshuai.common.core.page.TableDataInfo;
-import com.fzshuai.system.domain.bo.SysOssBo;
-import com.fzshuai.system.domain.vo.SysOssVo;
+import com.fzshuai.system.domain.bo.SysOssBO;
+import com.fzshuai.system.domain.vo.SysOssVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +19,15 @@ import java.util.List;
  */
 public interface ISysOssService {
 
-    TableDataInfo<SysOssVo> queryPageList(SysOssBo sysOss, PageQuery pageQuery);
+    TableDataInfo<SysOssVO> queryPageList(SysOssBO sysOss, PageQuery pageQuery);
 
-    List<SysOssVo> listByIds(Collection<Long> ossIds);
+    List<SysOssVO> listByIds(Collection<Long> ossIds);
 
-    SysOssVo getById(Long ossId);
+    SysOssVO getById(Long ossId);
 
-    SysOssVo upload(MultipartFile file);
+    SysOssVO upload(MultipartFile file);
 
-    SysOssVo upload(File file);
+    SysOssVO upload(File file);
 
     void download(Long ossId, HttpServletResponse response) throws IOException;
 
