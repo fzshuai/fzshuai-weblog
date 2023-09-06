@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import com.fzshuai.blog.domain.dto.ArticleSearchDTO;
 import com.fzshuai.blog.strategy.SearchStrategy;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -33,11 +34,11 @@ import static com.fzshuai.common.constant.BlogConstant.*;
  * @since 1.0
  */
 @Log4j2
+@RequiredArgsConstructor
 @Service("esSearchStrategy")
 public class EsSearchStrategyImpl implements SearchStrategy {
 
-    @Autowired
-    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Override
     public List<ArticleSearchDTO> searchArticle(String keywords) {

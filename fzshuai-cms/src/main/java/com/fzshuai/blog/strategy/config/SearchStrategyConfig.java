@@ -4,6 +4,8 @@ import com.fzshuai.blog.enums.SearchModeEnum;
 import com.fzshuai.blog.strategy.SearchStrategy;
 import com.fzshuai.blog.strategy.impl.EsSearchStrategyImpl;
 import com.fzshuai.blog.strategy.impl.MySqlSearchStrategyImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

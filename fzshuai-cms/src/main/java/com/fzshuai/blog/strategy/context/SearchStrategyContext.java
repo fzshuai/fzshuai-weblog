@@ -17,6 +17,7 @@ import java.util.List;
  */
 @Service
 public class SearchStrategyContext extends SearchStrategyConfig {
+
     /**
      * 搜索模式
      */
