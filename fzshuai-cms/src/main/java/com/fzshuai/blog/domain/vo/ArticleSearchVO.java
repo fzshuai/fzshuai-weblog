@@ -1,4 +1,4 @@
-package com.fzshuai.blog.domain.dto;
+package com.fzshuai.blog.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "article")
-public class ArticleSearchDTO {
+public class ArticleSearchVO {
 
     /**
      * 文章id

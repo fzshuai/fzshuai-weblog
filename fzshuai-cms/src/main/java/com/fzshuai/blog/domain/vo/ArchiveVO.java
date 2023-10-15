@@ -1,4 +1,4 @@
-package com.fzshuai.blog.domain.dto;
+package com.fzshuai.blog.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArchiveDTO {
+public class ArchiveVO {
 
     /**
      * id

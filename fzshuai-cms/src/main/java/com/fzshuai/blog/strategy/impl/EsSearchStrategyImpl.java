@@ -3,7 +3,7 @@ package com.fzshuai.blog.strategy.impl;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
-import com.fzshuai.blog.domain.dto.ArticleSearchDTO;
+import com.fzshuai.blog.domain.vo.ArticleSearchVO;
 import com.fzshuai.blog.strategy.SearchStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -41,7 +40,7 @@ public class EsSearchStrategyImpl implements SearchStrategy {
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Override
-    public List<ArticleSearchDTO> searchArticle(String keywords) {
+    public List<ArticleSearchVO> searchArticle(String keywords) {
         if (StringUtils.isBlank(keywords)) {
             return new ArrayList<>();
         }
@@ -73,7 +72,7 @@ public class EsSearchStrategyImpl implements SearchStrategy {
      * @param nativeSearchQueryBuilder es条件构造器
      * @return 搜索结果
      */
-    private List<ArticleSearchDTO> search(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
+    private List<ArticleSearchVO> search(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
         // 添加文章标题高亮
         HighlightBuilder.Field titleField = new HighlightBuilder.Field("articleTitle");
         titleField.preTags(PRE_TAG);
@@ -86,9 +85,9 @@ public class EsSearchStrategyImpl implements SearchStrategy {
         nativeSearchQueryBuilder.withHighlightFields(titleField, contentField);
         // 搜索
         try {
-            SearchHits<ArticleSearchDTO> search = elasticsearchRestTemplate.search(nativeSearchQueryBuilder.build(), ArticleSearchDTO.class);
+            SearchHits<ArticleSearchVO> search = elasticsearchRestTemplate.search(nativeSearchQueryBuilder.build(), ArticleSearchVO.class);
             return search.getSearchHits().stream().map(hit -> {
-                ArticleSearchDTO article = hit.getContent();
+                ArticleSearchVO article = hit.getContent();
                 // 获取文章标题高亮数据
                 List<String> titleHighLightList = hit.getHighlightFields().get("articleTitle");
                 if (CollectionUtils.isNotEmpty(titleHighLightList)) {

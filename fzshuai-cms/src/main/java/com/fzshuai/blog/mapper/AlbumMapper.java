@@ -3,6 +3,7 @@ package com.fzshuai.blog.mapper;
 import com.fzshuai.blog.domain.Album;
 import com.fzshuai.blog.domain.vo.AlbumVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -14,14 +15,10 @@ import org.apache.ibatis.annotations.Select;
 public interface AlbumMapper extends BaseMapperPlus<AlbumMapper, Album, AlbumVO> {
 
     /**
-     * 将文章图片转换为url
-     */
-    @Select("select o.url from sys_oss o where o.oss_id = #{url}")
-    String ImgUrl(Long url);
-
-    /**
      * 查询相册内照片数量
+     *
+     * @param albumId 相册id
+     * @return 相册内的照片数量
      */
-    @Select("select COUNT(*) from blog_photo bp where bp.album_id = #{id}")
-    Integer PhotoCount(Long id);
+    Integer selectPhotoCountByAlbumId(@Param("albumId") Long albumId);
 }

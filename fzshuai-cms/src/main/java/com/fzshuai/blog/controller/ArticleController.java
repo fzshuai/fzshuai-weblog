@@ -5,8 +5,7 @@ import java.util.Arrays;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ConditionVO;
-import com.fzshuai.blog.domain.vo.PageResultVO;
+import com.fzshuai.blog.domain.vo.*;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +23,6 @@ import com.fzshuai.common.core.validate.AddGroup;
 import com.fzshuai.common.core.validate.EditGroup;
 import com.fzshuai.common.enums.BusinessType;
 import com.fzshuai.common.utils.poi.ExcelUtil;
-import com.fzshuai.blog.domain.vo.ArticleVO;
 import com.fzshuai.blog.domain.bo.ArticleBO;
 import com.fzshuai.blog.service.IArticleService;
 import com.fzshuai.common.core.page.TableDataInfo;
@@ -46,12 +44,12 @@ public class ArticleController extends BaseController {
     /**
      * 查看文章归档
      *
-     * @return {@link R<ArchiveDTO>} 文章归档列表
+     * @return {@link R< ArchiveVO >} 文章归档列表
      */
     @SaIgnore
     @GetMapping("/articles/archives")
-    public R<PageResultVO<ArchiveDTO>> listArchives() {
-        return R.ok(articleService.listArchives());
+    public R<PageResultVO<ArchiveVO>> listArchives() {
+        return R.ok(articleService.selectArchivePage());
     }
 
     /**
@@ -61,43 +59,43 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles")
-    public R<List<ArticleHomeDTO>> listArticles() {
-        return R.ok(articleService.listArticles());
+    public R<List<ArticleHomeVO>> listArticles() {
+        return R.ok(articleService.selectArticleList());
     }
 
     /**
      * 根据id查看文章
      *
      * @param articleId 文章id
-     * @return {@link R<ArticleDTO>} 文章信息
+     * @return {@link R< ArticleDetailDTO >} 文章信息
      */
     @SaIgnore
     @GetMapping("/articles/{articleId}")
-    public R<ArticleDTO> getArticleById(@PathVariable("articleId") Long articleId) {
-        return R.ok(articleService.getArticleById(articleId));
+    public R<ArticleDetailVO> getArticleById(@PathVariable("articleId") Long articleId) {
+        return R.ok(articleService.selectArticleDetailById(articleId));
     }
 
     /**
      * 根据条件查询文章
      *
      * @param condition 条件
-     * @return {@link R<ArticlePreviewListDTO>} 文章列表
+     * @return {@link R< ArticlePreviewListVO >} 文章列表
      */
     @GetMapping("/articles/condition")
-    public R<ArticlePreviewListDTO> listArticlesByCondition(ConditionVO condition) {
-        return R.ok(articleService.listArticlesByCondition(condition));
+    public R<ArticlePreviewListVO> listArticlesByCondition(ConditionVO condition) {
+        return R.ok(articleService.selectArticleList(condition));
     }
 
     /**
      * 搜索文章
      *
      * @param condition 条件
-     * @return {@link R<ArticleSearchDTO>} 文章列表
+     * @return {@link R< ArticleSearchVO >} 文章列表
      */
     @SaIgnore
     @GetMapping("/articles/search")
-    public R<List<ArticleSearchDTO>> listArticlesBySearch(ConditionVO condition) {
-        return R.ok(articleService.listArticlesBySearch(condition));
+    public R<List<ArticleSearchVO>> listArticlesBySearch(ConditionVO condition) {
+        return R.ok(articleService.searchArticle(condition));
     }
 
     /**
@@ -108,7 +106,7 @@ public class ArticleController extends BaseController {
      */
     @PostMapping("/articles/{articleId}/like")
     public R<?> saveArticleLike(@PathVariable("articleId") Long articleId) {
-        articleService.saveArticleLike(articleId);
+        articleService.likeArticle(articleId);
         return R.ok();
     }
 
@@ -118,7 +116,7 @@ public class ArticleController extends BaseController {
     @SaCheckPermission("blog:article:list")
     @GetMapping("/list")
     public TableDataInfo<ArticleVO> list(ArticleBO bo, PageQuery pageQuery) {
-        return articleService.queryPageList(bo, pageQuery);
+        return articleService.selectArticlePage(bo, pageQuery);
     }
 
     /**
@@ -128,7 +126,7 @@ public class ArticleController extends BaseController {
     @Log(title = "文章", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(ArticleBO bo, HttpServletResponse response) {
-        List<ArticleVO> list = articleService.queryList(bo);
+        List<ArticleVO> list = articleService.selectArticleList(bo);
         ExcelUtil.exportExcel(list, "文章", ArticleVO.class, response);
     }
 
@@ -141,7 +139,7 @@ public class ArticleController extends BaseController {
     @GetMapping("/{articleId}")
     public R<ArticleVO> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long articleId) {
-        return R.ok(articleService.queryById(articleId));
+        return R.ok(articleService.selectArticleById(articleId));
     }
 
     /**
