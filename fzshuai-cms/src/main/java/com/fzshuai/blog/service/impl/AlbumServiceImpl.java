@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Album;
 import com.fzshuai.blog.domain.Photo;
 import com.fzshuai.blog.domain.bo.AlbumBO;
-import com.fzshuai.blog.domain.dto.AlbumDTO;
 import com.fzshuai.blog.domain.vo.AlbumVO;
 import com.fzshuai.blog.domain.vo.PhotoVO;
 import com.fzshuai.blog.mapper.AlbumMapper;
@@ -41,25 +40,25 @@ public class AlbumServiceImpl implements IAlbumService {
     private final PhotoMapper photoMapper;
 
     @Override
-    public List<AlbumDTO> listPhotoAlbums() {
+    public List<AlbumVO> selectAlbumList() {
         // 查询相册列表
         List<Album> photoAlbumList = baseMapper.selectList(new LambdaQueryWrapper<Album>()
             .eq(Album::getStatus, PUBLIC.getStatus())
             .eq(Album::getIsDelete, FALSE)
             .orderByDesc(Album::getAlbumId));
-        return BeanCopyUtils.copyList(photoAlbumList, AlbumDTO.class);
+        return BeanCopyUtils.copyList(photoAlbumList, AlbumVO.class);
     }
 
     /**
      * 查询相册
      */
     @Override
-    public AlbumVO queryById(Long albumId) {
+    public AlbumVO selectAlbumById(Long albumId) {
         AlbumVO albumVo = baseMapper.selectVoById(albumId);
         if (Objects.isNull(albumVo)) {
             throw new BaseException("相册不存在或已被删除");
         }
-        albumVo.setPhotoCount(baseMapper.PhotoCount(albumId));
+        albumVo.setPhotoCount(baseMapper.selectPhotoCountByAlbumId(albumId));
         return albumVo;
     }
 
@@ -67,7 +66,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public TableDataInfo<AlbumVO> queryPageList(AlbumBO bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVO> selectAlbumPage(AlbumBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         Page<AlbumVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -77,7 +76,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public List<AlbumVO> queryList(AlbumBO bo) {
+    public List<AlbumVO> selectAlbumList(AlbumBO bo) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

@@ -1,5 +1,6 @@
-package com.fzshuai.blog.domain.dto;
+package com.fzshuai.blog.domain.vo;
 
+import com.fzshuai.blog.domain.dto.ArticlePreviewDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticlePreviewListDTO {
+public class ArticlePreviewListVO {
 
     /**
      * 文章列表

@@ -49,7 +49,7 @@
         </collection>
     </resultMap>
 
-    <resultMap id="articleResultMap" type="com.fzshuai.blog.domain.dto.ArticleDTO">
+    <resultMap id="articleResultMap" type="com.fzshuai.blog.domain.dto.ArticleDetailDTO">
         <id property="articleId" column="article_id"/>
         <result property="articleCover" column="article_cover"/>
         <result property="articleTitle" column="article_title"/>
@@ -82,7 +82,7 @@
         </collection>
     </resultMap>
 
-    <select id="listArticles" resultMap="articleHomeResultMap">
+    <select id="selectArticleList" resultMap="articleHomeResultMap">
         SELECT a.article_id,
                o.url as article_cover,
                article_title,
@@ -116,7 +116,7 @@
                  a.article_id DESC
     </select>
 
-    <select id="listArticlesByCondition" resultMap="articlePreviewResultMap">
+    <select id="selectArticleList" resultMap="articlePreviewResultMap">
         SELECT
         a.article_id,
         article_cover,
@@ -161,7 +161,7 @@
         JOIN blog_tag t ON t.tag_id = atg.tag_id
     </select>
 
-    <select id="getArticleById" resultMap="articleResultMap">
+    <select id="selectArticleDetailById" resultMap="articleResultMap">
         SELECT a.article_id,
                article_cover,
                article_title,
@@ -183,7 +183,7 @@
           AND a.status = 1
     </select>
 
-    <select id="listArticleBacks" resultMap="articleBackResultMap">
+    <select id="selectArticleListBack" resultMap="articleBackResultMap">
         SELECT
         a.article_id,
         article_cover,
@@ -249,7 +249,7 @@
         a.article_id DESC
     </select>
 
-    <select id="countArticleBacks" resultType="java.lang.Integer">
+    <select id="selectArticleCountBack" resultType="java.lang.Integer">
         SELECT
         count(DISTINCT a.article_id)
         from
@@ -275,7 +275,7 @@
         </where>
     </select>
 
-    <select id="listRecommendArticles" resultType="com.fzshuai.blog.domain.dto.ArticleRecommendDTO">
+    <select id="selectRecommendArticleList" resultType="com.fzshuai.blog.domain.dto.ArticleRecommendDTO">
         SELECT a.article_id,
                article_title,
                article_cover,
@@ -289,7 +289,7 @@
         ORDER BY is_top DESC, article_id DESC LIMIT 6
     </select>
 
-    <select id="listArticleStatistics" resultType="com.fzshuai.blog.domain.dto.ArticleStatisticsDTO">
+    <select id="selectArticleStatisticsList" resultType="com.fzshuai.blog.domain.dto.ArticleStatisticsDTO">
         SELECT DATE_FORMAT(create_time, "%Y-%m-%d") AS date,
             COUNT( 1 ) AS count
         FROM

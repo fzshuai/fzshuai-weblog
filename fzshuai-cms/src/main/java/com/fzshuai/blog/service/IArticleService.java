@@ -1,12 +1,9 @@
 package com.fzshuai.blog.service;
 
-import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ArticleVO;
 import com.fzshuai.blog.domain.bo.ArticleBO;
-import com.fzshuai.blog.domain.vo.ConditionVO;
-import com.fzshuai.blog.domain.vo.PageResultVO;
-import com.fzshuai.common.core.page.TableDataInfo;
+import com.fzshuai.blog.domain.vo.*;
 import com.fzshuai.common.core.domain.PageQuery;
+import com.fzshuai.common.core.page.TableDataInfo;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,29 +21,29 @@ public interface IArticleService {
      *
      * @param articleId 文章id
      */
-    void saveArticleLike(Long articleId);
+    void likeArticle(Long articleId);
 
     /**
      * 查询文章归档
      *
      * @return 文章归档
      */
-    PageResultVO<ArchiveDTO> listArchives();
+    PageResultVO<ArchiveVO> selectArchivePage();
 
     /**
      * 查看博客前端首页文章
      *
      * @return 首页文章
      */
-    List<ArticleHomeDTO> listArticles();
+    List<ArticleHomeVO> selectArticleList();
 
     /**
      * 博客前端根据id查看文章
      *
      * @param articleId 文章id
-     * @return {@link ArticleDTO} 文章信息
+     * @return 文章信息
      */
-    ArticleDTO getArticleById(Long articleId);
+    ArticleDetailVO selectArticleDetailById(Long articleId);
 
     /**
      * 搜索文章
@@ -54,7 +51,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleSearchDTO> listArticlesBySearch(ConditionVO condition);
+    List<ArticleSearchVO> searchArticle(ConditionVO condition);
 
     /**
      * 根据条件查询文章列表
@@ -62,35 +59,55 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    ArticlePreviewListDTO listArticlesByCondition(ConditionVO condition);
+    ArticlePreviewListVO selectArticleList(ConditionVO condition);
 
     /**
      * 查询文章
+     *
+     * @param articleId 文章id
+     * @return 文章
      */
-    ArticleVO queryById(Long articleId);
+    ArticleVO selectArticleById(Long articleId);
 
     /**
      * 查询文章列表
+     *
+     * @param bo        文章对象
+     * @param pageQuery 分页对象
+     * @return 文章列表
      */
-    TableDataInfo<ArticleVO> queryPageList(ArticleBO bo, PageQuery pageQuery);
+    TableDataInfo<ArticleVO> selectArticlePage(ArticleBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章列表
+     *
+     * @param bo 文章对象
+     * @return 文章列表
      */
-    List<ArticleVO> queryList(ArticleBO bo);
+    List<ArticleVO> selectArticleList(ArticleBO bo);
 
     /**
      * 新增文章
+     *
+     * @param bo 文章
+     * @return 是否成功
      */
     Boolean insertByBo(ArticleBO bo);
 
     /**
      * 修改文章
+     *
+     * @param bo 文章
+     * @return 是否成功
      */
     Boolean updateByBo(ArticleBO bo);
 
     /**
      * 校验并批量删除文章信息
+     *
+     * @param ids     文章id
+     * @param isValid 是否校验
+     * @return 是否成功
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
 }

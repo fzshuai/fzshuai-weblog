@@ -17,4 +17,10 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
+    <select id="selectPhotoCountByAlbumId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM blog_photo bp
+        WHERE bp.album_id = #{albumId}
+    </select>
+
 </mapper>

@@ -1,7 +1,7 @@
 package com.fzshuai.blog.strategy.context;
 
 
-import com.fzshuai.blog.domain.dto.ArticleSearchDTO;
+import com.fzshuai.blog.domain.vo.ArticleSearchVO;
 import com.fzshuai.blog.strategy.config.SearchStrategyConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class SearchStrategyContext extends SearchStrategyConfig {
      * @param keywords 关键字
      * @return 文章列表
      */
-    public List<ArticleSearchDTO> executeSearchStrategy(String keywords) {
+    public List<ArticleSearchVO> executeSearchStrategy(String keywords) {
         return searchStrategyMap.get(searchMode).searchArticle(keywords);
     }
 }

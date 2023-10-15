@@ -29,21 +29,24 @@ public class Album extends BaseEntity {
      * 相册名
      */
     private String albumName;
+
     /**
      * 相册描述
      */
     private String albumDesc;
+
     /**
      * 相册封面
      */
     private String albumCover;
+
     /**
      * 是否删除
      */
     private Integer isDelete;
+
     /**
      * 状态值 1公开 2私密
      */
     private Integer status;
-
 }

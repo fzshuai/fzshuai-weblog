@@ -24,7 +24,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param size    大小
      * @return 文章列表
      */
-    List<ArticleHomeDTO> listArticles(@Param("current") Long current, @Param("size") Long size);
+    List<ArticleHomeDTO> selectArticleList(@Param("current") Long current, @Param("size") Long size);
 
     /**
      * 根据id查询文章
@@ -32,7 +32,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param articleId 文章id
      * @return 文章信息
      */
-    ArticleDTO getArticleById(@Param("articleId") Long articleId);
+    ArticleDetailDTO selectArticleDetailById(@Param("articleId") Long articleId);
 
     /**
      * 根据条件查询文章
@@ -42,7 +42,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticlePreviewDTO> listArticlesByCondition(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
+    List<ArticlePreviewDTO> selectArticleList(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章
@@ -52,7 +52,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleBackDTO> listArticleBacks(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
+    List<ArticleBackDTO> selectArticleListBack(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章总量
@@ -60,7 +60,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章总量
      */
-    Integer countArticleBacks(@Param("condition") ConditionVO condition);
+    Integer selectArticleCountBack(@Param("condition") ConditionVO condition);
 
     /**
      * 查看文章的推荐文章
@@ -68,13 +68,12 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param articleId 文章id
      * @return 文章列表
      */
-    List<ArticleRecommendDTO> listRecommendArticles(@Param("articleId") Long articleId);
+    List<ArticleRecommendDTO> selectRecommendArticleList(@Param("articleId") Long articleId);
 
     /**
      * 文章统计
      *
-     * @return {@link List<ArticleStatisticsDTO>} 文章统计结果
+     * @return 文章统计结果
      */
-    List<ArticleStatisticsDTO> listArticleStatistics();
-
+    List<ArticleStatisticsDTO> selectArticleStatisticsList();
 }

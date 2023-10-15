@@ -8,10 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.*;
 import com.fzshuai.blog.domain.bo.ArticleBO;
 import com.fzshuai.blog.domain.dto.*;
-import com.fzshuai.blog.domain.vo.ArticleVO;
-import com.fzshuai.blog.domain.vo.ConditionVO;
-import com.fzshuai.blog.domain.vo.PageResultVO;
-import com.fzshuai.blog.domain.vo.TagVO;
+import com.fzshuai.blog.domain.vo.*;
 import com.fzshuai.blog.mapper.*;
 import com.fzshuai.blog.service.IArticleService;
 import com.fzshuai.blog.service.IArticleTagService;
@@ -26,6 +23,7 @@ import com.fzshuai.common.utils.blog.BlogPageUtils;
 import com.fzshuai.common.utils.redis.RedisUtils;
 import com.fzshuai.system.mapper.SysUserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +43,7 @@ import static com.fzshuai.blog.enums.ArticleStatusEnum.PUBLIC;
  * @author fzshuai
  * @date 2023-05-03
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ArticleServiceImpl implements IArticleService {
@@ -60,7 +59,7 @@ public class ArticleServiceImpl implements IArticleService {
     private final IArticleTagService articleTagService;
 
     @Override
-    public void saveArticleLike(Long articleId) {
+    public void likeArticle(Long articleId) {
         // 判断是否点赞
         String articleLikeKey = ARTICLE_USER_LIKE + LoginHelper.getLoginUser().getLoginId();
         if (RedisUtils.isExistsSetObject(articleLikeKey, articleId)) {
@@ -77,7 +76,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public PageResultVO<ArchiveDTO> listArchives() {
+    public PageResultVO<ArchiveVO> selectArchivePage() {
         Page<Article> page = new Page<>(BlogPageUtils.getCurrent(), BlogPageUtils.getSize());
         // 获取分页数据
         Page<Article> articlePage = baseMapper.selectPage(page, new LambdaQueryWrapper<Article>()
@@ -85,20 +84,21 @@ public class ArticleServiceImpl implements IArticleService {
             .orderByDesc(Article::getCreateTime)
             .eq(Article::getIsDelete, FALSE)
             .eq(Article::getStatus, PUBLIC.getStatus()));
-        List<ArchiveDTO> archiveDTOList = BeanCopyUtils.copyList(articlePage.getRecords(), ArchiveDTO.class);
-        return new PageResultVO<>(archiveDTOList, (int) articlePage.getTotal());
+        List<ArchiveVO> archiveVOList = BeanCopyUtils.copyList(articlePage.getRecords(), ArchiveVO.class);
+        return new PageResultVO<>(archiveVOList, (int) articlePage.getTotal());
     }
 
     @Override
-    public List<ArticleHomeDTO> listArticles() {
-        return baseMapper.listArticles(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
+    public List<ArticleHomeVO> selectArticleList() {
+        List<ArticleHomeDTO> articleHomeDTOS = baseMapper.selectArticleList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
+        return BeanCopyUtils.copyList(articleHomeDTOS, ArticleHomeVO.class);
     }
 
     @Override
-    public ArticleDTO getArticleById(Long articleId) {
+    public ArticleDetailVO selectArticleDetailById(Long articleId) {
         // 查询推荐文章
         CompletableFuture<List<ArticleRecommendDTO>> recommendArticleList = CompletableFuture
-            .supplyAsync(() -> baseMapper.listRecommendArticles(articleId));
+            .supplyAsync(() -> baseMapper.selectRecommendArticleList(articleId));
         // 查询最新文章
         CompletableFuture<List<ArticleRecommendDTO>> newestArticleList = CompletableFuture
             .supplyAsync(() -> {
@@ -111,7 +111,7 @@ public class ArticleServiceImpl implements IArticleService {
                 return BeanCopyUtils.copyList(articleList, ArticleRecommendDTO.class);
             });
         // 查询id对应文章
-        ArticleDTO article = baseMapper.getArticleById(articleId);
+        ArticleDetailDTO article = baseMapper.selectArticleDetailById(articleId);
         if (Objects.isNull(article)) {
             throw new ServiceException("文章不存在");
         }
@@ -134,20 +134,21 @@ public class ArticleServiceImpl implements IArticleService {
             .last("limit 1"));
         article.setLastArticle(BeanCopyUtils.copy(lastArticle, ArticlePaginationDTO.class));
         article.setNextArticle(BeanCopyUtils.copy(nextArticle, ArticlePaginationDTO.class));
-        // 封装点赞量和浏览量
+        // 封装点赞量
         Double score = RedisUtils.getCacheSortedSetScore(ARTICLE_VIEWS_COUNT, articleId);
         if (Objects.nonNull(score)) {
             article.setViewsCount(score.intValue());
         }
+        // 封装点赞量
         article.setLikeCount(RedisUtils.getCacheMapValue(ARTICLE_LIKE_COUNT, articleId.toString()));
         // 封装文章信息
         try {
             article.setRecommendArticleList(recommendArticleList.get());
             article.setNewestArticleList(newestArticleList.get());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
-        return article;
+        return BeanUtil.toBean(article, ArticleDetailVO.class);
     }
 
     /**
@@ -156,25 +157,19 @@ public class ArticleServiceImpl implements IArticleService {
      * @param articleId 文章id
      */
     public void updateArticleViewsCount(Long articleId) {
-        // 判断是否第一次访问，增加浏览量
-        Set<Long> articleSet = (Set<Long>) Optional.ofNullable(session.getAttribute(ARTICLE_SET)).orElse(new HashSet<>());
-        if (!articleSet.contains(articleId)) {
-            articleSet.add(articleId);
-            session.setAttribute(ARTICLE_SET, articleSet);
-            // 浏览量+1
-            RedisUtils.incrCacheSortedSetScore(ARTICLE_VIEWS_COUNT, articleId, 1D);
-        }
+        // 浏览量+1
+        RedisUtils.incrCacheSortedSetScore(ARTICLE_VIEWS_COUNT, articleId, 1D);
     }
 
     @Override
-    public List<ArticleSearchDTO> listArticlesBySearch(ConditionVO condition) {
+    public List<ArticleSearchVO> searchArticle(ConditionVO condition) {
         return searchStrategyContext.executeSearchStrategy(condition.getKeywords());
     }
 
     @Override
-    public ArticlePreviewListDTO listArticlesByCondition(ConditionVO condition) {
+    public ArticlePreviewListVO selectArticleList(ConditionVO condition) {
         // 查询文章
-        List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.listArticlesByCondition(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
+        List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.selectArticleList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
         // 搜索条件对应名(标签或分类名)
         String name;
         if (Objects.nonNull(condition.getCategoryId())) {
@@ -188,7 +183,7 @@ public class ArticleServiceImpl implements IArticleService {
                     .eq(Tag::getTagId, condition.getTagId()))
                 .getTagName();
         }
-        return ArticlePreviewListDTO.builder()
+        return ArticlePreviewListVO.builder()
             .articlePreviewDTOList(articlePreviewDTOList)
             .name(name)
             .build();
@@ -198,7 +193,7 @@ public class ArticleServiceImpl implements IArticleService {
      * 保存文章分类
      *
      * @param articleBo 文章信息
-     * @return {@link Category} 文章分类
+     * @return 文章分类
      */
     private Category saveArticleCategory(ArticleBO articleBo) {
         // 判断分类是否存在
@@ -266,12 +261,12 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public ArticleVO queryById(Long articleId) {
+    public ArticleVO selectArticleById(Long articleId) {
         return baseMapper.selectVoById(articleId);
     }
 
     @Override
-    public TableDataInfo<ArticleVO> queryPageList(ArticleBO articleBo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVO> selectArticlePage(ArticleBO articleBo, PageQuery pageQuery) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(articleBo);
         Page<ArticleVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(articleVO -> {
@@ -283,7 +278,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<ArticleVO> queryList(ArticleBO bo) {
+    public List<ArticleVO> selectArticleList(ArticleBO bo) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

@@ -3,7 +3,6 @@ package com.fzshuai.blog.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.fzshuai.blog.domain.bo.AlbumBO;
-import com.fzshuai.blog.domain.dto.AlbumDTO;
 import com.fzshuai.blog.domain.vo.AlbumVO;
 import com.fzshuai.blog.service.IAlbumService;
 import com.fzshuai.common.annotation.Log;
@@ -43,14 +42,13 @@ public class AlbumController extends BaseController {
     /**
      * 前台获取相册列表
      *
-     * @return {@link R<AlbumDTO>} 相册列表
+     * @return 相册列表
      */
     @SaIgnore
     @GetMapping("/photos/albums")
-    public R<List<AlbumDTO>> listPhotoAlbums() {
-        return R.ok(albumService.listPhotoAlbums());
+    public R<List<AlbumVO>> listPhotoAlbums() {
+        return R.ok(albumService.selectAlbumList());
     }
-
 
 
     /**
@@ -59,7 +57,7 @@ public class AlbumController extends BaseController {
     @SaCheckPermission("blog:album:list")
     @GetMapping("/list")
     public TableDataInfo<AlbumVO> list(AlbumBO bo, PageQuery pageQuery) {
-        return albumService.queryPageList(bo, pageQuery);
+        return albumService.selectAlbumPage(bo, pageQuery);
     }
 
     /**
@@ -69,7 +67,7 @@ public class AlbumController extends BaseController {
     @Log(title = "相册", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(AlbumBO bo, HttpServletResponse response) {
-        List<AlbumVO> list = albumService.queryList(bo);
+        List<AlbumVO> list = albumService.selectAlbumList(bo);
         ExcelUtil.exportExcel(list, "相册", AlbumVO.class, response);
     }
 
@@ -82,7 +80,7 @@ public class AlbumController extends BaseController {
     @GetMapping("/{albumId}")
     public R<AlbumVO> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long albumId) {
-        return R.ok(albumService.queryById(albumId));
+        return R.ok(albumService.selectAlbumById(albumId));
     }
 
     /**

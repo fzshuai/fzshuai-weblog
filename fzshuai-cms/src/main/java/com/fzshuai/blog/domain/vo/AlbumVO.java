@@ -52,9 +52,9 @@ public class AlbumVO {
     /**
      * 是否删除
      */
-    @ExcelProperty(value = "是否删除", converter = ExcelDictConvert.class)
-    @ExcelDictFormat(dictType = "sys_yes_no")
-    private Integer isDelete;
+    // @ExcelProperty(value = "是否删除", converter = ExcelDictConvert.class)
+    // @ExcelDictFormat(dictType = "sys_yes_no")
+    // private Integer isDelete;
 
     /**
      * 状态值 1公开 2私密
