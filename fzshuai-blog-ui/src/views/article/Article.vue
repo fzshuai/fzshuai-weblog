@@ -125,14 +125,14 @@
                   <li class="reward-item">
                     <img
                       class="reward-img"
-                      :src="blogInfo.websiteConfig.weiXinQRCode"
+                      :src="blogInfo.websiteConfig.weiXinQRCodeUrl"
                     />
                     <div class="reward-desc">微信</div>
                   </li>
                   <li class="reward-item">
                     <img
                       class="reward-img"
-                      :src="blogInfo.websiteConfig.alipayQRCode"
+                      :src="blogInfo.websiteConfig.alipayQRCodeUrl"
                     />
                     <div class="reward-desc">支付宝</div>
                   </li>
@@ -149,7 +149,7 @@
               <router-link :to="'/articles/' + article.lastArticle.articleId">
                 <img
                   class="post-cover"
-                  :src="article.lastArticle.articleCover"
+                  :src="article.lastArticle.articleCoverUrl"
                 />
                 <div class="post-info">
                   <div class="label">上一篇</div>
@@ -167,7 +167,7 @@
               <router-link :to="'/articles/' + article.nextArticle.articleId">
                 <img
                   class="post-cover"
-                  :src="article.nextArticle.articleCover"
+                  :src="article.nextArticle.articleCoverUrl"
                 />
                 <div class="post-info" style="text-align: right">
                   <div class="label">下一篇</div>
@@ -193,7 +193,7 @@
                 :key="item.articleId"
               >
                 <router-link :to="'/articles/' + item.articleId">
-                  <img class="recommend-cover" :src="item.articleCover" />
+                  <img class="recommend-cover" :src="item.articleCoverUrl" />
                   <div class="recommend-info">
                     <div class="recommend-date">
                       <i class="iconfont iconrili" />
@@ -235,7 +235,7 @@
                 :key="item.articleId"
               >
                 <router-link :to="'/articles/' + item.articleId" class="content-cover">
-                  <img :src="item.articleCover" />
+                  <img :src="item.articleCoverUrl" />
                 </router-link>
                 <div class="content">
                   <div class="content-title">
@@ -278,11 +278,11 @@ export default {
       article: {
         nextArticle: {
           articleId: 0,
-          articleCover: ""
+          articleCoverUrl: ""
         },
         lastArticle: {
           articleId: 0,
-          articleCover: ""
+          articleCoverUrl: ""
         },
         recommendArticleList: [],
         newestArticleList: []
