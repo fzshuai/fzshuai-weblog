@@ -1,6 +1,8 @@
 package com.fzshuai.blog.domain.vo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.fzshuai.common.annotation.Translation;
+import com.fzshuai.common.constant.TransConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +40,12 @@ public class WebsiteConfigVO {
      * 网站头像
      */
     private String websiteAvatar;
+
+    /**
+     * 网站头像Url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "websiteAvatar")
+    private String websiteAvatarUrl;
 
     /**
      * 网站名称
@@ -100,9 +108,21 @@ public class WebsiteConfigVO {
     private String touristAvatar;
 
     /**
+     * 游客头像Url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "touristAvatar")
+    private String touristAvatarUrl;
+
+    /**
      * 用户头像
      */
     private String userAvatar;
+
+    /**
+     * 用户头像Url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "userAvatar")
+    private String userAvatarUrl;
 
     /**
      * 是否评论审核
@@ -130,9 +150,21 @@ public class WebsiteConfigVO {
     private String weiXinQRCode;
 
     /**
+     * 微信二维码Url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "weiXinQRCode")
+    private String weiXinQRCodeUrl;
+
+    /**
      * 支付宝二维码
      */
     private String alipayQRCode;
+
+    /**
+     * 支付宝二维码Url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "alipayQRCode")
+    private String alipayQRCodeUrl;
 
     /**
      * 是否开启聊天室

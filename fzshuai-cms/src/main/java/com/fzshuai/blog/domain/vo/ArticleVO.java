@@ -111,4 +111,7 @@ public class ArticleVO {
      */
     @ExcelProperty(value = "状态值 1公开 2私密 3评论可见")
     private Integer status;
+
+    @ExcelProperty(value = "浏览量")
+    private Integer viewCount;
 }

@@ -26,7 +26,6 @@ import static com.fzshuai.common.constant.RedisConstant.WEBSITE_CONFIG;
 public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
 
     private final WebsiteConfigMapper baseMapper;
-    private final SysOssMapper ossMapper;
 
     /**
      * 前台获取
@@ -40,22 +39,10 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
         Object websiteConfig = RedisUtils.getCacheObject(WEBSITE_CONFIG);
         if (Objects.nonNull(websiteConfig)) {
             websiteConfigVo = JSON.parseObject(websiteConfig.toString(), WebsiteConfigVO.class);
-            // 将图片改为url地址
-            websiteConfigVo.setWebsiteAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWebsiteAvatar())).getUrl());
-            websiteConfigVo.setAlipayQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getAlipayQRCode())).getUrl());
-            websiteConfigVo.setTouristAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getTouristAvatar())).getUrl());
-            websiteConfigVo.setUserAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getUserAvatar())).getUrl());
-            websiteConfigVo.setWeiXinQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWeiXinQRCode())).getUrl());
         } else {
             // 从数据库中加载
             String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
             websiteConfigVo = JSON.parseObject(config, WebsiteConfigVO.class);
-            // 将图片改为url地址
-            websiteConfigVo.setWebsiteAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWebsiteAvatar())).getUrl());
-            websiteConfigVo.setAlipayQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getAlipayQRCode())).getUrl());
-            websiteConfigVo.setTouristAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getTouristAvatar())).getUrl());
-            websiteConfigVo.setUserAvatar(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getUserAvatar())).getUrl());
-            websiteConfigVo.setWeiXinQRCode(ossMapper.selectVoById(Long.parseLong(websiteConfigVo.getWeiXinQRCode())).getUrl());
             RedisUtils.setCacheObject(WEBSITE_CONFIG, config);
         }
         return websiteConfigVo;

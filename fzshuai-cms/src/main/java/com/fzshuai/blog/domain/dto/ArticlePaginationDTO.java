@@ -1,5 +1,8 @@
 package com.fzshuai.blog.domain.dto;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.fzshuai.common.annotation.Translation;
+import com.fzshuai.common.constant.TransConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +29,13 @@ public class ArticlePaginationDTO {
      * 文章缩略图
      */
     private String articleCover;
+
+    /**
+     * 文章缩略图url
+     */
+    @ExcelProperty(value = "文章缩略图地址")
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "articleCover")
+    private String articleCoverUrl;
 
     /**
      * 标题
