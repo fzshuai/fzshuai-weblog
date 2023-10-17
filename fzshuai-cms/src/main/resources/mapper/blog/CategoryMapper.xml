@@ -11,7 +11,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="listCategoryDTO" resultType="com.fzshuai.blog.domain.dto.CategoryDTO">
+    <select id="selectCategoryList" resultType="com.fzshuai.blog.domain.dto.CategoryDTO">
         SELECT c.id,
                c.category_name,
                COUNT(a.id) AS article_count
@@ -23,16 +23,16 @@
         GROUP BY c.id
     </select>
 
-    <select id="selectNameById" resultType="string">
+    <select id="selectCategoryNameById" resultType="string">
         select category_name
         from blog_category
-        where category_id = #{id}
+        where category_id = #{categoryId}
     </select>
 
-    <select id="selectIdByName" resultType="long">
+    <select id="selectCategoryIdByName" resultType="long">
         select id
         from blog_category
-        where category_name = #{name}
+        where category_name = #{categoryName}
     </select>
 
 </mapper>

@@ -47,7 +47,7 @@ public class TagController extends BaseController {
      */
     @GetMapping("/tags")
     public R<PageResultVO<TagDTO>> listTags() {
-        return R.ok(tagService.listTags());
+        return R.ok(tagService.selectTagList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class TagController extends BaseController {
     @SaCheckPermission("blog:tag:list")
     @GetMapping("/list")
     public TableDataInfo<TagVO> list(TagBO bo, PageQuery pageQuery) {
-        return tagService.queryPageList(bo, pageQuery);
+        return tagService.selectTagPageList(bo, pageQuery);
     }
 
     /**
@@ -66,7 +66,7 @@ public class TagController extends BaseController {
     @Log(title = "文章标签", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(TagBO bo, HttpServletResponse response) {
-        List<TagVO> list = tagService.queryList(bo);
+        List<TagVO> list = tagService.selectTagList(bo);
         ExcelUtil.exportExcel(list, "文章标签", TagVO.class, response);
     }
 
@@ -79,7 +79,7 @@ public class TagController extends BaseController {
     @GetMapping("/{tagId}")
     public R<TagVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long tagId) {
-        return R.ok(tagService.queryById(tagId));
+        return R.ok(tagService.selectTagById(tagId));
     }
 
     /**

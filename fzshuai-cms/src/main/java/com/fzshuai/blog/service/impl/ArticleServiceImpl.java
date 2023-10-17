@@ -11,7 +11,6 @@ import com.fzshuai.blog.domain.dto.*;
 import com.fzshuai.blog.domain.vo.*;
 import com.fzshuai.blog.mapper.*;
 import com.fzshuai.blog.service.IArticleService;
-import com.fzshuai.blog.service.IArticleTagService;
 import com.fzshuai.blog.strategy.context.SearchStrategyContext;
 import com.fzshuai.common.core.domain.PageQuery;
 import com.fzshuai.common.core.page.TableDataInfo;
@@ -27,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -55,8 +53,6 @@ public class ArticleServiceImpl implements IArticleService {
     private final CommentMapper commentMapper;
     private final SysUserMapper sysUserMapper;
     private final SearchStrategyContext searchStrategyContext;
-    private final HttpSession session;
-    private final IArticleTagService articleTagService;
 
     @Override
     public void likeArticle(Long articleId) {
@@ -76,7 +72,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public PageResultVO<ArchiveVO> selectArchivePage() {
+    public PageResultVO<ArchiveVO> selectArticleArchiveList() {
         Page<Article> page = new Page<>(BlogPageUtils.getCurrent(), BlogPageUtils.getSize());
         // 获取分页数据
         Page<Article> articlePage = baseMapper.selectPage(page, new LambdaQueryWrapper<Article>()
@@ -89,8 +85,8 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<ArticleHomeVO> selectArticleList() {
-        List<ArticleHomeDTO> articleHomeDTOS = baseMapper.selectArticleList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
+    public List<ArticleHomeVO> selectArticleHomeList() {
+        List<ArticleHomeDTO> articleHomeDTOS = baseMapper.selectArticleHomeList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
         return BeanCopyUtils.copyList(articleHomeDTOS, ArticleHomeVO.class);
     }
 
@@ -167,7 +163,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public ArticlePreviewListVO selectArticleList(ConditionVO condition) {
+    public ArticlePreviewListVO selectArticlePreviewList(ConditionVO condition) {
         // 查询文章
         List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.selectArticleList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
         // 搜索条件对应名(标签或分类名)
@@ -215,20 +211,11 @@ public class ArticleServiceImpl implements IArticleService {
      * @param tagNameList 标签名称集合
      */
     private void insertArticleTag(Long articleId, List<String> tagNameList) {
-        // 编辑文章则删除文章所有标签
-        // if (Objects.nonNull(articleVO.getArticleId())) {
-        //     articleTagMapper.delete(new LambdaQueryWrapper<ArticleTag>()
-        //         .eq(ArticleTag::getArticleId, articleVO.getArticleId()));
-        // }
-        // 添加文章标签
-        // List<String> tagNameList = articleVO.getTagNameList();
         if (CollectionUtils.isNotEmpty(tagNameList)) {
             // 查询已存在的标签
             List<TagVO> existTagVOList = tagMapper.selectVoList(new LambdaQueryWrapper<Tag>()
                 .in(Tag::getTagName, tagNameList));
 
-            // List<Tag> existTagList = tagService.list(new LambdaQueryWrapper<Tag>()
-            //     .in(Tag::getTagName, tagNameList));
             List<String> existTagNameList = existTagVOList.stream()
                 .map(TagVO::getTagName)
                 .collect(Collectors.toList());
@@ -256,7 +243,7 @@ public class ArticleServiceImpl implements IArticleService {
                     .tagId(item)
                     .build())
                 .collect(Collectors.toList());
-            articleTagService.saveBatch(articleTagList);
+            articleTagMapper.insertBatch(articleTagList);
         }
     }
 
@@ -266,12 +253,12 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public TableDataInfo<ArticleVO> selectArticlePage(ArticleBO articleBo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVO> selectArticlePageList(ArticleBO articleBo, PageQuery pageQuery) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(articleBo);
         Page<ArticleVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(articleVO -> {
             articleVO.setUserName(sysUserMapper.selectVoById(articleVO.getUserId()).getUserName());
-            articleVO.setCategoryName(categoryMapper.selectNameById(articleVO.getCategoryId()));
+            articleVO.setCategoryName(categoryMapper.selectCategoryNameById(articleVO.getCategoryId()));
             articleVO.setTagNameList(tagMapper.selectTagNamesByArticleId(articleVO.getArticleId()));
         });
         return TableDataInfo.build(result);
@@ -321,38 +308,12 @@ public class ArticleServiceImpl implements IArticleService {
         if (bo.getTagNameList().isEmpty()) {
             bo.setTagNameList(Arrays.asList(DEFAULTCATORTAG));
         }
-        // for (String s : bo.getTagNameList()) {
-        //     // 如果是新增的标签则先将标签新增
-        //     if (baseMapper.queryTagIdByName(s) == null) {
-        //         Tag tag = Tag.builder().tagName(s).build();
-        //         tagMapper.insert(tag);
-        //     }
-        //     //判断文章是否已经有这个标签
-        //     List<String> tags = baseMapper.queryArticleTags(bo.getArticleId());
-        //     if (tags.contains(s)) {
-        //         continue;
-        //     }
-        //     baseMapper.insertArticleTag(bo.getArticleId(), baseMapper.queryTagIdByName(s));
-        // }
 
         // 新增文章与标签管理
         insertArticleTag(bo.getArticleId(), bo.getTagNameList());
 
         return flag;
     }
-
-    // public void insertArticleTag(Long articleId, List<Long> tagIds) {
-    //     if (ArrayUtil.isNotEmpty(tagIds)) {
-    //         // 新增用户与角色管理
-    //         List<ArticleTag> list = StreamUtils.toList(Arrays.asList(tagIds), tagId -> {
-    //             ArticleTag ur = new ArticleTag();
-    //             ur.setArticleId(articleId);
-    //             ur.setTagId(tagId);
-    //             return ur;
-    //         });
-    //         articleTagMapper.insertBatch(list);
-    //     }
-    // }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

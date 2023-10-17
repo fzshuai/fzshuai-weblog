@@ -66,7 +66,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public TableDataInfo<AlbumVO> selectAlbumPage(AlbumBO bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVO> selectAlbumPageList(AlbumBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         Page<AlbumVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);

@@ -21,31 +21,31 @@ public interface ITalkService {
     /**
      * 获取首页说说列表
      *
-     * @return {@link List<String>} 说说列表
+     * @return 说说列表
      */
-    List<String> listHomeTalks();
+    List<String> selectTalkHomeList();
 
     /**
-     * 获取前端1说说列表
+     * 获取前端说说列表
      *
-     * @return {@link PageResultVO < TalkDTO >} 说说列表
+     * @return 说说列表
      */
-    PageResultVO<TalkDTO> listTalks();
+    PageResultVO<TalkDTO> selectTalkPageList();
 
     /**
      * 查询说说
      */
-    TalkVO queryById(Long talkId);
+    TalkVO selectTalkById(Long talkId);
 
     /**
      * 查询说说列表
      */
-    TableDataInfo<TalkVO> queryPageList(TalkBO bo, PageQuery pageQuery);
+    TableDataInfo<TalkVO> selectTalkPageList(TalkBO bo, PageQuery pageQuery);
 
     /**
      * 查询说说列表
      */
-    List<TalkVO> queryList(TalkBO bo);
+    List<TalkVO> selectTalkList(TalkBO bo);
 
     /**
      * 新增说说

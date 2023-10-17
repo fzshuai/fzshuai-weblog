@@ -15,14 +15,14 @@ public interface IWebsiteConfigService {
      *
      * @return {@link WebsiteConfigVO} 网站配置
      */
-    WebsiteConfigVO getWebsiteConfig();
+    WebsiteConfigVO selectWebsiteConfig();
 
     /**
      * 后台获取网站配置
      *
      * @return {@link WebsiteConfigVO} 网站配置
      */
-    WebsiteConfigVO getAdminWebsiteConfig();
+    WebsiteConfigVO selectAdminWebsiteConfig();
 
     /**
      * 保存或更新网站配置

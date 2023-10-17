@@ -20,16 +20,21 @@ public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category,
      *
      * @return 分类列表
      */
-    List<CategoryDTO> listCategoryDTO();
+    List<CategoryDTO> selectCategoryList();
 
     /**
      * 根据id查询分类名称
+     *
+     * @param categoryId 分类id
+     * @return 分类名称
      */
-    String selectNameById(Long id);
-
+    String selectCategoryNameById(Long categoryId);
 
     /**
      * 根据名称查分类ID
+     *
+     * @param categoryName 分类名称
+     * @return 分类id
      */
-    Long selectIdByName(String name);
+    Long selectCategoryIdByName(String categoryName);
 }

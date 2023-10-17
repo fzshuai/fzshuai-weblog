@@ -1,10 +1,9 @@
 package com.fzshuai.blog.service;
 
-import com.fzshuai.blog.domain.dto.FriendLinkDTO;
-import com.fzshuai.blog.domain.vo.FriendLinkVO;
 import com.fzshuai.blog.domain.bo.FriendLinkBO;
-import com.fzshuai.common.core.page.TableDataInfo;
+import com.fzshuai.blog.domain.vo.FriendLinkVO;
 import com.fzshuai.common.core.domain.PageQuery;
+import com.fzshuai.common.core.page.TableDataInfo;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,22 +21,22 @@ public interface IFriendLinkService {
      *
      * @return 友链列表
      */
-    List<FriendLinkDTO> listFriendLinks();
+    List<FriendLinkVO> selectFriendLinkList();
 
     /**
      * 查询友人链接
      */
-    FriendLinkVO queryById(Long friendLinkId);
+    FriendLinkVO selectFriendLinkById(Long friendLinkId);
 
     /**
      * 查询友人链接列表
      */
-    TableDataInfo<FriendLinkVO> queryPageList(FriendLinkBO bo, PageQuery pageQuery);
+    TableDataInfo<FriendLinkVO> selectFriendLinkPageList(FriendLinkBO bo, PageQuery pageQuery);
 
     /**
      * 查询友人链接列表
      */
-    List<FriendLinkVO> queryList(FriendLinkBO bo);
+    List<FriendLinkVO> selectFriendLinkList(FriendLinkBO bo);
 
     /**
      * 新增友人链接

@@ -38,7 +38,7 @@ public interface IAlbumService {
      * @param pageQuery 分页对象
      * @return 相册列表
      */
-    TableDataInfo<AlbumVO> selectAlbumPage(AlbumBO bo, PageQuery pageQuery);
+    TableDataInfo<AlbumVO> selectAlbumPageList(AlbumBO bo, PageQuery pageQuery);
 
     /**
      * 查询相册列表

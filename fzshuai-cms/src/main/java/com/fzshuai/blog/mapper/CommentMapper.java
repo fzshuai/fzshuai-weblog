@@ -27,7 +27,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentVO 评论信息
      * @return 评论集合
      */
-    List<CommentDTO> listComments(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVO commentVO);
+    List<CommentDTO> selectCommentList(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVO commentVO);
 
     /**
      * 查看评论id集合下的回复
@@ -35,7 +35,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentIdList 评论id集合
      * @return 回复集合
      */
-    List<ReplyDTO> listReplies(@Param("commentIdList") List<Long> commentIdList);
+    List<ReplyDTO> selectReplyListByIds(@Param("commentIdList") List<Long> commentIdList);
 
     /**
      * 根据评论id查询回复总量
@@ -43,14 +43,14 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentIdList 评论id集合
      * @return 回复数量
      */
-    List<ReplyCountDTO> listReplyCountByCommentId(@Param("commentIdList") List<Long> commentIdList);
+    List<ReplyCountDTO> selectReplyCountByIds(@Param("commentIdList") List<Long> commentIdList);
 
     /**
      * 根据评论主题id获取评论量
      *
      * @param topicIdList 说说id列表
-     * @return {@link List<CommentCountDTO>}说说评论量
+     * @return 说说评论量
      */
-    List<CommentCountDTO> listCommentCountByTopicIds(List<Long> topicIdList);
+    List<CommentCountDTO> selectCommentCountByTopicIds(List<Long> topicIdList);
 
 }

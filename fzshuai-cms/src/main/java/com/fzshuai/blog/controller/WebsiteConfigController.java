@@ -29,7 +29,7 @@ public class WebsiteConfigController extends BaseController {
      */
     @GetMapping("/config")
     public R<WebsiteConfigVO> getWebsiteConfig() {
-        return R.ok(websiteConfigService.getWebsiteConfig());
+        return R.ok(websiteConfigService.selectWebsiteConfig());
     }
 
     /**
@@ -37,7 +37,7 @@ public class WebsiteConfigController extends BaseController {
      */
     @GetMapping("/admin/config")
     public R<WebsiteConfigVO> getAdminWebsiteConfig() {
-        return R.ok(websiteConfigService.getAdminWebsiteConfig());
+        return R.ok(websiteConfigService.selectAdminWebsiteConfig());
     }
 
     /**

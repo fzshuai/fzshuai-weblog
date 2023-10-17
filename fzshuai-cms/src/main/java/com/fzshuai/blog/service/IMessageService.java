@@ -1,6 +1,5 @@
 package com.fzshuai.blog.service;
 
-import com.fzshuai.blog.domain.dto.MessageDTO;
 import com.fzshuai.blog.domain.vo.MessageVO;
 import com.fzshuai.blog.domain.bo.MessageBO;
 import com.fzshuai.common.core.page.TableDataInfo;
@@ -22,29 +21,29 @@ public interface IMessageService {
      *
      * @param messageVo 留言对象
      */
-    void saveMessage(MessageVO messageVo);
+    void insertMessage(MessageVO messageVo);
 
     /**
      * 查看前台留言弹幕
      *
      * @return 留言列表
      */
-    List<MessageDTO> listMessages();
+    List<MessageVO> selectMessageList();
 
-    /*
+    /**
      * 查询留言
      */
-    MessageVO queryById(Long messageId);
+    MessageVO selectMessageById(Long messageId);
 
     /**
      * 查询留言列表
      */
-    TableDataInfo<MessageVO> queryPageList(MessageBO bo, PageQuery pageQuery);
+    TableDataInfo<MessageVO> selectMessagePageList(MessageBO bo, PageQuery pageQuery);
 
     /**
      * 查询留言列表
      */
-    List<MessageVO> queryList(MessageBO bo);
+    List<MessageVO> selectMessageList(MessageBO bo);
 
     /**
      * 新增留言

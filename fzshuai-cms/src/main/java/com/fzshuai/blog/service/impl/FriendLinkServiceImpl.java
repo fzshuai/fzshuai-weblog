@@ -1,7 +1,6 @@
 package com.fzshuai.blog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.fzshuai.blog.domain.dto.FriendLinkDTO;
 import com.fzshuai.common.utils.BeanCopyUtils;
 import com.fzshuai.common.utils.StringUtils;
 import com.fzshuai.common.core.page.TableDataInfo;
@@ -39,17 +38,17 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * @return
      */
     @Override
-    public List<FriendLinkDTO> listFriendLinks() {
+    public List<FriendLinkVO> selectFriendLinkList() {
         // 查询友链列表
         List<FriendLink> friendLinkList = baseMapper.selectList(null);
-        return BeanCopyUtils.copyList(friendLinkList, FriendLinkDTO.class);
+        return BeanCopyUtils.copyList(friendLinkList, FriendLinkVO.class);
     }
 
     /**
      * 查询友人链接
      */
     @Override
-    public FriendLinkVO queryById(Long friendLinkId) {
+    public FriendLinkVO selectFriendLinkById(Long friendLinkId) {
         return baseMapper.selectVoById(friendLinkId);
     }
 
@@ -57,7 +56,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public TableDataInfo<FriendLinkVO> queryPageList(FriendLinkBO bo, PageQuery pageQuery) {
+    public TableDataInfo<FriendLinkVO> selectFriendLinkPageList(FriendLinkBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
         Page<FriendLinkVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -67,7 +66,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public List<FriendLinkVO> queryList(FriendLinkBO bo) {
+    public List<FriendLinkVO> selectFriendLinkList(FriendLinkBO bo) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

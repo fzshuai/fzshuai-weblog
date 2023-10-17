@@ -34,7 +34,7 @@ public class BlogInfoController extends BaseController {
     @SaIgnore
     @GetMapping()
     public R<BlogHomeInfoVO> getBlogHomeInfo() {
-        return R.ok(blogInfoService.getBlogHomeInfo());
+        return R.ok(blogInfoService.selectBlogHomeInfo());
     }
 
     /**
@@ -45,7 +45,7 @@ public class BlogInfoController extends BaseController {
     @SaIgnore
     @GetMapping("/about")
     public R<String> getAbout() {
-        return R.ok(blogInfoService.getAbout());
+        return R.ok(blogInfoService.selectAbout());
     }
 
     /**
@@ -68,7 +68,7 @@ public class BlogInfoController extends BaseController {
     @SaIgnore
     @PostMapping("/report")
     public R<?> report() {
-        blogInfoService.report();
+        blogInfoService.reportVisitor();
         return R.ok();
     }
 }

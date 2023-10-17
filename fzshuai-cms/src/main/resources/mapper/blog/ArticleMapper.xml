@@ -82,7 +82,7 @@
         </collection>
     </resultMap>
 
-    <select id="selectArticleList" resultMap="articleHomeResultMap">
+    <select id="selectArticleHomeList" resultMap="articleHomeResultMap">
         SELECT a.article_id,
                o.url as article_cover,
                article_title,
@@ -116,7 +116,7 @@
                  a.article_id DESC
     </select>
 
-    <select id="selectArticleList" resultMap="articlePreviewResultMap">
+    <select id="selectArticlePreviewList" resultMap="articlePreviewResultMap">
         SELECT
         a.article_id,
         article_cover,
@@ -183,7 +183,7 @@
           AND a.status = 1
     </select>
 
-    <select id="selectArticleListBack" resultMap="articleBackResultMap">
+    <select id="selectAdminArticleList" resultMap="articleBackResultMap">
         SELECT
         a.article_id,
         article_cover,
@@ -249,7 +249,7 @@
         a.article_id DESC
     </select>
 
-    <select id="selectArticleCountBack" resultType="java.lang.Integer">
+    <select id="selectAdminArticleCount" resultType="java.lang.Integer">
         SELECT
         count(DISTINCT a.article_id)
         from
