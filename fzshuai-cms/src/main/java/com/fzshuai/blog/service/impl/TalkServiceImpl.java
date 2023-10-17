@@ -48,7 +48,7 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public List<String> listHomeTalks() {
+    public List<String> selectTalkHomeList() {
         // 查询最新10条说说
         return baseMapper.selectList(new LambdaQueryWrapper<Talk>()
                         .orderByDesc(Talk::getIsTop)
@@ -65,20 +65,20 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public PageResultVO<TalkDTO> listTalks() {
+    public PageResultVO<TalkDTO> selectTalkPageList() {
         // 查询说说总量
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
             return new PageResultVO<>();
         }
         // 分页查询说说
-        List<TalkDTO> result = baseMapper.listTalks(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
+        List<TalkDTO> result = baseMapper.selectTalkList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
 
         // 查询说说评论量
         List<Long> topicIdList = result.stream()
                 .map(TalkDTO::getTalkId)
                 .collect(Collectors.toList());
-        Map<Long, Integer> commentCountMap = commentMapper.listCommentCountByTopicIds(topicIdList)
+        Map<Long, Integer> commentCountMap = commentMapper.selectCommentCountByTopicIds(topicIdList)
                 .stream()
                 .collect(Collectors.toMap(CommentCountDTO::getCommentId, CommentCountDTO::getCommentCount));
         // 查询说说点赞量
@@ -107,8 +107,8 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说
      */
     @Override
-    public TalkVO queryById(Long talkId) {
-        TalkVO result = baseMapper.BackTalks(talkId);
+    public TalkVO selectTalkById(Long talkId) {
+        TalkVO result = baseMapper.selectAdminTalkById(talkId);
         if (Objects.nonNull(result.getImages())) {
             List<String> list = Arrays.asList(result.getImages().split(","));
             // 将图片转换为url路径
@@ -121,12 +121,12 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public TableDataInfo<TalkVO> queryPageList(TalkBO bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVO> selectTalkPageList(TalkBO bo, PageQuery pageQuery) {
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
             return new TableDataInfo<>();
         }
-        List<TalkVO> result = baseMapper.listBackTalks();
+        List<TalkVO> result = baseMapper.selectAdminTalkList();
         result.forEach(item -> {
             if (Objects.nonNull(item.getImages())) {
                 List<String> list = Arrays.asList(item.getImages().split(","));
@@ -148,7 +148,7 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public List<TalkVO> queryList(TalkBO bo) {
+    public List<TalkVO> selectTalkList(TalkBO bo) {
         LambdaQueryWrapper<Talk> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

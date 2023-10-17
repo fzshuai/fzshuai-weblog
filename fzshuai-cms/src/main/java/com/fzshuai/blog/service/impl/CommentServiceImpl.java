@@ -60,7 +60,7 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVO 评论信息
      */
     @Override
-    public PageResultVO<CommentDTO> listComments(CommentVO commentVO) {
+    public PageResultVO<CommentDTO> selectCommentList(CommentVO commentVO) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
                 .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
@@ -71,7 +71,7 @@ public class CommentServiceImpl implements ICommentService {
             return new PageResultVO<>();
         }
         // 分页查询评论数据
-        List<CommentDTO> commentDTOList = baseMapper.listComments(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
+        List<CommentDTO> commentDTOList = baseMapper.selectCommentList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
         if (CollectionUtils.isEmpty(commentDTOList)) {
             return new PageResultVO<>();
         }
@@ -82,14 +82,14 @@ public class CommentServiceImpl implements ICommentService {
                 .map((CommentDTO::getCommentId))
                 .collect(Collectors.toList());
         // 根据评论id集合查询回复数据
-        List<ReplyDTO> replyDTOList = baseMapper.listReplies(commentIdList);
+        List<ReplyDTO> replyDTOList = baseMapper.selectReplyListByIds(commentIdList);
         // 封装回复点赞量
         replyDTOList.forEach(item -> item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString())));
         // 根据评论id分组回复数据
         Map<Long, List<ReplyDTO>> replyMap = replyDTOList.stream()
                 .collect(Collectors.groupingBy(ReplyDTO::getParentId));
         // 根据评论id查询回复量
-        Map<Long, Integer> replyCountMap = baseMapper.listReplyCountByCommentId(commentIdList)
+        Map<Long, Integer> replyCountMap = baseMapper.selectReplyCountByIds(commentIdList)
                 .stream().collect(Collectors.toMap(ReplyCountDTO::getCommentId, ReplyCountDTO::getReplyCount));
         // 封装评论数据
         commentDTOList.forEach(item -> {
@@ -106,9 +106,9 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVo 评论对象
      */
     @Override
-    public void saveComment(CommentVO commentVo) {
+    public void insertComment(CommentVO commentVo) {
         // 判断是否需要审核
-        WebsiteConfigVO websiteConfig = websiteConfigService.getWebsiteConfig();
+        WebsiteConfigVO websiteConfig = websiteConfigService.selectWebsiteConfig();
         Integer isReview = websiteConfig.getIsCommentReview();
         // 过滤标签
         commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
@@ -134,7 +134,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论
      */
     @Override
-    public CommentVO queryById(Long commentId) {
+    public CommentVO selectCommentById(Long commentId) {
         return baseMapper.selectVoById(commentId);
     }
 
@@ -142,7 +142,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public TableDataInfo<CommentVO> queryPageList(CommentBO bo, PageQuery pageQuery) {
+    public TableDataInfo<CommentVO> selectCommentPageList(CommentBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         Page<CommentVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(commentVO -> {
@@ -157,7 +157,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public List<CommentVO> queryList(CommentBO bo) {
+    public List<CommentVO> selectCommentList(CommentBO bo) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

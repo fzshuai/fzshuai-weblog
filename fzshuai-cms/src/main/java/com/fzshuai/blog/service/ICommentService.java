@@ -23,29 +23,29 @@ public interface ICommentService {
      *
      * @param commentVO 评论信息
      */
-    PageResultVO<CommentDTO> listComments(CommentVO commentVO);
+    PageResultVO<CommentDTO> selectCommentList(CommentVO commentVO);
 
     /**
      * 博客前台添加评论
      *
      * @param commentVO 评论对象
      */
-    void saveComment(CommentVO commentVO);
+    void insertComment(CommentVO commentVO);
 
     /**
      * 查询文章评论
      */
-    CommentVO queryById(Long commentId);
+    CommentVO selectCommentById(Long commentId);
 
     /**
      * 查询文章评论列表
      */
-    TableDataInfo<CommentVO> queryPageList(CommentBO bo, PageQuery pageQuery);
+    TableDataInfo<CommentVO> selectCommentPageList(CommentBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章评论列表
      */
-    List<CommentVO> queryList(CommentBO bo);
+    List<CommentVO> selectCommentList(CommentBO bo);
 
     /**
      * 新增文章评论

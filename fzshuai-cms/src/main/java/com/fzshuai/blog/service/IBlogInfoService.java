@@ -12,18 +12,18 @@ import com.fzshuai.blog.domain.vo.BlogInfoVO;
 public interface IBlogInfoService {
 
     /**
-     * 获取首页数据
+     * 查询首页数据
      *
      * @return 博客首页信息
      */
-    BlogHomeInfoVO getBlogHomeInfo();
+    BlogHomeInfoVO selectBlogHomeInfo();
 
     /**
-     * 获取关于我内容
+     * 查询关于我内容
      *
      * @return 关于我内容
      */
-    String getAbout();
+    String selectAbout();
 
     /**
      * 修改关于我内容
@@ -35,5 +35,5 @@ public interface IBlogInfoService {
     /**
      * 上传访客信息
      */
-    void report();
+    void reportVisitor();
 }

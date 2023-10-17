@@ -49,7 +49,7 @@ public class ArticleController extends BaseController {
     @SaIgnore
     @GetMapping("/articles/archives")
     public R<PageResultVO<ArchiveVO>> listArchives() {
-        return R.ok(articleService.selectArchivePage());
+        return R.ok(articleService.selectArticleArchiveList());
     }
 
     /**
@@ -60,7 +60,7 @@ public class ArticleController extends BaseController {
     @SaIgnore
     @GetMapping("/articles")
     public R<List<ArticleHomeVO>> listArticles() {
-        return R.ok(articleService.selectArticleList());
+        return R.ok(articleService.selectArticleHomeList());
     }
 
     /**
@@ -83,7 +83,7 @@ public class ArticleController extends BaseController {
      */
     @GetMapping("/articles/condition")
     public R<ArticlePreviewListVO> listArticlesByCondition(ConditionVO condition) {
-        return R.ok(articleService.selectArticleList(condition));
+        return R.ok(articleService.selectArticlePreviewList(condition));
     }
 
     /**
@@ -116,7 +116,7 @@ public class ArticleController extends BaseController {
     @SaCheckPermission("blog:article:list")
     @GetMapping("/list")
     public TableDataInfo<ArticleVO> list(ArticleBO bo, PageQuery pageQuery) {
-        return articleService.selectArticlePage(bo, pageQuery);
+        return articleService.selectArticlePageList(bo, pageQuery);
     }
 
     /**

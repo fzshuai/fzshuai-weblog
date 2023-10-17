@@ -24,7 +24,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param size    大小
      * @return 文章列表
      */
-    List<ArticleHomeDTO> selectArticleList(@Param("current") Long current, @Param("size") Long size);
+    List<ArticleHomeDTO> selectArticleHomeList(@Param("current") Long current, @Param("size") Long size);
 
     /**
      * 根据id查询文章
@@ -42,7 +42,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticlePreviewDTO> selectArticleList(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
+    List<ArticlePreviewDTO> selectArticlePreviewList(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章
@@ -52,7 +52,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleBackDTO> selectArticleListBack(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
+    List<ArticleBackDTO> selectAdminArticleList(@Param("current") Long current, @Param("size") Long size, @Param("condition") ConditionVO condition);
 
     /**
      * 查询后台文章总量
@@ -60,7 +60,7 @@ public interface ArticleMapper extends BaseMapperPlus<ArticleMapper, Article, Ar
      * @param condition 条件
      * @return 文章总量
      */
-    Integer selectArticleCountBack(@Param("condition") ConditionVO condition);
+    Integer selectAdminArticleCount(@Param("condition") ConditionVO condition);
 
     /**
      * 查看文章的推荐文章

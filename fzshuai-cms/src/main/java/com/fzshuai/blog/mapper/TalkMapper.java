@@ -23,15 +23,15 @@ public interface TalkMapper extends BaseMapperPlus<TalkMapper, Talk, TalkVO> {
      * @param size    大小
      * @return {@link List< TalkDTO >}
      */
-    List<TalkDTO> listTalks(@Param("current") Long current, @Param("size") Long size);
+    List<TalkDTO> selectTalkList(@Param("current") Long current, @Param("size") Long size);
 
     /**
      * 查看后台说说
      */
-    List<TalkVO> listBackTalks();
+    List<TalkVO> selectAdminTalkList();
 
     /**
      * 根据id查询后台说说
      */
-    TalkVO BackTalks(Long id);
+    TalkVO selectAdminTalkById(Long id);
 }

@@ -46,7 +46,7 @@ public class CategoryController extends BaseController {
      */
     @GetMapping("/categories")
     public R<PageResultVO<CategoryDTO>> listCategories() {
-        return R.ok(categoryService.listCategories());
+        return R.ok(categoryService.selectCategoryList());
     }
 
     /**
@@ -55,7 +55,7 @@ public class CategoryController extends BaseController {
     @SaCheckPermission("blog:category:list")
     @GetMapping("/list")
     public TableDataInfo<CategoryVO> list(CategoryBO bo, PageQuery pageQuery) {
-        return categoryService.queryPageList(bo, pageQuery);
+        return categoryService.selectCategoryList(bo, pageQuery);
     }
 
     /**
@@ -65,7 +65,7 @@ public class CategoryController extends BaseController {
     @Log(title = "文章分类", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(CategoryBO bo, HttpServletResponse response) {
-        List<CategoryVO> list = categoryService.queryList(bo);
+        List<CategoryVO> list = categoryService.selectCategoryList(bo);
         ExcelUtil.exportExcel(list, "文章分类", CategoryVO.class, response);
     }
 
@@ -78,7 +78,7 @@ public class CategoryController extends BaseController {
     @GetMapping("/{categoryId}")
     public R<CategoryVO> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long categoryId) {
-        return R.ok(categoryService.queryById(categoryId));
+        return R.ok(categoryService.selectCategoryById(categoryId));
     }
 
     /**

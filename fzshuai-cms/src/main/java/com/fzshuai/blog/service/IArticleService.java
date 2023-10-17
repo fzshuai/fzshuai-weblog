@@ -28,14 +28,14 @@ public interface IArticleService {
      *
      * @return 文章归档
      */
-    PageResultVO<ArchiveVO> selectArchivePage();
+    PageResultVO<ArchiveVO> selectArticleArchiveList();
 
     /**
      * 查看博客前端首页文章
      *
      * @return 首页文章
      */
-    List<ArticleHomeVO> selectArticleList();
+    List<ArticleHomeVO> selectArticleHomeList();
 
     /**
      * 博客前端根据id查看文章
@@ -59,7 +59,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    ArticlePreviewListVO selectArticleList(ConditionVO condition);
+    ArticlePreviewListVO selectArticlePreviewList(ConditionVO condition);
 
     /**
      * 查询文章
@@ -76,7 +76,7 @@ public interface IArticleService {
      * @param pageQuery 分页对象
      * @return 文章列表
      */
-    TableDataInfo<ArticleVO> selectArticlePage(ArticleBO bo, PageQuery pageQuery);
+    TableDataInfo<ArticleVO> selectArticlePageList(ArticleBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章列表

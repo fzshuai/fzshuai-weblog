@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzshuai.blog.domain.Message;
 import com.fzshuai.blog.domain.bo.MessageBO;
-import com.fzshuai.blog.domain.dto.MessageDTO;
 import com.fzshuai.blog.domain.vo.MessageVO;
 import com.fzshuai.blog.mapper.MessageMapper;
 import com.fzshuai.blog.service.IMessageService;
@@ -48,9 +47,9 @@ public class MessageServiceImpl implements IMessageService {
      * @param messageVo
      */
     @Override
-    public void saveMessage(MessageVO messageVo) {
+    public void insertMessage(MessageVO messageVo) {
         // 判断是否需要审核
-        Integer isReview = websiteConfigService.getWebsiteConfig().getIsMessageReview();
+        Integer isReview = websiteConfigService.selectWebsiteConfig().getIsMessageReview();
         // 获取用户ip
         String ipAddress = ServletUtils.getClientIP(request);
         String ipSource = AddressUtils.getRealAddressByIP(ipAddress);
@@ -67,19 +66,19 @@ public class MessageServiceImpl implements IMessageService {
      * @return
      */
     @Override
-    public List<MessageDTO> listMessages() {
+    public List<MessageVO> selectMessageList() {
         // 查询留言列表
         List<Message> messageList = baseMapper.selectList(new LambdaQueryWrapper<Message>()
             .select(Message::getMessageId, Message::getNickname, Message::getAvatar, Message::getMessageContent, Message::getTime)
             .eq(Message::getIsReview, YES));
-        return BeanCopyUtils.copyList(messageList, MessageDTO.class);
+        return BeanCopyUtils.copyList(messageList, MessageVO.class);
     }
 
     /*
      * 查询留言
      */
     @Override
-    public MessageVO queryById(Long messageId) {
+    public MessageVO selectMessageById(Long messageId) {
         return baseMapper.selectVoById(messageId);
     }
 
@@ -87,7 +86,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public TableDataInfo<MessageVO> queryPageList(MessageBO bo, PageQuery pageQuery) {
+    public TableDataInfo<MessageVO> selectMessagePageList(MessageBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
         Page<MessageVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -97,7 +96,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public List<MessageVO> queryList(MessageBO bo) {
+    public List<MessageVO> selectMessageList(MessageBO bo) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

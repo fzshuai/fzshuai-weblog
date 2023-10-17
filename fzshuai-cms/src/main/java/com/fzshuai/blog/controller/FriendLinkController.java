@@ -3,7 +3,6 @@ package com.fzshuai.blog.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.fzshuai.blog.domain.bo.FriendLinkBO;
-import com.fzshuai.blog.domain.dto.FriendLinkDTO;
 import com.fzshuai.blog.domain.vo.FriendLinkVO;
 import com.fzshuai.blog.service.IFriendLinkService;
 import com.fzshuai.common.annotation.Log;
@@ -43,12 +42,12 @@ public class FriendLinkController extends BaseController {
     /**
      * 查看前台友链列表
      *
-     * @return {@link R< FriendLinkDTO >} 友链列表
+     * @return 友链列表
      */
     @SaIgnore
     @GetMapping("/links")
-    public R<List<FriendLinkDTO>> listFriendLinks() {
-        return R.ok(friendLinkService.listFriendLinks());
+    public R<List<FriendLinkVO>> listFriendLinks() {
+        return R.ok(friendLinkService.selectFriendLinkList());
     }
 
     /**
@@ -57,7 +56,7 @@ public class FriendLinkController extends BaseController {
     @SaCheckPermission("blog:friendLink:list")
     @GetMapping("/list")
     public TableDataInfo<FriendLinkVO> list(FriendLinkBO bo, PageQuery pageQuery) {
-        return friendLinkService.queryPageList(bo, pageQuery);
+        return friendLinkService.selectFriendLinkPageList(bo, pageQuery);
     }
 
     /**
@@ -67,7 +66,7 @@ public class FriendLinkController extends BaseController {
     @Log(title = "友人链接", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(FriendLinkBO bo, HttpServletResponse response) {
-        List<FriendLinkVO> list = friendLinkService.queryList(bo);
+        List<FriendLinkVO> list = friendLinkService.selectFriendLinkList(bo);
         ExcelUtil.exportExcel(list, "友人链接", FriendLinkVO.class, response);
     }
 
@@ -80,7 +79,7 @@ public class FriendLinkController extends BaseController {
     @GetMapping("/{friendLinkId}")
     public R<FriendLinkVO> getInfo(@NotNull(message = "主键不能为空")
                                    @PathVariable Long friendLinkId) {
-        return R.ok(friendLinkService.queryById(friendLinkId));
+        return R.ok(friendLinkService.selectFriendLinkById(friendLinkId));
     }
 
     /**
@@ -117,5 +116,4 @@ public class FriendLinkController extends BaseController {
                           @PathVariable Long[] friendLinkIds) {
         return toAjax(friendLinkService.deleteWithValidByIds(Arrays.asList(friendLinkIds), true));
     }
-
 }

@@ -57,7 +57,7 @@ public class AlbumController extends BaseController {
     @SaCheckPermission("blog:album:list")
     @GetMapping("/list")
     public TableDataInfo<AlbumVO> list(AlbumBO bo, PageQuery pageQuery) {
-        return albumService.selectAlbumPage(bo, pageQuery);
+        return albumService.selectAlbumPageList(bo, pageQuery);
     }
 
     /**
@@ -67,7 +67,7 @@ public class AlbumController extends BaseController {
     @Log(title = "相册", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(AlbumBO bo, HttpServletResponse response) {
-        List<AlbumVO> list = albumService.selectAlbumList(bo);
+        List<AlbumVO> list = albumService.selectAlbumPageList(bo);
         ExcelUtil.exportExcel(list, "相册", AlbumVO.class, response);
     }
 

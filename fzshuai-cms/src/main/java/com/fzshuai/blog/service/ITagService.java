@@ -25,22 +25,22 @@ public interface ITagService extends IService<Tag> {
      *
      * @return 标签列表
      */
-    PageResultVO<TagDTO> listTags();
+    PageResultVO<TagDTO> selectTagList();
 
     /**
      * 查询文章标签
      */
-    TagVO queryById(Long tagId);
+    TagVO selectTagById(Long tagId);
 
     /**
      * 查询文章标签列表
      */
-    TableDataInfo<TagVO> queryPageList(TagBO bo, PageQuery pageQuery);
+    TableDataInfo<TagVO> selectTagPageList(TagBO bo, PageQuery pageQuery);
 
     /**
      * 查询文章标签列表
      */
-    List<TagVO> queryList(TagBO bo);
+    List<TagVO> selectTagList(TagBO bo);
 
     /**
      * 新增文章标签

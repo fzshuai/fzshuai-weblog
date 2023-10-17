@@ -17,7 +17,7 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="listTalks" resultType="com.fzshuai.blog.domain.dto.TalkDTO">
+    <select id="selectTalkList" resultType="com.fzshuai.blog.domain.dto.TalkDTO">
         SELECT t.talk_id,
                u.nick_name,
                u.avatar,
@@ -30,7 +30,7 @@
             LIMIT #{current}, #{size}
     </select>
 
-    <select id="listBackTalks" resultType="com.fzshuai.blog.domain.vo.TalkVO">
+    <select id="selectAdminTalkList" resultType="com.fzshuai.blog.domain.vo.TalkVO">
         SELECT t.id,
                t.content,
                t.images,
@@ -42,7 +42,7 @@
                  LEFT JOIN sys_user u ON t.user_id = u.user_id
     </select>
 
-    <select id="BackTalks" parameterType="Long" resultType="com.fzshuai.blog.domain.vo.TalkVO">
+    <select id="selectAdminTalkById" parameterType="Long" resultType="com.fzshuai.blog.domain.vo.TalkVO">
         SELECT t.id,
                t.content,
                t.images,

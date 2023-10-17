@@ -39,15 +39,15 @@ public class CategoryServiceImpl implements ICategoryService {
     private final ArticleMapper articleMapper;
 
     @Override
-    public PageResultVO<CategoryDTO> listCategories() {
-        return new PageResultVO<>(baseMapper.listCategoryDTO(), Integer.parseInt(String.valueOf(baseMapper.selectCount(null))));
+    public PageResultVO<CategoryDTO> selectCategoryList() {
+        return new PageResultVO<>(baseMapper.selectCategoryList(), Integer.parseInt(String.valueOf(baseMapper.selectCount(null))));
     }
 
     /**
      * 查询文章分类
      */
     @Override
-    public CategoryVO queryById(Long categoryId) {
+    public CategoryVO selectCategoryById(Long categoryId) {
         return baseMapper.selectVoById(categoryId);
     }
 
@@ -55,7 +55,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * 查询文章分类列表
      */
     @Override
-    public TableDataInfo<CategoryVO> queryPageList(CategoryBO bo, PageQuery pageQuery) {
+    public TableDataInfo<CategoryVO> selectCategoryList(CategoryBO bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
         Page<CategoryVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -65,7 +65,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * 查询文章分类列表
      */
     @Override
-    public List<CategoryVO> queryList(CategoryBO bo) {
+    public List<CategoryVO> selectCategoryList(CategoryBO bo) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

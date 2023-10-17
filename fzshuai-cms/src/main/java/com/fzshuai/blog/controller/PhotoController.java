@@ -51,7 +51,7 @@ public class PhotoController extends BaseController {
     @SaIgnore
     @GetMapping("/albums/{albumId}/photos")
     public R<FrontPhotoDto> listPhotosByAlbumId(@PathVariable("albumId") Long albumId, PageQuery pageQuery) {
-        return R.ok(photoService.listPhotosByAlbumId(albumId, pageQuery));
+        return R.ok(photoService.selectPhotoByAlbumId(albumId, pageQuery));
     }
     /**
      * 查询照片列表
@@ -59,7 +59,7 @@ public class PhotoController extends BaseController {
     @SaCheckPermission("blog:photo:list")
     @GetMapping("/list")
     public TableDataInfo<PhotoVO> list(PhotoBO bo, PageQuery pageQuery) {
-        return photoService.queryPageList(bo, pageQuery);
+        return photoService.selectPhotoPageList(bo, pageQuery);
     }
 
     /**
@@ -69,7 +69,7 @@ public class PhotoController extends BaseController {
     @Log(title = "照片", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(PhotoBO bo, HttpServletResponse response) {
-        List<PhotoVO> list = photoService.queryList(bo);
+        List<PhotoVO> list = photoService.selectPhotoList(bo);
         ExcelUtil.exportExcel(list, "照片", PhotoVO.class, response);
     }
 
@@ -82,7 +82,7 @@ public class PhotoController extends BaseController {
     @GetMapping("/{photoId}")
     public R<PhotoVO> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long photoId) {
-        return R.ok(photoService.queryById(photoId));
+        return R.ok(photoService.selectPhotoById(photoId));
     }
 
     /**
