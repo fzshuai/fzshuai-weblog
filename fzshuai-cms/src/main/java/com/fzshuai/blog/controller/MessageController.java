@@ -54,11 +54,11 @@ public class MessageController extends BaseController {
     /**
      * 查看前台留言列表
      *
-     * @return {@link R< MessageDTO >} 留言列表
+     * @return 留言列表
      */
     @SaIgnore
     @GetMapping("/messages")
-    public R<List<MessageDTO>> listMessages() {
+    public R<List<MessageVO>> listMessages() {
         return R.ok(messageService.selectMessageList());
     }
 

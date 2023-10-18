@@ -165,7 +165,7 @@ public class ArticleServiceImpl implements IArticleService {
     @Override
     public ArticlePreviewListVO selectArticlePreviewList(ConditionVO condition) {
         // 查询文章
-        List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.selectArticleList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
+        List<ArticlePreviewDTO> articlePreviewDTOList = baseMapper.selectArticlePreviewList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
         // 搜索条件对应名(标签或分类名)
         String name;
         if (Objects.nonNull(condition.getCategoryId())) {
