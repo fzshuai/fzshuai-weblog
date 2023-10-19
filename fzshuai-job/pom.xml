@@ -26,6 +26,11 @@
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
         </dependency>
+        <!-- cms-->
+        <dependency>
+            <groupId>com.fzshuai</groupId>
+            <artifactId>fzshuai-cms</artifactId>
+        </dependency>
 
     </dependencies>
 

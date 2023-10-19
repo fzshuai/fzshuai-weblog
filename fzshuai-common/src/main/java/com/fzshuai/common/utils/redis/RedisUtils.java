@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.poi.ss.formula.functions.T;
 import org.redisson.api.*;
+import org.redisson.client.protocol.ScoredEntry;
 
 import java.time.Duration;
 import java.util.Collection;
@@ -334,6 +335,18 @@ public class RedisUtils {
      */
     public static <T> void delCacheSetObject(final String key, final T member) {
         CLIENT.getSet(key).remove(member);
+    }
+
+    /**
+     * 获取ZSet中 member 和 score, 按照 score 升序(默认)
+     *
+     * @param key        Redis键
+     * @param startIndex 开始位置
+     * @param endIndex   结束位置
+     * @return 带有成员的元素分数对象
+     */
+    public static Collection<ScoredEntry<Object>> getZSetEntryRange(final String key, final int startIndex, final int endIndex) {
+        return CLIENT.getScoredSortedSet(key).entryRange(startIndex, endIndex);
     }
 
     /**
