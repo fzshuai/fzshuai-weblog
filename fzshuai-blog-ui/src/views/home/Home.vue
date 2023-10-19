@@ -124,7 +124,7 @@
               <v-avatar size="110">
                 <img
                   class="author-avatar"
-                  :src="blogInfo.websiteConfig.websiteAvatar"
+                  :src="blogInfo.websiteConfig.userAvatarUrl"
                 />
               </v-avatar>
               <div style="font-size: 1.375rem;margin-top:0.625rem">
