@@ -1,6 +1,7 @@
 package com.fzshuai.job.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.fzshuai.blog.domain.Article;
 import com.fzshuai.blog.domain.vo.ArticleVO;
 import com.fzshuai.blog.mapper.ArticleMapper;
@@ -39,8 +40,11 @@ public class BlogService {
         zSetEntryRange.forEach(item -> {
             ArticleVO articleVO = baseMapper.selectVoById((Long) item.getValue());
             articleVO.setViewCount(item.getScore().intValue());
-            Article article = BeanUtil.toBean(articleVO, Article.class);
-            baseMapper.updateById(article);
+            baseMapper.update(null,
+                new LambdaUpdateWrapper<Article>()
+                    .eq(Article::getArticleId, (Long) item.getValue())
+                    .set(Article::getViewCount, item.getScore().intValue())
+            );
         });
         log.info("更新完毕");
     }
