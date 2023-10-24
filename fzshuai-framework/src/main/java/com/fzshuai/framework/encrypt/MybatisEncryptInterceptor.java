@@ -1,6 +1,7 @@
 package com.fzshuai.framework.encrypt;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import com.fzshuai.common.annotation.EncryptField;
 import com.fzshuai.common.encrypt.EncryptContext;
@@ -86,7 +87,7 @@ public class MybatisEncryptInterceptor implements Interceptor {
         Set<Field> fields = encryptorManager.getFieldCache(sourceObject.getClass());
         try {
             for (Field field : fields) {
-                field.set(sourceObject, this.encryptField(String.valueOf(field.get(sourceObject)), field));
+                field.set(sourceObject, this.encryptField(Convert.toStr(field.get(sourceObject)), field));
             }
         } catch (Exception e) {
             log.error("处理加密字段时出错", e);
