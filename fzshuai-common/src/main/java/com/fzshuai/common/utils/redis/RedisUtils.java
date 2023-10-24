@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 /**
  * redis 工具类
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  * @version 3.1.0 新增
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -180,7 +180,7 @@ public class RedisUtils {
     }
 
     /**
-     * 获得缓存的基本对象。
+     * 获得缓存的基本对象
      *
      * @param key 缓存键值
      * @return 缓存键值对应的数据
@@ -323,7 +323,7 @@ public class RedisUtils {
      * @param member 成员
      * @return 返回是否存在
      */
-    public static <T> boolean isExistsSetObject(final String key, final T member) {
+    public static <T> boolean isExistsCacheSetObject(final String key, final T member) {
         return CLIENT.getSet(key).contains(member);
     }
 

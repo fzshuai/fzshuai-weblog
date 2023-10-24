@@ -57,12 +57,22 @@ public class CommentController extends BaseController {
      * 博客前台添加评论
      *
      * @param commentVo 评论信息
-     * @return {@link R<>}
      */
     @SaIgnore
     @PostMapping("/comments")
     public R<?> saveComment(@Valid @RequestBody CommentVO commentVo) {
         commentService.insertComment(commentVo);
+        return R.ok();
+    }
+
+    /**
+     * 评论点赞
+     *
+     * @param commentId 评论id
+     */
+    @PostMapping("/comments/{commentId}/like")
+    public R<?> saveCommentLike(@PathVariable("commentId") Long commentId) {
+        commentService.likeComment(commentId);
         return R.ok();
     }
 
