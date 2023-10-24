@@ -44,7 +44,7 @@ public class ArticleController extends BaseController {
     /**
      * 查看文章归档
      *
-     * @return {@link R< ArchiveVO >} 文章归档列表
+     * @return 文章归档列表
      */
     @SaIgnore
     @GetMapping("/articles/archives")
@@ -55,7 +55,7 @@ public class ArticleController extends BaseController {
     /**
      * 查看首页文章
      *
-     * @return {@link R<ArticleHomeDTO>} 首页文章列表
+     * @return 首页文章列表
      */
     @SaIgnore
     @GetMapping("/articles")
@@ -67,7 +67,7 @@ public class ArticleController extends BaseController {
      * 根据id查看文章
      *
      * @param articleId 文章id
-     * @return {@link R< ArticleDetailDTO >} 文章信息
+     * @return 文章信息
      */
     @SaIgnore
     @GetMapping("/articles/{articleId}")
@@ -79,7 +79,7 @@ public class ArticleController extends BaseController {
      * 根据条件查询文章
      *
      * @param condition 条件
-     * @return {@link R< ArticlePreviewListVO >} 文章列表
+     * @return 文章列表
      */
     @GetMapping("/articles/condition")
     public R<ArticlePreviewListVO> listArticlesByCondition(ConditionVO condition) {
@@ -90,7 +90,7 @@ public class ArticleController extends BaseController {
      * 搜索文章
      *
      * @param condition 条件
-     * @return {@link R< ArticleSearchVO >} 文章列表
+     * @return 文章列表
      */
     @SaIgnore
     @GetMapping("/articles/search")
@@ -102,7 +102,7 @@ public class ArticleController extends BaseController {
      * 点赞文章
      *
      * @param articleId 文章id
-     * @return {@link R<>}
+     * @return R
      */
     @PostMapping("/articles/{articleId}/like")
     public R<?> saveArticleLike(@PathVariable("articleId") Long articleId) {

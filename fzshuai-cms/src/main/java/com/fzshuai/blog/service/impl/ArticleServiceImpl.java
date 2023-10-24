@@ -58,7 +58,7 @@ public class ArticleServiceImpl implements IArticleService {
     public void likeArticle(Long articleId) {
         // 判断是否点赞
         String articleLikeKey = ARTICLE_USER_LIKE + LoginHelper.getLoginUser().getLoginId();
-        if (RedisUtils.isExistsSetObject(articleLikeKey, articleId)) {
+        if (RedisUtils.isExistsCacheSetObject(articleLikeKey, articleId)) {
             // 点过赞则删除文章id
             RedisUtils.delCacheSetObject(articleLikeKey, articleId);
             // 文章点赞量-1

@@ -66,4 +66,11 @@ public interface ICommentService {
      * 审核评论
      */
     Boolean auditComment(Long id, Boolean type);
+
+    /**
+     * 点赞评论
+     *
+     * @param commentId 评论id
+     */
+    void likeComment(Long commentId);
 }

@@ -20,6 +20,7 @@ import com.fzshuai.blog.service.IWebsiteConfigService;
 import com.fzshuai.blog.utils.HTMLUtils;
 import com.fzshuai.common.core.domain.PageQuery;
 import com.fzshuai.common.core.page.TableDataInfo;
+import com.fzshuai.common.helper.LoginHelper;
 import com.fzshuai.common.utils.ServletUtils;
 import com.fzshuai.common.utils.StringUtils;
 import com.fzshuai.common.utils.blog.BlogPageUtils;
@@ -38,6 +39,7 @@ import java.util.stream.Collectors;
 
 import static com.fzshuai.common.constant.BlogConstant.*;
 import static com.fzshuai.common.constant.RedisConstant.COMMENT_LIKE_COUNT;
+import static com.fzshuai.common.constant.RedisConstant.COMMENT_USER_LIKE;
 
 /**
  * 文章评论Service业务层处理
@@ -63,10 +65,10 @@ public class CommentServiceImpl implements ICommentService {
     public PageResultVO<CommentDTO> selectCommentList(CommentVO commentVO) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
-                .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
-                .eq(Comment::getType, commentVO.getType())
-                .isNull(Comment::getParentId)
-                .eq(Comment::getState, STATE));
+            .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
+            .eq(Comment::getType, commentVO.getType())
+            .isNull(Comment::getParentId)
+            .eq(Comment::getState, STATE));
         if (commentCount == 0) {
             return new PageResultVO<>();
         }
@@ -79,18 +81,18 @@ public class CommentServiceImpl implements ICommentService {
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(COMMENT_LIKE_COUNT);
         // 提取评论id集合
         List<Long> commentIdList = commentDTOList.stream()
-                .map((CommentDTO::getCommentId))
-                .collect(Collectors.toList());
+            .map((CommentDTO::getCommentId))
+            .collect(Collectors.toList());
         // 根据评论id集合查询回复数据
         List<ReplyDTO> replyDTOList = baseMapper.selectReplyListByIds(commentIdList);
         // 封装回复点赞量
         replyDTOList.forEach(item -> item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString())));
         // 根据评论id分组回复数据
         Map<Long, List<ReplyDTO>> replyMap = replyDTOList.stream()
-                .collect(Collectors.groupingBy(ReplyDTO::getParentId));
+            .collect(Collectors.groupingBy(ReplyDTO::getParentId));
         // 根据评论id查询回复量
         Map<Long, Integer> replyCountMap = baseMapper.selectReplyCountByIds(commentIdList)
-                .stream().collect(Collectors.toMap(ReplyCountDTO::getCommentId, ReplyCountDTO::getReplyCount));
+            .stream().collect(Collectors.toMap(ReplyCountDTO::getCommentId, ReplyCountDTO::getReplyCount));
         // 封装评论数据
         commentDTOList.forEach(item -> {
             item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString()));
@@ -113,16 +115,16 @@ public class CommentServiceImpl implements ICommentService {
         // 过滤标签
         commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
         Comment comment = Comment.builder()
-                .userId(commentVo.getUserId())
-                .replyUserId(commentVo.getReplyUserId())
-                .topicId(commentVo.getTopicId())
-                .commentContent(commentVo.getCommentContent())
-                .parentId(commentVo.getParentId())
-                .type(commentVo.getType())
-                .ipAddress(ServletUtils.getClientIP())
-                .ipSource(AddressUtils.getRealAddressByIP(ServletUtils.getClientIP()))
-                .state(isReview == TRUE ? 2 : 1)
-                .build();
+            .userId(commentVo.getUserId())
+            .replyUserId(commentVo.getReplyUserId())
+            .topicId(commentVo.getTopicId())
+            .commentContent(commentVo.getCommentContent())
+            .parentId(commentVo.getParentId())
+            .type(commentVo.getType())
+            .ipAddress(ServletUtils.getClientIP())
+            .ipSource(AddressUtils.getRealAddressByIP(ServletUtils.getClientIP()))
+            .state(isReview == TRUE ? 2 : 1)
+            .build();
         baseMapper.insert(comment);
         // 判断是否开启邮箱通知,通知用户
         // if (websiteConfig.getIsEmailNotice().equals(TRUE)) {
@@ -226,7 +228,24 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public Boolean auditComment(Long commentId, Boolean status) {
         return baseMapper.update(null, new LambdaUpdateWrapper<Comment>()
-                .set(Comment::getState, status ? 1 : 3)
-                .eq(Comment::getCommentId, commentId)) > 0;
+            .set(Comment::getState, status ? 1 : 3)
+            .eq(Comment::getCommentId, commentId)) > 0;
+    }
+
+    @Override
+    public void likeComment(Long commentId) {
+        // 判断是否点赞
+        String commentLikeKey = COMMENT_USER_LIKE + LoginHelper.getUserId();
+        if (RedisUtils.isExistsCacheSetObject(commentLikeKey, commentId)) {
+            // 点过赞则删除评论id
+            RedisUtils.delCacheSetObject(commentLikeKey, commentId);
+            // 评论点赞量-1
+            RedisUtils.decrCacheMapValue(COMMENT_LIKE_COUNT, commentId.toString(), 1L);
+        } else {
+            // 未点赞则增加评论id
+            RedisUtils.setCacheSet(commentLikeKey, commentId);
+            // 评论点赞量+1
+            RedisUtils.incrCacheMapValue(COMMENT_LIKE_COUNT, commentId.toString(), 1L);
+        }
     }
 }
