@@ -6,6 +6,8 @@ import com.fzshuai.common.annotation.ExcelDictFormat;
 import com.fzshuai.common.convert.ExcelDictConvert;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 文章评论视图对象 blog_comment
@@ -15,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class CommentVO {
+public class CommentVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

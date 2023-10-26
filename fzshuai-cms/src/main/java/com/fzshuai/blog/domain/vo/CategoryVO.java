@@ -4,6 +4,8 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 文章分类视图对象 blog_category
@@ -13,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class CategoryVO {
+public class CategoryVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

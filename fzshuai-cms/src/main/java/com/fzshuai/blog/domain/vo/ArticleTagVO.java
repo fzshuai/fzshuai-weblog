@@ -4,6 +4,8 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 文章和文章标签关联视图对象 blog_article_tag
@@ -13,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class ArticleTagVO {
+public class ArticleTagVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

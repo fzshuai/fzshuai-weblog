@@ -6,6 +6,8 @@ import com.fzshuai.common.annotation.Translation;
 import com.fzshuai.common.constant.TransConstant;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 页面视图对象 blog_page
@@ -15,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class PageVO {
+public class PageVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
