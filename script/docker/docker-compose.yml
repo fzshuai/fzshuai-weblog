@@ -115,7 +115,7 @@ services:
     network_mode: "host"
 
   fzshuai-server2:
-    image: "fzshuai/fzshuai-server:4.8.0"
+    image: "fzshuai/fzshuai-server:2.0.0"
     container_name: fzshuai-server2
     environment:
       # 时区上海
@@ -130,7 +130,7 @@ services:
     network_mode: "host"
 
   fzshuai-monitor-admin:
-    image: fzshuai/fzshuai-monitor-admin:4.8.0
+    image: fzshuai/fzshuai-monitor-admin:2.0.0
     container_name: fzshuai-monitor-admin
     environment:
       # 时区上海
@@ -142,7 +142,7 @@ services:
     network_mode: "host"
 
   fzshuai-xxl-job-admin:
-    image: fzshuai/fzshuai-xxl-job-admin:4.8.0
+    image: fzshuai/fzshuai-xxl-job-admin:2.0.0
     container_name: fzshuai-xxl-job-admin
     environment:
       # 时区上海
