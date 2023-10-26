@@ -8,6 +8,7 @@ import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.fzshuai.common.annotation.Log;
+import com.fzshuai.common.constant.UserConstants;
 import com.fzshuai.common.core.controller.BaseController;
 import com.fzshuai.common.core.domain.PageQuery;
 import com.fzshuai.common.core.domain.R;
@@ -21,6 +22,7 @@ import com.fzshuai.common.helper.LoginHelper;
 import com.fzshuai.common.utils.StreamUtils;
 import com.fzshuai.common.utils.StringUtils;
 import com.fzshuai.common.utils.poi.ExcelUtil;
+import com.fzshuai.system.domain.SysPost;
 import com.fzshuai.system.domain.vo.SysUserExportVO;
 import com.fzshuai.system.domain.vo.SysUserImportVO;
 import com.fzshuai.system.domain.vo.UserInfoVO;
@@ -45,7 +47,7 @@ import java.util.Map;
 /**
  * 用户信息
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @Validated
 @RequiredArgsConstructor
@@ -63,7 +65,7 @@ public class SysUserController extends BaseController {
      */
     @SaIgnore
     @PutMapping("/users/info")
-    public R BlogupdateUserInfo(@Valid @RequestBody UserInfoVO userInfoVo) {
+    public R<Void> updateBlogUserInfo(@Valid @RequestBody UserInfoVO userInfoVo) {
         userService.updateBlogUserInfo(userInfoVo);
         return R.ok();
     }
@@ -129,9 +131,13 @@ public class SysUserController extends BaseController {
     public R<Map<String, Object>> getInfo(@PathVariable(value = "userId", required = false) Long userId) {
         userService.checkUserDataScope(userId);
         Map<String, Object> ajax = new HashMap<>();
-        List<SysRole> roles = roleService.selectRoleAll();
+        SysRole role = new SysRole();
+        role.setStatus(UserConstants.ROLE_NORMAL);
+        SysPost post = new SysPost();
+        post.setStatus(UserConstants.POST_NORMAL);
+        List<SysRole> roles = roleService.selectRoleList(role);
         ajax.put("roles", LoginHelper.isAdmin(userId) ? roles : StreamUtils.filter(roles, r -> !r.isAdmin()));
-        ajax.put("posts", postService.selectPostAll());
+        ajax.put("posts", postService.selectPostList(post));
         if (ObjectUtil.isNotNull(userId)) {
             SysUser sysUser = userService.selectUserById(userId);
             ajax.put("user", sysUser);
@@ -148,6 +154,7 @@ public class SysUserController extends BaseController {
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysUser user) {
+        deptService.checkDeptDataScope(user.getDeptId());
         if (!userService.checkUserNameUnique(user)) {
             return R.fail("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         } else if (StringUtils.isNotEmpty(user.getPhoneNumber()) && !userService.checkPhoneUnique(user)) {
@@ -168,6 +175,7 @@ public class SysUserController extends BaseController {
     public R<Void> edit(@Validated @RequestBody SysUser user) {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
+        deptService.checkDeptDataScope(user.getDeptId());
         if (!userService.checkUserNameUnique(user)) {
             return R.fail("修改用户'" + user.getUserName() + "'失败，登录账号已存在");
         } else if (StringUtils.isNotEmpty(user.getPhoneNumber()) && !userService.checkPhoneUnique(user)) {
