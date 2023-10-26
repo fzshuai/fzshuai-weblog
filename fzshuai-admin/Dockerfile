@@ -6,7 +6,7 @@ RUN mkdir -p /fzshuai/server/logs \
     /fzshuai/server/temp \
     /fzshuai/skywalking/agent
 
-WORKDIR /ruoyi/server
+WORKDIR /fzshuai/server
 
 ENV SERVER_PORT=8080
 
