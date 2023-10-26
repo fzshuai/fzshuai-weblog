@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -15,10 +16,9 @@ import java.time.LocalDateTime;
  * @date 2023-05-03
  */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ArchiveVO {
+public class ArchiveVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * id

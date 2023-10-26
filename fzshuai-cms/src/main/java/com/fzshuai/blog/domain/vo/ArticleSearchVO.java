@@ -9,6 +9,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.io.Serializable;
+
 
 /**
  * 搜索文章
@@ -21,7 +23,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "article")
-public class ArticleSearchVO {
+public class ArticleSearchVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 文章id

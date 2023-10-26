@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * 邮件
@@ -15,10 +16,9 @@ import javax.validation.constraints.NotBlank;
  * @date 2023-05-03
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class EmailVO {
+public class EmailVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 邮箱

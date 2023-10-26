@@ -4,6 +4,8 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 聊天记录视图对象 blog_chat_record
@@ -13,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class ChatRecordVO {
+public class ChatRecordVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

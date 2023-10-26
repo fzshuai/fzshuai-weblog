@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,10 +18,7 @@ import java.util.List;
  * @date 2023-05-03
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class WebsiteConfigVO {
+public class WebsiteConfigVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

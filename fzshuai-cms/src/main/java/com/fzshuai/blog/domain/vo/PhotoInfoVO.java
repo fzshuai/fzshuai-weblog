@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 照片
@@ -15,10 +16,9 @@ import javax.validation.constraints.NotNull;
  * @date 2023-05-03
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class PhotoInfoVO {
+public class PhotoInfoVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 照片id

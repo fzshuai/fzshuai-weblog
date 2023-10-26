@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,10 +16,9 @@ import java.util.Date;
  * @date 2023-05-03
  */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class VoiceVO {
+public class VoiceVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 消息类型

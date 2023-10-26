@@ -6,6 +6,7 @@ import com.fzshuai.common.annotation.ExcelDictFormat;
 import com.fzshuai.common.convert.ExcelDictConvert;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class TalkVO {
+public class TalkVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

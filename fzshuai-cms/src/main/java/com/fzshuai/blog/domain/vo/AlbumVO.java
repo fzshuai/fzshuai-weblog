@@ -6,6 +6,8 @@ import com.fzshuai.common.annotation.ExcelDictFormat;
 import com.fzshuai.common.convert.ExcelDictConvert;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 相册视图对象 blog_photo_album
@@ -15,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class AlbumVO {
+public class AlbumVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
