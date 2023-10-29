@@ -91,7 +91,7 @@
               >
                 CC BY-NC-SA 4.0
               </a>
-              许可协议。转载请注明文章出处。
+              许可协议，转载请注明文章出处
             </div>
           </div>
           <!-- 转发 -->
@@ -144,7 +144,7 @@
             <!-- 上一篇 -->
             <div
               :class="isFull(article.lastArticle.articleId)"
-              v-if="article.lastArticle.articleId"
+              v-if="article.lastArticle != null"
             >
               <router-link :to="'/articles/' + article.lastArticle.articleId">
                 <img
@@ -162,7 +162,7 @@
             <!-- 下一篇 -->
             <div
               :class="isFull(article.nextArticle.articleId)"
-              v-if="article.nextArticle.articleId"
+              v-if="article.nextArticle != null"
             >
               <router-link :to="'/articles/' + article.nextArticle.articleId">
                 <img
@@ -292,18 +292,26 @@ export default {
       commentType: 1,
       articleHref: window.location.href,
       clipboard: null,
-      commentCount: 0
+      commentCount: 0,
+      form: {
+        articleId: null,
+        userid : this.$store.state.userId
+      },
     };
   },
   methods: {
     getArticle() {
       const that = this;
-      //查询文章
+      // 查询文章
       this.axios.get("/api/blog/article" + this.$route.path).then(({ data }) => {
+        // 判断响应是否正确
+        if (data.code!=200){
+          this.$toast({ type: "error", message: data.msg });
+          this.$router.push('/')
+        }
         document.title = data.data.articleTitle;
-        //将markdown转换为Html
+        // 将markdown转换为Html
         this.markdownToHtml(data.data);
-        console.log(this.article);
         this.$nextTick(() => {
           // 统计文章字数
           this.wordNum = this.deleteHTMLTag(this.article.articleContent).length;
@@ -326,9 +334,12 @@ export default {
             }
           }
           tocbot.init({
-            tocSelector: "#toc", //要把目录添加元素位置，支持选择器
-            contentSelector: ".article-content", //获取html的元素
-            headingSelector: "h1, h2, h3", //要显示的id的目录
+            // 要把目录添加元素位置，支持选择器
+            tocSelector: "#toc",
+            // 获取html的元素
+            contentSelector: ".article-content",
+            // 要显示的id的目录
+            headingSelector: "h1, h2, h3",
             hasInnerContainers: true,
             onClick: function(e) {
               e.preventDefault();
@@ -351,12 +362,13 @@ export default {
         this.$store.state.loginFlag = true;
         return false;
       }
-      //发送请求
+      this.form.articleId = this.$route.path.toString().split("/")[2];
+      // 发送请求
       this.axios
-        .post("/api/blog/article/articles/" + this.article.articleId + "/like")
+        .post("/api/blog/article/articles/" + this.article.articleId + "/like" ,this.form)
         .then(({ data }) => {
-          if (data.flag) {
-            //判断是否点赞
+          if (data.code == 200) {
+            // 判断是否点赞
             if (
               this.$store.state.articleLikeSet.indexOf(this.article.articleId) != -1
             ) {
@@ -453,7 +465,7 @@ export default {
     },
     isLike() {
       var articleLikeSet = this.$store.state.articleLikeSet;
-      return articleLikeSet.indexOf(this.article.id) != -1
+      return articleLikeSet.indexOf(this.article.articleId) != -1
         ? "like-btn-active"
         : "like-btn";
     },
