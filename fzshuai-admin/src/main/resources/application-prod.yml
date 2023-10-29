@@ -5,7 +5,7 @@ spring.servlet.multipart.location: /ruoyi/server/temp
 spring.boot.admin.client:
   # 增加客户端开关
   enabled: false
-  url: http://localhost:9090/admin
+  url: http://101.42.155.186:9090/admin
   instance:
     service-host-type: IP
   username: ruoyi
@@ -16,7 +16,7 @@ xxl.job:
   # 执行器开关
   enabled: false
   # 调度中心地址：如调度中心集群部署存在多个地址则用逗号分隔。
-  admin-addresses: http://localhost:9100/xxl-job-admin
+  admin-addresses: http://101.42.155.186:9100/xxl-job-admin
   # 执行器通讯TOKEN：非空时启用
   access-token: xxl-job
   executor:
@@ -52,21 +52,21 @@ spring:
           driverClassName: com.mysql.cj.jdbc.Driver
           # jdbc 所有参数配置参考 https://lionli.blog.csdn.net/article/details/122018562
           # rewriteBatchedStatements=true 批处理优化 大幅提升批量插入更新删除性能(对数据库有性能损耗 使用批量操作应考虑性能问题)
-          url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+          url: jdbc:mysql://101.42.155.186:3306/fzshuai-blog?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
           username: root
-          password: root
+          password: 123456
         # 从库数据源
-        slave:
-          lazy: true
-          type: ${spring.datasource.type}
-          driverClassName: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
-          username:
-          password:
+#        slave:
+#          lazy: true
+#          type: ${spring.datasource.type}
+#          driverClassName: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://101.42.155.186:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+#          username:
+#          password:
 #        oracle:
 #          type: ${spring.datasource.type}
 #          driverClassName: oracle.jdbc.OracleDriver
-#          url: jdbc:oracle:thin:@//localhost:1521/XE
+#          url: jdbc:oracle:thin:@//101.42.155.186:1521/XE
 #          username: ROOT
 #          password: root
 #          hikari:
@@ -74,13 +74,13 @@ spring:
 #        postgres:
 #          type: ${spring.datasource.type}
 #          driverClassName: org.postgresql.Driver
-#          url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+#          url: jdbc:postgresql://101.42.155.186:5432/postgres?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
 #          username: root
 #          password: root
 #        sqlserver:
 #          type: ${spring.datasource.type}
 #          driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#          url: jdbc:sqlserver://localhost:1433;DatabaseName=tempdb;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true
+#          url: jdbc:sqlserver://101.42.155.186:1433;DatabaseName=tempdb;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true
 #          username: SA
 #          password: root
       hikari:
@@ -101,17 +101,31 @@ spring:
         # 多久检查一次连接的活性
         keepaliveTime: 30000
 
+--- # mq配置
+spring:
+  rabbitmq:
+    host: 101.42.155.186
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3 #最大重试次数
+          initial-interval: 3000 #重试间隔时间（单位毫秒）
+
 --- # redis 单机配置(单机与集群只能开启一个另一个需要注释掉)
 spring:
   redis:
     # 地址
-    host: localhost
+    host: 101.42.155.186
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码(如没有密码请注释掉)
-    # password:
+    password: 123456
     # 连接超时时间
     timeout: 10s
     # 是否开启ssl

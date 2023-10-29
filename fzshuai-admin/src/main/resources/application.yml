@@ -93,18 +93,6 @@ spring:
     deserialization:
       # 允许对象忽略json中不存在的属性
       fail_on_unknown_properties: false
-  # mq配置
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    listener:
-      simple:
-        retry:
-          enabled: true
-          max-attempts: 3 #最大重试次数
-          initial-interval: 3000 #重试间隔时间（单位毫秒）
 
   # 邮箱配置 在dev环境mail中配置邮箱信息，这里先注释！
 #  mail:
@@ -256,7 +244,7 @@ springdoc:
     # 描述
     description: '描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...'
     # 版本
-    version: '版本号: ${fzshuai-blog.version}'
+    version: '版本号: ${ruoyi.version}'
     # 作者信息
     contact:
       name: fzshuai
