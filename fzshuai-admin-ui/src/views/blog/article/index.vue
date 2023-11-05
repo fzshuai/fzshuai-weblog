@@ -466,7 +466,7 @@ export default {
     },
     /** 修改跳转界面 */
     editArticle(id) {
-      this.$router.push({path: "/publishArticle", query: {id: id}});
+      this.$router.push({path: "/article/edit", query: {id: id}});
     },
     /** 提交按钮 */
     submitForm() {

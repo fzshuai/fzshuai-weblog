@@ -542,7 +542,7 @@ INSERT INTO `sys_menu` VALUES (115, '代码生成', 3, 2, 'gen', 'tool/gen/index
 INSERT INTO `sys_menu` VALUES (117, 'Admin监控', 2, 5, 'Admin', 'monitor/admin/index', '', 1, 0, 'C', '0', '0', 'monitor:admin:list', 'dashboard', 'admin', '2023-04-28 17:26:18', '', NULL, 'Admin监控菜单');
 INSERT INTO `sys_menu` VALUES (118, '文件管理', 1, 10, 'oss', 'system/oss/index', '', 1, 0, 'C', '0', '0', 'system:oss:list', 'upload', 'admin', '2023-04-28 17:26:18', '', NULL, '文件管理菜单');
 INSERT INTO `sys_menu` VALUES (120, '任务调度中心', 2, 5, 'XxlJob', 'monitor/xxljob/index', '', 1, 0, 'C', '0', '0', 'monitor:xxljob:list', 'job', 'admin', '2023-04-28 17:26:18', '', NULL, 'Xxl-Job控制台菜单');
-INSERT INTO `sys_menu` VALUES (121, '发布文章', 4, 1, 'publish', 'blog/article/publish/index', NULL, 1, 0, 'C', '1', '0', 'blog:article:add', '#', 'admin', '2023-01-05 20:15:31', 'admin', '2023-07-09 13:36:56', '');
+INSERT INTO `sys_menu` VALUES (121, '编辑文章', 4, 1, 'edit', 'blog/article/edit/index', NULL, 1, 0, 'C', '1', '0', 'blog:article:add', '#', 'admin', '2023-01-05 20:15:31', 'admin', '2023-07-09 13:36:56', '');
 INSERT INTO `sys_menu` VALUES (122, '文章管理', 4, 1, 'article', 'blog/article/index', NULL, 1, 0, 'C', '0', '0', 'blog:article:list', '#', 'admin', '2023-05-09 20:11:52', 'admin', '2023-07-09 13:36:31', '文章菜单');
 INSERT INTO `sys_menu` VALUES (123, '分类管理', 4, 2, 'category', 'blog/category/index', NULL, 1, 0, 'C', '0', '0', 'blog:category:list', '#', 'admin', '2023-05-09 20:11:52', 'admin', '2023-07-09 13:36:37', '文章分类菜单');
 INSERT INTO `sys_menu` VALUES (124, '标签管理', 4, 3, 'tag', 'blog/tag/index', NULL, 1, 0, 'C', '0', '0', 'blog:tag:list', '#', 'admin', '2023-06-05 21:54:35', 'admin', '2023-07-09 13:36:41', '文章标签菜单');
