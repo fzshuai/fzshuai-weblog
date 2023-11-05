@@ -138,9 +138,9 @@ import {uploadOssImage} from "@/api/blog/about";
 export default {
   created() {
     this.findUser();
-    const id = this.$route.query.id;
-    if (id) {
-      getArticle(id).then(response => {
+    const articleId = this.$route.query.articleId;
+    if (articleId) {
+      getArticle(articleId).then(response => {
         this.form = response.data;
       })
     } else {
@@ -351,7 +351,6 @@ export default {
         this.newArticleTitle = this.form.articleTitle;
         this.newArticleContent = this.form.articleContent;
         this.handleAdd();
-        console.log("我错了嘛？？？？？？？？？？？？");
         this.form.articleContent = this.newArticleContent;
         this.form.articleTitle = this.newArticleTitle;
         this.form.createBy = this.username
@@ -366,16 +365,12 @@ export default {
           this.form = response.data;
           this.form.articleContent = this.newArticleContent;
           this.form.articleTitle = this.newArticleTitle;
-          console.log("shenme我错了嘛？？？？？？？？？？？？")
           this.open = true;
           this.title = "修改文章列表";
         });
       }
     },
-    /** 修改跳转界面 */
-    handleUpdate1(row) {
-      this.$router.push({path: "/article/articles"});
-    },
+
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
@@ -417,14 +412,14 @@ export default {
         this.loading = false;
       });
     },
-    /** 导出按钮操作 */
+    // 导出按钮操作
     handleExport() {
       this.download('article/article/export', {
         ...this.queryParams
       }, `article_${new Date().getTime()}.xlsx`)
     },
 
-    /**  文章分类操作 */
+    // 文章分类操作
     removeCategory() {
       this.form.categoryName = null;
     },
@@ -492,7 +487,7 @@ export default {
         )
       }
     },
-    /**  获取cookie中的作者名称   */
+    // 获取cookie中的作者名称
     findUser() {
       const strCookie = document.cookie;
       const arrCookie = strCookie.split("; ");
@@ -528,25 +523,6 @@ export default {
   align-items: center;
   margin-bottom: 1.25rem;
   margin-top: 2.25rem;
-}
-
-.save-btn {
-  margin-left: 0.75rem;
-  background: #fff;
-  color: #f56c6c;
-}
-
-.tag-item {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-
-.tag-item-select {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  cursor: not-allowed;
-  color: #ccccd8 !important;
 }
 
 .category-item {

@@ -168,7 +168,7 @@
     <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
 
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <!--        文章分类-->
+        <!-- 文章分类-->
         <el-form-item label="文章分类">
           <el-tag type="success" v-show="form.categoryName" style="margin:0 1rem 0 0" :closable="true"
                   @close="removeCategory">
@@ -198,7 +198,7 @@
           </el-popover>
         </el-form-item>
 
-        <!--        文章标签 -->
+        <!-- 文章标签 -->
         <el-form-item label="文章标签">
           <el-tag v-for="(item, index) of form.tagNameList" :key="index" style="margin:0 1rem 0 0" :closable="true"
                   @close="removeTag(item)">
@@ -323,7 +323,7 @@ export default {
       },
       // 表单参数
       form: {
-        id: null,
+        articleId: null,
         userId: null,
         userName: "",
         categoryId: null,
@@ -341,7 +341,7 @@ export default {
       },
       // 表单校验
       rules: {
-        id: [
+        articleId: [
           {required: true, message: "不能为空", trigger: "blur"}
         ],
         userId: [
@@ -404,7 +404,7 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        id: undefined,
+        articleId: undefined,
         userId: undefined,
         categoryId: undefined,
         tagNameList: [],
@@ -456,8 +456,8 @@ export default {
     handleUpdate(row) {
       this.loading = true;
       this.reset();
-      const id = row.articleId || this.ids
-      getArticle(id).then(response => {
+      const articleId = row.articleId || this.ids
+      getArticle(articleId).then(response => {
         this.loading = false;
         this.form = response.data;
         this.open = true;
@@ -465,15 +465,15 @@ export default {
       });
     },
     /** 修改跳转界面 */
-    editArticle(id) {
-      this.$router.push({path: "/blog/edit", query: {id: id}});
+    editArticle(articleId) {
+      this.$router.push({path: "/blog/edit", query: {articleId: articleId}});
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.buttonLoading = true;
-          if (this.form.id != null) {
+          if (this.form.articleId != null) {
             updateArticle(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
@@ -508,22 +508,24 @@ export default {
         this.loading = false;
       });
     },
-    /** 导出按钮操作 */
+    // 导出按钮操作
     handleExport() {
       this.download('article/article/export', {
         ...this.queryParams
       }, `article_${new Date().getTime()}.xlsx`)
     },
 
-    /**  文章分类操作 */
+    // 文章分类操作
     removeCategory() {
       this.form.categoryName = null;
     },
+
     searchCategories() {
       listCategory(this.queryParams).then(response => {
         this.categoryList = response.rows;
       });
     },
+
     saveCategory() {
       if (this.categoryName.trim() != "") {
         this.addCategory({
@@ -532,25 +534,29 @@ export default {
         this.categoryName = "";
       }
     },
+
     addCategory(item) {
       this.form.categoryName = item.categoryName;
     },
+
     handleSelectCategories(item) {
       this.addCategory({
         categoryName: item.categoryName,
       });
     },
 
-    /**  文章标签方法 */
+    // 文章标签方法
     removeTag(item) {
       const index = this.form.tagNameList.indexOf(item);
       this.form.tagNameList.splice(index, 1);
     },
+
     searchTags() {
       listTag(this.queryParams).then(response => {
         this.tagList = response.rows
       })
     },
+
     saveTag() {
       if (this.tagName.trim() != "") {
         this.addTag({
@@ -559,17 +565,20 @@ export default {
         this.tagName = "";
       }
     },
+
     handleSelectTag(item) {
       this.addTag({
         tagName: item.tagName,
       });
     },
+
     addTag(item) {
       if (this.form.tagNameList.indexOf(item.tagName) == -1) {
         this.form.tagNameList.push(item.tagName);
       }
     },
   },
+
   computed: {
     tagClass() {
       return function (item) {
@@ -581,37 +590,7 @@ export default {
 };
 </script>
 
-
 <style scoped>
-.ed {
-  height: calc(100vh - 260px);
-}
-
-.article-title-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.25rem;
-  margin-top: 2.25rem;
-}
-
-.save-btn {
-  margin-left: 0.75rem;
-  background: #fff;
-  color: #f56c6c;
-}
-
-.tag-item {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-
-.tag-item-select {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  cursor: not-allowed;
-  color: #ccccd8 !important;
-}
 
 .category-item {
   cursor: pointer;
