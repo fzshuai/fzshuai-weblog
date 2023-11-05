@@ -9,4 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="tagId" column="tag_id"/>
     </resultMap>
 
+    <select id="selectArticleTagNameList" resultType="java.lang.String">
+        select tag_name
+        from blog_tag t
+                 join blog_article_tag at
+        on t.tag_id = at.tag_id
+        where article_id = #{articleId}
+    </select>
+
 </mapper>

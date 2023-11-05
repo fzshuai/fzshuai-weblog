@@ -3,6 +3,9 @@ package com.fzshuai.blog.mapper;
 import com.fzshuai.blog.domain.ArticleTag;
 import com.fzshuai.blog.domain.vo.ArticleTagVO;
 import com.fzshuai.common.core.mapper.BaseMapperPlus;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 文章和文章标签关联Mapper接口
@@ -12,4 +15,11 @@ import com.fzshuai.common.core.mapper.BaseMapperPlus;
  */
 public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, ArticleTag, ArticleTagVO> {
 
+    /**
+     * 根据文章id获取文章对应的标签名称列表
+     *
+     * @param articleId 文章id
+     * @return 标签列表
+     */
+    List<String> selectArticleTagNameList(@Param("articleId") Long articleId);
 }

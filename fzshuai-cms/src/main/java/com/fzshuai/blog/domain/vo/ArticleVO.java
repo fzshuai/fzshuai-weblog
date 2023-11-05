@@ -49,13 +49,11 @@ public class ArticleVO implements Serializable {
     /**
      * 文章分类名称
      */
-    @TableField(exist = false)
     private String categoryName;
 
     /**
      * 文章标签
      */
-    @TableField(exist = false)
     private List<String> tagNameList;
 
     /**

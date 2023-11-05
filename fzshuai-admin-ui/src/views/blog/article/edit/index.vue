@@ -59,7 +59,7 @@
             </el-popover>
           </el-form-item>
 
-          <!--        文章标签 -->
+          <!-- 文章标签 -->
           <el-form-item label="文章标签">
             <el-tag v-for="(item, index) of form.tagNameList" :key="index" style="margin:0 1rem 0 0" :closable="true"
                     @close="removeTag(item)">
@@ -137,11 +137,11 @@ import {uploadOssImage} from "@/api/blog/about";
 
 export default {
   created() {
-    this.finduser();
-    const articleId = this.$route.query.articleId;
-    if (articleId) {
-      getArticle(articleId).then(response => {
-        this.form = response.data
+    this.findUser();
+    const id = this.$route.query.id;
+    if (id) {
+      getArticle(id).then(response => {
+        this.form = response.data;
       })
     } else {
       const article = sessionStorage.getItem("form")
@@ -324,7 +324,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map(item => item.articleId)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
@@ -351,6 +351,7 @@ export default {
         this.newArticleTitle = this.form.articleTitle;
         this.newArticleContent = this.form.articleContent;
         this.handleAdd();
+        console.log("我错了嘛？？？？？？？？？？？？");
         this.form.articleContent = this.newArticleContent;
         this.form.articleTitle = this.newArticleTitle;
         this.form.createBy = this.username
@@ -365,6 +366,7 @@ export default {
           this.form = response.data;
           this.form.articleContent = this.newArticleContent;
           this.form.articleTitle = this.newArticleTitle;
+          console.log("shenme我错了嘛？？？？？？？？？？？？")
           this.open = true;
           this.title = "修改文章列表";
         });
@@ -448,14 +450,13 @@ export default {
       });
     },
 
-    /**  文章标签方法 */
     removeTag(item) {
       const index = this.form.tagNameList.indexOf(item);
       this.form.tagNameList.splice(index, 1);
     },
     searchTags() {
       listTag(this.queryParams).then(response => {
-        this.tagList = response.rows
+        this.tagList = response.rows;
       })
     },
     saveTag() {
@@ -492,7 +493,7 @@ export default {
       }
     },
     /**  获取cookie中的作者名称   */
-    finduser() {
+    findUser() {
       const strCookie = document.cookie;
       const arrCookie = strCookie.split("; ");
       let username;

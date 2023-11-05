@@ -14,11 +14,4 @@ import java.util.List;
  */
 public interface TagMapper extends BaseMapperPlus<TagMapper, Tag, TagVO> {
 
-    /**
-     * 根据文章Id查询标签名称
-     *
-     * @param articleId 文章Id
-     * @return 标签名称
-     */
-    List<String> selectTagNamesByArticleId(Long articleId);
 }

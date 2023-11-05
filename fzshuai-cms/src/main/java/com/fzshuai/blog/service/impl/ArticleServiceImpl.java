@@ -249,7 +249,9 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     public ArticleVO selectArticleById(Long articleId) {
-        return baseMapper.selectVoById(articleId);
+        ArticleVO articleVO = baseMapper.selectVoById(articleId);
+        articleVO.setTagNameList(articleTagMapper.selectArticleTagNameList(articleId));
+        return articleVO;
     }
 
     @Override
@@ -259,7 +261,7 @@ public class ArticleServiceImpl implements IArticleService {
         result.getRecords().forEach(articleVO -> {
             articleVO.setUserName(sysUserMapper.selectVoById(articleVO.getUserId()).getUserName());
             articleVO.setCategoryName(categoryMapper.selectCategoryNameById(articleVO.getCategoryId()));
-            articleVO.setTagNameList(tagMapper.selectTagNamesByArticleId(articleVO.getArticleId()));
+            articleVO.setTagNameList(articleTagMapper.selectArticleTagNameList(articleVO.getArticleId()));
         });
         return TableDataInfo.build(result);
     }
