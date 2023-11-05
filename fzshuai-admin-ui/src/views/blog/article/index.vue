@@ -450,7 +450,7 @@ export default {
     },
     /** 新增跳转到新增界面 */
     NewHandleAdd() {
-      this.$router.push({path: "/blog/publish"});
+      this.$router.push({path: "/blog/edit"});
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -466,7 +466,7 @@ export default {
     },
     /** 修改跳转界面 */
     editArticle(id) {
-      this.$router.push({path: "/article/edit", query: {id: id}});
+      this.$router.push({path: "/blog/edit", query: {id: id}});
     },
     /** 提交按钮 */
     submitForm() {
