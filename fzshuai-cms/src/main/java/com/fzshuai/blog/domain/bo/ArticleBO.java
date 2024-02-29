@@ -42,7 +42,6 @@ public class ArticleBO extends BaseEntity {
     /**
      * 文章分类名称
      */
-
     private String categoryName;
 
     /**

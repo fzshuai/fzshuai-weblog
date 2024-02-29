@@ -29,7 +29,7 @@
       <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
 
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-          <!--        文章分类-->
+          <!-- 文章分类 -->
           <el-form-item label="文章分类">
             <el-tag type="success" v-show="form.categoryName" style="margin:0 1rem 0 0" :closable="true"
                     @close="removeCategory">
@@ -158,23 +158,23 @@ export default {
   dicts: ['article_status', 'article_type', 'sys_yes_no'],
   data() {
     return {
-      //文章图片
+      // 文章图片
       imgFile: [],
-      //当前登录用户名称
+      // 当前登录用户名称
       username: "",
-      //当前修改的文章id
+      // 当前修改的文章id
       articleId: this.$route.query.articleId,
-      //更新后的文章：
+      // 更新后的文章：
       newArticleContent: "",
-      //更新后的文章标题：
+      // 更新后的文章标题：
       newArticleTitle: "",
-      //文章分类
+      // 文章分类
       categoryName: "",
-      //分类集合
+      // 分类集合
       categoryList: [],
-      //标签名
+      // 标签名
       tagName: "",
-      //标签名集合
+      // 标签名集合
       tagList: [],
       // 按钮loading
       buttonLoading: false,
