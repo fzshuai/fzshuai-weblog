@@ -1,11 +1,11 @@
 --- # 临时文件存储位置 避免临时文件被系统清理报错
-spring.servlet.multipart.location: /ruoyi/server/temp
+spring.servlet.multipart.location: /fzshuai/server/temp
 
 --- # 监控中心配置
 spring.boot.admin.client:
   # 增加客户端开关
   enabled: false
-  url: http://101.42.155.186:9090/admin
+  url: http://127.0.0.1:9090/admin
   instance:
     service-host-type: IP
   username: ruoyi
@@ -16,7 +16,7 @@ xxl.job:
   # 执行器开关
   enabled: false
   # 调度中心地址：如调度中心集群部署存在多个地址则用逗号分隔。
-  admin-addresses: http://101.42.155.186:9100/xxl-job-admin
+  admin-addresses: http://127.0.0.1:9100/xxl-job-admin
   # 执行器通讯TOKEN：非空时启用
   access-token: xxl-job
   executor:
@@ -52,7 +52,7 @@ spring:
           driverClassName: com.mysql.cj.jdbc.Driver
           # jdbc 所有参数配置参考 https://lionli.blog.csdn.net/article/details/122018562
           # rewriteBatchedStatements=true 批处理优化 大幅提升批量插入更新删除性能(对数据库有性能损耗 使用批量操作应考虑性能问题)
-          url: jdbc:mysql://101.42.155.186:3306/fzshuai-blog?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+          url: jdbc:mysql://127.0.0.1:3306/fzshuai_blog?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
           username: root
           password: 123456
         # 从库数据源
@@ -96,15 +96,13 @@ spring:
         idleTimeout: 600000
         # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
         maxLifetime: 1800000
-        # 连接测试query（配置检测连接是否有效）
-        connectionTestQuery: SELECT 1
         # 多久检查一次连接的活性
         keepaliveTime: 30000
 
 --- # mq配置
 spring:
   rabbitmq:
-    host: 101.42.155.186
+    host: 127.0.0.1
     port: 5672
     username: guest
     password: guest
@@ -119,7 +117,7 @@ spring:
 spring:
   redis:
     # 地址
-    host: 101.42.155.186
+    host: 127.0.0.1
     # 端口，默认为6379
     port: 6379
     # 数据库索引

@@ -94,24 +94,10 @@ spring:
       # 允许对象忽略json中不存在的属性
       fail_on_unknown_properties: false
 
-  # 邮箱配置 在dev环境mail中配置邮箱信息，这里先注释！
-#  mail:
-#    host: smtp.qq.com
-#    username: 156117106@qq.com
-#    password: xxxxxxxx
-#    default-encoding: UTF-8
-#    port: 587
-#    properties:
-#      mail:
-#      smtp:
-#      auth: true
-#      socketFactory:
-#      class: javax.net.ssl.SSLSocketFactory
-
-management:
-  health:
-    elasticsearch:
-      enabled: false
+#management:
+#  health:
+#    elasticsearch:
+#      enabled: false
 
 # 搜索模式 可选 elasticsearch或mysql
 search:
@@ -165,8 +151,6 @@ security:
     # swagger 文档配置
     - /*/api-docs
     - /*/api-docs/**
-    - /websocket/**
-  anonymous:
     # WebSocket
     - /websocket/**
     # actuator 监控配置
