@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.PageMapper">
+<mapper namespace="top.fzshuai.blog.mapper.PageMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.Page" id="PageResult">
+    <resultMap type="top.fzshuai.blog.domain.Page" id="PageResult">
         <result property="pageId" column="page_id"/>
         <result property="pageName" column="page_name"/>
         <result property="pageLabel" column="page_label"/>

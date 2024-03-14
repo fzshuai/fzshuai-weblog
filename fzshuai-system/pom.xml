@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fzshuai-blog</artifactId>
-        <groupId>com.fzshuai</groupId>
-        <version>2.0.0</version>
+        <groupId>top.fzshuai</groupId>
+        <version>2.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,17 +18,17 @@
     <dependencies>
         <!-- 通用工具-->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-common</artifactId>
         </dependency>
         <!-- OSS功能模块 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-oss</artifactId>
         </dependency>
         <!-- SMS功能模块 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-sms</artifactId>
         </dependency>
 

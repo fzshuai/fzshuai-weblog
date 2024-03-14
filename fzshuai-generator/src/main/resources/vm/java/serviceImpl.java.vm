@@ -2,8 +2,8 @@ package ${packageName}.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
     #if($table.crud || $table.sub)
-import com.fzshuai.common.core.page.TableDataInfo;
-import com.fzshuai.common.core.domain.PageQuery;
+import top.fzshuai.common.core.page.TableDataInfo;
+import top.fzshuai.common.core.domain.PageQuery;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 #end
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.UniqueViewMapper">
+<mapper namespace="top.fzshuai.blog.mapper.UniqueViewMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.UniqueView" id="UniqueViewResult">
+    <resultMap type="top.fzshuai.blog.domain.UniqueView" id="UniqueViewResult">
         <result property="uniqueViewId" column="unique_view_id"/>
         <result property="viewsCount" column="views_count"/>
         <result property="createTime" column="create_time"/>

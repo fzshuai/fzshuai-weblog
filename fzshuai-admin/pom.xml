@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fzshuai-blog</artifactId>
-        <groupId>com.fzshuai</groupId>
-        <version>2.0.0</version>
+        <groupId>top.fzshuai</groupId>
+        <version>2.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -44,17 +44,17 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-job</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-oss</artifactId>
         </dependency>
         <!-- 代码生成 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-generator</artifactId>
         </dependency>
         <!-- 对象池，使用redis时必须引入 -->
@@ -64,22 +64,22 @@
         </dependency>
         <!-- 核心模块-->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-framework</artifactId>
         </dependency>
         <!-- 系统模块 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-system</artifactId>
         </dependency>
         <!-- common模块 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-common</artifactId>
         </dependency>
         <!-- 博客模块 -->
         <dependency>
-            <groupId>com.fzshuai</groupId>
+            <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-cms</artifactId>
         </dependency>
 

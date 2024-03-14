@@ -2,7 +2,7 @@ package ${packageName}.mapper;
 
 import ${packageName}.domain.${ClassName};
 import ${packageName}.domain.vo.${ClassName}Vo;
-import com.fzshuai.common.core.mapper.BaseMapperPlus;
+import top.fzshuai.common.core.mapper.BaseMapperPlus;
 
 /**
  * ${functionName}Mapper接口
