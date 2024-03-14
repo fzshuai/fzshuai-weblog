@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.TalkMapper">
+<mapper namespace="top.fzshuai.blog.mapper.TalkMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.Talk" id="TalkResult">
+    <resultMap type="top.fzshuai.blog.domain.Talk" id="TalkResult">
         <result property="talkId" column="talk_id"/>
         <result property="userId" column="user_id"/>
         <result property="content" column="content"/>
@@ -17,7 +17,7 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="selectTalkList" resultType="com.fzshuai.blog.domain.dto.TalkDTO">
+    <select id="selectTalkList" resultType="top.fzshuai.blog.domain.dto.TalkDTO">
         SELECT t.talk_id,
                u.nick_name,
                u.avatar,
@@ -30,7 +30,7 @@
             LIMIT #{current}, #{size}
     </select>
 
-    <select id="selectAdminTalkList" resultType="com.fzshuai.blog.domain.vo.TalkVO">
+    <select id="selectAdminTalkList" resultType="top.fzshuai.blog.domain.vo.TalkVO">
         SELECT t.id,
                t.content,
                t.images,
@@ -42,7 +42,7 @@
                  LEFT JOIN sys_user u ON t.user_id = u.user_id
     </select>
 
-    <select id="selectAdminTalkById" parameterType="Long" resultType="com.fzshuai.blog.domain.vo.TalkVO">
+    <select id="selectAdminTalkById" parameterType="Long" resultType="top.fzshuai.blog.domain.vo.TalkVO">
         SELECT t.id,
                t.content,
                t.images,

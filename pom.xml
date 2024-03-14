@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fzshuai</groupId>
+    <groupId>top.fzshuai</groupId>
     <artifactId>fzshuai-blog</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 
     <name>Fzshuai-Blog</name>
     <url>https://gitee.com/fu-zhanshuai/Fzshuai-Blog</url>
     <description>Fzshuai-Blog 博客系统</description>
 
     <properties>
-        <fzshuai-blog.version>2.0.0</fzshuai-blog.version>
+        <fzshuai-blog.version>2.1.0</fzshuai-blog.version>
         <spring-boot.version>2.7.15</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -250,11 +250,13 @@
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
@@ -280,49 +282,55 @@
             </dependency>
             <!-- 定时任务 -->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-job</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-generator</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-framework</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-system</artifactId>
+                <version>${fzshuai-blog.version}</version>
+            </dependency>
+            <!-- 演示模块-->
+            <dependency>
+                <groupId>top.fzshuai</groupId>
+                <artifactId>fzshuai-demo</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-common</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- OSS对象存储模块 -->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-oss</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- SMS短信模块 -->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-sms</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
             <!-- 博客模块 -->
             <dependency>
-                <groupId>com.fzshuai</groupId>
+                <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-cms</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
@@ -359,6 +367,7 @@
         <module>fzshuai-oss</module>
         <module>fzshuai-sms</module>
         <module>fzshuai-cms</module>
+        <module>fzshuai-demo</module>
     </modules>
     <packaging>pom</packaging>
 

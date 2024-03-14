@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>fzshuai-extend</artifactId>
-        <groupId>com.fzshuai</groupId>
-        <version>2.0.0</version>
+        <groupId>top.fzshuai</groupId>
+        <version>2.1.0</version>
     </parent>
     <artifactId>fzshuai-xxl-job-admin</artifactId>
     <packaging>jar</packaging>

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.CommentMapper">
+<mapper namespace="top.fzshuai.blog.mapper.CommentMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.Comment" id="CommentResult">
+    <resultMap type="top.fzshuai.blog.domain.Comment" id="CommentResult">
         <result property="commentId" column="comment_id"/>
         <result property="userId" column="user_id"/>
         <result property="topicId" column="topic_id"/>
@@ -22,7 +22,7 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="selectCommentList" resultType="com.fzshuai.blog.domain.dto.CommentDTO">
+    <select id="selectCommentList" resultType="top.fzshuai.blog.domain.dto.CommentDTO">
         SELECT
         u.nickname,
         u.avatar,
@@ -47,7 +47,7 @@
         LIMIT #{current},#{size}
     </select>
 
-    <select id="selectReplyListByIds" resultType="com.fzshuai.blog.domain.dto.ReplyDTO">
+    <select id="selectReplyListByIds" resultType="top.fzshuai.blog.domain.dto.ReplyDTO">
         SELECT
         *
         FROM
@@ -83,7 +83,7 @@
         4 > row_num
     </select>
 
-    <select id="selectReplyCountByIds" resultType="com.fzshuai.blog.domain.dto.ReplyCountDTO">
+    <select id="selectReplyCountByIds" resultType="top.fzshuai.blog.domain.dto.ReplyCountDTO">
         SELECT
         parent_id as comment_id,
         count(1) AS reply_count
@@ -100,7 +100,7 @@
         parent_id
     </select>
 
-    <select id="selectCommentCountByTopicIds" resultType="com.fzshuai.blog.domain.dto.CommentCountDTO">
+    <select id="selectCommentCountByTopicIds" resultType="top.fzshuai.blog.domain.dto.CommentCountDTO">
         SELECT
         topic_id as id,
         COUNT( 1 ) AS comment_count

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.ChatRecordMapper">
+<mapper namespace="top.fzshuai.blog.mapper.ChatRecordMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.ChatRecord" id="ChatRecordResult">
+    <resultMap type="top.fzshuai.blog.domain.ChatRecord" id="ChatRecordResult">
         <result property="chatRecordId" column="chat_record_id"/>
         <result property="userId" column="user_id"/>
         <result property="nickname" column="nickname"/>

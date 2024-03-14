@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzshuai.blog.mapper.MessageMapper">
+<mapper namespace="top.fzshuai.blog.mapper.MessageMapper">
 
-    <resultMap type="com.fzshuai.blog.domain.Message" id="MessageResult">
+    <resultMap type="top.fzshuai.blog.domain.Message" id="MessageResult">
         <result property="messageId" column="message_id"/>
         <result property="nickname" column="nickname"/>
         <result property="avatar" column="avatar"/>

@@ -6,7 +6,6 @@ import ${import};
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fzshuai.common.annotation.Excel;
-import com.fzshuai.common.core.domain.BaseEntity;
 
 /**
  * ${subTable.functionName}对象 ${subTableName}
