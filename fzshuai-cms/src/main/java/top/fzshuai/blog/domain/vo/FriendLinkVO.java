@@ -48,4 +48,5 @@ public class FriendLinkVO implements Serializable {
      */
     @ExcelProperty(value = "链接介绍")
     private String linkIntro;
+
 }

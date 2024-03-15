@@ -33,4 +33,5 @@ public class FrontPhotoDto {
      * 照片列表
      */
     private List<String> photoList;
+
 }

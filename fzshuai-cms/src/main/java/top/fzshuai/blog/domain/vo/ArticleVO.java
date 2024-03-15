@@ -9,7 +9,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * 文章视图对象 blog_article
  *
@@ -112,4 +111,5 @@ public class ArticleVO implements Serializable {
 
     @ExcelProperty(value = "浏览量")
     private Integer viewCount;
+
 }

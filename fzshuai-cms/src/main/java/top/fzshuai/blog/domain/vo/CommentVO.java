@@ -106,4 +106,5 @@ public class CommentVO implements Serializable {
     @ExcelProperty(value = "评论状态", converter = ExcelDictConvert.class)
     @ExcelDictFormat(dictType = "comment_status")
     private Integer state;
+
 }

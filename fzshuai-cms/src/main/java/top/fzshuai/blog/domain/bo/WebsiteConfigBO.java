@@ -4,6 +4,7 @@ import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.core.validate.EditGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import javax.validation.constraints.*;
 
 import top.fzshuai.common.core.domain.BaseEntity;
@@ -14,7 +15,6 @@ import top.fzshuai.common.core.domain.BaseEntity;
  * @author fzshuai
  * @date 2023-05-03
  */
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class WebsiteConfigBO extends BaseEntity {
@@ -22,12 +22,13 @@ public class WebsiteConfigBO extends BaseEntity {
     /**
      * 主键
      */
-    @NotNull(message = "主键不能为空", groups = { EditGroup.class })
+    @NotNull(message = "主键不能为空", groups = {EditGroup.class})
     private Long websiteConfigId;
 
     /**
      * 配置信息
      */
-    @NotBlank(message = "配置信息不能为空", groups = { AddGroup.class, EditGroup.class })
+    @NotBlank(message = "配置信息不能为空", groups = {AddGroup.class, EditGroup.class})
     private String config;
+
 }

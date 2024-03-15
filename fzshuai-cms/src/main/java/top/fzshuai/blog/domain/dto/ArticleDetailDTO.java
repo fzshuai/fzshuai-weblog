@@ -105,4 +105,5 @@ public class ArticleDetailDTO {
      * 最新文章列表
      */
     private List<ArticleRecommendDTO> newestArticleList;
+
 }

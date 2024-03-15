@@ -45,4 +45,5 @@ public interface IChatRecordService {
      * 校验并批量删除聊天记录信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

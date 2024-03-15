@@ -45,23 +45,23 @@ public class CommentController extends BaseController {
     /**
      * 查询博客前台评论
      *
-     * @param commentVo 评论信息
+     * @param commentVO 评论信息
      */
     @SaIgnore
     @GetMapping("/comments")
-    public R<PageResultVO<CommentDTO>> listComments(CommentVO commentVo) {
-        return R.ok(commentService.selectCommentList(commentVo));
+    public R<PageResultVO<CommentDTO>> listComments(CommentVO commentVO) {
+        return R.ok(commentService.selectCommentList(commentVO));
     }
 
     /**
      * 博客前台添加评论
      *
-     * @param commentVo 评论信息
+     * @param commentVO 评论信息
      */
     @SaIgnore
     @PostMapping("/comments")
-    public R<?> saveComment(@Valid @RequestBody CommentVO commentVo) {
-        commentService.insertComment(commentVo);
+    public R<?> saveComment(@Valid @RequestBody CommentVO commentVO) {
+        commentService.insertComment(commentVO);
         return R.ok();
     }
 

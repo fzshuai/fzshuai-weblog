@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
  * 分类
  *
@@ -32,4 +31,5 @@ public class CategoryDTO {
      * 分类下的文章数量
      */
     private Integer articleCount;
+
 }

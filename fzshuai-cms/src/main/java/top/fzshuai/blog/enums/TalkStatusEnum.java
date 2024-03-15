@@ -32,4 +32,5 @@ public enum TalkStatusEnum {
      * 描述
      */
     private final String desc;
+
 }

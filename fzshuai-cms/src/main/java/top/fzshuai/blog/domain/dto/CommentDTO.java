@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 /**
  * 评论
  *
@@ -70,4 +69,5 @@ public class CommentDTO {
      * 回复列表
      */
     private List<ReplyDTO> replyDTOList;
+
 }

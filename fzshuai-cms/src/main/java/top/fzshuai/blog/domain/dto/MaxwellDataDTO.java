@@ -53,4 +53,5 @@ public class MaxwellDataDTO {
      * ts
      */
     private Integer ts;
+
 }

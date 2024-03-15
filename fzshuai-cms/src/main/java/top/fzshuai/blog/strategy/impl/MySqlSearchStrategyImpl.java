@@ -38,11 +38,11 @@ public class MySqlSearchStrategyImpl implements SearchStrategy {
         }
         // 搜索文章
         List<Article> articleList = articleMapper.selectList(new LambdaQueryWrapper<Article>()
-                .eq(Article::getIsDelete, FALSE)
-                .eq(Article::getStatus, ArticleStatusEnum.PUBLIC.getStatus())
-                .and(article -> article.like(Article::getArticleTitle, keywords)
-                        .or()
-                        .like(Article::getArticleContent, keywords)));
+            .eq(Article::getIsDelete, FALSE)
+            .eq(Article::getStatus, ArticleStatusEnum.PUBLIC.getStatus())
+            .and(article -> article.like(Article::getArticleTitle, keywords)
+                .or()
+                .like(Article::getArticleContent, keywords)));
         // 高亮处理
         return articleList.stream().map(article -> {
             // 获取关键词第一次出现的位置
@@ -63,10 +63,10 @@ public class MySqlSearchStrategyImpl implements SearchStrategy {
             // 文章标题高亮
             String articleTitle = article.getArticleTitle().replaceAll(keywords, PRE_TAG + keywords + POST_TAG);
             return ArticleSearchVO.builder()
-                    .articleId(article.getArticleId())
-                    .articleTitle(articleTitle)
-                    .articleContent(articleContent)
-                    .build();
+                .articleId(article.getArticleId())
+                .articleTitle(articleTitle)
+                .articleContent(articleContent)
+                .build();
         }).collect(Collectors.toList());
     }
 

@@ -175,4 +175,5 @@ public class WebsiteConfigVO implements Serializable {
      * 是否开启音乐
      */
     private Integer isMusicPlayer;
+
 }

@@ -28,8 +28,6 @@ public class BlogInfoController extends BaseController {
 
     /**
      * 查看博客信息
-     *
-     * @return {@link R<  BlogHomeInfoVO  >} 博客信息
      */
     @SaIgnore
     @GetMapping()

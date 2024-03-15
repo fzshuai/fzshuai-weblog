@@ -33,4 +33,5 @@ public class SearchStrategyContext extends SearchStrategyConfig {
     public List<ArticleSearchVO> executeSearchStrategy(String keywords) {
         return searchStrategyMap.get(searchMode).searchArticle(keywords);
     }
+
 }

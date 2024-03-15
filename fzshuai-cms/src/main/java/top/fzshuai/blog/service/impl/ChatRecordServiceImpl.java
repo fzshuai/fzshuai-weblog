@@ -35,7 +35,7 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 查询聊天记录
      */
     @Override
-    public ChatRecordVO queryById(Long chatRecordId){
+    public ChatRecordVO queryById(Long chatRecordId) {
         return baseMapper.selectVoById(chatRecordId);
     }
 
@@ -98,8 +98,8 @@ public class ChatRecordServiceImpl implements IChatRecordService {
     /**
      * 保存前的数据校验
      */
-    private void validEntityBeforeSave(ChatRecord entity){
-        //TODO 做一些数据校验,如唯一约束
+    private void validEntityBeforeSave(ChatRecord entity) {
+        // TODO 做一些数据校验,如唯一约束
     }
 
     /**
@@ -107,9 +107,10 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      */
     @Override
     public Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid) {
-        if(isValid){
-            //TODO 做一些业务上的校验,判断是否需要校验
+        if (isValid) {
+            // TODO 做一些业务上的校验,判断是否需要校验
         }
         return baseMapper.deleteBatchIds(ids) > 0;
     }
+
 }

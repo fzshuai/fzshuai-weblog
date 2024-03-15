@@ -51,12 +51,12 @@ public class TalkServiceImpl implements ITalkService {
     public List<String> selectTalkHomeList() {
         // 查询最新10条说说
         return baseMapper.selectList(new LambdaQueryWrapper<Talk>()
-                        .orderByDesc(Talk::getIsTop)
-                        .orderByDesc(Talk::getTalkId)
-                        .last("limit 10"))
-                .stream()
-                .map(item -> item.getContent().length() > 200 ? HTMLUtils.deleteTag(item.getContent().substring(0, 200)) : HTMLUtils.deleteTag(item.getContent()))
-                .collect(Collectors.toList());
+                .orderByDesc(Talk::getIsTop)
+                .orderByDesc(Talk::getTalkId)
+                .last("limit 10"))
+            .stream()
+            .map(item -> item.getContent().length() > 200 ? HTMLUtils.deleteTag(item.getContent().substring(0, 200)) : HTMLUtils.deleteTag(item.getContent()))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -76,11 +76,11 @@ public class TalkServiceImpl implements ITalkService {
 
         // 查询说说评论量
         List<Long> topicIdList = result.stream()
-                .map(TalkDTO::getTalkId)
-                .collect(Collectors.toList());
+            .map(TalkDTO::getTalkId)
+            .collect(Collectors.toList());
         Map<Long, Integer> commentCountMap = commentMapper.selectCommentCountByTopicIds(topicIdList)
-                .stream()
-                .collect(Collectors.toMap(CommentCountDTO::getCommentId, CommentCountDTO::getCommentCount));
+            .stream()
+            .collect(Collectors.toMap(CommentCountDTO::getCommentId, CommentCountDTO::getCommentCount));
         // 查询说说点赞量
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(TALK_LIKE_COUNT);
         result.forEach(item -> {
@@ -216,4 +216,5 @@ public class TalkServiceImpl implements ITalkService {
         }
         return baseMapper.deleteBatchIds(ids) > 0;
     }
+
 }

@@ -32,4 +32,5 @@ public enum PhotoAlbumStatusEnum {
      * 描述
      */
     private final String desc;
+
 }

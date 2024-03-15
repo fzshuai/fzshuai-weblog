@@ -159,4 +159,5 @@ public class PhotoServiceImpl implements IPhotoService {
         }
         return baseMapper.deleteBatchIds(ids) > 0;
     }
+
 }

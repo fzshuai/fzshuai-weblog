@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * 文章预览列表
  *
@@ -33,4 +32,5 @@ public class ArticlePreviewListVO implements Serializable {
      * 条件名
      */
     private String name;
+
 }

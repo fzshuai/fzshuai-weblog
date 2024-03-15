@@ -54,4 +54,5 @@ public interface ICategoryService {
      * 校验并批量删除文章分类信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

@@ -36,4 +36,5 @@ public interface IBlogInfoService {
      * 上传访客信息
      */
     void reportVisitor();
+
 }

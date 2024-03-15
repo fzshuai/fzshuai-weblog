@@ -122,4 +122,5 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
         }
         return baseMapper.deleteBatchIds(ids) > 0;
     }
+
 }

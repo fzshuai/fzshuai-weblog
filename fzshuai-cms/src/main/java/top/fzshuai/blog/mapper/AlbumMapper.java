@@ -20,4 +20,5 @@ public interface AlbumMapper extends BaseMapperPlus<AlbumMapper, Album, AlbumVO>
      * @return 相册内的照片数量
      */
     Integer selectPhotoCountByAlbumId(@Param("albumId") Long albumId);
+
 }

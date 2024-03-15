@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 /**
  * 后台文章
  *
@@ -80,4 +79,5 @@ public class ArticleBackDTO {
      * 文章状态
      */
     private Integer status;
+
 }

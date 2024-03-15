@@ -50,4 +50,5 @@ public class PageVO implements Serializable {
      */
     @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "pageCover")
     private String pageCoverUrl;
+
 }

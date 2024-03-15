@@ -61,4 +61,5 @@ public interface IPhotoService {
      * 校验并批量删除照片信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

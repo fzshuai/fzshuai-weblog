@@ -19,8 +19,8 @@ public class HTMLUtils {
         source = SensitiveUtil.filter(source);
         // 保留图片标签
         source = source.replaceAll("(?!<(img).*?>)<.*?>", "")
-                .replaceAll("(onload(.*?)=)", "")
-                .replaceAll("(onerror(.*?)=)", "");
+            .replaceAll("(onload(.*?)=)", "")
+            .replaceAll("(onerror(.*?)=)", "");
         return deleteHMTLTag(source);
     }
 

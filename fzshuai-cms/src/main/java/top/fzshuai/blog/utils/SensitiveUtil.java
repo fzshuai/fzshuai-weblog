@@ -40,8 +40,8 @@ public class SensitiveUtil {
     @PostConstruct
     public void init() {
         try (
-                InputStream is = this.getClass().getClassLoader().getResourceAsStream(SENSITIVE_WORD);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(SENSITIVE_WORD);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))
         ) {
             String keyword;
             while ((keyword = reader.readLine()) != null) {

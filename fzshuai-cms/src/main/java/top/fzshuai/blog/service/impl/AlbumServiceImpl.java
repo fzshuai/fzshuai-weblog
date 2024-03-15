@@ -146,4 +146,5 @@ public class AlbumServiceImpl implements IAlbumService {
         // 删除相册
         return baseMapper.deleteBatchIds(ids) > 0;
     }
+
 }

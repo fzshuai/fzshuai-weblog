@@ -53,4 +53,5 @@ public class PhotoVO implements Serializable {
      */
     @ExcelProperty(value = "是否删除")
     private Integer isDelete;
+
 }

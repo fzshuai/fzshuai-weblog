@@ -110,4 +110,5 @@ public interface IArticleService {
      * @return 是否成功
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

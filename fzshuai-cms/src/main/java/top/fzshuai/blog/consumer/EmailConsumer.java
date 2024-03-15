@@ -25,7 +25,7 @@ public class EmailConsumer {
     public void process(byte[] data) {
         EmailDTO emailDTO = JSON.parseObject(new String(data), EmailDTO.class);
         log.info(emailDTO.toString());
-        MailUtils.sendText(emailDTO.getEmail(),emailDTO.getSubject(),emailDTO.getContent());
+        MailUtils.sendText(emailDTO.getEmail(), emailDTO.getSubject(), emailDTO.getContent());
     }
 
 }

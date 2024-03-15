@@ -31,4 +31,5 @@ public class EmailDTO {
      * 内容
      */
     private String content;
+
 }

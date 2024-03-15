@@ -37,4 +37,5 @@ public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category,
      * @return 分类id
      */
     Long selectCategoryIdByName(String categoryName);
+
 }

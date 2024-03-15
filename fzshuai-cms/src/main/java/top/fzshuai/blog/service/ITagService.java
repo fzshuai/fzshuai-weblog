@@ -56,4 +56,5 @@ public interface ITagService extends IService<Tag> {
      * 校验并批量删除文章标签信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

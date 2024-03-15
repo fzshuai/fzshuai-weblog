@@ -132,8 +132,8 @@ public class MessageController extends BaseController {
      * 审核留言
      */
     @GetMapping("/audit")
-    public R<Void> audit(Long id,Boolean review){
-        return toAjax(messageService.auditMessage(id,review));
+    public R<Void> audit(Long id, Boolean review) {
+        return toAjax(messageService.auditMessage(id, review));
 
     }
 }

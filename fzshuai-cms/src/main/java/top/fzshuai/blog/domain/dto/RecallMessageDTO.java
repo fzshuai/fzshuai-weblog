@@ -26,4 +26,5 @@ public class RecallMessageDTO {
      * 是否为语音
      */
     private Boolean isVoice;
+
 }

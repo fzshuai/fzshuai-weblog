@@ -52,4 +52,5 @@ public interface IFriendLinkService {
      * 校验并批量删除友人链接信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

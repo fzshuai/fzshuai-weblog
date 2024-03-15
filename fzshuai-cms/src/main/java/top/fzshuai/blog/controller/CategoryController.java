@@ -6,8 +6,10 @@ import java.util.Arrays;
 import top.fzshuai.blog.domain.dto.CategoryDTO;
 import top.fzshuai.blog.domain.vo.PageResultVO;
 import lombok.RequiredArgsConstructor;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
+
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -42,7 +44,7 @@ public class CategoryController extends BaseController {
     /**
      * 查看分类列表
      *
-     * @return {@link R< CategoryDTO >} 分类列表
+     * @return 分类列表
      */
     @GetMapping("/categories")
     public R<PageResultVO<CategoryDTO>> listCategories() {
@@ -77,7 +79,7 @@ public class CategoryController extends BaseController {
     @SaCheckPermission("blog:category:query")
     @GetMapping("/{categoryId}")
     public R<CategoryVO> getInfo(@NotNull(message = "主键不能为空")
-                                     @PathVariable Long categoryId) {
+                                 @PathVariable Long categoryId) {
         return R.ok(categoryService.selectCategoryById(categoryId));
     }
 

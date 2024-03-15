@@ -22,4 +22,5 @@ public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, Artic
      * @return 标签列表
      */
     List<String> selectArticleTagNameList(@Param("articleId") Long articleId);
+
 }

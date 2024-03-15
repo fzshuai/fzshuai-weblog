@@ -105,7 +105,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * 保存前的数据校验
      */
     private void validEntityBeforeSave(Category category) {
-        //TODO 做一些数据校验,如唯一约束
+        // TODO 做一些数据校验,如唯一约束
         Category existCategory = baseMapper.selectOne(new LambdaQueryWrapper<Category>()
             .select(Category::getCategoryId)
             .eq(Category::getCategoryName, category.getCategoryName()));
@@ -120,7 +120,7 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public Boolean deleteWithValidByIds(Collection<Long> categoryIds, Boolean isValid) {
         if (isValid) {
-            //TODO 做一些业务上的校验,判断是否需要校验
+            // TODO 做一些业务上的校验,判断是否需要校验
         }
         Long count = articleMapper.selectCount(new LambdaQueryWrapper<Article>()
             .in(Article::getCategoryId, categoryIds));
@@ -130,4 +130,5 @@ public class CategoryServiceImpl implements ICategoryService {
 
         return baseMapper.deleteBatchIds(categoryIds) > 0;
     }
+
 }

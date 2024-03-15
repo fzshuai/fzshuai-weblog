@@ -30,4 +30,5 @@ public class UniqueViewVO implements Serializable {
      */
     @ExcelProperty(value = "访问量")
     private Integer viewsCount;
+
 }

@@ -1,7 +1,6 @@
 package top.fzshuai.blog.constant;
 
 /**
- * mqprefix常量
  * mq常量
  *
  * @author fzshuai

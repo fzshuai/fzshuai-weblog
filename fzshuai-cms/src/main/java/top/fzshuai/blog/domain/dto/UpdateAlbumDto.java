@@ -23,4 +23,5 @@ public class UpdateAlbumDto {
      */
     @NotNull(message = "相册id不能为空")
     private Long albumId;
+
 }

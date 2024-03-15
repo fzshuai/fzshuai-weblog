@@ -67,4 +67,5 @@ public class TalkVO implements Serializable {
     @ExcelProperty(value = "是否置顶", converter = ExcelDictConvert.class)
     @ExcelDictFormat(dictType = "sys_yes_no")
     private Integer isTop;
+
 }

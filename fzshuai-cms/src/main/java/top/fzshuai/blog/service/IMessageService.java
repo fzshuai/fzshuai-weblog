@@ -64,4 +64,5 @@ public interface IMessageService {
      * 审核留言
      */
     Boolean auditMessage(Long id, Boolean review);
+
 }

@@ -45,4 +45,5 @@ public interface IBlogPageService {
      * 校验并批量删除博客页面信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

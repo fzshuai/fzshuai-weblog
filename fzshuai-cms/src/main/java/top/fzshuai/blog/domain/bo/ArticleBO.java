@@ -16,7 +16,6 @@ import top.fzshuai.common.core.domain.BaseEntity;
  * @author fzshuai
  * @date 2023-05-03
  */
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ArticleBO extends BaseEntity {
@@ -96,4 +95,5 @@ public class ArticleBO extends BaseEntity {
      */
     // @NotNull(message = "状态值 1公开 2私密 3评论可见不能为空", groups = {AddGroup.class, EditGroup.class})
     private Integer status;
+
 }

@@ -30,4 +30,5 @@ public interface IWebsiteConfigService {
      * @param websiteConfigVo 网站配置
      */
     void updateWebsiteConfig(WebsiteConfigVO websiteConfigVo);
+
 }

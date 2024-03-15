@@ -43,8 +43,6 @@ public class TalkController extends BaseController {
 
     /**
      * 查看博客首页说说
-     *
-     * @return {@link R<String>}
      */
     @SaIgnore
     @GetMapping("/home/talks")
@@ -54,8 +52,6 @@ public class TalkController extends BaseController {
 
     /**
      * 博客前端查看说说列表
-     *
-     * @return {@link R< TalkDTO >}
      */
     @SaIgnore
     @GetMapping("/talks")

@@ -1,6 +1,5 @@
 package top.fzshuai.blog.domain.dto;
 
-
 import top.fzshuai.blog.domain.ChatRecord;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 
 /**
  * 聊天记录
@@ -36,4 +34,5 @@ public class ChatRecordDTO {
      * ip来源
      */
     private String ipSource;
+
 }

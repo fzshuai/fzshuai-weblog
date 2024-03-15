@@ -10,7 +10,9 @@ import top.fzshuai.blog.domain.dto.ArticleSearchDTO;
 import top.fzshuai.blog.domain.dto.MaxwellDataDTO;
 import top.fzshuai.blog.mapper.ElasticsearchMapper;
 import top.fzshuai.common.utils.BeanCopyUtils;
+
 import javax.annotation.Resource;
+
 import static top.fzshuai.blog.constant.MQConstant.MAXWELL_QUEUE;
 
 

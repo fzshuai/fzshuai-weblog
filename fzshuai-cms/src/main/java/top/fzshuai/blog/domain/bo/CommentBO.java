@@ -15,7 +15,6 @@ import top.fzshuai.common.core.domain.BaseEntity;
  * @author fzshuai
  * @date 2023-05-03
  */
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class CommentBO extends BaseEntity {

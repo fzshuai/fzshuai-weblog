@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-
 /**
  * 相册视图对象 blog_photo_album
  *
@@ -61,4 +60,5 @@ public class AlbumVO implements Serializable {
      */
     @ExcelProperty(value = "状态值 1公开 2私密")
     private Integer status;
+
 }

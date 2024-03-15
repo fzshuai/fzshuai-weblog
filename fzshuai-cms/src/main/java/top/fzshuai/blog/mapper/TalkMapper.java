@@ -34,4 +34,5 @@ public interface TalkMapper extends BaseMapperPlus<TalkMapper, Talk, TalkVO> {
      * 根据id查询后台说说
      */
     TalkVO selectAdminTalkById(Long id);
+
 }

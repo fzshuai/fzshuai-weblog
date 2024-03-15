@@ -33,4 +33,5 @@ public class SearchStrategyConfig {
         searchStrategyMap.put(SearchModeEnum.MYSQL.getMode(), mySqlSearchStrategy);
         searchStrategyMap.put(SearchModeEnum.ELASTICSEARCH.getMode(), esSearchStrategy);
     }
+
 }

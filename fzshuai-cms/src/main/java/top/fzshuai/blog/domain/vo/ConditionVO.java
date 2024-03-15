@@ -84,4 +84,5 @@ public class ConditionVO implements Serializable {
      * 是否审核
      */
     private Integer isReview;
+
 }

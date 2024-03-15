@@ -12,4 +12,5 @@ import top.fzshuai.blog.domain.dto.ArticleSearchDTO;
  */
 @Mapper
 public interface ElasticsearchMapper extends ElasticsearchRepository<ArticleSearchDTO, Long> {
+
 }

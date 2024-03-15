@@ -79,4 +79,5 @@ public class Article extends BaseEntity {
      * 浏览量
      */
     private Integer viewCount;
+
 }

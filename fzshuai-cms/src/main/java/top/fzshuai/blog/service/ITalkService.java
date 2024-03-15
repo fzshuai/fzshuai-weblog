@@ -61,4 +61,5 @@ public interface ITalkService {
      * 校验并批量删除说说信息
      */
     Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid);
+
 }

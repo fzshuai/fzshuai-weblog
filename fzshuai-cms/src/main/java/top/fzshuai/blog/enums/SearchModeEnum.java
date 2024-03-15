@@ -32,4 +32,5 @@ public enum SearchModeEnum {
      * 策略
      */
     private final String strategy;
+
 }

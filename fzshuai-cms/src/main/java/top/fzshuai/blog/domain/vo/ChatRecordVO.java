@@ -66,4 +66,5 @@ public class ChatRecordVO implements Serializable {
      */
     @ExcelProperty(value = "类型")
     private Integer type;
+
 }

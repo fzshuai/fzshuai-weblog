@@ -25,4 +25,5 @@ public interface PhotoMapper extends BaseMapperPlus<PhotoMapper, Photo, PhotoVO>
      * 查询照片url列表
      */
     List<String> selectPhotoUrlListByAlbumId(@Param("albumId") Long albumId, @Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
+
 }

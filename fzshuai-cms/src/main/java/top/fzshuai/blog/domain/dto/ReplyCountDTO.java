@@ -27,4 +27,5 @@ public class ReplyCountDTO {
      * 回复数量
      */
     private Integer replyCount;
+
 }

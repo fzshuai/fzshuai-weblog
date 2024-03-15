@@ -41,4 +41,5 @@ public class ArticlePaginationDTO {
      * 标题
      */
     private String articleTitle;
+
 }

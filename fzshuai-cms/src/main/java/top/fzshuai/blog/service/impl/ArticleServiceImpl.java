@@ -350,4 +350,5 @@ public class ArticleServiceImpl implements IArticleService {
         commentMapper.delete(new LambdaQueryWrapper<Comment>().in(Comment::getTopicId, articleIds));
         return baseMapper.deleteBatchIds(articleIds) > 0;
     }
+
 }

@@ -51,4 +51,5 @@ public class WebsiteConfigController extends BaseController {
         websiteConfigService.updateWebsiteConfig(websiteConfigVO);
         return R.ok();
     }
+
 }

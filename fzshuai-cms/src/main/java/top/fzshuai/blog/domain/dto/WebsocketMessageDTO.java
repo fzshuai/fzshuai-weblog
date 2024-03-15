@@ -26,4 +26,5 @@ public class WebsocketMessageDTO {
      * 数据
      */
     private Object data;
+
 }

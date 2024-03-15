@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-
 /**
  * 文章和文章标签关联视图对象 blog_article_tag
  *
@@ -30,4 +29,5 @@ public class ArticleTagVO implements Serializable {
      */
     @ExcelProperty(value = "标签id")
     private Long tagId;
+
 }

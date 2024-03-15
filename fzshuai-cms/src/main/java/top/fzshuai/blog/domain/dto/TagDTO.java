@@ -1,11 +1,9 @@
 package top.fzshuai.blog.domain.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 /**
  * 标签
@@ -28,4 +26,5 @@ public class TagDTO {
      * 标签名
      */
     private String tagName;
+
 }

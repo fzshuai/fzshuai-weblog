@@ -64,11 +64,12 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
     public void updateWebsiteConfig(WebsiteConfigVO websiteConfigVo) {
         // 修改网站配置
         WebsiteConfig websiteConfig = WebsiteConfig.builder()
-                .websiteConfigId(1L)
-                .config(JSON.toJSONString(websiteConfigVo))
-                .build();
+            .websiteConfigId(1L)
+            .config(JSON.toJSONString(websiteConfigVo))
+            .build();
         baseMapper.updateById(websiteConfig);
         // 删除缓存
         RedisUtils.deleteObject(WEBSITE_CONFIG);
     }
+
 }

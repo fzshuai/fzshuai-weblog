@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Arrays;
 
 import lombok.RequiredArgsConstructor;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
+
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -65,7 +67,7 @@ public class PageController extends BaseController {
     @SaCheckPermission("blog:page:query")
     @GetMapping("/{pageId}")
     public R<PageVO> getInfo(@NotNull(message = "主键不能为空")
-                                     @PathVariable Long pageId) {
+                             @PathVariable Long pageId) {
         return R.ok(iBlogPageService.selectPageById(pageId));
     }
 

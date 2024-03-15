@@ -3,6 +3,7 @@ package top.fzshuai.blog.domain.bo;
 import top.fzshuai.common.core.validate.EditGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import javax.validation.constraints.*;
 
 import top.fzshuai.common.core.domain.BaseEntity;
@@ -13,7 +14,6 @@ import top.fzshuai.common.core.domain.BaseEntity;
  * @author fzshuai
  * @date 2023-05-03
  */
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ArticleTagBO extends BaseEntity {
@@ -21,14 +21,13 @@ public class ArticleTagBO extends BaseEntity {
     /**
      * 文章id
      */
-    @NotNull(message = "文章id不能为空", groups = { EditGroup.class })
+    @NotNull(message = "文章id不能为空", groups = {EditGroup.class})
     private Long articleId;
 
     /**
      * 标签id
      */
-    @NotNull(message = "标签id不能为空", groups = { EditGroup.class })
+    @NotNull(message = "标签id不能为空", groups = {EditGroup.class})
     private Long tagId;
-
 
 }

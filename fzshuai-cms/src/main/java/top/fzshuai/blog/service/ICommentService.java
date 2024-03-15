@@ -73,4 +73,5 @@ public interface ICommentService {
      * @param commentId 评论id
      */
     void likeComment(Long commentId);
+
 }

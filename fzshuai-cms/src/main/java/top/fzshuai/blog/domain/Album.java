@@ -49,4 +49,5 @@ public class Album extends BaseEntity {
      * 状态值 1公开 2私密
      */
     private Integer status;
+
 }

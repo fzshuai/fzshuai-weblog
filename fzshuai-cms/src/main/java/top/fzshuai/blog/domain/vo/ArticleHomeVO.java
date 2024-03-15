@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 /**
  * 首页文章
  *
@@ -68,4 +67,5 @@ public class ArticleHomeVO implements Serializable {
      * 文章标签
      */
     private List<TagDTO> tagDTOList;
+
 }

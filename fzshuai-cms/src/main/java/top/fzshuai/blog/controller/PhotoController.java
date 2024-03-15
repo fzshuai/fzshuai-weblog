@@ -53,6 +53,7 @@ public class PhotoController extends BaseController {
     public R<FrontPhotoDto> listPhotosByAlbumId(@PathVariable("albumId") Long albumId, PageQuery pageQuery) {
         return R.ok(photoService.selectPhotoByAlbumId(albumId, pageQuery));
     }
+
     /**
      * 查询照片列表
      */
@@ -116,6 +117,7 @@ public class PhotoController extends BaseController {
     public R<Void> editPhotoAlbum(@RequestBody UpdateAlbumDto updateAlbumDto) {
         return toAjax(photoService.updateByBo(updateAlbumDto));
     }
+
     /**
      * 删除照片
      *

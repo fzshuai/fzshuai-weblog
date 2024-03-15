@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
  * 留言列表
  *
@@ -42,4 +41,5 @@ public class MessageDTO {
      * 弹幕速度
      */
     private Integer time;
+
 }

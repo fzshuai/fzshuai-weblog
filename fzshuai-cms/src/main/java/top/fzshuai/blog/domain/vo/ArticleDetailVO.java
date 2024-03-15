@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 /**
  * 文章
  *
@@ -105,4 +104,5 @@ public class ArticleDetailVO implements Serializable {
      * 最新文章列表
      */
     private List<ArticleRecommendDTO> newestArticleList;
+
 }

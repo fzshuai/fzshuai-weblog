@@ -16,7 +16,6 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class TalkBO extends BaseEntity {
@@ -24,7 +23,7 @@ public class TalkBO extends BaseEntity {
     /**
      * 主键
      */
-    @NotNull(message = "主键不能为空", groups = { EditGroup.class })
+    @NotNull(message = "主键不能为空", groups = {EditGroup.class})
     private Long talkId;
 
     /**
@@ -35,7 +34,7 @@ public class TalkBO extends BaseEntity {
     /**
      * 说说内容
      */
-    @NotBlank(message = "说说内容不能为空", groups = { AddGroup.class, EditGroup.class })
+    @NotBlank(message = "说说内容不能为空", groups = {AddGroup.class, EditGroup.class})
     private String content;
 
     /**
@@ -51,5 +50,6 @@ public class TalkBO extends BaseEntity {
     /**
      * 图片集合
      */
-    private List<String> ImgList;
+    private List<String> imgList;
+
 }

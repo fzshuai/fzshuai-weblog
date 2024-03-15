@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
  * 文章排行
  *
@@ -27,4 +26,5 @@ public class ArticleRankDTO {
      * 浏览量
      */
     private Integer viewsCount;
+
 }

@@ -35,4 +35,5 @@ public class PhotoDTO {
      * 照片名称列表
      */
     private List<String> photoNameList;
+
 }

@@ -1,9 +1,6 @@
 package top.fzshuai.blog.domain.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -22,4 +19,5 @@ public class BlogInfoVO implements Serializable {
      * 关于我内容
      */
     private String aboutContent;
+
 }

@@ -78,7 +78,7 @@ public class TagController extends BaseController {
     @SaCheckPermission("blog:tag:query")
     @GetMapping("/{tagId}")
     public R<TagVO> getInfo(@NotNull(message = "主键不能为空")
-                                     @PathVariable Long tagId) {
+                            @PathVariable Long tagId) {
         return R.ok(tagService.selectTagById(tagId));
     }
 
