@@ -54,15 +54,15 @@ public class DataBaseHelper {
     }
 
     public static String findInSet(Object var1, String var2) {
-        DataBaseType dataBasyType = getDataBaseType();
+        DataBaseType dataBaseType = getDataBaseType();
         String var = Convert.toStr(var1);
-        if (dataBasyType == DataBaseType.SQL_SERVER) {
+        if (dataBaseType == DataBaseType.SQL_SERVER) {
             // charindex(',100,' , ',0,100,101,') <> 0
             return "charindex('," + var + ",' , ','+" + var2 + "+',') <> 0";
-        } else if (dataBasyType == DataBaseType.POSTGRE_SQL) {
+        } else if (dataBaseType == DataBaseType.POSTGRE_SQL) {
             // (select position(',100,' in ',0,100,101,')) <> 0
             return "(select position('," + var + ",' in ','||" + var2 + "||',')) <> 0";
-        } else if (dataBasyType == DataBaseType.ORACLE) {
+        } else if (dataBaseType == DataBaseType.ORACLE) {
             // instr(',0,100,101,' , ',100,') <> 0
             return "instr(','||" + var2 + "||',' , '," + var + ",') <> 0";
         }
