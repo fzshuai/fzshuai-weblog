@@ -14,7 +14,7 @@
 
     <properties>
         <fzshuai-blog.version>2.1.0</fzshuai-blog.version>
-        <spring-boot.version>2.7.15</spring-boot.version>
+        <spring-boot.version>2.7.16</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -24,18 +24,18 @@
         <poi.version>5.2.3</poi.version>
         <easyexcel.version>3.3.2</easyexcel.version>
         <velocity.version>2.3</velocity.version>
-        <satoken.version>1.35.0.RC</satoken.version>
-        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+        <satoken.version>1.36.0</satoken.version>
+        <mybatis-plus.version>3.5.4</mybatis-plus.version>
         <p6spy.version>3.9.1</p6spy.version>
         <hutool.version>5.8.20</hutool.version>
         <okhttp.version>4.10.0</okhttp.version>
-        <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
+        <spring-boot-admin.version>2.7.11</spring-boot-admin.version>
         <redisson.version>3.20.1</redisson.version>
         <lock4j.version>2.2.3</lock4j.version>
         <dynamic-ds.version>3.5.2</dynamic-ds.version>
         <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
         <xxl-job.version>2.4.0</xxl-job.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <rabbitmq.version>2.4.1</rabbitmq.version>
         <mail.version>2.4.1</mail.version>
         <commons-pool2.version>2.8.0</commons-pool2.version>
@@ -47,7 +47,7 @@
         <!-- 临时修复 snakeyaml 漏洞 -->
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- OSS 配置 -->
-        <aws-java-sdk-s3.version>1.12.400</aws-java-sdk-s3.version>
+        <aws-java-sdk-s3.version>1.12.540</aws-java-sdk-s3.version>
         <!-- SMS 配置 -->
         <sms4j.version>2.2.0</sms4j.version>
     </properties>
