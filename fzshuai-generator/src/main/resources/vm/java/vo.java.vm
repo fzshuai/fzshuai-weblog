@@ -8,7 +8,9 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import top.fzshuai.common.annotation.ExcelDictFormat;
 import top.fzshuai.common.convert.ExcelDictConvert;
 import lombok.Data;
+import java.util.Date;
 
+import java.io.Serializable;
 
 /**
  * ${functionName}视图对象 ${tableName}
@@ -18,7 +20,7 @@ import lombok.Data;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class ${ClassName}VO {
+public class ${ClassName}VO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
