@@ -11,7 +11,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="selectCategoryList" resultType="top.fzshuai.blog.domain.dto.CategoryDTO">
+    <select id="selectCategoryList" resultType="top.fzshuai.blog.domain.dto.CategoryDto">
         SELECT c.id,
                c.category_name,
                COUNT(a.id) AS article_count

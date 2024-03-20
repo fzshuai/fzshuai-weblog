@@ -8,7 +8,7 @@ import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
-import top.fzshuai.common.core.domain.dto.UserOnlineDTO;
+import top.fzshuai.common.core.domain.dto.UserOnlineDto;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.utils.StreamUtils;
@@ -43,32 +43,32 @@ public class SysUserOnlineController extends BaseController {
     public TableDataInfo<SysUserOnline> list(String ipaddr, String userName) {
         // 获取所有未过期的 token
         List<String> keys = StpUtil.searchTokenValue("", 0, -1, false);
-        List<UserOnlineDTO> userOnlineDTOList = new ArrayList<>();
+        List<UserOnlineDto> userOnlineDtoList = new ArrayList<>();
         for (String key : keys) {
             String token = StringUtils.substringAfterLast(key, ":");
             // 如果已经过期则跳过
             if (StpUtil.stpLogic.getTokenActiveTimeoutByToken(token) < -1) {
                 continue;
             }
-            userOnlineDTOList.add(RedisUtils.getCacheObject(CacheConstants.ONLINE_TOKEN_KEY + token));
+            userOnlineDtoList.add(RedisUtils.getCacheObject(CacheConstants.ONLINE_TOKEN_KEY + token));
         }
         if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName)) {
-            userOnlineDTOList = StreamUtils.filter(userOnlineDTOList, userOnline ->
+            userOnlineDtoList = StreamUtils.filter(userOnlineDtoList, userOnline ->
                 StringUtils.equals(ipaddr, userOnline.getIpaddr()) &&
                     StringUtils.equals(userName, userOnline.getUserName())
             );
         } else if (StringUtils.isNotEmpty(ipaddr)) {
-            userOnlineDTOList = StreamUtils.filter(userOnlineDTOList, userOnline ->
+            userOnlineDtoList = StreamUtils.filter(userOnlineDtoList, userOnline ->
                 StringUtils.equals(ipaddr, userOnline.getIpaddr())
             );
         } else if (StringUtils.isNotEmpty(userName)) {
-            userOnlineDTOList = StreamUtils.filter(userOnlineDTOList, userOnline ->
+            userOnlineDtoList = StreamUtils.filter(userOnlineDtoList, userOnline ->
                 StringUtils.equals(userName, userOnline.getUserName())
             );
         }
-        Collections.reverse(userOnlineDTOList);
-        userOnlineDTOList.removeAll(Collections.singleton(null));
-        List<SysUserOnline> userOnlineList = BeanUtil.copyToList(userOnlineDTOList, SysUserOnline.class);
+        Collections.reverse(userOnlineDtoList);
+        userOnlineDtoList.removeAll(Collections.singleton(null));
+        List<SysUserOnline> userOnlineList = BeanUtil.copyToList(userOnlineDtoList, SysUserOnline.class);
         return TableDataInfo.build(userOnlineList);
     }
 

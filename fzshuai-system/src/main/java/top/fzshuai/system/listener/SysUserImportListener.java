@@ -12,7 +12,7 @@ import top.fzshuai.common.exception.ServiceException;
 import top.fzshuai.common.helper.LoginHelper;
 import top.fzshuai.common.utils.ValidatorUtils;
 import top.fzshuai.common.utils.spring.SpringUtils;
-import top.fzshuai.system.domain.vo.SysUserImportVO;
+import top.fzshuai.system.domain.vo.SysUserImportVo;
 import top.fzshuai.system.service.ISysConfigService;
 import top.fzshuai.system.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author Lion Li
  */
 @Slf4j
-public class SysUserImportListener extends AnalysisEventListener<SysUserImportVO> implements ExcelListener<SysUserImportVO> {
+public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo> implements ExcelListener<SysUserImportVo> {
 
     private final ISysUserService userService;
 
@@ -49,7 +49,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVO
     }
 
     @Override
-    public void invoke(SysUserImportVO userVo, AnalysisContext context) {
+    public void invoke(SysUserImportVo userVo, AnalysisContext context) {
         SysUser user = this.userService.selectUserByUserName(userVo.getUserName());
         try {
             // 验证是否存在这个用户
@@ -90,8 +90,8 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVO
     }
 
     @Override
-    public ExcelResult<SysUserImportVO> getExcelResult() {
-        return new ExcelResult<SysUserImportVO>() {
+    public ExcelResult<SysUserImportVo> getExcelResult() {
+        return new ExcelResult<SysUserImportVo>() {
 
             @Override
             public String getAnalysis() {
@@ -105,7 +105,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVO
             }
 
             @Override
-            public List<SysUserImportVO> getList() {
+            public List<SysUserImportVo> getList() {
                 return null;
             }
 

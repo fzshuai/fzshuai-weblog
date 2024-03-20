@@ -2,13 +2,13 @@ package top.fzshuai.web.controller.system;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.alibaba.fastjson.JSON;
-import top.fzshuai.blog.domain.dto.EmailDTO;
+import top.fzshuai.blog.domain.dto.EmailDto;
 import top.fzshuai.common.exception.base.BaseException;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.model.RegisterBody;
 import top.fzshuai.common.utils.redis.RedisUtils;
-import top.fzshuai.system.domain.vo.UserVO;
+import top.fzshuai.system.domain.vo.UserVo;
 import top.fzshuai.system.service.ISysConfigService;
 import top.fzshuai.system.service.SysRegisterService;
 import lombok.RequiredArgsConstructor;
@@ -71,7 +71,7 @@ public class SysRegisterController extends BaseController {
         // 生成六位随机验证码发送
         String code = getRandomCode();
         // 发送验证码
-        EmailDTO emailDTO = EmailDTO.builder()
+        EmailDto emailDTO = EmailDto.builder()
                 .email(email)
                 .subject("验证码")
                 .content("您的验证码为 " + code + " 有效期15分钟，请不要告诉他人哦！")
@@ -90,7 +90,7 @@ public class SysRegisterController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/blog/register")
-    public R<?> register(@Valid @RequestBody UserVO user) {
+    public R<?> register(@Valid @RequestBody UserVo user) {
         registerService.blogRegister(user);
         return R.ok();
     }

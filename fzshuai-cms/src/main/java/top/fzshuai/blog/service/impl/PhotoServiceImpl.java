@@ -6,11 +6,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.fzshuai.blog.domain.Photo;
 import top.fzshuai.blog.domain.Album;
-import top.fzshuai.blog.domain.bo.PhotoBO;
+import top.fzshuai.blog.domain.bo.PhotoBo;
 import top.fzshuai.blog.domain.dto.FrontPhotoDto;
-import top.fzshuai.blog.domain.dto.PhotoDTO;
+import top.fzshuai.blog.domain.dto.PhotoDto;
 import top.fzshuai.blog.domain.dto.UpdateAlbumDto;
-import top.fzshuai.blog.domain.vo.PhotoVO;
+import top.fzshuai.blog.domain.vo.PhotoVo;
 import top.fzshuai.blog.mapper.AlbumMapper;
 import top.fzshuai.blog.mapper.PhotoMapper;
 import top.fzshuai.blog.service.IPhotoService;
@@ -66,7 +66,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片
      */
     @Override
-    public PhotoVO selectPhotoById(Long photoId) {
+    public PhotoVo selectPhotoById(Long photoId) {
         return baseMapper.selectVoById(photoId);
     }
 
@@ -74,9 +74,9 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public TableDataInfo<PhotoVO> selectPhotoPageList(PhotoBO bo, PageQuery pageQuery) {
+    public TableDataInfo<PhotoVo> selectPhotoPageList(PhotoBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
-        Page<PhotoVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<PhotoVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -84,12 +84,12 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public List<PhotoVO> selectPhotoList(PhotoBO bo) {
+    public List<PhotoVo> selectPhotoList(PhotoBo bo) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Photo> buildQueryWrapper(PhotoBO bo) {
+    private LambdaQueryWrapper<Photo> buildQueryWrapper(PhotoBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Photo> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getAlbumId() != null, Photo::getAlbumId, bo.getAlbumId());
@@ -104,7 +104,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 新增照片
      */
     @Override
-    public Boolean insertByBo(PhotoDTO bo) {
+    public Boolean insertByBo(PhotoDto bo) {
         Boolean flag = true;
         for (int i = 0; i < bo.getPhotoUrlList().size(); i++) {
             Photo photo = new Photo();
@@ -120,7 +120,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 修改照片
      */
     @Override
-    public Boolean updateByBo(PhotoBO bo) {
+    public Boolean updateByBo(PhotoBo bo) {
         Photo update = BeanUtil.toBean(bo, Photo.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

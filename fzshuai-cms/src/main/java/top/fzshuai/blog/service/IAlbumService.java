@@ -1,7 +1,7 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.bo.AlbumBO;
-import top.fzshuai.blog.domain.vo.AlbumVO;
+import top.fzshuai.blog.domain.bo.AlbumBo;
+import top.fzshuai.blog.domain.vo.AlbumVo;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.page.TableDataInfo;
 
@@ -21,7 +21,7 @@ public interface IAlbumService {
      *
      * @return 相册列表
      */
-    List<AlbumVO> selectAlbumList();
+    List<AlbumVo> selectAlbumList();
 
     /**
      * 查询相册管理
@@ -29,7 +29,7 @@ public interface IAlbumService {
      * @param photoAlbumId 相册id
      * @return 相册
      */
-    AlbumVO selectAlbumById(Long photoAlbumId);
+    AlbumVo selectAlbumById(Long photoAlbumId);
 
     /**
      * 查询相册列表
@@ -38,7 +38,7 @@ public interface IAlbumService {
      * @param pageQuery 分页对象
      * @return 相册列表
      */
-    TableDataInfo<AlbumVO> selectAlbumPageList(AlbumBO bo, PageQuery pageQuery);
+    TableDataInfo<AlbumVo> selectAlbumPageList(AlbumBo bo, PageQuery pageQuery);
 
     /**
      * 查询相册列表
@@ -46,7 +46,7 @@ public interface IAlbumService {
      * @param bo 相册对象
      * @return 相册列表
      */
-    List<AlbumVO> selectAlbumList(AlbumBO bo);
+    List<AlbumVo> selectAlbumList(AlbumBo bo);
 
     /**
      * 新增相册
@@ -54,7 +54,7 @@ public interface IAlbumService {
      * @param bo 相册对象
      * @return 是否成功
      */
-    Boolean insertByBo(AlbumBO bo);
+    Boolean insertByBo(AlbumBo bo);
 
     /**
      * 修改相册
@@ -62,7 +62,7 @@ public interface IAlbumService {
      * @param bo 相册对象
      * @return 是否成功
      */
-    Boolean updateByBo(AlbumBO bo);
+    Boolean updateByBo(AlbumBo bo);
 
     /**
      * 校验并批量删除相册信息

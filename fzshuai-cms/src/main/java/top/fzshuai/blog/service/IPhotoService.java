@@ -1,10 +1,10 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.bo.PhotoBO;
+import top.fzshuai.blog.domain.bo.PhotoBo;
 import top.fzshuai.blog.domain.dto.FrontPhotoDto;
-import top.fzshuai.blog.domain.dto.PhotoDTO;
+import top.fzshuai.blog.domain.dto.PhotoDto;
 import top.fzshuai.blog.domain.dto.UpdateAlbumDto;
-import top.fzshuai.blog.domain.vo.PhotoVO;
+import top.fzshuai.blog.domain.vo.PhotoVo;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.page.TableDataInfo;
 
@@ -30,27 +30,27 @@ public interface IPhotoService {
     /**
      * 查询照片
      */
-    PhotoVO selectPhotoById(Long photoId);
+    PhotoVo selectPhotoById(Long photoId);
 
     /**
      * 查询照片列表
      */
-    TableDataInfo<PhotoVO> selectPhotoPageList(PhotoBO bo, PageQuery pageQuery);
+    TableDataInfo<PhotoVo> selectPhotoPageList(PhotoBo bo, PageQuery pageQuery);
 
     /**
      * 查询照片列表
      */
-    List<PhotoVO> selectPhotoList(PhotoBO bo);
+    List<PhotoVo> selectPhotoList(PhotoBo bo);
 
     /**
      * 新增照片
      */
-    Boolean insertByBo(PhotoDTO bo);
+    Boolean insertByBo(PhotoDto bo);
 
     /**
      * 修改照片
      */
-    Boolean updateByBo(PhotoBO bo);
+    Boolean updateByBo(PhotoBo bo);
 
     /**
      * 修改照片相册

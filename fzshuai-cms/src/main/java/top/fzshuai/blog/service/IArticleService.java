@@ -1,6 +1,6 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.bo.ArticleBO;
+import top.fzshuai.blog.domain.bo.ArticleBo;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.blog.domain.vo.*;
@@ -28,14 +28,14 @@ public interface IArticleService {
      *
      * @return 文章归档
      */
-    PageResultVO<ArchiveVO> selectArticleArchiveList();
+    PageResultVo<ArchiveVo> selectArticleArchiveList();
 
     /**
      * 查看博客前端首页文章
      *
      * @return 首页文章
      */
-    List<ArticleHomeVO> selectArticleHomeList();
+    List<ArticleHomeVo> selectArticleHomeList();
 
     /**
      * 博客前端根据id查看文章
@@ -43,7 +43,7 @@ public interface IArticleService {
      * @param articleId 文章id
      * @return 文章信息
      */
-    ArticleDetailVO selectArticleDetailById(Long articleId);
+    ArticleDetailVo selectArticleDetailById(Long articleId);
 
     /**
      * 搜索文章
@@ -51,7 +51,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    List<ArticleSearchVO> searchArticle(ConditionVO condition);
+    List<ArticleSearchVo> searchArticle(ConditionVo condition);
 
     /**
      * 根据条件查询文章列表
@@ -59,7 +59,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    ArticlePreviewListVO selectArticlePreviewList(ConditionVO condition);
+    ArticlePreviewListVo selectArticlePreviewList(ConditionVo condition);
 
     /**
      * 查询文章
@@ -67,7 +67,7 @@ public interface IArticleService {
      * @param articleId 文章id
      * @return 文章
      */
-    ArticleVO selectArticleById(Long articleId);
+    ArticleVo selectArticleById(Long articleId);
 
     /**
      * 查询文章列表
@@ -76,7 +76,7 @@ public interface IArticleService {
      * @param pageQuery 分页对象
      * @return 文章列表
      */
-    TableDataInfo<ArticleVO> selectArticlePageList(ArticleBO bo, PageQuery pageQuery);
+    TableDataInfo<ArticleVo> selectArticlePageList(ArticleBo bo, PageQuery pageQuery);
 
     /**
      * 查询文章列表
@@ -84,7 +84,7 @@ public interface IArticleService {
      * @param bo 文章对象
      * @return 文章列表
      */
-    List<ArticleVO> selectArticleList(ArticleBO bo);
+    List<ArticleVo> selectArticleList(ArticleBo bo);
 
     /**
      * 新增文章
@@ -92,7 +92,7 @@ public interface IArticleService {
      * @param bo 文章
      * @return 是否成功
      */
-    Boolean insertByBo(ArticleBO bo);
+    Boolean insertByBo(ArticleBo bo);
 
     /**
      * 修改文章
@@ -100,7 +100,7 @@ public interface IArticleService {
      * @param bo 文章
      * @return 是否成功
      */
-    Boolean updateByBo(ArticleBO bo);
+    Boolean updateByBo(ArticleBo bo);
 
     /**
      * 校验并批量删除文章信息

@@ -6,13 +6,13 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.fzshuai.blog.domain.Comment;
-import top.fzshuai.blog.domain.bo.CommentBO;
-import top.fzshuai.blog.domain.dto.CommentDTO;
-import top.fzshuai.blog.domain.dto.ReplyCountDTO;
-import top.fzshuai.blog.domain.dto.ReplyDTO;
-import top.fzshuai.blog.domain.vo.CommentVO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
-import top.fzshuai.blog.domain.vo.WebsiteConfigVO;
+import top.fzshuai.blog.domain.bo.CommentBo;
+import top.fzshuai.blog.domain.dto.CommentDto;
+import top.fzshuai.blog.domain.dto.ReplyCountDto;
+import top.fzshuai.blog.domain.dto.ReplyDto;
+import top.fzshuai.blog.domain.vo.CommentVo;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.blog.mapper.CommentMapper;
 import top.fzshuai.blog.service.ICommentService;
@@ -63,7 +63,7 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVO 评论信息
      */
     @Override
-    public PageResultVO<CommentDTO> selectCommentList(CommentVO commentVO) {
+    public PageResultVo<CommentDto> selectCommentList(CommentVo commentVO) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
             .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
@@ -71,36 +71,36 @@ public class CommentServiceImpl implements ICommentService {
             .isNull(Comment::getParentId)
             .eq(Comment::getState, STATE));
         if (commentCount == 0) {
-            return new PageResultVO<>();
+            return new PageResultVo<>();
         }
         // 分页查询评论数据
-        List<CommentDTO> commentDTOList = baseMapper.selectCommentList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
-        if (CollectionUtils.isEmpty(commentDTOList)) {
-            return new PageResultVO<>();
+        List<CommentDto> commentDtoList = baseMapper.selectCommentList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
+        if (CollectionUtils.isEmpty(commentDtoList)) {
+            return new PageResultVo<>();
         }
         // 查询redis的评论点赞数据
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(COMMENT_LIKE_COUNT);
         // 提取评论id集合
-        List<Long> commentIdList = commentDTOList.stream()
-            .map((CommentDTO::getCommentId))
+        List<Long> commentIdList = commentDtoList.stream()
+            .map((CommentDto::getCommentId))
             .collect(Collectors.toList());
         // 根据评论id集合查询回复数据
-        List<ReplyDTO> replyDTOList = baseMapper.selectReplyListByIds(commentIdList);
+        List<ReplyDto> replyDtoList = baseMapper.selectReplyListByIds(commentIdList);
         // 封装回复点赞量
-        replyDTOList.forEach(item -> item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString())));
+        replyDtoList.forEach(item -> item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString())));
         // 根据评论id分组回复数据
-        Map<Long, List<ReplyDTO>> replyMap = replyDTOList.stream()
-            .collect(Collectors.groupingBy(ReplyDTO::getParentId));
+        Map<Long, List<ReplyDto>> replyMap = replyDtoList.stream()
+            .collect(Collectors.groupingBy(ReplyDto::getParentId));
         // 根据评论id查询回复量
         Map<Long, Integer> replyCountMap = baseMapper.selectReplyCountByIds(commentIdList)
-            .stream().collect(Collectors.toMap(ReplyCountDTO::getCommentId, ReplyCountDTO::getReplyCount));
+            .stream().collect(Collectors.toMap(ReplyCountDto::getCommentId, ReplyCountDto::getReplyCount));
         // 封装评论数据
-        commentDTOList.forEach(item -> {
+        commentDtoList.forEach(item -> {
             item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString()));
-            item.setReplyDTOList(replyMap.get(item.getCommentId()));
+            item.setReplyDtoList(replyMap.get(item.getCommentId()));
             item.setReplyCount(replyCountMap.get(item.getCommentId()));
         });
-        return new PageResultVO<>(commentDTOList, Integer.parseInt(String.valueOf(commentCount)));
+        return new PageResultVo<>(commentDtoList, Integer.parseInt(String.valueOf(commentCount)));
     }
 
     /**
@@ -109,9 +109,9 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVo 评论对象
      */
     @Override
-    public void insertComment(CommentVO commentVo) {
+    public void insertComment(CommentVo commentVo) {
         // 判断是否需要审核
-        WebsiteConfigVO websiteConfig = websiteConfigService.selectWebsiteConfig();
+        WebsiteConfigVo websiteConfig = websiteConfigService.selectWebsiteConfig();
         Integer isReview = websiteConfig.getIsCommentReview();
         // 过滤标签
         commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
@@ -137,7 +137,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论
      */
     @Override
-    public CommentVO selectCommentById(Long commentId) {
+    public CommentVo selectCommentById(Long commentId) {
         return baseMapper.selectVoById(commentId);
     }
 
@@ -145,13 +145,13 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public TableDataInfo<CommentVO> selectCommentPageList(CommentBO bo, PageQuery pageQuery) {
+    public TableDataInfo<CommentVo> selectCommentPageList(CommentBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
-        Page<CommentVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
-        result.getRecords().forEach(commentVO -> {
-            commentVO.setNickname(sysUserMapper.selectVoById(commentVO.getReplyUserId()).getNickName());
-            commentVO.setArticleTitle(articleMapper.selectById(commentVO.getTopicId()).getArticleTitle());
-            commentVO.setReplyUserName(sysUserMapper.selectVoById(commentVO.getReplyUserId()).getUserName());
+        Page<CommentVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        result.getRecords().forEach(commentVo -> {
+            commentVo.setNickname(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getNickName());
+            commentVo.setArticleTitle(articleMapper.selectById(commentVo.getTopicId()).getArticleTitle());
+            commentVo.setReplyUserName(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getUserName());
         });
         return TableDataInfo.build(result);
     }
@@ -160,12 +160,12 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public List<CommentVO> selectCommentList(CommentBO bo) {
+    public List<CommentVo> selectCommentList(CommentBo bo) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Comment> buildQueryWrapper(CommentBO bo) {
+    private LambdaQueryWrapper<Comment> buildQueryWrapper(CommentBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Comment> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Comment::getUserId, bo.getUserId());
@@ -185,7 +185,7 @@ public class CommentServiceImpl implements ICommentService {
      * 新增文章评论
      */
     @Override
-    public Boolean insertByBo(CommentBO bo) {
+    public Boolean insertByBo(CommentBo bo) {
         Comment add = BeanUtil.toBean(bo, Comment.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -199,7 +199,7 @@ public class CommentServiceImpl implements ICommentService {
      * 修改文章评论
      */
     @Override
-    public Boolean updateByBo(CommentBO bo) {
+    public Boolean updateByBo(CommentBo bo) {
         Comment update = BeanUtil.toBean(bo, Comment.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

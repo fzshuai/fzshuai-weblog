@@ -1,6 +1,6 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.vo.WebsiteConfigVO;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 
 /**
  * 网站配置Service接口
@@ -13,22 +13,22 @@ public interface IWebsiteConfigService {
     /**
      * 前端获取网站配置
      *
-     * @return {@link WebsiteConfigVO} 网站配置
+     * @return {@link WebsiteConfigVo} 网站配置
      */
-    WebsiteConfigVO selectWebsiteConfig();
+    WebsiteConfigVo selectWebsiteConfig();
 
     /**
      * 后台获取网站配置
      *
-     * @return {@link WebsiteConfigVO} 网站配置
+     * @return {@link WebsiteConfigVo} 网站配置
      */
-    WebsiteConfigVO selectAdminWebsiteConfig();
+    WebsiteConfigVo selectAdminWebsiteConfig();
 
     /**
      * 保存或更新网站配置
      *
      * @param websiteConfigVo 网站配置
      */
-    void updateWebsiteConfig(WebsiteConfigVO websiteConfigVo);
+    void updateWebsiteConfig(WebsiteConfigVo websiteConfigVo);
 
 }

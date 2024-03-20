@@ -1,6 +1,6 @@
 package top.fzshuai.common.core.domain.model;
 
-import top.fzshuai.common.core.domain.dto.RoleDTO;
+import top.fzshuai.common.core.domain.dto.RoleDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -93,7 +93,7 @@ public class LoginUser implements Serializable {
     /**
      * 角色对象
      */
-    private List<RoleDTO> roles;
+    private List<RoleDto> roles;
 
     /**
      * 数据权限 当前角色ID

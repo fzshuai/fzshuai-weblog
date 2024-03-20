@@ -1,9 +1,9 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.dto.TalkDTO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
-import top.fzshuai.blog.domain.vo.TalkVO;
-import top.fzshuai.blog.domain.bo.TalkBO;
+import top.fzshuai.blog.domain.dto.TalkDto;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.domain.vo.TalkVo;
+import top.fzshuai.blog.domain.bo.TalkBo;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.domain.PageQuery;
 
@@ -30,32 +30,32 @@ public interface ITalkService {
      *
      * @return 说说列表
      */
-    PageResultVO<TalkDTO> selectTalkPageList();
+    PageResultVo<TalkDto> selectTalkPageList();
 
     /**
      * 查询说说
      */
-    TalkVO selectTalkById(Long talkId);
+    TalkVo selectTalkById(Long talkId);
 
     /**
      * 查询说说列表
      */
-    TableDataInfo<TalkVO> selectTalkPageList(TalkBO bo, PageQuery pageQuery);
+    TableDataInfo<TalkVo> selectTalkPageList(TalkBo bo, PageQuery pageQuery);
 
     /**
      * 查询说说列表
      */
-    List<TalkVO> selectTalkList(TalkBO bo);
+    List<TalkVo> selectTalkList(TalkBo bo);
 
     /**
      * 新增说说
      */
-    Boolean insertByBo(TalkBO bo);
+    Boolean insertByBo(TalkBo bo);
 
     /**
      * 修改说说
      */
-    Boolean updateByBo(TalkBO bo);
+    Boolean updateByBo(TalkBo bo);
 
     /**
      * 校验并批量删除说说信息

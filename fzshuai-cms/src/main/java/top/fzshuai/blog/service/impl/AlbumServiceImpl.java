@@ -7,9 +7,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.fzshuai.blog.domain.Album;
 import top.fzshuai.blog.domain.Photo;
-import top.fzshuai.blog.domain.bo.AlbumBO;
-import top.fzshuai.blog.domain.vo.AlbumVO;
-import top.fzshuai.blog.domain.vo.PhotoVO;
+import top.fzshuai.blog.domain.bo.AlbumBo;
+import top.fzshuai.blog.domain.vo.AlbumVo;
+import top.fzshuai.blog.domain.vo.PhotoVo;
 import top.fzshuai.blog.mapper.AlbumMapper;
 import top.fzshuai.blog.mapper.PhotoMapper;
 import top.fzshuai.blog.service.IAlbumService;
@@ -40,21 +40,21 @@ public class AlbumServiceImpl implements IAlbumService {
     private final PhotoMapper photoMapper;
 
     @Override
-    public List<AlbumVO> selectAlbumList() {
+    public List<AlbumVo> selectAlbumList() {
         // 查询相册列表
         List<Album> photoAlbumList = baseMapper.selectList(new LambdaQueryWrapper<Album>()
             .eq(Album::getStatus, PUBLIC.getStatus())
             .eq(Album::getIsDelete, FALSE)
             .orderByDesc(Album::getAlbumId));
-        return BeanCopyUtils.copyList(photoAlbumList, AlbumVO.class);
+        return BeanCopyUtils.copyList(photoAlbumList, AlbumVo.class);
     }
 
     /**
      * 查询相册
      */
     @Override
-    public AlbumVO selectAlbumById(Long albumId) {
-        AlbumVO albumVo = baseMapper.selectVoById(albumId);
+    public AlbumVo selectAlbumById(Long albumId) {
+        AlbumVo albumVo = baseMapper.selectVoById(albumId);
         if (Objects.isNull(albumVo)) {
             throw new BaseException("相册不存在或已被删除");
         }
@@ -66,9 +66,9 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public TableDataInfo<AlbumVO> selectAlbumPageList(AlbumBO bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVo> selectAlbumPageList(AlbumBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
-        Page<AlbumVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<AlbumVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -76,12 +76,12 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public List<AlbumVO> selectAlbumList(AlbumBO bo) {
+    public List<AlbumVo> selectAlbumList(AlbumBo bo) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Album> buildQueryWrapper(AlbumBO bo) {
+    private LambdaQueryWrapper<Album> buildQueryWrapper(AlbumBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Album> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getAlbumName()), Album::getAlbumName, bo.getAlbumName());
@@ -96,7 +96,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 新增相册
      */
     @Override
-    public Boolean insertByBo(AlbumBO bo) {
+    public Boolean insertByBo(AlbumBo bo) {
         Album add = BeanUtil.toBean(bo, Album.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -110,7 +110,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 修改相册
      */
     @Override
-    public Boolean updateByBo(AlbumBO bo) {
+    public Boolean updateByBo(AlbumBo bo) {
         Album update = BeanUtil.toBean(bo, Album.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;
@@ -133,10 +133,10 @@ public class AlbumServiceImpl implements IAlbumService {
         }
         // 删除相册当前删除相册内的照片
         // 查询相册内所有照片
-        List<PhotoVO> photoVOList = photoMapper.selectVoList(new LambdaQueryWrapper<Photo>().in(Photo::getAlbumId, ids));
+        List<PhotoVo> photoVoList = photoMapper.selectVoList(new LambdaQueryWrapper<Photo>().in(Photo::getAlbumId, ids));
         List<Long> photoIdList = new ArrayList<>();
         //
-        photoVOList.forEach(photoVo -> {
+        photoVoList.forEach(photoVo -> {
             photoIdList.add(photoVo.getPhotoId());
         });
         // 删除相册对应的照片

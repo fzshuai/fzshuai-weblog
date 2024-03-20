@@ -21,7 +21,7 @@ import top.fzshuai.common.core.domain.TreeEntity;
 #if($table.crud || $table.sub)
 #set($Entity="BaseEntity")
 #elseif($table.tree)
-#set($Entity="TreeEntity<${ClassName}BO>")
+#set($Entity="TreeEntity<${ClassName}Bo>")
 #end
 
 @Data

@@ -23,9 +23,9 @@ import top.fzshuai.common.utils.StreamUtils;
 import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.poi.ExcelUtil;
 import top.fzshuai.system.domain.SysPost;
-import top.fzshuai.system.domain.vo.SysUserExportVO;
-import top.fzshuai.system.domain.vo.SysUserImportVO;
-import top.fzshuai.system.domain.vo.UserInfoVO;
+import top.fzshuai.system.domain.vo.SysUserExportVo;
+import top.fzshuai.system.domain.vo.SysUserImportVo;
+import top.fzshuai.system.domain.vo.UserInfoVo;
 import top.fzshuai.system.listener.SysUserImportListener;
 import top.fzshuai.system.service.ISysDeptService;
 import top.fzshuai.system.service.ISysPostService;
@@ -65,7 +65,7 @@ public class SysUserController extends BaseController {
      */
     @SaIgnore
     @PutMapping("/users/info")
-    public R<Void> updateBlogUserInfo(@Valid @RequestBody UserInfoVO userInfoVo) {
+    public R<Void> updateBlogUserInfo(@Valid @RequestBody UserInfoVo userInfoVo) {
         userService.updateBlogUserInfo(userInfoVo);
         return R.ok();
     }
@@ -87,16 +87,16 @@ public class SysUserController extends BaseController {
     @PostMapping("/export")
     public void export(SysUser user, HttpServletResponse response) {
         List<SysUser> list = userService.selectUserList(user);
-        List<SysUserExportVO> listVo = BeanUtil.copyToList(list, SysUserExportVO.class);
+        List<SysUserExportVo> listVo = BeanUtil.copyToList(list, SysUserExportVo.class);
         for (int i = 0; i < list.size(); i++) {
             SysDept dept = list.get(i).getDept();
-            SysUserExportVO vo = listVo.get(i);
+            SysUserExportVo vo = listVo.get(i);
             if (ObjectUtil.isNotEmpty(dept)) {
                 vo.setDeptName(dept.getDeptName());
                 vo.setLeader(dept.getLeader());
             }
         }
-        ExcelUtil.exportExcel(listVo, "用户数据", SysUserExportVO.class, response);
+        ExcelUtil.exportExcel(listVo, "用户数据", SysUserExportVo.class, response);
     }
 
     /**
@@ -109,7 +109,7 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:import")
     @PostMapping(value = "/importData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public R<Void> importData(@RequestPart("file") MultipartFile file, boolean updateSupport) throws Exception {
-        ExcelResult<SysUserImportVO> result = ExcelUtil.importExcel(file.getInputStream(), SysUserImportVO.class, new SysUserImportListener(updateSupport));
+        ExcelResult<SysUserImportVo> result = ExcelUtil.importExcel(file.getInputStream(), SysUserImportVo.class, new SysUserImportListener(updateSupport));
         return R.ok(result.getAnalysis());
     }
 
@@ -118,7 +118,7 @@ public class SysUserController extends BaseController {
      */
     @PostMapping("/importTemplate")
     public void importTemplate(HttpServletResponse response) {
-        ExcelUtil.exportExcel(new ArrayList<>(), "用户数据", SysUserImportVO.class, response);
+        ExcelUtil.exportExcel(new ArrayList<>(), "用户数据", SysUserImportVo.class, response);
     }
 
     /**

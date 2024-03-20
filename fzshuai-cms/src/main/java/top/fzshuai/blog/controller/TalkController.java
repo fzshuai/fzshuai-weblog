@@ -2,10 +2,10 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.TalkBO;
-import top.fzshuai.blog.domain.dto.TalkDTO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
-import top.fzshuai.blog.domain.vo.TalkVO;
+import top.fzshuai.blog.domain.bo.TalkBo;
+import top.fzshuai.blog.domain.dto.TalkDto;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.domain.vo.TalkVo;
 import top.fzshuai.blog.service.ITalkService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -55,7 +55,7 @@ public class TalkController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/talks")
-    public R<PageResultVO<TalkDTO>> listTalks() {
+    public R<PageResultVo<TalkDto>> listTalks() {
         return R.ok(talkService.selectTalkPageList());
     }
 
@@ -64,7 +64,7 @@ public class TalkController extends BaseController {
      */
     @SaCheckPermission("blog:talk:list")
     @GetMapping("/list")
-    public TableDataInfo<TalkVO> list(TalkBO bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVo> list(TalkBo bo, PageQuery pageQuery) {
         return talkService.selectTalkPageList(bo, pageQuery);
     }
 
@@ -74,9 +74,9 @@ public class TalkController extends BaseController {
     @SaCheckPermission("blog:talk:export")
     @Log(title = "说说", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(TalkBO bo, HttpServletResponse response) {
-        List<TalkVO> list = talkService.selectTalkList(bo);
-        ExcelUtil.exportExcel(list, "说说", TalkVO.class, response);
+    public void export(TalkBo bo, HttpServletResponse response) {
+        List<TalkVo> list = talkService.selectTalkList(bo);
+        ExcelUtil.exportExcel(list, "说说", TalkVo.class, response);
     }
 
     /**
@@ -87,7 +87,7 @@ public class TalkController extends BaseController {
     @SaIgnore
     @SaCheckPermission("blog:talk:query")
     @GetMapping("/{talkId}")
-    public R<TalkVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<TalkVo> getInfo(@NotNull(message = "主键不能为空")
                              @PathVariable Long talkId) {
         return R.ok(talkService.selectTalkById(talkId));
     }
@@ -99,7 +99,7 @@ public class TalkController extends BaseController {
     @Log(title = "说说", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody TalkBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody TalkBo bo) {
         return toAjax(talkService.insertByBo(bo));
     }
 
@@ -110,7 +110,7 @@ public class TalkController extends BaseController {
     @Log(title = "说说", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TalkBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody TalkBo bo) {
         return toAjax(talkService.updateByBo(bo));
     }
 

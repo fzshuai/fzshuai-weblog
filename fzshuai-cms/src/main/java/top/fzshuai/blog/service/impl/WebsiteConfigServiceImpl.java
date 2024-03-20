@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import top.fzshuai.blog.domain.vo.WebsiteConfigVO;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.domain.WebsiteConfig;
 import top.fzshuai.blog.mapper.WebsiteConfigMapper;
 import top.fzshuai.blog.service.IWebsiteConfigService;
@@ -32,16 +32,16 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVO selectWebsiteConfig() {
-        WebsiteConfigVO websiteConfigVo;
+    public WebsiteConfigVo selectWebsiteConfig() {
+        WebsiteConfigVo websiteConfigVo;
         // 获取缓存数据
         Object websiteConfig = RedisUtils.getCacheObject(WEBSITE_CONFIG);
         if (Objects.nonNull(websiteConfig)) {
-            websiteConfigVo = JSON.parseObject(websiteConfig.toString(), WebsiteConfigVO.class);
+            websiteConfigVo = JSON.parseObject(websiteConfig.toString(), WebsiteConfigVo.class);
         } else {
             // 从数据库中加载
             String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
-            websiteConfigVo = JSON.parseObject(config, WebsiteConfigVO.class);
+            websiteConfigVo = JSON.parseObject(config, WebsiteConfigVo.class);
             RedisUtils.setCacheObject(WEBSITE_CONFIG, config);
         }
         return websiteConfigVo;
@@ -53,15 +53,15 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVO selectAdminWebsiteConfig() {
-        WebsiteConfigVO websiteConfigVo;
+    public WebsiteConfigVo selectAdminWebsiteConfig() {
+        WebsiteConfigVo websiteConfigVo;
         String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
-        websiteConfigVo = JSON.parseObject(config, WebsiteConfigVO.class);
+        websiteConfigVo = JSON.parseObject(config, WebsiteConfigVo.class);
         return websiteConfigVo;
     }
 
     @Override
-    public void updateWebsiteConfig(WebsiteConfigVO websiteConfigVo) {
+    public void updateWebsiteConfig(WebsiteConfigVo websiteConfigVo) {
         // 修改网站配置
         WebsiteConfig websiteConfig = WebsiteConfig.builder()
             .websiteConfigId(1L)

@@ -19,7 +19,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import top.fzshuai.common.annotation.DataColumn;
 import top.fzshuai.common.annotation.DataPermission;
-import top.fzshuai.common.core.domain.dto.RoleDTO;
+import top.fzshuai.common.core.domain.dto.RoleDto;
 import top.fzshuai.common.core.domain.model.LoginUser;
 import top.fzshuai.common.enums.DataScopeType;
 import top.fzshuai.common.exception.ServiceException;
@@ -100,7 +100,7 @@ public class PlusDataPermissionHandler {
         context.setBeanResolver(beanResolver);
         DataPermissionHelper.getContext().forEach(context::setVariable);
         Set<String> conditions = new HashSet<>();
-        for (RoleDTO role : user.getRoles()) {
+        for (RoleDto role : user.getRoles()) {
             user.setRoleId(role.getRoleId());
             // 获取角色权限泛型
             DataScopeType type = DataScopeType.findCode(role.getDataScope());

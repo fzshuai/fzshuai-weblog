@@ -3,7 +3,7 @@ package top.fzshuai.system.service;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.domain.entity.SysUser;
 import top.fzshuai.common.core.page.TableDataInfo;
-import top.fzshuai.system.domain.vo.UserInfoVO;
+import top.fzshuai.system.domain.vo.UserInfoVo;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface ISysUserService {
      * 博客前台修改用户信息
      * @param userInfoVo
      */
-    void updateBlogUserInfo(UserInfoVO userInfoVo);
+    void updateBlogUserInfo(UserInfoVo userInfoVo);
 
 
     TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery);

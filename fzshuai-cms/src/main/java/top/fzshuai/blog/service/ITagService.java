@@ -2,10 +2,10 @@ package top.fzshuai.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import top.fzshuai.blog.domain.Tag;
-import top.fzshuai.blog.domain.dto.TagDTO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
-import top.fzshuai.blog.domain.vo.TagVO;
-import top.fzshuai.blog.domain.bo.TagBO;
+import top.fzshuai.blog.domain.dto.TagDto;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.domain.vo.TagVo;
+import top.fzshuai.blog.domain.bo.TagBo;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.domain.PageQuery;
 
@@ -25,32 +25,32 @@ public interface ITagService extends IService<Tag> {
      *
      * @return 标签列表
      */
-    PageResultVO<TagDTO> selectTagList();
+    PageResultVo<TagDto> selectTagList();
 
     /**
      * 查询文章标签
      */
-    TagVO selectTagById(Long tagId);
+    TagVo selectTagById(Long tagId);
 
     /**
      * 查询文章标签列表
      */
-    TableDataInfo<TagVO> selectTagPageList(TagBO bo, PageQuery pageQuery);
+    TableDataInfo<TagVo> selectTagPageList(TagBo bo, PageQuery pageQuery);
 
     /**
      * 查询文章标签列表
      */
-    List<TagVO> selectTagList(TagBO bo);
+    List<TagVo> selectTagList(TagBo bo);
 
     /**
      * 新增文章标签
      */
-    Boolean insertByBo(TagBO bo);
+    Boolean insertByBo(TagBo bo);
 
     /**
      * 修改文章标签
      */
-    Boolean updateByBo(TagBO bo);
+    Boolean updateByBo(TagBo bo);
 
     /**
      * 校验并批量删除文章标签信息

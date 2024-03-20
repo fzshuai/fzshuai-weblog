@@ -6,7 +6,7 @@ import cn.dev33.satoken.stp.SaLoginModel;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import top.fzshuai.common.constant.CacheConstants;
-import top.fzshuai.common.core.domain.dto.UserOnlineDTO;
+import top.fzshuai.common.core.domain.dto.UserOnlineDto;
 import top.fzshuai.common.core.domain.model.LoginUser;
 import top.fzshuai.common.enums.UserType;
 import top.fzshuai.common.helper.LoginHelper;
@@ -41,7 +41,7 @@ public class UserActionListener implements SaTokenListener {
             UserAgent userAgent = UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
             String ip = ServletUtils.getClientIP();
             LoginUser user = LoginHelper.getLoginUser();
-            UserOnlineDTO dto = new UserOnlineDTO();
+            UserOnlineDto dto = new UserOnlineDto();
             dto.setIpaddr(ip);
             dto.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
             dto.setBrowser(userAgent.getBrowser().getName());

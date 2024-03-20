@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class ${ClassName}VO implements Serializable {
+public class ${ClassName}Vo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

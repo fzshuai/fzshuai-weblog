@@ -1,7 +1,7 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.vo.BlogHomeInfoVO;
-import top.fzshuai.blog.domain.vo.BlogInfoVO;
+import top.fzshuai.blog.domain.vo.BlogHomeInfoVo;
+import top.fzshuai.blog.domain.vo.BlogInfoVo;
 
 /**
  * 博客信息服务
@@ -16,7 +16,7 @@ public interface IBlogInfoService {
      *
      * @return 博客首页信息
      */
-    BlogHomeInfoVO selectBlogHomeInfo();
+    BlogHomeInfoVo selectBlogHomeInfo();
 
     /**
      * 查询关于我内容
@@ -30,7 +30,7 @@ public interface IBlogInfoService {
      *
      * @param blogInfoVO 博客信息
      */
-    void updateAbout(BlogInfoVO blogInfoVO);
+    void updateAbout(BlogInfoVo blogInfoVO);
 
     /**
      * 上传访客信息

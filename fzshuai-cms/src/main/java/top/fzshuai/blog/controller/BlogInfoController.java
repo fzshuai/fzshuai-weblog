@@ -2,8 +2,8 @@ package top.fzshuai.blog.controller;
 
 
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.vo.BlogHomeInfoVO;
-import top.fzshuai.blog.domain.vo.BlogInfoVO;
+import top.fzshuai.blog.domain.vo.BlogHomeInfoVo;
+import top.fzshuai.blog.domain.vo.BlogInfoVo;
 import top.fzshuai.blog.service.IBlogInfoService;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
@@ -31,7 +31,7 @@ public class BlogInfoController extends BaseController {
      */
     @SaIgnore
     @GetMapping()
-    public R<BlogHomeInfoVO> getBlogHomeInfo() {
+    public R<BlogHomeInfoVo> getBlogHomeInfo() {
         return R.ok(blogInfoService.selectBlogHomeInfo());
     }
 
@@ -53,7 +53,7 @@ public class BlogInfoController extends BaseController {
      * @return {@link R<>}
      */
     @PutMapping("/admin/about")
-    public R<?> updateAbout(@Valid @RequestBody BlogInfoVO blogInfoVO) {
+    public R<?> updateAbout(@Valid @RequestBody BlogInfoVo blogInfoVO) {
         blogInfoService.updateAbout(blogInfoVO);
         return R.ok();
     }

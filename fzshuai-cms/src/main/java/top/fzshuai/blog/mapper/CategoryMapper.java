@@ -1,8 +1,8 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.Category;
-import top.fzshuai.blog.domain.dto.CategoryDTO;
-import top.fzshuai.blog.domain.vo.CategoryVO;
+import top.fzshuai.blog.domain.dto.CategoryDto;
+import top.fzshuai.blog.domain.vo.CategoryVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 
 import java.util.List;
@@ -13,14 +13,14 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category, CategoryVO> {
+public interface CategoryMapper extends BaseMapperPlus<CategoryMapper, Category, CategoryVo> {
 
     /**
      * 查询分类和对应文章数量
      *
      * @return 分类列表
      */
-    List<CategoryDTO> selectCategoryList();
+    List<CategoryDto> selectCategoryList();
 
     /**
      * 根据id查询分类名称

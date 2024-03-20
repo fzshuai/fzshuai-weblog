@@ -1,7 +1,7 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.vo.ChatRecordVO;
-import top.fzshuai.blog.domain.bo.ChatRecordBO;
+import top.fzshuai.blog.domain.vo.ChatRecordVo;
+import top.fzshuai.blog.domain.bo.ChatRecordBo;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.domain.PageQuery;
 
@@ -19,27 +19,27 @@ public interface IChatRecordService {
     /**
      * 查询聊天记录
      */
-    ChatRecordVO queryById(Long chatRecordId);
+    ChatRecordVo queryById(Long chatRecordId);
 
     /**
      * 查询聊天记录列表
      */
-    TableDataInfo<ChatRecordVO> queryPageList(ChatRecordBO bo, PageQuery pageQuery);
+    TableDataInfo<ChatRecordVo> queryPageList(ChatRecordBo bo, PageQuery pageQuery);
 
     /**
      * 查询聊天记录列表
      */
-    List<ChatRecordVO> queryList(ChatRecordBO bo);
+    List<ChatRecordVo> queryList(ChatRecordBo bo);
 
     /**
      * 新增聊天记录
      */
-    Boolean insertByBo(ChatRecordBO bo);
+    Boolean insertByBo(ChatRecordBo bo);
 
     /**
      * 修改聊天记录
      */
-    Boolean updateByBo(ChatRecordBO bo);
+    Boolean updateByBo(ChatRecordBo bo);
 
     /**
      * 校验并批量删除聊天记录信息

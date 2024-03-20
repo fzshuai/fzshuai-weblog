@@ -1,8 +1,8 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.Talk;
-import top.fzshuai.blog.domain.dto.TalkDTO;
-import top.fzshuai.blog.domain.vo.TalkVO;
+import top.fzshuai.blog.domain.dto.TalkDto;
+import top.fzshuai.blog.domain.vo.TalkVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,25 +14,25 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface TalkMapper extends BaseMapperPlus<TalkMapper, Talk, TalkVO> {
+public interface TalkMapper extends BaseMapperPlus<TalkMapper, Talk, TalkVo> {
 
     /**
      * 获取说说列表
      *
      * @param current 页码
      * @param size    大小
-     * @return {@link List< TalkDTO >}
+     * @return {@link List<  TalkDto  >}
      */
-    List<TalkDTO> selectTalkList(@Param("current") Long current, @Param("size") Long size);
+    List<TalkDto> selectTalkList(@Param("current") Long current, @Param("size") Long size);
 
     /**
      * 查看后台说说
      */
-    List<TalkVO> selectAdminTalkList();
+    List<TalkVo> selectAdminTalkList();
 
     /**
      * 根据id查询后台说说
      */
-    TalkVO selectAdminTalkById(Long id);
+    TalkVo selectAdminTalkById(Long id);
 
 }

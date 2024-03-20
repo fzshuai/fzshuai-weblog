@@ -1,6 +1,6 @@
 package top.fzshuai.blog.controller;
 
-import top.fzshuai.blog.domain.vo.WebsiteConfigVO;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.service.IWebsiteConfigService;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
@@ -28,7 +28,7 @@ public class WebsiteConfigController extends BaseController {
      * 前台获取网站配置
      */
     @GetMapping("/config")
-    public R<WebsiteConfigVO> getWebsiteConfig() {
+    public R<WebsiteConfigVo> getWebsiteConfig() {
         return R.ok(websiteConfigService.selectWebsiteConfig());
     }
 
@@ -36,7 +36,7 @@ public class WebsiteConfigController extends BaseController {
      * 后台获取网站配置
      */
     @GetMapping("/admin/config")
-    public R<WebsiteConfigVO> getAdminWebsiteConfig() {
+    public R<WebsiteConfigVo> getAdminWebsiteConfig() {
         return R.ok(websiteConfigService.selectAdminWebsiteConfig());
     }
 
@@ -47,7 +47,7 @@ public class WebsiteConfigController extends BaseController {
      * @return {@link R}
      */
     @PutMapping("/config")
-    public R<?> updateWebsiteConfig(@Valid @RequestBody WebsiteConfigVO websiteConfigVO) {
+    public R<?> updateWebsiteConfig(@Valid @RequestBody WebsiteConfigVo websiteConfigVO) {
         websiteConfigService.updateWebsiteConfig(websiteConfigVO);
         return R.ok();
     }

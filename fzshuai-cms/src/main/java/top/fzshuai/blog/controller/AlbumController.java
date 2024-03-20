@@ -2,8 +2,8 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.AlbumBO;
-import top.fzshuai.blog.domain.vo.AlbumVO;
+import top.fzshuai.blog.domain.bo.AlbumBo;
+import top.fzshuai.blog.domain.vo.AlbumVo;
 import top.fzshuai.blog.service.IAlbumService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -46,7 +46,7 @@ public class AlbumController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/photos/albums")
-    public R<List<AlbumVO>> listPhotoAlbums() {
+    public R<List<AlbumVo>> listPhotoAlbums() {
         return R.ok(albumService.selectAlbumList());
     }
 
@@ -56,7 +56,7 @@ public class AlbumController extends BaseController {
      */
     @SaCheckPermission("blog:album:list")
     @GetMapping("/list")
-    public TableDataInfo<AlbumVO> list(AlbumBO bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVo> list(AlbumBo bo, PageQuery pageQuery) {
         return albumService.selectAlbumPageList(bo, pageQuery);
     }
 
@@ -66,9 +66,9 @@ public class AlbumController extends BaseController {
     @SaCheckPermission("blog:album:export")
     @Log(title = "相册", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(AlbumBO bo, HttpServletResponse response) {
-        List<AlbumVO> list = albumService.selectAlbumList(bo);
-        ExcelUtil.exportExcel(list, "相册", AlbumVO.class, response);
+    public void export(AlbumBo bo, HttpServletResponse response) {
+        List<AlbumVo> list = albumService.selectAlbumList(bo);
+        ExcelUtil.exportExcel(list, "相册", AlbumVo.class, response);
     }
 
     /**
@@ -78,7 +78,7 @@ public class AlbumController extends BaseController {
      */
     @SaCheckPermission("blog:album:query")
     @GetMapping("/{albumId}")
-    public R<AlbumVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<AlbumVo> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long albumId) {
         return R.ok(albumService.selectAlbumById(albumId));
     }
@@ -90,7 +90,7 @@ public class AlbumController extends BaseController {
     @Log(title = "相册", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody AlbumBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody AlbumBo bo) {
         return toAjax(albumService.insertByBo(bo));
     }
 
@@ -101,7 +101,7 @@ public class AlbumController extends BaseController {
     @Log(title = "相册", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody AlbumBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody AlbumBo bo) {
         return toAjax(albumService.updateByBo(bo));
     }
 

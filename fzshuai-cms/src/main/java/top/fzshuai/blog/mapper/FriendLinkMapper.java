@@ -1,7 +1,7 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.FriendLink;
-import top.fzshuai.blog.domain.vo.FriendLinkVO;
+import top.fzshuai.blog.domain.vo.FriendLinkVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 
 /**
@@ -10,6 +10,6 @@ import top.fzshuai.common.core.mapper.BaseMapperPlus;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface FriendLinkMapper extends BaseMapperPlus<FriendLinkMapper, FriendLink, FriendLinkVO> {
+public interface FriendLinkMapper extends BaseMapperPlus<FriendLinkMapper, FriendLink, FriendLinkVo> {
 
 }

@@ -4,11 +4,11 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import top.fzshuai.blog.domain.Talk;
-import top.fzshuai.blog.domain.bo.TalkBO;
-import top.fzshuai.blog.domain.dto.CommentCountDTO;
-import top.fzshuai.blog.domain.dto.TalkDTO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
-import top.fzshuai.blog.domain.vo.TalkVO;
+import top.fzshuai.blog.domain.bo.TalkBo;
+import top.fzshuai.blog.domain.dto.CommentCountDto;
+import top.fzshuai.blog.domain.dto.TalkDto;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.domain.vo.TalkVo;
 import top.fzshuai.blog.mapper.CommentMapper;
 import top.fzshuai.blog.mapper.TalkMapper;
 import top.fzshuai.blog.service.ITalkService;
@@ -65,22 +65,22 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public PageResultVO<TalkDTO> selectTalkPageList() {
+    public PageResultVo<TalkDto> selectTalkPageList() {
         // 查询说说总量
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
-            return new PageResultVO<>();
+            return new PageResultVo<>();
         }
         // 分页查询说说
-        List<TalkDTO> result = baseMapper.selectTalkList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
+        List<TalkDto> result = baseMapper.selectTalkList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
 
         // 查询说说评论量
         List<Long> topicIdList = result.stream()
-            .map(TalkDTO::getTalkId)
+            .map(TalkDto::getTalkId)
             .collect(Collectors.toList());
         Map<Long, Integer> commentCountMap = commentMapper.selectCommentCountByTopicIds(topicIdList)
             .stream()
-            .collect(Collectors.toMap(CommentCountDTO::getCommentId, CommentCountDTO::getCommentCount));
+            .collect(Collectors.toMap(CommentCountDto::getCommentId, CommentCountDto::getCommentCount));
         // 查询说说点赞量
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(TALK_LIKE_COUNT);
         result.forEach(item -> {
@@ -100,15 +100,15 @@ public class TalkServiceImpl implements ITalkService {
 
             }
         });
-        return new PageResultVO<>(result, Integer.parseInt(String.valueOf(count)));
+        return new PageResultVo<>(result, Integer.parseInt(String.valueOf(count)));
     }
 
     /**
      * 查询说说
      */
     @Override
-    public TalkVO selectTalkById(Long talkId) {
-        TalkVO result = baseMapper.selectAdminTalkById(talkId);
+    public TalkVo selectTalkById(Long talkId) {
+        TalkVo result = baseMapper.selectAdminTalkById(talkId);
         if (Objects.nonNull(result.getImages())) {
             List<String> list = Arrays.asList(result.getImages().split(","));
             // 将图片转换为url路径
@@ -121,12 +121,12 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public TableDataInfo<TalkVO> selectTalkPageList(TalkBO bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVo> selectTalkPageList(TalkBo bo, PageQuery pageQuery) {
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
             return new TableDataInfo<>();
         }
-        List<TalkVO> result = baseMapper.selectAdminTalkList();
+        List<TalkVo> result = baseMapper.selectAdminTalkList();
         result.forEach(item -> {
             if (Objects.nonNull(item.getImages())) {
                 List<String> list = Arrays.asList(item.getImages().split(","));
@@ -148,12 +148,12 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public List<TalkVO> selectTalkList(TalkBO bo) {
+    public List<TalkVo> selectTalkList(TalkBo bo) {
         LambdaQueryWrapper<Talk> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Talk> buildQueryWrapper(TalkBO bo) {
+    private LambdaQueryWrapper<Talk> buildQueryWrapper(TalkBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Talk> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Talk::getUserId, bo.getUserId());
@@ -167,7 +167,7 @@ public class TalkServiceImpl implements ITalkService {
      * 新增说说
      */
     @Override
-    public Boolean insertByBo(TalkBO bo) {
+    public Boolean insertByBo(TalkBo bo) {
         bo.setUserId(LoginHelper.getUserId());
         if (Objects.nonNull(bo.getImages())) {
             List<String> list = Arrays.asList(bo.getImages().split(","));
@@ -187,7 +187,7 @@ public class TalkServiceImpl implements ITalkService {
      * 修改说说
      */
     @Override
-    public Boolean updateByBo(TalkBO bo) {
+    public Boolean updateByBo(TalkBo bo) {
         bo.setUserId(LoginHelper.getUserId());
         if (Objects.nonNull(bo.getImages())) {
             List<String> list = Arrays.asList(bo.getImages().split(","));

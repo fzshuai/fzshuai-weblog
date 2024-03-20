@@ -1,7 +1,7 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.UniqueView;
-import top.fzshuai.blog.domain.vo.UniqueViewVO;
+import top.fzshuai.blog.domain.vo.UniqueViewVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 
 /**
@@ -10,6 +10,6 @@ import top.fzshuai.common.core.mapper.BaseMapperPlus;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface UniqueViewMapper extends BaseMapperPlus<UniqueViewMapper, UniqueView, UniqueViewVO> {
+public interface UniqueViewMapper extends BaseMapperPlus<UniqueViewMapper, UniqueView, UniqueViewVo> {
 
 }

@@ -2,11 +2,11 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.PhotoBO;
+import top.fzshuai.blog.domain.bo.PhotoBo;
 import top.fzshuai.blog.domain.dto.FrontPhotoDto;
-import top.fzshuai.blog.domain.dto.PhotoDTO;
+import top.fzshuai.blog.domain.dto.PhotoDto;
 import top.fzshuai.blog.domain.dto.UpdateAlbumDto;
-import top.fzshuai.blog.domain.vo.PhotoVO;
+import top.fzshuai.blog.domain.vo.PhotoVo;
 import top.fzshuai.blog.service.IPhotoService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -59,7 +59,7 @@ public class PhotoController extends BaseController {
      */
     @SaCheckPermission("blog:photo:list")
     @GetMapping("/list")
-    public TableDataInfo<PhotoVO> list(PhotoBO bo, PageQuery pageQuery) {
+    public TableDataInfo<PhotoVo> list(PhotoBo bo, PageQuery pageQuery) {
         return photoService.selectPhotoPageList(bo, pageQuery);
     }
 
@@ -69,9 +69,9 @@ public class PhotoController extends BaseController {
     @SaCheckPermission("blog:photo:export")
     @Log(title = "照片", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(PhotoBO bo, HttpServletResponse response) {
-        List<PhotoVO> list = photoService.selectPhotoList(bo);
-        ExcelUtil.exportExcel(list, "照片", PhotoVO.class, response);
+    public void export(PhotoBo bo, HttpServletResponse response) {
+        List<PhotoVo> list = photoService.selectPhotoList(bo);
+        ExcelUtil.exportExcel(list, "照片", PhotoVo.class, response);
     }
 
     /**
@@ -81,7 +81,7 @@ public class PhotoController extends BaseController {
      */
     @SaCheckPermission("blog:photo:query")
     @GetMapping("/{photoId}")
-    public R<PhotoVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<PhotoVo> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long photoId) {
         return R.ok(photoService.selectPhotoById(photoId));
     }
@@ -93,7 +93,7 @@ public class PhotoController extends BaseController {
     @Log(title = "照片", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody PhotoDTO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody PhotoDto bo) {
         return toAjax(photoService.insertByBo(bo));
     }
 
@@ -104,7 +104,7 @@ public class PhotoController extends BaseController {
     @Log(title = "照片", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PhotoBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody PhotoBo bo) {
         return toAjax(photoService.updateByBo(bo));
     }
 

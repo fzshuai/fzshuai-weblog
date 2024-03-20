@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import top.fzshuai.blog.domain.bo.ChatRecordBO;
-import top.fzshuai.blog.domain.vo.ChatRecordVO;
+import top.fzshuai.blog.domain.bo.ChatRecordBo;
+import top.fzshuai.blog.domain.vo.ChatRecordVo;
 import top.fzshuai.blog.domain.ChatRecord;
 import top.fzshuai.blog.mapper.ChatRecordMapper;
 import top.fzshuai.blog.service.IChatRecordService;
@@ -35,7 +35,7 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 查询聊天记录
      */
     @Override
-    public ChatRecordVO queryById(Long chatRecordId) {
+    public ChatRecordVo queryById(Long chatRecordId) {
         return baseMapper.selectVoById(chatRecordId);
     }
 
@@ -43,9 +43,9 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 查询聊天记录列表
      */
     @Override
-    public TableDataInfo<ChatRecordVO> queryPageList(ChatRecordBO bo, PageQuery pageQuery) {
+    public TableDataInfo<ChatRecordVo> queryPageList(ChatRecordBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<ChatRecord> lqw = buildQueryWrapper(bo);
-        Page<ChatRecordVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<ChatRecordVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -53,12 +53,12 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 查询聊天记录列表
      */
     @Override
-    public List<ChatRecordVO> queryList(ChatRecordBO bo) {
+    public List<ChatRecordVo> queryList(ChatRecordBo bo) {
         LambdaQueryWrapper<ChatRecord> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<ChatRecord> buildQueryWrapper(ChatRecordBO bo) {
+    private LambdaQueryWrapper<ChatRecord> buildQueryWrapper(ChatRecordBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<ChatRecord> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, ChatRecord::getUserId, bo.getUserId());
@@ -75,7 +75,7 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 新增聊天记录
      */
     @Override
-    public Boolean insertByBo(ChatRecordBO bo) {
+    public Boolean insertByBo(ChatRecordBo bo) {
         ChatRecord add = BeanUtil.toBean(bo, ChatRecord.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -89,7 +89,7 @@ public class ChatRecordServiceImpl implements IChatRecordService {
      * 修改聊天记录
      */
     @Override
-    public Boolean updateByBo(ChatRecordBO bo) {
+    public Boolean updateByBo(ChatRecordBo bo) {
         ChatRecord update = BeanUtil.toBean(bo, ChatRecord.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

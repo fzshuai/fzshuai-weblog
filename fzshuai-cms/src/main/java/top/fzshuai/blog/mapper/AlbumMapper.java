@@ -1,7 +1,7 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.Album;
-import top.fzshuai.blog.domain.vo.AlbumVO;
+import top.fzshuai.blog.domain.vo.AlbumVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface AlbumMapper extends BaseMapperPlus<AlbumMapper, Album, AlbumVO> {
+public interface AlbumMapper extends BaseMapperPlus<AlbumMapper, Album, AlbumVo> {
 
     /**
      * 查询相册内照片数量

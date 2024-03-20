@@ -3,12 +3,12 @@ package top.fzshuai.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.bo.PageBO;
-import top.fzshuai.blog.domain.dto.ArticleRankDTO;
-import top.fzshuai.blog.domain.vo.BlogHomeInfoVO;
-import top.fzshuai.blog.domain.vo.BlogInfoVO;
-import top.fzshuai.blog.domain.vo.PageVO;
-import top.fzshuai.blog.domain.vo.WebsiteConfigVO;
+import top.fzshuai.blog.domain.bo.PageBo;
+import top.fzshuai.blog.domain.dto.ArticleRankDto;
+import top.fzshuai.blog.domain.vo.BlogHomeInfoVo;
+import top.fzshuai.blog.domain.vo.BlogInfoVo;
+import top.fzshuai.blog.domain.vo.PageVo;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.blog.mapper.CategoryMapper;
 import top.fzshuai.blog.mapper.TagMapper;
@@ -52,7 +52,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     private final IWebsiteConfigService websiteConfigService;
 
     @Override
-    public BlogHomeInfoVO selectBlogHomeInfo() {
+    public BlogHomeInfoVo selectBlogHomeInfo() {
         // 查询文章数量
         Long articleCount = articleMapper.selectCount(new LambdaQueryWrapper<Article>()
             .eq(Article::getStatus, PUBLIC.getStatus())
@@ -65,17 +65,17 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
         Object count = RedisUtils.getCacheObject(BLOG_VIEWS_COUNT);
         String viewsCount = Optional.ofNullable(count).orElse(0).toString();
         // 查询网站配置
-        WebsiteConfigVO websiteConfig = websiteConfigService.selectWebsiteConfig();
+        WebsiteConfigVo websiteConfig = websiteConfigService.selectWebsiteConfig();
         // 查询页面图片
-        List<PageVO> pageVOList = pageService.selectPageList(new PageBO());
+        List<PageVo> pageVoList = pageService.selectPageList(new PageBo());
         // 封装数据
-        return BlogHomeInfoVO.builder()
+        return BlogHomeInfoVo.builder()
             .articleCount(articleCount.intValue())
             .categoryCount(categoryCount.intValue())
             .tagCount(tagCount.intValue())
             .viewsCount(viewsCount)
             .websiteConfig(websiteConfig)
-            .pageList(pageVOList)
+            .pageList(pageVoList)
             .build();
     }
 
@@ -86,7 +86,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     }
 
     @Override
-    public void updateAbout(BlogInfoVO blogInfoVO) {
+    public void updateAbout(BlogInfoVo blogInfoVO) {
         RedisUtils.setCacheObject(ABOUT, blogInfoVO.getAboutContent());
     }
 
@@ -126,7 +126,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
      * @param articleMap 文章信息
      * @return 文章排行
      */
-    private List<ArticleRankDTO> listArticleRank(Map<Object, Double> articleMap) {
+    private List<ArticleRankDto> listArticleRank(Map<Object, Double> articleMap) {
         // 提取文章id
         List<Integer> articleIdList = new ArrayList<>();
         articleMap.forEach((key, value) -> articleIdList.add((Integer) key));
@@ -134,11 +134,11 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
         return articleMapper.selectList(new LambdaQueryWrapper<Article>()
                 .select(Article::getArticleId, Article::getArticleTitle)
                 .in(Article::getArticleId, articleIdList))
-            .stream().map(article -> ArticleRankDTO.builder()
+            .stream().map(article -> ArticleRankDto.builder()
                 .articleTitle(article.getArticleTitle())
                 .viewsCount(articleMap.get(article.getArticleId()).intValue())
                 .build())
-            .sorted(Comparator.comparingInt(ArticleRankDTO::getViewsCount).reversed())
+            .sorted(Comparator.comparingInt(ArticleRankDto::getViewsCount).reversed())
             .collect(Collectors.toList());
     }
 

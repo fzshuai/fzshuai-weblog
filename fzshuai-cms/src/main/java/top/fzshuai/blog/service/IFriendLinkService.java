@@ -1,7 +1,7 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.bo.FriendLinkBO;
-import top.fzshuai.blog.domain.vo.FriendLinkVO;
+import top.fzshuai.blog.domain.bo.FriendLinkBo;
+import top.fzshuai.blog.domain.vo.FriendLinkVo;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.page.TableDataInfo;
 
@@ -21,32 +21,32 @@ public interface IFriendLinkService {
      *
      * @return 友链列表
      */
-    List<FriendLinkVO> selectFriendLinkList();
+    List<FriendLinkVo> selectFriendLinkList();
 
     /**
      * 查询友人链接
      */
-    FriendLinkVO selectFriendLinkById(Long friendLinkId);
+    FriendLinkVo selectFriendLinkById(Long friendLinkId);
 
     /**
      * 查询友人链接列表
      */
-    TableDataInfo<FriendLinkVO> selectFriendLinkPageList(FriendLinkBO bo, PageQuery pageQuery);
+    TableDataInfo<FriendLinkVo> selectFriendLinkPageList(FriendLinkBo bo, PageQuery pageQuery);
 
     /**
      * 查询友人链接列表
      */
-    List<FriendLinkVO> selectFriendLinkList(FriendLinkBO bo);
+    List<FriendLinkVo> selectFriendLinkList(FriendLinkBo bo);
 
     /**
      * 新增友人链接
      */
-    Boolean insertByBo(FriendLinkBO bo);
+    Boolean insertByBo(FriendLinkBo bo);
 
     /**
      * 修改友人链接
      */
-    Boolean updateByBo(FriendLinkBO bo);
+    Boolean updateByBo(FriendLinkBo bo);
 
     /**
      * 校验并批量删除友人链接信息

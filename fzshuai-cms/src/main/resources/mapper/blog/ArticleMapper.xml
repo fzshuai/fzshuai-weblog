@@ -20,7 +20,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <resultMap id="articleHomeResultMap" type="top.fzshuai.blog.domain.dto.ArticleHomeDTO">
+    <resultMap id="articleHomeResultMap" type="top.fzshuai.blog.domain.dto.ArticleHomeDto">
         <id property="articleId" column="article_id"/>
         <result property="articleCover" column="article_cover"/>
         <result property="articleTitle" column="article_title"/>
@@ -30,26 +30,26 @@
         <result property="isTop" column="is_top"/>
         <result property="categoryId" column="category_id"/>
         <result property="categoryName" column="category_name"/>
-        <collection property="tagDTOList" ofType="top.fzshuai.blog.domain.dto.TagDTO">
+        <collection property="tagDtoList" ofType="top.fzshuai.blog.domain.dto.TagDto">
             <id property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
         </collection>
     </resultMap>
 
-    <resultMap id="articlePreviewResultMap" type="top.fzshuai.blog.domain.dto.ArticlePreviewDTO">
+    <resultMap id="articlePreviewResultMap" type="top.fzshuai.blog.domain.dto.ArticlePreviewDto">
         <id property="articleId" column="article_id"/>
         <result property="articleCover" column="article_cover"/>
         <result property="articleTitle" column="article_title"/>
         <result property="createTime" column="create_time"/>
         <result property="categoryId" column="category_id"/>
         <result property="categoryName" column="category_name"/>
-        <collection property="tagDTOList" ofType="top.fzshuai.blog.domain.dto.TagDTO">
+        <collection property="tagDtoList" ofType="top.fzshuai.blog.domain.dto.TagDto">
             <id property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
         </collection>
     </resultMap>
 
-    <resultMap id="articleResultMap" type="top.fzshuai.blog.domain.dto.ArticleDetailDTO">
+    <resultMap id="articleResultMap" type="top.fzshuai.blog.domain.dto.ArticleDetailDto">
         <id property="articleId" column="article_id"/>
         <result property="articleCover" column="article_cover"/>
         <result property="articleTitle" column="article_title"/>
@@ -60,13 +60,13 @@
         <result property="updateTime" column="update_time"/>
         <result property="categoryId" column="category_id"/>
         <result property="categoryName" column="category_name"/>
-        <collection property="tagDTOList" ofType="top.fzshuai.blog.domain.dto.TagDTO">
+        <collection property="tagDtoList" ofType="top.fzshuai.blog.domain.dto.TagDto">
             <id property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
         </collection>
     </resultMap>
 
-    <resultMap id="articleBackResultMap" type="top.fzshuai.blog.domain.dto.ArticleBackDTO">
+    <resultMap id="articleBackResultMap" type="top.fzshuai.blog.domain.dto.ArticleBackDto">
         <id property="articleId" column="article_id"/>
         <result property="articleCover" column="article_cover"/>
         <result property="articleTitle" column="article_title"/>
@@ -76,7 +76,7 @@
         <result property="isDelete" column="is_delete"/>
         <result property="status" column="status"/>
         <result property="categoryName" column="category_name"/>
-        <collection property="tagDTOList" ofType="top.fzshuai.blog.domain.dto.TagDTO">
+        <collection property="tagDtoList" ofType="top.fzshuai.blog.domain.dto.TagDto">
             <id property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
         </collection>
@@ -275,7 +275,7 @@
         </where>
     </select>
 
-    <select id="selectRecommendArticleList" resultType="top.fzshuai.blog.domain.dto.ArticleRecommendDTO">
+    <select id="selectRecommendArticleList" resultType="top.fzshuai.blog.domain.dto.ArticleRecommendDto">
         SELECT a.article_id,
                article_title,
                article_cover,
@@ -289,7 +289,7 @@
         ORDER BY is_top DESC, article_id DESC LIMIT 6
     </select>
 
-    <select id="selectArticleStatisticsList" resultType="top.fzshuai.blog.domain.dto.ArticleStatisticsDTO">
+    <select id="selectArticleStatisticsList" resultType="top.fzshuai.blog.domain.dto.ArticleStatisticsDto">
         SELECT DATE_FORMAT(create_time, "%Y-%m-%d") AS date,
             COUNT( 1 ) AS count
         FROM

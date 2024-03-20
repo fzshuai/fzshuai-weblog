@@ -21,7 +21,7 @@ import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.core.validate.EditGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.utils.poi.ExcelUtil;
-import top.fzshuai.blog.domain.bo.ArticleBO;
+import top.fzshuai.blog.domain.bo.ArticleBo;
 import top.fzshuai.blog.service.IArticleService;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.blog.domain.vo.*;
@@ -47,7 +47,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles/archives")
-    public R<PageResultVO<ArchiveVO>> listArchives() {
+    public R<PageResultVo<ArchiveVo>> listArchives() {
         return R.ok(articleService.selectArticleArchiveList());
     }
 
@@ -58,7 +58,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles")
-    public R<List<ArticleHomeVO>> listArticles() {
+    public R<List<ArticleHomeVo>> listArticles() {
         return R.ok(articleService.selectArticleHomeList());
     }
 
@@ -70,7 +70,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles/{articleId}")
-    public R<ArticleDetailVO> getArticleById(@PathVariable("articleId") Long articleId) {
+    public R<ArticleDetailVo> getArticleById(@PathVariable("articleId") Long articleId) {
         return R.ok(articleService.selectArticleDetailById(articleId));
     }
 
@@ -81,7 +81,7 @@ public class ArticleController extends BaseController {
      * @return 文章列表
      */
     @GetMapping("/articles/condition")
-    public R<ArticlePreviewListVO> listArticlesByCondition(ConditionVO condition) {
+    public R<ArticlePreviewListVo> listArticlesByCondition(ConditionVo condition) {
         return R.ok(articleService.selectArticlePreviewList(condition));
     }
 
@@ -93,7 +93,7 @@ public class ArticleController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/articles/search")
-    public R<List<ArticleSearchVO>> listArticlesBySearch(ConditionVO condition) {
+    public R<List<ArticleSearchVo>> listArticlesBySearch(ConditionVo condition) {
         return R.ok(articleService.searchArticle(condition));
     }
 
@@ -114,7 +114,7 @@ public class ArticleController extends BaseController {
      */
     @SaCheckPermission("blog:article:list")
     @GetMapping("/list")
-    public TableDataInfo<ArticleVO> list(ArticleBO bo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVo> list(ArticleBo bo, PageQuery pageQuery) {
         return articleService.selectArticlePageList(bo, pageQuery);
     }
 
@@ -124,9 +124,9 @@ public class ArticleController extends BaseController {
     @SaCheckPermission("blog:article:export")
     @Log(title = "文章", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(ArticleBO bo, HttpServletResponse response) {
-        List<ArticleVO> list = articleService.selectArticleList(bo);
-        ExcelUtil.exportExcel(list, "文章", ArticleVO.class, response);
+    public void export(ArticleBo bo, HttpServletResponse response) {
+        List<ArticleVo> list = articleService.selectArticleList(bo);
+        ExcelUtil.exportExcel(list, "文章", ArticleVo.class, response);
     }
 
     /**
@@ -136,7 +136,7 @@ public class ArticleController extends BaseController {
      */
     @SaCheckPermission("blog:article:query")
     @GetMapping("/{articleId}")
-    public R<ArticleVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<ArticleVo> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long articleId) {
         return R.ok(articleService.selectArticleById(articleId));
     }
@@ -148,7 +148,7 @@ public class ArticleController extends BaseController {
     @Log(title = "文章", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody ArticleBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody ArticleBo bo) {
         return toAjax(articleService.insertByBo(bo));
     }
 
@@ -159,7 +159,7 @@ public class ArticleController extends BaseController {
     @Log(title = "文章", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody ArticleBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody ArticleBo bo) {
         return toAjax(articleService.updateByBo(bo));
     }
 

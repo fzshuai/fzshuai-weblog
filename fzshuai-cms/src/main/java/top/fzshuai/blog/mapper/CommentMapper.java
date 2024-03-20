@@ -1,11 +1,11 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.Comment;
-import top.fzshuai.blog.domain.dto.CommentCountDTO;
-import top.fzshuai.blog.domain.dto.CommentDTO;
-import top.fzshuai.blog.domain.dto.ReplyCountDTO;
-import top.fzshuai.blog.domain.dto.ReplyDTO;
-import top.fzshuai.blog.domain.vo.CommentVO;
+import top.fzshuai.blog.domain.dto.CommentCountDto;
+import top.fzshuai.blog.domain.dto.CommentDto;
+import top.fzshuai.blog.domain.dto.ReplyCountDto;
+import top.fzshuai.blog.domain.dto.ReplyDto;
+import top.fzshuai.blog.domain.vo.CommentVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, CommentVO> {
+public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, CommentVo> {
 
     /**
      * 查看评论
@@ -27,7 +27,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentVO 评论信息
      * @return 评论集合
      */
-    List<CommentDTO> selectCommentList(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVO commentVO);
+    List<CommentDto> selectCommentList(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVo commentVO);
 
     /**
      * 查看评论id集合下的回复
@@ -35,7 +35,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentIdList 评论id集合
      * @return 回复集合
      */
-    List<ReplyDTO> selectReplyListByIds(@Param("commentIdList") List<Long> commentIdList);
+    List<ReplyDto> selectReplyListByIds(@Param("commentIdList") List<Long> commentIdList);
 
     /**
      * 根据评论id查询回复总量
@@ -43,7 +43,7 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param commentIdList 评论id集合
      * @return 回复数量
      */
-    List<ReplyCountDTO> selectReplyCountByIds(@Param("commentIdList") List<Long> commentIdList);
+    List<ReplyCountDto> selectReplyCountByIds(@Param("commentIdList") List<Long> commentIdList);
 
     /**
      * 根据评论主题id获取评论量
@@ -51,6 +51,6 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param topicIdList 说说id列表
      * @return 说说评论量
      */
-    List<CommentCountDTO> selectCommentCountByTopicIds(List<Long> topicIdList);
+    List<CommentCountDto> selectCommentCountByTopicIds(List<Long> topicIdList);
 
 }

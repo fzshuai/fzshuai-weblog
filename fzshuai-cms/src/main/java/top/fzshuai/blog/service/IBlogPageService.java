@@ -1,7 +1,7 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.vo.PageVO;
-import top.fzshuai.blog.domain.bo.PageBO;
+import top.fzshuai.blog.domain.vo.PageVo;
+import top.fzshuai.blog.domain.bo.PageBo;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.domain.PageQuery;
 
@@ -19,27 +19,27 @@ public interface IBlogPageService {
     /**
      * 查询博客页面
      */
-    PageVO selectPageById(Long pageId);
+    PageVo selectPageById(Long pageId);
 
     /**
      * 查询博客页面列表
      */
-    TableDataInfo<PageVO> selectPageList(PageBO bo, PageQuery pageQuery);
+    TableDataInfo<PageVo> selectPageList(PageBo bo, PageQuery pageQuery);
 
     /**
      * 查询博客页面列表
      */
-    List<PageVO> selectPageList(PageBO bo);
+    List<PageVo> selectPageList(PageBo bo);
 
     /**
      * 新增博客页面
      */
-    Boolean insertByBo(PageBO bo);
+    Boolean insertByBo(PageBo bo);
 
     /**
      * 修改博客页面
      */
-    Boolean updateByBo(PageBO bo);
+    Boolean updateByBo(PageBo bo);
 
     /**
      * 校验并批量删除博客页面信息

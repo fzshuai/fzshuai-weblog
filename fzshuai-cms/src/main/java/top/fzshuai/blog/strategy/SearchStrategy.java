@@ -1,6 +1,6 @@
 package top.fzshuai.blog.strategy;
 
-import top.fzshuai.blog.domain.vo.ArticleSearchVO;
+import top.fzshuai.blog.domain.vo.ArticleSearchVo;
 import java.util.List;
 
 /**
@@ -18,6 +18,6 @@ public interface SearchStrategy {
      * @param keywords 关键字
      * @return 文章列表
      */
-    List<ArticleSearchVO> searchArticle(String keywords);
+    List<ArticleSearchVo> searchArticle(String keywords);
 
 }

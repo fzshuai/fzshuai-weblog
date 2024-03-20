@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.vo.ArticleSearchVO;
+import top.fzshuai.blog.domain.vo.ArticleSearchVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.blog.strategy.SearchStrategy;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class MySqlSearchStrategyImpl implements SearchStrategy {
     private final ArticleMapper articleMapper;
 
     @Override
-    public List<ArticleSearchVO> searchArticle(String keywords) {
+    public List<ArticleSearchVo> searchArticle(String keywords) {
         // 判空
         if (StringUtils.isBlank(keywords)) {
             return new ArrayList<>();
@@ -62,7 +62,7 @@ public class MySqlSearchStrategyImpl implements SearchStrategy {
             }
             // 文章标题高亮
             String articleTitle = article.getArticleTitle().replaceAll(keywords, PRE_TAG + keywords + POST_TAG);
-            return ArticleSearchVO.builder()
+            return ArticleSearchVo.builder()
                 .articleId(article.getArticleId())
                 .articleTitle(articleTitle)
                 .articleContent(articleContent)

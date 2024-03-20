@@ -8,7 +8,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.constant.Constants;
-import top.fzshuai.common.core.domain.dto.RoleDTO;
+import top.fzshuai.common.core.domain.dto.RoleDto;
 import top.fzshuai.common.core.domain.entity.SysUser;
 import top.fzshuai.common.core.domain.event.LogininforEvent;
 import top.fzshuai.common.core.domain.model.LoginUser;
@@ -282,7 +282,7 @@ public class SysLoginService {
         loginUser.setMenuPermission(permissionService.getMenuPermission(user));
         loginUser.setRolePermission(permissionService.getRolePermission(user));
         loginUser.setDeptName(ObjectUtil.isNull(user.getDept()) ? "" : user.getDept().getDeptName());
-        List<RoleDTO> roles = BeanUtil.copyToList(user.getRoles(), RoleDTO.class);
+        List<RoleDto> roles = BeanUtil.copyToList(user.getRoles(), RoleDto.class);
         loginUser.setRoles(roles);
         return loginUser;
     }

@@ -2,8 +2,8 @@ package top.fzshuai.blog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.dto.CategoryDTO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
+import top.fzshuai.blog.domain.dto.CategoryDto;
+import top.fzshuai.blog.domain.vo.PageResultVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.common.exception.ServiceException;
 import top.fzshuai.common.utils.StringUtils;
@@ -14,8 +14,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import top.fzshuai.blog.domain.bo.CategoryBO;
-import top.fzshuai.blog.domain.vo.CategoryVO;
+import top.fzshuai.blog.domain.bo.CategoryBo;
+import top.fzshuai.blog.domain.vo.CategoryVo;
 import top.fzshuai.blog.domain.Category;
 import top.fzshuai.blog.mapper.CategoryMapper;
 import top.fzshuai.blog.service.ICategoryService;
@@ -39,15 +39,15 @@ public class CategoryServiceImpl implements ICategoryService {
     private final ArticleMapper articleMapper;
 
     @Override
-    public PageResultVO<CategoryDTO> selectCategoryList() {
-        return new PageResultVO<>(baseMapper.selectCategoryList(), Integer.parseInt(String.valueOf(baseMapper.selectCount(null))));
+    public PageResultVo<CategoryDto> selectCategoryList() {
+        return new PageResultVo<>(baseMapper.selectCategoryList(), Integer.parseInt(String.valueOf(baseMapper.selectCount(null))));
     }
 
     /**
      * 查询文章分类
      */
     @Override
-    public CategoryVO selectCategoryById(Long categoryId) {
+    public CategoryVo selectCategoryById(Long categoryId) {
         return baseMapper.selectVoById(categoryId);
     }
 
@@ -55,9 +55,9 @@ public class CategoryServiceImpl implements ICategoryService {
      * 查询文章分类列表
      */
     @Override
-    public TableDataInfo<CategoryVO> selectCategoryList(CategoryBO bo, PageQuery pageQuery) {
+    public TableDataInfo<CategoryVo> selectCategoryList(CategoryBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
-        Page<CategoryVO> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
+        Page<CategoryVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
@@ -65,12 +65,12 @@ public class CategoryServiceImpl implements ICategoryService {
      * 查询文章分类列表
      */
     @Override
-    public List<CategoryVO> selectCategoryList(CategoryBO bo) {
+    public List<CategoryVo> selectCategoryList(CategoryBo bo) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
-    private LambdaQueryWrapper<Category> buildQueryWrapper(CategoryBO bo) {
+    private LambdaQueryWrapper<Category> buildQueryWrapper(CategoryBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Category> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(bo.getCategoryName()), Category::getCategoryName, bo.getCategoryName());
@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * 新增文章分类
      */
     @Override
-    public Boolean insertByBo(CategoryBO bo) {
+    public Boolean insertByBo(CategoryBo bo) {
         Category add = BeanUtil.toBean(bo, Category.class);
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
@@ -95,7 +95,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * 修改文章分类
      */
     @Override
-    public Boolean updateByBo(CategoryBO bo) {
+    public Boolean updateByBo(CategoryBo bo) {
         Category update = BeanUtil.toBean(bo, Category.class);
         validEntityBeforeSave(update);
         return baseMapper.updateById(update) > 0;

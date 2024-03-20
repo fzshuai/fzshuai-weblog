@@ -2,7 +2,7 @@ package top.fzshuai.job.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.vo.ArticleVO;
+import top.fzshuai.blog.domain.vo.ArticleVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -41,7 +41,7 @@ public class BlogService {
         List<Article> articleList = new ArrayList<>();
         zSetEntryRange.forEach(
             item -> {
-                ArticleVO articleVO = baseMapper.selectVoById((Long) item.getValue());
+                ArticleVo articleVO = baseMapper.selectVoById((Long) item.getValue());
                 articleVO.setViewCount(item.getScore().intValue());
                 Article article = BeanUtil.toBean(articleVO, Article.class);
                 articleList.add(article);

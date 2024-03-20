@@ -4,10 +4,10 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import top.fzshuai.blog.domain.ChatRecord;
-import top.fzshuai.blog.domain.dto.ChatRecordDTO;
-import top.fzshuai.blog.domain.dto.RecallMessageDTO;
-import top.fzshuai.blog.domain.dto.WebsocketMessageDTO;
-import top.fzshuai.blog.domain.vo.VoiceVO;
+import top.fzshuai.blog.domain.dto.ChatRecordDto;
+import top.fzshuai.blog.domain.dto.RecallMessageDto;
+import top.fzshuai.blog.domain.dto.WebsocketMessageDto;
+import top.fzshuai.blog.domain.vo.VoiceVo;
 import top.fzshuai.blog.mapper.ChatRecordMapper;
 import top.fzshuai.blog.utils.HTMLUtils;
 import top.fzshuai.common.utils.BeanCopyUtils;
@@ -141,9 +141,9 @@ public class WebSocketService {
         }
 
         // 加载历史聊天记录
-        ChatRecordDTO chatRecordDTO = listChartRecords(endpointConfig);
+        ChatRecordDto chatRecordDTO = listChartRecords(endpointConfig);
         // 发送消息
-        WebsocketMessageDTO messageDTO = WebsocketMessageDTO.builder()
+        WebsocketMessageDto messageDTO = WebsocketMessageDto.builder()
             .type(HISTORY_RECORD.getType())
             .data(chatRecordDTO)
             .build();
@@ -179,7 +179,7 @@ public class WebSocketService {
      */
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
-        WebsocketMessageDTO messageDTO = JSON.parseObject(message, WebsocketMessageDTO.class);
+        WebsocketMessageDto messageDTO = JSON.parseObject(message, WebsocketMessageDto.class);
         switch (Objects.requireNonNull(getChatType(messageDTO.getType()))) {
             case SEND_MESSAGE:
                 // 发送消息
@@ -196,7 +196,7 @@ public class WebSocketService {
                 break;
             case RECALL_MESSAGE:
                 // 撤回消息
-                RecallMessageDTO recallMessage = JSON.parseObject(JSON.toJSONString(messageDTO.getData()), RecallMessageDTO.class);
+                RecallMessageDto recallMessage = JSON.parseObject(JSON.toJSONString(messageDTO.getData()), RecallMessageDto.class);
                 // 删除记录
                 chatRecordMapper.deleteById(recallMessage.getMessageId());
                 // 广播消息
@@ -217,7 +217,7 @@ public class WebSocketService {
      * @param messageDTO 消息dto
      * @throws IOException io异常
      */
-    private void broadcastMessage(WebsocketMessageDTO messageDTO) throws IOException {
+    private void broadcastMessage(WebsocketMessageDto messageDTO) throws IOException {
         for (WebSocketService webSocketService : webSocketSet) {
             synchronized (webSocketService.session) {
                 webSocketService.session.getBasicRemote().sendText(JSON.toJSONString(messageDTO));
@@ -233,7 +233,7 @@ public class WebSocketService {
      */
     public void updateOnlineCount() throws IOException {
         // 获取当前在线人数
-        WebsocketMessageDTO messageDTO = WebsocketMessageDTO.builder()
+        WebsocketMessageDto messageDTO = WebsocketMessageDto.builder()
             .type(ONLINE_COUNT.getType())
             .data(getOnlineCount())
             .build();
@@ -247,7 +247,7 @@ public class WebSocketService {
      *
      * @param voiceVo 语音路径
      */
-    public void sendVoice(VoiceVO voiceVo) {
+    public void sendVoice(VoiceVo voiceVo) {
         // 上传语音文件
         String content = sysOssService.upload(voiceVo.getFile()).getUrl();
         voiceVo.setContent(content);
@@ -256,7 +256,7 @@ public class WebSocketService {
         chatRecord.setCreateTime(new Date());
         chatRecordMapper.insert(chatRecord);
         // 发送消息
-        WebsocketMessageDTO messageDTO = WebsocketMessageDTO.builder()
+        WebsocketMessageDto messageDTO = WebsocketMessageDto.builder()
             .type(VOICE_MESSAGE.getType())
             .data(chatRecord)
             .build();
@@ -274,13 +274,13 @@ public class WebSocketService {
      *
      * @return 加载历史聊天记录
      */
-    private ChatRecordDTO listChartRecords(EndpointConfig endpointConfig) {
+    private ChatRecordDto listChartRecords(EndpointConfig endpointConfig) {
         // 获取聊天历史记录
         List<ChatRecord> chatRecordList = chatRecordMapper.selectList(new LambdaQueryWrapper<ChatRecord>()
             .ge(ChatRecord::getCreateTime, DateUtil.offsetHour(new Date(), -12)));
         // 获取当前用户ip
         String ipAddress = endpointConfig.getUserProperties().get(ChatConfigurator.HEADER_NAME).toString();
-        return ChatRecordDTO.builder()
+        return ChatRecordDto.builder()
             .chatRecordList(chatRecordList)
             .ipAddress(ipAddress)
             .ipSource(AddressUtils.getRealAddressByIP(ipAddress))

@@ -2,10 +2,10 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.CommentBO;
-import top.fzshuai.blog.domain.dto.CommentDTO;
-import top.fzshuai.blog.domain.vo.CommentVO;
-import top.fzshuai.blog.domain.vo.PageResultVO;
+import top.fzshuai.blog.domain.bo.CommentBo;
+import top.fzshuai.blog.domain.dto.CommentDto;
+import top.fzshuai.blog.domain.vo.CommentVo;
+import top.fzshuai.blog.domain.vo.PageResultVo;
 import top.fzshuai.blog.service.ICommentService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -49,7 +49,7 @@ public class CommentController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/comments")
-    public R<PageResultVO<CommentDTO>> listComments(CommentVO commentVO) {
+    public R<PageResultVo<CommentDto>> listComments(CommentVo commentVO) {
         return R.ok(commentService.selectCommentList(commentVO));
     }
 
@@ -60,7 +60,7 @@ public class CommentController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/comments")
-    public R<?> saveComment(@Valid @RequestBody CommentVO commentVO) {
+    public R<?> saveComment(@Valid @RequestBody CommentVo commentVO) {
         commentService.insertComment(commentVO);
         return R.ok();
     }
@@ -82,7 +82,7 @@ public class CommentController extends BaseController {
     @SaIgnore
     @SaCheckPermission("blog:comment:list")
     @GetMapping("/list")
-    public TableDataInfo<CommentVO> list(CommentBO bo, PageQuery pageQuery) {
+    public TableDataInfo<CommentVo> list(CommentBo bo, PageQuery pageQuery) {
         return commentService.selectCommentPageList(bo, pageQuery);
     }
 
@@ -92,9 +92,9 @@ public class CommentController extends BaseController {
     @SaCheckPermission("blog:comment:export")
     @Log(title = "文章评论", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(CommentBO bo, HttpServletResponse response) {
-        List<CommentVO> list = commentService.selectCommentList(bo);
-        ExcelUtil.exportExcel(list, "文章评论", CommentVO.class, response);
+    public void export(CommentBo bo, HttpServletResponse response) {
+        List<CommentVo> list = commentService.selectCommentList(bo);
+        ExcelUtil.exportExcel(list, "文章评论", CommentVo.class, response);
     }
 
     /**
@@ -105,7 +105,7 @@ public class CommentController extends BaseController {
     @SaIgnore
     @SaCheckPermission("blog:comment:query")
     @GetMapping("/{commentId}")
-    public R<CommentVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<CommentVo> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long commentId) {
         return R.ok(commentService.selectCommentById(commentId));
     }
@@ -117,7 +117,7 @@ public class CommentController extends BaseController {
     @Log(title = "文章评论", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody CommentBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody CommentBo bo) {
         return toAjax(commentService.insertByBo(bo));
     }
 
@@ -128,7 +128,7 @@ public class CommentController extends BaseController {
     @Log(title = "文章评论", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CommentBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CommentBo bo) {
         return toAjax(commentService.updateByBo(bo));
     }
 

@@ -2,8 +2,8 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.FriendLinkBO;
-import top.fzshuai.blog.domain.vo.FriendLinkVO;
+import top.fzshuai.blog.domain.bo.FriendLinkBo;
+import top.fzshuai.blog.domain.vo.FriendLinkVo;
 import top.fzshuai.blog.service.IFriendLinkService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -46,7 +46,7 @@ public class FriendLinkController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/links")
-    public R<List<FriendLinkVO>> listFriendLinks() {
+    public R<List<FriendLinkVo>> listFriendLinks() {
         return R.ok(friendLinkService.selectFriendLinkList());
     }
 
@@ -55,7 +55,7 @@ public class FriendLinkController extends BaseController {
      */
     @SaCheckPermission("blog:friendLink:list")
     @GetMapping("/list")
-    public TableDataInfo<FriendLinkVO> list(FriendLinkBO bo, PageQuery pageQuery) {
+    public TableDataInfo<FriendLinkVo> list(FriendLinkBo bo, PageQuery pageQuery) {
         return friendLinkService.selectFriendLinkPageList(bo, pageQuery);
     }
 
@@ -65,9 +65,9 @@ public class FriendLinkController extends BaseController {
     @SaCheckPermission("blog:friendLink:export")
     @Log(title = "友人链接", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(FriendLinkBO bo, HttpServletResponse response) {
-        List<FriendLinkVO> list = friendLinkService.selectFriendLinkList(bo);
-        ExcelUtil.exportExcel(list, "友人链接", FriendLinkVO.class, response);
+    public void export(FriendLinkBo bo, HttpServletResponse response) {
+        List<FriendLinkVo> list = friendLinkService.selectFriendLinkList(bo);
+        ExcelUtil.exportExcel(list, "友人链接", FriendLinkVo.class, response);
     }
 
     /**
@@ -77,7 +77,7 @@ public class FriendLinkController extends BaseController {
      */
     @SaCheckPermission("blog:friendLink:query")
     @GetMapping("/{friendLinkId}")
-    public R<FriendLinkVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<FriendLinkVo> getInfo(@NotNull(message = "主键不能为空")
                                    @PathVariable Long friendLinkId) {
         return R.ok(friendLinkService.selectFriendLinkById(friendLinkId));
     }
@@ -89,7 +89,7 @@ public class FriendLinkController extends BaseController {
     @Log(title = "友人链接", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody FriendLinkBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody FriendLinkBo bo) {
         return toAjax(friendLinkService.insertByBo(bo));
     }
 
@@ -100,7 +100,7 @@ public class FriendLinkController extends BaseController {
     @Log(title = "友人链接", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody FriendLinkBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody FriendLinkBo bo) {
         return toAjax(friendLinkService.updateByBo(bo));
     }
 

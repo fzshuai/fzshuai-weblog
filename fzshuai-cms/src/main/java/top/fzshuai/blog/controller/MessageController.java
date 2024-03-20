@@ -2,8 +2,8 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
-import top.fzshuai.blog.domain.bo.MessageBO;
-import top.fzshuai.blog.domain.vo.MessageVO;
+import top.fzshuai.blog.domain.bo.MessageBo;
+import top.fzshuai.blog.domain.vo.MessageVo;
 import top.fzshuai.blog.service.IMessageService;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.annotation.RepeatSubmit;
@@ -45,7 +45,7 @@ public class MessageController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/messages")
-    public R<?> saveMessage(@Valid @RequestBody MessageVO messageVo) {
+    public R<?> saveMessage(@Valid @RequestBody MessageVo messageVo) {
         messageService.insertMessage(messageVo);
         return R.ok();
     }
@@ -57,7 +57,7 @@ public class MessageController extends BaseController {
      */
     @SaIgnore
     @GetMapping("/messages")
-    public R<List<MessageVO>> listMessages() {
+    public R<List<MessageVo>> listMessages() {
         return R.ok(messageService.selectMessageList());
     }
 
@@ -66,7 +66,7 @@ public class MessageController extends BaseController {
      */
     @SaCheckPermission("blog:message:list")
     @GetMapping("/list")
-    public TableDataInfo<MessageVO> list(MessageBO bo, PageQuery pageQuery) {
+    public TableDataInfo<MessageVo> list(MessageBo bo, PageQuery pageQuery) {
         return messageService.selectMessagePageList(bo, pageQuery);
     }
 
@@ -76,9 +76,9 @@ public class MessageController extends BaseController {
     @SaCheckPermission("blog:message:export")
     @Log(title = "留言", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(MessageBO bo, HttpServletResponse response) {
-        List<MessageVO> list = messageService.selectMessageList(bo);
-        ExcelUtil.exportExcel(list, "留言", MessageVO.class, response);
+    public void export(MessageBo bo, HttpServletResponse response) {
+        List<MessageVo> list = messageService.selectMessageList(bo);
+        ExcelUtil.exportExcel(list, "留言", MessageVo.class, response);
     }
 
     /**
@@ -88,7 +88,7 @@ public class MessageController extends BaseController {
      */
     @SaCheckPermission("blog:message:query")
     @GetMapping("/{messageId}")
-    public R<MessageVO> getInfo(@NotNull(message = "主键不能为空")
+    public R<MessageVo> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long messageId) {
         return R.ok(messageService.selectMessageById(messageId));
     }
@@ -100,7 +100,7 @@ public class MessageController extends BaseController {
     @Log(title = "留言", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody MessageBO bo) {
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody MessageBo bo) {
         return toAjax(messageService.insertByBo(bo));
     }
 
@@ -111,7 +111,7 @@ public class MessageController extends BaseController {
     @Log(title = "留言", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody MessageBO bo) {
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody MessageBo bo) {
         return toAjax(messageService.updateByBo(bo));
     }
 

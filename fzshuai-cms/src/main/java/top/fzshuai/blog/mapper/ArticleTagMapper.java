@@ -1,7 +1,7 @@
 package top.fzshuai.blog.mapper;
 
 import top.fzshuai.blog.domain.ArticleTag;
-import top.fzshuai.blog.domain.vo.ArticleTagVO;
+import top.fzshuai.blog.domain.vo.ArticleTagVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author fzshuai
  * @date 2023-05-03
  */
-public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, ArticleTag, ArticleTagVO> {
+public interface ArticleTagMapper extends BaseMapperPlus<ArticleTagMapper, ArticleTag, ArticleTagVo> {
 
     /**
      * 根据文章id获取文章对应的标签名称列表

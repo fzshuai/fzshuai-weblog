@@ -22,7 +22,7 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="selectCommentList" resultType="top.fzshuai.blog.domain.dto.CommentDTO">
+    <select id="selectCommentList" resultType="top.fzshuai.blog.domain.dto.CommentDto">
         SELECT
         u.nickname,
         u.avatar,
@@ -35,10 +35,10 @@
         blog_comment c
         JOIN sys_user u ON c.user_id = u.user_id
         <where>
-            <if test="commentVO.topicId != null">
-                topic_id = #{commentVO.topicId}
+            <if test="commentVo.topicId != null">
+                topic_id = #{commentVo.topicId}
             </if>
-            AND type = #{commentVO.type}
+            AND type = #{commentVo.type}
             AND c.state = 1
             AND parent_id IS NULL
         </where>
@@ -47,7 +47,7 @@
         LIMIT #{current},#{size}
     </select>
 
-    <select id="selectReplyListByIds" resultType="top.fzshuai.blog.domain.dto.ReplyDTO">
+    <select id="selectReplyListByIds" resultType="top.fzshuai.blog.domain.dto.ReplyDto">
         SELECT
         *
         FROM
@@ -83,7 +83,7 @@
         4 > row_num
     </select>
 
-    <select id="selectReplyCountByIds" resultType="top.fzshuai.blog.domain.dto.ReplyCountDTO">
+    <select id="selectReplyCountByIds" resultType="top.fzshuai.blog.domain.dto.ReplyCountDto">
         SELECT
         parent_id as comment_id,
         count(1) AS reply_count
@@ -100,7 +100,7 @@
         parent_id
     </select>
 
-    <select id="selectCommentCountByTopicIds" resultType="top.fzshuai.blog.domain.dto.CommentCountDTO">
+    <select id="selectCommentCountByTopicIds" resultType="top.fzshuai.blog.domain.dto.CommentCountDto">
         SELECT
         topic_id as id,
         COUNT( 1 ) AS comment_count
