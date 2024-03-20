@@ -69,8 +69,6 @@ spring:
 #          url: jdbc:oracle:thin:@//101.42.155.186:1521/XE
 #          username: ROOT
 #          password: root
-#          hikari:
-#            connectionTestQuery: SELECT 1 FROM DUAL
 #        postgres:
 #          type: ${spring.datasource.type}
 #          driverClassName: org.postgresql.Driver
