@@ -3,7 +3,6 @@ package top.fzshuai.common.enums;
 import top.fzshuai.common.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import top.fzshuai.common.helper.DataPermissionHelper;
 
 /**
  * 数据权限类型
@@ -11,7 +10,7 @@ import top.fzshuai.common.helper.DataPermissionHelper;
  * 语法支持 spel 模板表达式
  * <p>
  * 内置数据 user 当前用户 内容参考 LoginUser
- * 如需扩展数据 可使用 {@link DataPermissionHelper} 操作
+ * 如需扩展数据 可使用 {@link top.fzshuai.common.helper.DataPermissionHelper} 操作
  * 内置服务 sdss 系统数据权限服务 内容参考 SysDataScopeService
  * 如需扩展更多自定义服务 可以参考 sdss 自行编写
  *
@@ -30,17 +29,17 @@ public enum DataScopeType {
     /**
      * 自定数据权限
      */
-    CUSTOM("2", " #{#deptName} IN ( #{@sdss.getRoleCustom( #user.roleId )} ) ", ""),
+    CUSTOM("2", " #{#deptName} IN ( #{@sdss.getRoleCustom( #user.roleId )} ) ", " 1 = 0 "),
 
     /**
      * 部门数据权限
      */
-    DEPT("3", " #{#deptName} = #{#user.deptId} ", ""),
+    DEPT("3", " #{#deptName} = #{#user.deptId} ", " 1 = 0 "),
 
     /**
      * 部门及以下数据权限
      */
-    DEPT_AND_CHILD("4", " #{#deptName} IN ( #{@sdss.getDeptAndChild( #user.deptId )} )", ""),
+    DEPT_AND_CHILD("4", " #{#deptName} IN ( #{@sdss.getDeptAndChild( #user.deptId )} )", " 1 = 0 "),
 
     /**
      * 仅本人数据权限
