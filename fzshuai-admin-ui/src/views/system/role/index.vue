@@ -139,9 +139,9 @@
             <el-button size="mini" type="text" icon="el-icon-d-arrow-right">更多</el-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="handleDataScope" icon="el-icon-circle-check"
-                v-hasPermi="['system:role:edit']">数据权限</el-dropdown-item>
+                                v-hasPermi="['system:role:edit']">数据权限</el-dropdown-item>
               <el-dropdown-item command="handleAuthUser" icon="el-icon-user"
-                v-hasPermi="['system:role:edit']">分配用户</el-dropdown-item>
+                                v-hasPermi="['system:role:edit']">分配用户</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -164,7 +164,7 @@
         </el-form-item>
         <el-form-item prop="roleKey">
           <span slot="label">
-            <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
+            <el-tooltip content="控制器中定义的权限字符，如：@SaCheckRole('admin')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
             权限字符
@@ -421,21 +421,21 @@ export default {
         this.$refs.menu.setCheckedKeys([]);
       }
       this.menuExpand = false,
-      this.menuNodeAll = false,
-      this.deptExpand = true,
-      this.deptNodeAll = false,
-      this.form = {
-        roleId: undefined,
-        roleName: undefined,
-        roleKey: undefined,
-        roleSort: 0,
-        status: "0",
-        menuIds: [],
-        deptIds: [],
-        menuCheckStrictly: true,
-        deptCheckStrictly: true,
-        remark: undefined
-      };
+        this.menuNodeAll = false,
+        this.deptExpand = true,
+        this.deptNodeAll = false,
+        this.form = {
+          roleId: undefined,
+          roleName: undefined,
+          roleKey: undefined,
+          roleSort: 0,
+          status: "0",
+          menuIds: [],
+          deptIds: [],
+          menuCheckStrictly: true,
+          deptCheckStrictly: true,
+          remark: undefined
+        };
       this.resetForm("form");
     },
     /** 搜索按钮操作 */
@@ -517,9 +517,9 @@ export default {
           roleMenu.then(res => {
             let checkedKeys = res.data.checkedKeys
             checkedKeys.forEach((v) => {
-                this.$nextTick(()=>{
-                    this.$refs.menu.setChecked(v, true ,false);
-                })
+              this.$nextTick(()=>{
+                this.$refs.menu.setChecked(v, true ,false);
+              })
             })
           });
         });
@@ -604,4 +604,3 @@ export default {
   }
 };
 </script>
-
