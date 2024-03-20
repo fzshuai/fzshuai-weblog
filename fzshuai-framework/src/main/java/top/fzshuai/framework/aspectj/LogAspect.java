@@ -6,6 +6,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import top.fzshuai.common.annotation.Log;
 import top.fzshuai.common.core.domain.event.OperLogEvent;
+import top.fzshuai.common.core.domain.model.LoginUser;
 import top.fzshuai.common.enums.BusinessStatus;
 import top.fzshuai.common.enums.HttpMethod;
 import top.fzshuai.common.helper.LoginHelper;
@@ -74,7 +75,9 @@ public class LogAspect {
             String ip = ServletUtils.getClientIP();
             operLog.setOperIp(ip);
             operLog.setOperUrl(StringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
-            operLog.setOperName(LoginHelper.getUsername());
+            LoginUser loginUser = LoginHelper.getLoginUser();
+            operLog.setOperName(loginUser.getUsername());
+            operLog.setDeptName(loginUser.getDeptName());
 
             if (e != null) {
                 operLog.setStatus(BusinessStatus.FAIL.ordinal());
