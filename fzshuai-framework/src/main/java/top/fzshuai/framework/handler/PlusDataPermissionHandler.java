@@ -2,21 +2,8 @@ package top.fzshuai.framework.handler;
 
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.collection.ConcurrentHashSet;
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ObjectUtil;
-import top.fzshuai.common.annotation.DataColumn;
-import top.fzshuai.common.annotation.DataPermission;
-import top.fzshuai.common.core.domain.dto.RoleDTO;
-import top.fzshuai.common.core.domain.model.LoginUser;
-import top.fzshuai.common.enums.DataScopeType;
-import top.fzshuai.common.exception.ServiceException;
-import top.fzshuai.common.helper.DataPermissionHelper;
-import top.fzshuai.common.helper.LoginHelper;
-import top.fzshuai.common.utils.StreamUtils;
-import top.fzshuai.common.utils.StringUtils;
-import top.fzshuai.common.utils.spring.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.Expression;
@@ -30,6 +17,17 @@ import org.springframework.expression.ParserContext;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import top.fzshuai.common.annotation.DataColumn;
+import top.fzshuai.common.annotation.DataPermission;
+import top.fzshuai.common.core.domain.dto.RoleDTO;
+import top.fzshuai.common.core.domain.model.LoginUser;
+import top.fzshuai.common.enums.DataScopeType;
+import top.fzshuai.common.exception.ServiceException;
+import top.fzshuai.common.helper.DataPermissionHelper;
+import top.fzshuai.common.helper.LoginHelper;
+import top.fzshuai.common.utils.StreamUtils;
+import top.fzshuai.common.utils.StringUtils;
+import top.fzshuai.common.utils.spring.SpringUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -52,11 +50,6 @@ public class PlusDataPermissionHandler {
     private final Map<String, DataPermission> dataPermissionCacheMap = new ConcurrentHashMap<>();
 
     /**
-     * 无效注解方法缓存用于快速返回
-     */
-    private final Set<String> invalidCacheSet = new ConcurrentHashSet<>();
-
-    /**
      * spel 解析器
      */
     private final ExpressionParser parser = new SpelExpressionParser();
@@ -69,10 +62,6 @@ public class PlusDataPermissionHandler {
 
     public Expression getSqlSegment(Expression where, String mappedStatementId, boolean isSelect) {
         DataColumn[] dataColumns = findAnnotation(mappedStatementId);
-        if (ArrayUtil.isEmpty(dataColumns)) {
-            invalidCacheSet.add(mappedStatementId);
-            return where;
-        }
         LoginUser currentUser = DataPermissionHelper.getVariable("user");
         if (ObjectUtil.isNull(currentUser)) {
             currentUser = LoginHelper.getLoginUser();
@@ -156,7 +145,7 @@ public class PlusDataPermissionHandler {
         return "";
     }
 
-    private DataColumn[] findAnnotation(String mappedStatementId) {
+    public DataColumn[] findAnnotation(String mappedStatementId) {
         StringBuilder sb = new StringBuilder(mappedStatementId);
         int index = sb.lastIndexOf(".");
         String clazzName = sb.substring(0, index);
@@ -190,10 +179,4 @@ public class PlusDataPermissionHandler {
         return null;
     }
 
-    /**
-     * 是否为无效方法 无数据权限
-     */
-    public boolean isInvalid(String mappedStatementId) {
-        return invalidCacheSet.contains(mappedStatementId);
-    }
 }
