@@ -2,7 +2,7 @@ package top.fzshuai.blog.strategy.config;
 
 import top.fzshuai.blog.enums.SearchModeEnum;
 import top.fzshuai.blog.strategy.SearchStrategy;
-// import top.fzshuai.blog.strategy.impl.EsSearchStrategyImpl;
+import top.fzshuai.blog.strategy.impl.EsSearchStrategyImpl;
 import top.fzshuai.blog.strategy.impl.MySqlSearchStrategyImpl;
 
 import javax.annotation.PostConstruct;
@@ -24,13 +24,13 @@ public class SearchStrategyConfig {
     @Resource
     private MySqlSearchStrategyImpl mySqlSearchStrategy;
 
-    // @Resource
-    // private EsSearchStrategyImpl esSearchStrategy;
+    @Resource
+    private EsSearchStrategyImpl esSearchStrategy;
 
     @PostConstruct
     public void init() {
         searchStrategyMap.put(SearchModeEnum.MYSQL.getMode(), mySqlSearchStrategy);
-        // searchStrategyMap.put(SearchModeEnum.ELASTICSEARCH.getMode(), esSearchStrategy);
+        searchStrategyMap.put(SearchModeEnum.ELASTICSEARCH.getMode(), esSearchStrategy);
     }
 
 }
