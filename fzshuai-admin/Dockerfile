@@ -6,6 +6,10 @@ RUN mkdir -p /fzshuai/server/logs \
     /fzshuai/server/temp \
     /fzshuai/skywalking/agent
 
+ENV TZ="Asia/Shanghai"
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
+
 WORKDIR /fzshuai/server
 
 ENV SERVER_PORT=8080
