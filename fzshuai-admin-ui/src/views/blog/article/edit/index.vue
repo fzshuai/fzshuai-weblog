@@ -525,6 +525,25 @@ export default {
   margin-top: 2.25rem;
 }
 
+.save-btn {
+  margin-left: 0.75rem;
+  background: #fff;
+  color: #f56c6c;
+}
+
+.tag-item {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.tag-item-select {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  cursor: not-allowed;
+  color: #ccccd8 !important;
+}
+
 .category-item {
   cursor: pointer;
   padding: 0.6rem 0.5rem;
