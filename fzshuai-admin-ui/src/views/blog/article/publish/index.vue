@@ -154,7 +154,7 @@ export default {
     this.searchTags();
 
   },
-  name: "Article",
+  name: "Publish",
   dicts: ['article_status', 'article_type', 'sys_yes_no'],
   data() {
     return {
