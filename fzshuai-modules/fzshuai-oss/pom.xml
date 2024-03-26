@@ -2,29 +2,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>fzshuai-blog</artifactId>
-        <groupId>top.fzshuai</groupId>
-        <version>2.1.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>fzshuai-generator</artifactId>
+    <parent>
+        <artifactId>fzshuai-modules</artifactId>
+        <groupId>top.fzshuai</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>fzshuai-oss</artifactId>
 
     <description>
-        generator代码生成
+        OSS对象存储模块
     </description>
 
     <dependencies>
-        <!--velocity代码生成使用模板 -->
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-engine-core</artifactId>
-        </dependency>
         <!-- 通用工具-->
         <dependency>
             <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
         </dependency>
 
     </dependencies>

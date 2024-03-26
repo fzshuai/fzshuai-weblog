@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>fzshuai-blog</artifactId>
-        <groupId>top.fzshuai</groupId>
-        <version>2.1.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>fzshuai-sms</artifactId>
+    <parent>
+        <artifactId>fzshuai-modules</artifactId>
+        <groupId>top.fzshuai</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>fzshuai-system</artifactId>
 
     <description>
-        SMS短信模块
+        system系统模块
     </description>
 
     <dependencies>
@@ -21,17 +22,15 @@
             <groupId>top.fzshuai</groupId>
             <artifactId>fzshuai-common</artifactId>
         </dependency>
-
+        <!-- OSS功能模块 -->
         <dependency>
-            <groupId>org.dromara.sms4j</groupId>
-            <artifactId>sms4j-spring-boot-starter</artifactId>
-            <exclusions>
-                <!-- 排除京东短信内存在的fastjson等待作者后续修复 -->
-                <exclusion>
-                    <groupId>com.alibaba</groupId>
-                    <artifactId>fastjson</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>top.fzshuai</groupId>
+            <artifactId>fzshuai-oss</artifactId>
+        </dependency>
+        <!-- SMS功能模块 -->
+        <dependency>
+            <groupId>top.fzshuai</groupId>
+            <artifactId>fzshuai-sms</artifactId>
         </dependency>
 
     </dependencies>

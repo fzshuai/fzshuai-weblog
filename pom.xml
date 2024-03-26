@@ -6,13 +6,14 @@
 
     <groupId>top.fzshuai</groupId>
     <artifactId>fzshuai-blog</artifactId>
-    <version>2.1.0</version>
+    <version>${revision}</version>
 
     <name>Fzshuai-Blog</name>
     <url>https://gitee.com/fu-zhanshuai/Fzshuai-Blog</url>
     <description>Fzshuai-Blog 博客系统</description>
 
     <properties>
+        <revision>2.1.0</revision>
         <fzshuai-blog.version>2.1.0</fzshuai-blog.version>
         <spring-boot.version>2.7.18</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -307,13 +308,13 @@
                 <artifactId>fzshuai-common</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
-            <!-- OSS对象存储模块 -->
+            <!-- OSS对象存储 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-oss</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
-            <!-- SMS短信模块 -->
+            <!-- SMS短信 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-sms</artifactId>
@@ -322,10 +323,10 @@
             <!-- 博客模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
-                <artifactId>fzshuai-cms</artifactId>
+                <artifactId>fzshuai-content</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
-            <!-- RabbitMq模块 -->
+            <!-- RabbitMQ -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-amqp</artifactId>
@@ -350,15 +351,9 @@
     <modules>
         <module>fzshuai-admin</module>
         <module>fzshuai-framework</module>
-        <module>fzshuai-system</module>
-        <module>fzshuai-job</module>
-        <module>fzshuai-generator</module>
         <module>fzshuai-common</module>
         <module>fzshuai-extend</module>
-        <module>fzshuai-oss</module>
-        <module>fzshuai-sms</module>
-        <module>fzshuai-cms</module>
-        <module>fzshuai-demo</module>
+        <module>fzshuai-modules</module>
     </modules>
     <packaging>pom</packaging>
 

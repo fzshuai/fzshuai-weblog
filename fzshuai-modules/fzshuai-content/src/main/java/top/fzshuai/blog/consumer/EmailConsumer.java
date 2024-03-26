@@ -1,6 +1,5 @@
 package top.fzshuai.blog.consumer;
 
-
 import com.alibaba.fastjson.JSON;
 import top.fzshuai.blog.constant.MQConstant;
 import top.fzshuai.blog.domain.dto.EmailDto;
