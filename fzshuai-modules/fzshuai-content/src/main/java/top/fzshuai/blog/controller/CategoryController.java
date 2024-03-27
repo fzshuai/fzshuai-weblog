@@ -117,4 +117,5 @@ public class CategoryController extends BaseController {
                           @PathVariable Long[] categoryIds) {
         return toAjax(categoryService.deleteWithValidByIds(Arrays.asList(categoryIds), true));
     }
+
 }

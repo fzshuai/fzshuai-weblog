@@ -50,7 +50,6 @@ public class AlbumController extends BaseController {
         return R.ok(albumService.selectAlbumList());
     }
 
-
     /**
      * 查询相册管理列表
      */

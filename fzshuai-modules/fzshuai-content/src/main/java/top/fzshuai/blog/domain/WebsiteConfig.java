@@ -30,4 +30,5 @@ public class WebsiteConfig extends BaseEntity {
      * 配置信息
      */
     private String config;
+
 }

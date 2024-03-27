@@ -175,4 +175,5 @@ public class ArticleController extends BaseController {
                           @PathVariable Long[] articleIds) {
         return toAjax(articleService.deleteWithValidByIds(Arrays.asList(articleIds), true));
     }
+
 }

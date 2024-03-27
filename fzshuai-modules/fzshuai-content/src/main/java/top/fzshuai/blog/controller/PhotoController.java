@@ -130,4 +130,5 @@ public class PhotoController extends BaseController {
                           @PathVariable Long[] photoIds) {
         return toAjax(photoService.deleteWithValidByIds(Arrays.asList(photoIds), true));
     }
+
 }

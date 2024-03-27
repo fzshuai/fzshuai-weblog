@@ -105,4 +105,5 @@ public class PageController extends BaseController {
                           @PathVariable Long[] pageIds) {
         return toAjax(iBlogPageService.deleteWithValidByIds(Arrays.asList(pageIds), true));
     }
+
 }

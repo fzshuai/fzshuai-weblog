@@ -43,10 +43,8 @@ import static top.fzshuai.blog.enums.ChatTypeEnum.*;
 @Component
 public class WebSocketService {
 
-
     @Resource
     private ISysOssService sysOssService;
-
 
     @Autowired
     public void setChatRecordMapper(ChatRecordMapper chatRecordMapper) {
@@ -77,12 +75,11 @@ public class WebSocketService {
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     private Session session;
+
     /**
      * 接收userName
      */
-
     private String userName = "";
-
 
     /**
      * 获取客户端真实ip
@@ -267,7 +264,6 @@ public class WebSocketService {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 加载历史聊天记录

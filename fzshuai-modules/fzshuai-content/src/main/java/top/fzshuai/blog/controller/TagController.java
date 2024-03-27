@@ -116,4 +116,5 @@ public class TagController extends BaseController {
                           @PathVariable Long[] tagIds) {
         return toAjax(tagService.deleteWithValidByIds(Arrays.asList(tagIds), true));
     }
+
 }

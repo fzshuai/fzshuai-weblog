@@ -116,4 +116,5 @@ public class FriendLinkController extends BaseController {
                           @PathVariable Long[] friendLinkIds) {
         return toAjax(friendLinkService.deleteWithValidByIds(Arrays.asList(friendLinkIds), true));
     }
+
 }
