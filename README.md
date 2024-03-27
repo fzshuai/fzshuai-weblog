@@ -4,9 +4,9 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-blue.svg)]()
 [![JDK-8+](https://img.shields.io/badge/JDK-8-green.svg)]()
 
-> Fzshuai-Blog 是一个基于 Ruoyi-Vue-Plus 框架开发的博客系统。主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档
+> Fzshuai-Blog 是一个基于 Ruoyi-Vue-Plus 框架开发的前后端分离的博客系统，分为前台博客系统和后台管理系统。主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档
 
-> 涉及技术：Spring Boot 、Sa-Token、Redis、RabbitMQ、MySQL 、Nginx、Vue 等
+> 涉及技术：Spring Boot、Mybatis-Plus、Sa-Token、Redis、RabbitMQ、MySQL、MinIO、XXL-JOB、Vue、Element-UI、Nginx、Docker 等
 
 > 项目遵循开源协议，项目代码开源免费、可商用，在项目中保留开源协议文件即可
 > 项目处于开发阶段，仅推荐用于学习、毕业设计等个人使用
