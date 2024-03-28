@@ -19,8 +19,9 @@ import static top.fzshuai.blog.constant.MQConstant.MAXWELL_QUEUE;
  * maxwell监听数据
  *
  * @author fzshuai
- * @date 2024-01-21
- **/
+ * @date 2023/05/03 20:26
+ * @since 1.0
+ */
 @Component
 @RabbitListener(queues = MAXWELL_QUEUE)
 public class MaxWellConsumer {

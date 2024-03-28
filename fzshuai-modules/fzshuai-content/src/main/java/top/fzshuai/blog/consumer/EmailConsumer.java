@@ -10,11 +10,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * 通知
+ * 邮件通知
  *
  * @author fzshuai
- * @date 2023-05-03
- **/
+ * @date 2023/05/03 20:26
+ * @since 1.0
+ */
 @Slf4j
 @Component
 @RabbitListener(queues = MQConstant.EMAIL_QUEUE)

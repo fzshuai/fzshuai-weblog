@@ -1,10 +1,11 @@
 package top.fzshuai.blog.constant;
 
 /**
- * mq常量
+ * MQ常量
  *
  * @author fzshuai
- * @date 2023-05-03
+ * @date 2023/05/03 20:26
+ * @since 1.0
  */
 public class MQConstant {
 
