@@ -1,6 +1,5 @@
 package top.fzshuai.blog.config;
 
-
 import top.fzshuai.blog.constant.MQConstant;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 
 import static top.fzshuai.blog.constant.MQConstant.MAXWELL_QUEUE;
 
-
 /**
  * maxwell监听数据
  *
