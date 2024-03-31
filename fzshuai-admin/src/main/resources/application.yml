@@ -233,7 +233,7 @@ springdoc:
     contact:
       name: fzshuai
       email: 156117106@qq.com
-      url: https://gitee.com/fu-zhanshuai/Fzshuai-Blog
+      url: https://gitee.com/fu-zhanshuai/fzshuai-blog
   components:
     # 鉴权方式配置
     security-schemes:
