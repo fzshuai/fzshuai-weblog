@@ -1,9 +1,9 @@
 package top.fzshuai.job.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.vo.ArticleVo;
-import top.fzshuai.blog.mapper.ArticleMapper;
+import top.fzshuai.weblog.domain.Article;
+import top.fzshuai.weblog.domain.vo.ArticleVo;
+import top.fzshuai.weblog.mapper.ArticleMapper;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.RequiredArgsConstructor;

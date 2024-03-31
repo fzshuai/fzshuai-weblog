@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.fzshuai.weblog.mapper.PhotoMapper">
+
+    <resultMap type="top.fzshuai.weblog.domain.Photo" id="PhotoResult">
+        <result property="photoId" column="photo_id"/>
+        <result property="albumId" column="album_id"/>
+        <result property="photoName" column="photo_name"/>
+        <result property="photoDesc" column="photo_desc"/>
+        <result property="photoSrc" column="photo_src"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectPhotoUrlListByAlbumId" resultType="String">
+        select blog_photo.photo_src
+        from blog_photo
+        where album_id = #{albumId} LIMIT #{pageNum}
+            , #{pageSize}"
+    </select>
+
+</mapper>

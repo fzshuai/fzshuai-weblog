@@ -16,7 +16,7 @@
         <module>fzshuai-generator</module>
         <module>fzshuai-job</module>
         <module>fzshuai-system</module>
-        <module>fzshuai-content</module>
+        <module>fzshuai-weblog</module>
         <module>fzshuai-oss</module>
         <module>fzshuai-sms</module>
     </modules>

@@ -341,7 +341,7 @@
             <!-- 博客模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
-                <artifactId>fzshuai-content</artifactId>
+                <artifactId>fzshuai-weblog</artifactId>
                 <version>${fzshuai-blog.version}</version>
             </dependency>
 

@@ -2,7 +2,7 @@ package top.fzshuai.web.controller.system;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.alibaba.fastjson.JSON;
-import top.fzshuai.blog.domain.dto.EmailDto;
+import top.fzshuai.weblog.domain.dto.EmailDto;
 import top.fzshuai.common.exception.base.BaseException;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.time.Duration;
 
-import static top.fzshuai.blog.constant.MQConstant.EMAIL_EXCHANGE;
-import static top.fzshuai.blog.utils.CommonUtil.checkEmail;
-import static top.fzshuai.blog.utils.CommonUtil.getRandomCode;
+import static top.fzshuai.weblog.constant.MQConstant.EMAIL_EXCHANGE;
+import static top.fzshuai.weblog.utils.CommonUtil.checkEmail;
+import static top.fzshuai.weblog.utils.CommonUtil.getRandomCode;
 import static top.fzshuai.common.constant.RedisConstant.CODE_EXPIRE_TIME;
 import static top.fzshuai.common.constant.RedisConstant.USER_CODE_KEY;
 
