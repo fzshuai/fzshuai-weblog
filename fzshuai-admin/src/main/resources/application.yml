@@ -94,23 +94,13 @@ spring:
       # 允许对象忽略json中不存在的属性
       fail_on_unknown_properties: false
 
-#management:
-#  health:
-#    elasticsearch:
-#      enabled: false
-
 # 搜索模式 可选 elasticsearch或mysql
 search:
   mode: mysql
-
-# es配置 若搜索模式为mysql可删除
-#easy-es:
-#  enable: false # 是否开启EE自动配置  true同时需要取消注释EsSearchStrategyImpl这个类
-#  address : 127.0.0.1:9200  #填你的es连接地址
-#  # username: 有设置才填写,非必须
-#  # password: 有设置才填写,非必须
-#  db-config:
-#    map-underscore-to-camel-case: false # 是否开启下划线转驼峰 默认为false
+  # es配置 若搜索模式为mysql可删除
+#  elasticsearch:
+#    rest:
+#      uris: localhost:9200
 
 # Sa-Token配置
 sa-token:
