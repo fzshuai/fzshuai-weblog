@@ -100,7 +100,7 @@ spring:
 --- # elasticsearch配置
 spring:
   elasticsearch:
-    uris: localhost:9200
+    uris: 127.0.0.1:9200
 
 --- # mq配置
 spring:
