@@ -57,6 +57,10 @@ user:
     # 密码锁定时间（默认10分钟）
     lockTime: 10
 
+# 文章搜索模式（可选elasticsearch或mysql）
+search:
+  mode: mysql
+
 # Spring配置
 spring:
   application:
@@ -93,24 +97,6 @@ spring:
     deserialization:
       # 允许对象忽略json中不存在的属性
       fail_on_unknown_properties: false
-
-#management:
-#  health:
-#    elasticsearch:
-#      enabled: false
-
-# 搜索模式 可选 elasticsearch或mysql
-search:
-  mode: mysql
-
-# es配置 若搜索模式为mysql可删除
-#easy-es:
-#  enable: false # 是否开启EE自动配置  true同时需要取消注释EsSearchStrategyImpl这个类
-#  address : 127.0.0.1:9200  #填你的es连接地址
-#  # username: 有设置才填写,非必须
-#  # password: 有设置才填写,非必须
-#  db-config:
-#    map-underscore-to-camel-case: false # 是否开启下划线转驼峰 默认为false
 
 # Sa-Token配置
 sa-token:
@@ -233,7 +219,7 @@ springdoc:
     contact:
       name: fzshuai
       email: 156117106@qq.com
-      url: https://gitee.com/fu-zhanshuai/Fzshuai-Blog
+      url: https://gitee.com/fu-zhanshuai/fzshuai-blog
   components:
     # 鉴权方式配置
     security-schemes:

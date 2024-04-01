@@ -97,6 +97,11 @@ spring:
         # 多久检查一次连接的活性
         keepaliveTime: 30000
 
+--- # elasticsearch配置
+spring:
+  elasticsearch:
+    uris: 127.0.0.1:9200
+
 --- # mq配置
 spring:
   rabbitmq:
