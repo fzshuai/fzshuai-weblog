@@ -53,31 +53,31 @@ spring:
           username: root
           password: 123456
         # 从库数据源
-      #        slave:
-      #          lazy: true
-      #          type: ${spring.datasource.type}
-      #          driverClassName: com.mysql.cj.jdbc.Driver
-      #          url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
-      #          username:
-      #          password:
-      #        oracle:
-      #          type: ${spring.datasource.type}
-      #          driverClassName: oracle.jdbc.OracleDriver
-      #          url: jdbc:oracle:thin:@//localhost:1521/XE
-      #          username: ROOT
-      #          password: root
-      #        postgres:
-      #          type: ${spring.datasource.type}
-      #          driverClassName: org.postgresql.Driver
-      #          url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
-      #          username: root
-      #          password: root
-      #        sqlserver:
-      #          type: ${spring.datasource.type}
-      #          driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-      #          url: jdbc:sqlserver://localhost:1433;DatabaseName=tempdb;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true
-      #          username: SA
-      #          password: root
+#        slave:
+#          lazy: true
+#          type: ${spring.datasource.type}
+#          driverClassName: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+#          username:
+#          password:
+#        oracle:
+#          type: ${spring.datasource.type}
+#          driverClassName: oracle.jdbc.OracleDriver
+#          url: jdbc:oracle:thin:@//localhost:1521/XE
+#          username: ROOT
+#          password: root
+#        postgres:
+#          type: ${spring.datasource.type}
+#          driverClassName: org.postgresql.Driver
+#          url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+#          username: root
+#          password: root
+#        sqlserver:
+#          type: ${spring.datasource.type}
+#          driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#          url: jdbc:sqlserver://localhost:1433;DatabaseName=tempdb;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true
+#          username: SA
+#          password: root
       hikari:
         # 最大连接池数量
         maxPoolSize: 20
@@ -93,6 +93,11 @@ spring:
         maxLifetime: 1800000
         # 多久检查一次连接的活性
         keepaliveTime: 30000
+
+--- # elasticsearch配置
+spring:
+  elasticsearch:
+    uris: localhost:9200
 
 --- # mq配置
 spring:

@@ -57,6 +57,10 @@ user:
     # 密码锁定时间（默认10分钟）
     lockTime: 10
 
+# 文章搜索模式（可选elasticsearch或mysql）
+search:
+  mode: mysql
+
 # Spring配置
 spring:
   application:
@@ -93,14 +97,6 @@ spring:
     deserialization:
       # 允许对象忽略json中不存在的属性
       fail_on_unknown_properties: false
-
-# 搜索模式 可选 elasticsearch或mysql
-search:
-  mode: mysql
-  # es配置 若搜索模式为mysql可删除
-#  elasticsearch:
-#    rest:
-#      uris: localhost:9200
 
 # Sa-Token配置
 sa-token:
