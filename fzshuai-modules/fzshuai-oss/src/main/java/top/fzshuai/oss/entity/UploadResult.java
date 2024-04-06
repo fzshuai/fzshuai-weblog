@@ -21,4 +21,5 @@ public class UploadResult {
      * 文件名
      */
     private String filename;
+
 }
