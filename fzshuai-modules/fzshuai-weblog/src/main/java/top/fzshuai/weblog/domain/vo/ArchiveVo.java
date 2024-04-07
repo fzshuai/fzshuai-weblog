@@ -1,9 +1,12 @@
 package top.fzshuai.weblog.domain.vo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 归档文章
@@ -29,6 +32,6 @@ public class ArchiveVo implements Serializable {
     /**
      * 发表时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
 }
