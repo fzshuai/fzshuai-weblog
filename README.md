@@ -3,9 +3,9 @@
 [![使用IntelliJ IDEA开发维护](https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg)]()
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-blue.svg)]()
 [![JDK-8+](https://img.shields.io/badge/JDK-8-green.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://gitee.com/fu-zhanshuai/fzshuai-blog/blob/3.X/LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://gitee.com/fu-zhanshuai/fzshuai-weblog/blob/3.X/LICENSE)
 
-> Fzshuai-Blog 是一个基于 Ruoyi-Vue-Plus 框架开发的博客系统。主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档
+> Fzshuai-Weblog 是一个基于 Ruoyi-Vue-Plus 框架开发的博客系统。主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档
 
 > 涉及技术：Spring Boot、Mybatis-Plus、Sa-Token、Redis、RabbitMQ、MySQL、MinIO、XXL-JOB、Vue、Element-UI、Nginx、Docker 等
 

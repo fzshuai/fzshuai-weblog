@@ -8,9 +8,9 @@
     <artifactId>fzshuai-weblog</artifactId>
     <version>${revision}</version>
 
-    <name>Fzshuai-Blog</name>
-    <url>https://gitee.com/fu-zhanshuai/fzshuai-blog</url>
-    <description>Fzshuai-Blog 博客系统</description>
+    <name>Fzshuai-Weblog</name>
+    <url>https://gitee.com/fu-zhanshuai/fzshuai-weblog</url>
+    <description>Fzshuai-Weblog 博客系统</description>
 
     <properties>
         <revision>2.1.0</revision>

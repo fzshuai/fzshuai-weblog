@@ -1,9 +1,9 @@
 # 项目相关配置
 ruoyi:
   # 名称
-  name: Fzshuai-Blog
+  name: Fzshuai-Weblog
   # 版本
-  version: ${fzshuai-blog.version}
+  version: 2.1.0
   # 版权年份
   copyrightYear: 2024
   # 缓存懒加载
@@ -45,7 +45,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.fzshuai: @logging.level@
+    top.fzshuai: @logging.level@
     org.springframework: warn
   config: classpath:logback-plus.xml
 
@@ -219,7 +219,7 @@ springdoc:
     contact:
       name: fzshuai
       email: 156117106@qq.com
-      url: https://gitee.com/fu-zhanshuai/fzshuai-blog
+      url: https://gitee.com/fu-zhanshuai/fzshuai-weblog
   components:
     # 鉴权方式配置
     security-schemes:
