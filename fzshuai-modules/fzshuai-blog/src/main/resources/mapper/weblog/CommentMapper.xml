@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.fzshuai.weblog.mapper.CommentMapper">
+
+    <resultMap type="top.fzshuai.blog.domain.Comment" id="CommentResult">
+        <result property="commentId" column="comment_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="topicId" column="topic_id"/>
+        <result property="commentContent" column="comment_content"/>
+        <result property="replyUserId" column="reply_user_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="type" column="type"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="ipAddress" column="ip_address"/>
+        <result property="ipSource" column="ip_source"/>
+        <result property="state" column="state"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <select id="selectCommentList" resultType="top.fzshuai.blog.domain.dto.CommentDto">
+        SELECT
+        u.nickname,
+        u.avatar,
+        u.web_site,
+        c.user_id,
+        c.id,
+        c.comment_content,
+        c.create_time
+        FROM
+        blog_comment c
+        JOIN sys_user u ON c.user_id = u.user_id
+        <where>
+            <if test="commentVo.topicId != null">
+                topic_id = #{commentVo.topicId}
+            </if>
+            AND type = #{commentVo.type}
+            AND c.state = 1
+            AND parent_id IS NULL
+        </where>
+        ORDER BY
+        c.id DESC
+        LIMIT #{current},#{size}
+    </select>
+
+    <select id="selectReplyListByIds" resultType="top.fzshuai.blog.domain.dto.ReplyDto">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        c.user_id,
+        u.nick_name,
+        u.avatar,
+        u.web_site,
+        c.reply_user_id,
+        r.nick_name AS reply_nickname,
+        r.web_site AS reply_web_site,
+        c.id,
+        c.parent_id,
+        c.comment_content,
+        c.create_time,
+        row_number () over ( PARTITION BY parent_id ORDER BY create_time ASC ) row_num
+        FROM
+        blog_comment c
+        JOIN sys_user u ON c.user_id = u.user_id
+        JOIN sys_user r ON c.reply_user_id = r.user_id
+        WHERE
+        c.state = 1
+        AND
+        parent_id IN
+        (
+        <foreach collection="commentIdList" item="commentId" separator=",">
+            #{commentId}
+        </foreach>
+        )
+        ) t
+        WHERE
+        4 > row_num
+    </select>
+
+    <select id="selectReplyCountByIds" resultType="top.fzshuai.blog.domain.dto.ReplyCountDto">
+        SELECT
+        parent_id as comment_id,
+        count(1) AS reply_count
+        FROM
+        blog_comment
+        WHERE
+        state = 1
+        AND
+        parent_id IN
+        <foreach open="(" collection="commentIdList" item="commentId" separator="," close=")">
+            #{commentId}
+        </foreach>
+        GROUP BY
+        parent_id
+    </select>
+
+    <select id="selectCommentCountByTopicIds" resultType="top.fzshuai.blog.domain.dto.CommentCountDto">
+        SELECT
+        topic_id as id,
+        COUNT( 1 ) AS comment_count
+        FROM
+        blog_comment
+        WHERE
+        topic_id IN
+        <foreach open="(" collection="topicIdList" item="topicId" separator="," close=")">
+            #{topicId}
+        </foreach>
+        AND
+        parent_id IS NULL
+        GROUP BY
+        topic_id
+    </select>
+
+</mapper>

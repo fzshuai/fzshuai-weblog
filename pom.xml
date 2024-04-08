@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.fzshuai</groupId>
-    <artifactId>fzshuai-blog</artifactId>
+    <artifactId>fzshuai-weblog</artifactId>
     <version>${revision}</version>
 
     <name>Fzshuai-Blog</name>
@@ -14,7 +14,6 @@
 
     <properties>
         <revision>2.1.0</revision>
-        <fzshuai-blog.version>2.1.0</fzshuai-blog.version>
         <spring-boot.version>2.7.18</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -294,55 +293,55 @@
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-job</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 代码生成-->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-generator</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-framework</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 系统模块-->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-system</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 演示模块-->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-demo</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 通用工具-->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-common</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- OSS对象存储 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-oss</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- SMS短信 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-sms</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- 博客模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
-                <artifactId>fzshuai-weblog</artifactId>
-                <version>${fzshuai-blog.version}</version>
+                <artifactId>fzshuai-blog</artifactId>
+                <version>${revision}</version>
             </dependency>
 
         </dependencies>
