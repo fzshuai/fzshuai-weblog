@@ -27,8 +27,8 @@ import java.time.Duration;
 import static top.fzshuai.blog.constant.MQConstant.EMAIL_EXCHANGE;
 import static top.fzshuai.blog.utils.CommonUtil.checkEmail;
 import static top.fzshuai.blog.utils.CommonUtil.getRandomCode;
-import static top.fzshuai.common.constant.RedisConstant.CODE_EXPIRE_TIME;
-import static top.fzshuai.common.constant.RedisConstant.USER_CODE_KEY;
+import static top.fzshuai.common.constant.BlogConstant.CODE_EXPIRE_TIME;
+import static top.fzshuai.common.constant.BlogConstant.USER_CODE_KEY;
 
 /**
  * 注册验证

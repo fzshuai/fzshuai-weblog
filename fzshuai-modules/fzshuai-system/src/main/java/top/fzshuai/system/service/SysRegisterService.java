@@ -22,9 +22,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+import static top.fzshuai.common.constant.BlogConstant.USER_CODE_KEY;
 import static top.fzshuai.common.constant.Constants.AVATAR;
 import static top.fzshuai.common.constant.Constants.TYPE;
-import static top.fzshuai.common.constant.RedisConstant.USER_CODE_KEY;
 
 /**
  * 注册校验方法
