@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 
 import static top.fzshuai.blog.enums.ArticleStatusEnum.PUBLIC;
 import static top.fzshuai.common.constant.BlogConstant.*;
-import static top.fzshuai.common.constant.RedisConstant.*;
 
 /**
  * 博客信息服务

@@ -5,6 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import top.fzshuai.blog.domain.*;
 import top.fzshuai.blog.domain.bo.ArticleBo;
 import top.fzshuai.blog.domain.dto.*;
 import top.fzshuai.blog.domain.vo.*;
@@ -20,11 +25,6 @@ import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.blog.BlogPageUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.system.mapper.SysUserMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import top.fzshuai.blog.domain.*;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -32,9 +32,7 @@ import java.util.stream.Collectors;
 
 import static top.fzshuai.blog.enums.ArticleStatusEnum.DRAFT;
 import static top.fzshuai.blog.enums.ArticleStatusEnum.PUBLIC;
-import static top.fzshuai.common.constant.BlogConstant.DEFAULTCATORTAG;
-import static top.fzshuai.common.constant.BlogConstant.FALSE;
-import static top.fzshuai.common.constant.RedisConstant.*;
+import static top.fzshuai.common.constant.BlogConstant.*;
 
 /**
  * 文章Service业务层处理

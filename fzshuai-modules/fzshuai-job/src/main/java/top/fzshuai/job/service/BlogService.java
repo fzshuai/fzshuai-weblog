@@ -1,21 +1,21 @@
 package top.fzshuai.job.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.vo.ArticleVo;
-import top.fzshuai.blog.mapper.ArticleMapper;
-import top.fzshuai.common.utils.redis.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.client.protocol.ScoredEntry;
 import org.springframework.stereotype.Service;
+import top.fzshuai.blog.domain.Article;
+import top.fzshuai.blog.domain.vo.ArticleVo;
+import top.fzshuai.blog.mapper.ArticleMapper;
+import top.fzshuai.common.utils.redis.RedisUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static top.fzshuai.common.constant.RedisConstant.ARTICLE_VIEWS_COUNT;
+import static top.fzshuai.common.constant.BlogConstant.ARTICLE_VIEWS_COUNT;
 
 /**
  * 博客浏览量

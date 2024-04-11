@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Service;
 import top.fzshuai.blog.domain.Comment;
 import top.fzshuai.blog.domain.bo.CommentBo;
 import top.fzshuai.blog.domain.dto.CommentDto;
@@ -27,9 +30,6 @@ import top.fzshuai.common.utils.blog.BlogPageUtils;
 import top.fzshuai.common.utils.ip.AddressUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.system.mapper.SysUserMapper;
-import lombok.RequiredArgsConstructor;
-import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,10 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static top.fzshuai.common.constant.BlogConstant.STATE;
-import static top.fzshuai.common.constant.BlogConstant.TRUE;
-import static top.fzshuai.common.constant.RedisConstant.COMMENT_LIKE_COUNT;
-import static top.fzshuai.common.constant.RedisConstant.COMMENT_USER_LIKE;
+import static top.fzshuai.common.constant.BlogConstant.*;
 
 /**
  * 文章评论Service业务层处理

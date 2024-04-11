@@ -3,6 +3,8 @@ package top.fzshuai.blog.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import top.fzshuai.blog.domain.Talk;
 import top.fzshuai.blog.domain.bo.TalkBo;
 import top.fzshuai.blog.domain.dto.CommentCountDto;
@@ -20,13 +22,11 @@ import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.blog.BlogPageUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.system.mapper.SysOssMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static top.fzshuai.common.constant.RedisConstant.TALK_LIKE_COUNT;
+import static top.fzshuai.common.constant.BlogConstant.TALK_LIKE_COUNT;
 
 /**
  * 说说Service业务层处理

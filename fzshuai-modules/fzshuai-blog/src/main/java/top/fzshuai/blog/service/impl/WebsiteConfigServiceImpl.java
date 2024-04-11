@@ -1,18 +1,18 @@
 package top.fzshuai.blog.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import top.fzshuai.common.utils.redis.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.domain.WebsiteConfig;
+import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.mapper.WebsiteConfigMapper;
 import top.fzshuai.blog.service.IWebsiteConfigService;
+import top.fzshuai.common.utils.redis.RedisUtils;
 
 import java.util.Objects;
 
 import static top.fzshuai.common.constant.BlogConstant.DEFAULT_CONFIG_ID;
-import static top.fzshuai.common.constant.RedisConstant.WEBSITE_CONFIG;
+import static top.fzshuai.common.constant.BlogConstant.WEBSITE_CONFIG;
 
 /**
  * 网站配置Service业务层处理
