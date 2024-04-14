@@ -199,3 +199,66 @@ sms:
     sdkAppId: appid
     #地域信息默认为 ap-guangzhou 如无特殊改变可不用设置
     territory: ap-guangzhou
+
+--- # 三方授权
+justauth:
+  enabled: true
+  # 前端外网访问地址
+  address: http://localhost:80
+  type:
+    qq:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=qq
+      union-id: false
+    weibo:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=weibo
+    gitee:
+      client-id: 5ad0bd37725723a1ecbdd698cec77c66427258b54f13a0a875de97b53a69c080
+      client-secret: 0c5ab2ef6de38136a5c5e45b41bd1edf92e8c3407b6f9443e0498b7dc33bfbb5
+      redirect-uri: ${justauth.address}/social-callback?source=gitee
+    dingtalk:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=dingtalk
+    baidu:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=baidu
+    csdn:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=csdn
+    coding:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=coding
+      coding-group-name: xx
+    oschina:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=oschina
+    alipay_wallet:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=alipay_wallet
+      alipay-public-key: MIIB**************DAQAB
+    wechat_open:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=wechat_open
+    wechat_mp:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=wechat_mp
+    wechat_enterprise:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=wechat_enterprise
+      agent-id: 1000002
+    gitlab:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: ${justauth.address}/social-callback?source=gitlab

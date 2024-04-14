@@ -6,8 +6,15 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import me.zhyd.oauth.model.AuthResponse;
+import me.zhyd.oauth.model.AuthUser;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.constant.Constants;
+import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.dto.RoleDto;
 import top.fzshuai.common.core.domain.entity.SysUser;
 import top.fzshuai.common.core.domain.event.LogininforEvent;
@@ -26,11 +33,9 @@ import top.fzshuai.common.utils.ServletUtils;
 import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.common.utils.spring.SpringUtils;
+import top.fzshuai.system.domain.bo.SysSocialUserBo;
+import top.fzshuai.system.domain.vo.SysSocialUserVo;
 import top.fzshuai.system.mapper.SysUserMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.List;
@@ -48,6 +53,8 @@ public class SysLoginService {
 
     private final SysUserMapper userMapper;
     private final ISysConfigService configService;
+    private final ISysSocialUserService socialUserService;
+    private final ISysUserService userService;
     private final SysPermissionService permissionService;
 
     @Value("${user.password.maxRetryCount}")
@@ -138,6 +145,66 @@ public class SysLoginService {
     }
 
     /**
+     * 社交用户登录
+     *
+     * @param source   登录来源
+     * @param authUser 授权响应实体
+     * @return 统一响应实体
+     */
+    public R<String> socialLogin(String source, AuthResponse<AuthUser> authUser) {
+        // 判断授权响应是否成功
+        if (!authUser.ok()) {
+            return R.fail("对不起，授权信息验证不通过，请退出重试！");
+        }
+        AuthUser authUserData = authUser.getData();
+        SysSocialUserVo user = socialUserService.selectByAuthId(authUserData.getSource() + authUserData.getUuid());
+        if (ObjectUtil.isNotNull(user)) {
+            // 执行登录和记录登录信息操作
+            return loginAndRecord(user.getUserName());
+        } else {
+            // 判断是否已登录
+            if (!StpUtil.isLogin()) {
+                return R.fail("授权失败，请先登录才能绑定");
+            }
+            // 注册第三方社交用户
+            socialRegister(authUserData);
+            SysUser sysUser = loadUserByUsername(LoginHelper.getUsername());
+            // 执行登录和记录登录信息操作
+            return loginAndRecord(sysUser.getUserName());
+        }
+    }
+
+    /**
+     * 注册第三方社交用户
+     *
+     * @param authUserData 授权响应实体
+     */
+    public void socialRegister(AuthUser authUserData) {
+        SysSocialUserBo bo = BeanUtil.toBean(authUserData, SysSocialUserBo.class);
+        BeanUtil.copyProperties(authUserData.getToken(), bo);
+        bo.setUserId(LoginHelper.getUserId());
+        bo.setAuthId(authUserData.getSource() + authUserData.getUuid());
+        bo.setOpenId(authUserData.getUuid());
+        bo.setUserName(authUserData.getUsername());
+        bo.setNickName(authUserData.getNickname());
+        socialUserService.insertByBo(bo);
+    }
+
+    /**
+     * 执行登录和记录登录信息操作
+     *
+     * @param userName 用户名
+     * @return 统一响应实体
+     */
+    private R<String> loginAndRecord(String userName) {
+        SysUser dbUser = loadUserByUsername(userName);
+        LoginHelper.loginByDevice(buildLoginUser(dbUser), DeviceType.SOCIAL);
+        recordLogininfor(userName, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
+        recordLoginInfo(dbUser.getUserId(), dbUser.getUserName());
+        return R.ok(StpUtil.getTokenValue());
+    }
+
+    /**
      * 退出登录
      */
     public void logout() {
@@ -216,8 +283,8 @@ public class SysLoginService {
 
     private SysUser loadUserByUsername(String username) {
         SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getUserName, SysUser::getStatus)
-                .eq(SysUser::getUserName, username));
+            .select(SysUser::getUserName, SysUser::getStatus)
+            .eq(SysUser::getUserName, username));
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", username);
             throw new UserException("user.not.exists", username);
@@ -230,8 +297,8 @@ public class SysLoginService {
 
     private SysUser loadUserByPhoneNumber(String phoneNumber) {
         SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getPhoneNumber, SysUser::getStatus)
-                .eq(SysUser::getPhoneNumber, phoneNumber));
+            .select(SysUser::getPhoneNumber, SysUser::getStatus)
+            .eq(SysUser::getPhoneNumber, phoneNumber));
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", phoneNumber);
             throw new UserException("user.not.exists", phoneNumber);
@@ -244,8 +311,8 @@ public class SysLoginService {
 
     private SysUser loadUserByEmail(String email) {
         SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getPhoneNumber, SysUser::getStatus)
-                .eq(SysUser::getEmail, email));
+            .select(SysUser::getPhoneNumber, SysUser::getStatus)
+            .eq(SysUser::getEmail, email));
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", email);
             throw new UserException("user.not.exists", email);
@@ -334,4 +401,5 @@ public class SysLoginService {
         // 登录成功 清空错误次数
         RedisUtils.deleteObject(errorKey);
     }
+
 }

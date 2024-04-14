@@ -48,6 +48,7 @@
         <aws-java-sdk-s3.version>1.12.540</aws-java-sdk-s3.version>
         <!-- SMS 配置 -->
         <sms4j.version>2.2.0</sms4j.version>
+        <justauth.version>1.16.5</justauth.version>
     </properties>
 
     <profiles>
@@ -289,37 +290,43 @@
                 <artifactId>spring-boot-starter-websocket</artifactId>
                 <version>${websocket.version}</version>
             </dependency>
+            <!-- JustAuth 的依赖配置-->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justauth.version}</version>
+            </dependency>
             <!-- 定时任务 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-job</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 代码生成-->
+            <!-- 代码生成 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-generator</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 核心模块-->
+            <!-- 核心模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-framework</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 系统模块-->
+            <!-- 系统模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-system</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 演示模块-->
+            <!-- 演示模块 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-demo</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 通用工具-->
+            <!-- 通用工具 -->
             <dependency>
                 <groupId>top.fzshuai</groupId>
                 <artifactId>fzshuai-common</artifactId>
