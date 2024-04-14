@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.fzshuai.weblog.mapper.FriendLinkMapper">
+<mapper namespace="top.fzshuai.blog.mapper.FriendLinkMapper">
 
     <resultMap type="top.fzshuai.blog.domain.FriendLink" id="FriendLinkResult">
         <result property="friendLinkId" column="friend_link_id"/>

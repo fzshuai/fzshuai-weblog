@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.fzshuai.weblog.mapper.TalkMapper">
+<mapper namespace="top.fzshuai.blog.mapper.TalkMapper">
 
     <resultMap type="top.fzshuai.blog.domain.Talk" id="TalkResult">
         <result property="talkId" column="talk_id"/>

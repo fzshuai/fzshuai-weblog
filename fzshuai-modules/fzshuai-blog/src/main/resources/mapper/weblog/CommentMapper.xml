@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.fzshuai.weblog.mapper.CommentMapper">
+<mapper namespace="top.fzshuai.blog.mapper.CommentMapper">
 
     <resultMap type="top.fzshuai.blog.domain.Comment" id="CommentResult">
         <result property="commentId" column="comment_id"/>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.fzshuai.weblog.mapper.PhotoMapper">
+<mapper namespace="top.fzshuai.blog.mapper.PhotoMapper">
 
     <resultMap type="top.fzshuai.blog.domain.Photo" id="PhotoResult">
         <result property="photoId" column="photo_id"/>
