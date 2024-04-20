@@ -1,6 +1,12 @@
 package top.fzshuai.web.controller.system;
 
 import cn.dev33.satoken.annotation.SaIgnore;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import top.fzshuai.common.constant.Constants;
 import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.entity.SysMenu;
@@ -10,16 +16,11 @@ import top.fzshuai.common.core.domain.model.LoginBody;
 import top.fzshuai.common.core.domain.model.LoginUser;
 import top.fzshuai.common.core.domain.model.SmsLoginBody;
 import top.fzshuai.common.helper.LoginHelper;
+import top.fzshuai.system.domain.vo.BlogUserVo;
 import top.fzshuai.system.domain.vo.RouterVo;
 import top.fzshuai.system.service.ISysMenuService;
 import top.fzshuai.system.service.ISysUserService;
 import top.fzshuai.system.service.SysLoginService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
@@ -55,6 +56,15 @@ public class SysLoginController {
             loginBody.getUuid());
         ajax.put(Constants.TOKEN, token);
         return R.ok(ajax);
+    }
+
+    /**
+     * 博客登录
+     */
+    @SaIgnore
+    @PostMapping("/blog/login")
+    public R<BlogUserVo> blogLogin(String username, String password) {
+        return R.ok(loginService.blogLogin(username, password));
     }
 
     /**
