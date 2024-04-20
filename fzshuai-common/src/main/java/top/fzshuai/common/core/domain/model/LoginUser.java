@@ -13,7 +13,6 @@ import java.util.Set;
  *
  * @author Lion Li
  */
-
 @Data
 @NoArgsConstructor
 public class LoginUser implements Serializable {

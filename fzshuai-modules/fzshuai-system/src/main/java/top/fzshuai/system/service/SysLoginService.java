@@ -1,5 +1,6 @@
 package top.fzshuai.system.service;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
@@ -12,6 +13,7 @@ import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.constant.Constants;
 import top.fzshuai.common.core.domain.R;
@@ -34,6 +36,7 @@ import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.common.utils.spring.SpringUtils;
 import top.fzshuai.system.domain.bo.SysSocialUserBo;
+import top.fzshuai.system.domain.vo.BlogUserVo;
 import top.fzshuai.system.domain.vo.SysSocialUserVo;
 import top.fzshuai.system.mapper.SysUserMapper;
 
@@ -89,6 +92,25 @@ public class SysLoginService {
         recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getUserId(), username);
         return StpUtil.getTokenValue();
+    }
+
+    public BlogUserVo blogLogin(String username, String password) {
+        SysUser user = loadUserByUsername(username);
+        checkLogin(LoginType.PASSWORD, username, () -> !BCrypt.checkpw(password, user.getPassword()));
+        // 构建博客用户登录对象
+        BlogUserVo blogUser = new BlogUserVo();
+        blogUser.setUserId(user.getUserId());
+        blogUser.setEmail(user.getEmail());
+        blogUser.setAvatar(user.getAvatar());
+        blogUser.setNickname(user.getNickName());
+        blogUser.setIpAddress(user.getLoginIp());
+        blogUser.setUsername(user.getUserName());
+
+        recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
+        recordLoginInfo(user.getUserId(), username);
+
+        return blogUser;
+
     }
 
     public String smsLogin(String phonenumber, String smsCode) {
@@ -218,6 +240,15 @@ public class SysLoginService {
             } catch (NotLoginException ignored) {
             }
         }
+    }
+
+    /**
+     * 博客前台退出登录
+     */
+    @SaIgnore
+    @GetMapping("/blog/logout")
+    public R blogLogout(){
+        return R.ok("退出成功");
     }
 
     /**
