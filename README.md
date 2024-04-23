@@ -3,11 +3,11 @@
 [![使用IntelliJ IDEA开发维护](https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg)]()
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-blue.svg)]()
 [![JDK-8+](https://img.shields.io/badge/JDK-8-green.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://gitee.com/fu-zhanshuai/fzshuai-blog/blob/3.X/LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://gitee.com/fu-zhanshuai/fzshuai-weblog/blob/3.X/LICENSE)
 
-> Fzshuai-Weblog 是一个基于 Ruoyi-Vue-Plus 框架开发的博客系统，主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档
+> Fzshuai-Weblog 是一个基于 Ruoyi-Vue-Plus 框架开发的博客系统，主要实现博客的编写、发布、展示、修改、删除、搜索、分类、归档。前台展示博客等，后台管理系统维护数据，支持权限配置，数据权限，文件存储
 
-> 涉及技术：Spring Boot、Mybatis-Plus、Sa-Token、Redis、RabbitMQ、MySQL、MinIO、XXL-JOB、Vue、Element-UI、Nginx、Docker 等
+> 涉及技术：Spring Boot、Mybatis-Plus、Sa-Token、Redis、RabbitMQ、MySQL、Elasticsearch、MinIO、XXL-JOB、Vue、Element-UI、Nginx、Docker 等
 
 > 项目遵循开源协议，项目代码开源免费、可商用，在项目中保留开源协议文件即可
 > 项目处于开发阶段，仅推荐用于学习、毕业设计等个人使用
@@ -74,7 +74,7 @@
 
 ## 整体架构
 
-![整体架构图](https://upload.fzshuai.top/blog/2024/04/09/aa0056d9a61340de88792c3922e2bd23.png)
+![整体架构图](https://oss.fzshuai.top/blog/2024/04/09/aa0056d9a61340de88792c3922e2bd23.png)
 
 ## 加群与捐献
 
