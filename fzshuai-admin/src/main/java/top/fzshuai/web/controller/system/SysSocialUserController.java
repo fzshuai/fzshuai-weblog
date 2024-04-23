@@ -9,7 +9,6 @@ import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.fzshuai.common.annotation.Log;
@@ -41,12 +40,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/social")
 public class SysSocialUserController extends BaseController {
-
-    /**
-     * 前台域名地址
-     */
-    @Value("${website.url}")
-    private String websiteUrl;
 
     private final SocialProperties socialProperties;
     private final SysLoginService loginService;
