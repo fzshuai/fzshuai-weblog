@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 登录验证
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @Validated
 @RequiredArgsConstructor
@@ -62,7 +62,7 @@ public class SysLoginController {
      * 博客登录
      */
     @SaIgnore
-    @PostMapping("/blog/login")
+    @PostMapping("/blogLogin")
     public R<BlogUserVo> blogLogin(String username, String password) {
         return R.ok(loginService.blogLogin(username, password));
     }
@@ -151,4 +151,5 @@ public class SysLoginController {
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return R.ok(menuService.buildMenus(menus));
     }
+
 }

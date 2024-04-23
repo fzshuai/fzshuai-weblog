@@ -32,7 +32,7 @@ import static top.fzshuai.common.constant.BlogConstant.USER_CODE_KEY;
 /**
  * 注册验证
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @Validated
 @RequiredArgsConstructor
@@ -61,7 +61,7 @@ public class SysRegisterController extends BaseController {
      * 博客用户注册时，验证填写的邮箱是否有效
      */
     @SaIgnore
-    @GetMapping("/blog/register/code")
+    @GetMapping("/blogRegister/code")
     public R<Void> sendCode(String email) {
         // 校验邮箱是否合法
         if (!checkEmail(email)) {
@@ -85,9 +85,10 @@ public class SysRegisterController extends BaseController {
      * 博客用户注册
      */
     @SaIgnore
-    @PostMapping("/blog/register")
+    @PostMapping("/blogRegister")
     public R<Void> register(@Validated @RequestBody BlogRegisterBody user) {
         registerService.blogRegister(user);
         return R.ok();
     }
+
 }

@@ -29,7 +29,7 @@ import static top.fzshuai.common.constant.Constants.TYPE;
 /**
  * 注册校验方法
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @RequiredArgsConstructor
 @Service
