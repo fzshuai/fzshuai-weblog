@@ -89,7 +89,9 @@
 
 ## 演示图例
 
-后续更新...
+| <img src="https://oss.fzshuai.top/blog/2024/04/24/63b8a2e264f2484ca476f870856774d6.png" style="zoom: 25%;" /> | <img src="https://oss.fzshuai.top/blog/2024/04/24/339e226ccf784143b15dc6f219953c35.png" style="zoom: 25%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://oss.fzshuai.top/blog/2024/04/24/d31c2a1fc4c14e9c84d123736cb2e376.png" style="zoom: 25%;" /> | <img src="https://oss.fzshuai.top/blog/2024/04/24/b51c4141a8ce41ceb88c05ef331fd1b4.png" style="zoom: 25%;" /> |
 
 ## 特别鸣谢
 
