@@ -84,7 +84,7 @@
 
     <select id="selectArticleHomeList" resultMap="articleHomeResultMap">
         SELECT a.article_id,
-               o.url as article_cover,
+               o.url                           as article_cover,
                article_title,
                SUBSTR(article_content, 1, 500) AS article_content,
                a.create_time,
@@ -106,14 +106,14 @@
               WHERE is_delete = 0
                 AND status = 1
               ORDER BY is_top DESC,
-                       article_id DESC
+                       create_time DESC
                   LIMIT #{current}, #{size}) a
                  JOIN blog_category c ON a.category_id = c.category_id
                  JOIN blog_article_tag atg ON a.article_id = atg.article_id
                  JOIN blog_tag t ON t.tag_id = atg.tag_id
-                 JOIN sys_oss o ON  o.oss_id = a.article_cover
+                 JOIN sys_oss o ON o.oss_id = a.article_cover
         ORDER BY a.is_top DESC,
-                 a.article_id DESC
+                 a.create_time DESC
     </select>
 
     <select id="selectArticlePreviewList" resultMap="articlePreviewResultMap">
