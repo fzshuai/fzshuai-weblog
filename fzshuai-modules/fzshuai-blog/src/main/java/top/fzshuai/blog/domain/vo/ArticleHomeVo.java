@@ -1,7 +1,9 @@
 package top.fzshuai.blog.domain.vo;
 
-import top.fzshuai.blog.domain.dto.TagDto;
 import lombok.Data;
+import top.fzshuai.blog.domain.dto.TagDto;
+import top.fzshuai.common.annotation.Translation;
+import top.fzshuai.common.constant.TransConstant;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,6 +29,12 @@ public class ArticleHomeVo implements Serializable {
      * 文章缩略图
      */
     private String articleCover;
+
+    /**
+     * 文章缩略图url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "articleCover")
+    private String articleCoverUrl;
 
     /**
      * 标题
