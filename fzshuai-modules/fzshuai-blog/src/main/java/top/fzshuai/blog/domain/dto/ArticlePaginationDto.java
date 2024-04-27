@@ -1,12 +1,11 @@
 package top.fzshuai.blog.domain.dto;
 
-import com.alibaba.excel.annotation.ExcelProperty;
-import top.fzshuai.common.annotation.Translation;
-import top.fzshuai.common.constant.TransConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.fzshuai.common.annotation.Translation;
+import top.fzshuai.common.constant.TransConstant;
 
 /**
  * 文章上下篇
@@ -33,7 +32,6 @@ public class ArticlePaginationDto {
     /**
      * 文章缩略图url
      */
-    @ExcelProperty(value = "文章缩略图地址")
     @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "articleCover")
     private String articleCoverUrl;
 
