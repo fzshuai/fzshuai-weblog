@@ -1,6 +1,7 @@
 package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaIgnore;
 import top.fzshuai.blog.domain.bo.TagBo;
 import top.fzshuai.blog.domain.dto.TagDto;
 import top.fzshuai.blog.domain.vo.PageResultVo;
@@ -43,8 +44,9 @@ public class TagController extends BaseController {
     /**
      * 查询标签列表
      *
-     * @return {@link R<  TagDto  >} 标签列表
+     * @return 标签列表
      */
+    @SaIgnore
     @GetMapping("/tags")
     public R<PageResultVo<TagDto>> listTags() {
         return R.ok(tagService.selectTagList());
