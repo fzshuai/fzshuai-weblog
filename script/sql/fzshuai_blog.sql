@@ -252,7 +252,7 @@ CREATE TABLE `blog_unique_view`  (
 DROP TABLE IF EXISTS `blog_website_config`;
 CREATE TABLE `blog_website_config`  (
   `website_config_id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `config` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '配置信息',
+  `config` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '配置信息',
   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `create_by` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建者',
