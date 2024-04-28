@@ -12,15 +12,15 @@
     </resultMap>
 
     <select id="selectCategoryList" resultType="top.fzshuai.blog.domain.dto.CategoryDto">
-        SELECT c.id,
+        SELECT c.category_id,
                c.category_name,
-               COUNT(a.id) AS article_count
+               COUNT(a.article_id) AS article_count
         FROM blog_category c
-                 LEFT JOIN (SELECT id, category_id
+                 LEFT JOIN (SELECT article_id, category_id
                             FROM blog_article
                             WHERE is_delete = 0
-                              AND `status` = 1) a N c.id = a.category_id
-        GROUP BY c.id
+                              AND `status` = 1) a ON c.category_id = a.category_id
+        GROUP BY c.category_id
     </select>
 
     <select id="selectCategoryNameById" resultType="string">
@@ -30,7 +30,7 @@
     </select>
 
     <select id="selectCategoryIdByName" resultType="long">
-        select id
+        select category_id
         from blog_category
         where category_name = #{categoryName}
     </select>

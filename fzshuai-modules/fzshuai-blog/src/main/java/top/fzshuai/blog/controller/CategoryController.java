@@ -1,31 +1,31 @@
 package top.fzshuai.blog.controller;
 
-import java.util.List;
-import java.util.Arrays;
-
-import top.fzshuai.blog.domain.dto.CategoryDto;
-import top.fzshuai.blog.domain.vo.PageResultVo;
-import lombok.RequiredArgsConstructor;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.*;
-
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import org.springframework.web.bind.annotation.*;
+import cn.dev33.satoken.annotation.SaIgnore;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import top.fzshuai.common.annotation.RepeatSubmit;
+import org.springframework.web.bind.annotation.*;
+import top.fzshuai.blog.domain.bo.CategoryBo;
+import top.fzshuai.blog.domain.dto.CategoryDto;
+import top.fzshuai.blog.domain.vo.CategoryVo;
+import top.fzshuai.blog.domain.vo.PageResultVo;
+import top.fzshuai.blog.service.ICategoryService;
 import top.fzshuai.common.annotation.Log;
+import top.fzshuai.common.annotation.RepeatSubmit;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.domain.R;
+import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.core.validate.EditGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.utils.poi.ExcelUtil;
-import top.fzshuai.blog.domain.vo.CategoryVo;
-import top.fzshuai.blog.domain.bo.CategoryBo;
-import top.fzshuai.blog.service.ICategoryService;
-import top.fzshuai.common.core.page.TableDataInfo;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 文章分类
@@ -46,6 +46,7 @@ public class CategoryController extends BaseController {
      *
      * @return 分类列表
      */
+    @SaIgnore
     @GetMapping("/categories")
     public R<PageResultVo<CategoryDto>> listCategories() {
         return R.ok(categoryService.selectCategoryList());
