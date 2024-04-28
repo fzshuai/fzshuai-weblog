@@ -14,5 +14,4 @@
         <result property="service" column="service"/>
     </resultMap>
 
-
 </mapper>
