@@ -308,7 +308,7 @@ public class ArticleServiceImpl implements IArticleService {
         }
         // 给文章默认标签
         if (bo.getTagNameList().isEmpty()) {
-            bo.setTagNameList(Arrays.asList(DEFAULTCATORTAG));
+            bo.setTagNameList(new ArrayList<>(Arrays.asList(DEFAULTCATORTAG)));
         }
 
         // 新增文章与标签管理
