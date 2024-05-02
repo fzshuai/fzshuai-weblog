@@ -778,6 +778,9 @@ INSERT INTO `sys_menu`
 VALUES (132, '照片管理', 4, 1, 'photo', 'blog/photo/index', NULL, 1, 0, 'C', '0', '0', 'blog:photo:list', '#', 'admin',
         '2023-07-26 22:38:34', '', NULL, '照片菜单');
 INSERT INTO `sys_menu`
+VALUES (133, '关于我', 4, 13, 'about', 'blog/about/index', NULL, 1, 0, 'C', '0', '0', '', '#', 'admin',
+        '2023-02-19 17:07:29', 'admin', '2024-05-02 21:30:57', '关于我菜单');
+INSERT INTO `sys_menu`
 VALUES (500, '操作日志', 108, 1, 'operlog', 'monitor/operlog/index', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',
         'form', 'admin', '2023-04-28 17:26:18', '', NULL, '操作日志菜单');
 INSERT INTO `sys_menu`

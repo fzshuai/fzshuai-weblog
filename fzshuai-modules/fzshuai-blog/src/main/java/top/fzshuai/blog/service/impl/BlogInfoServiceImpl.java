@@ -85,8 +85,8 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     }
 
     @Override
-    public void updateAbout(BlogInfoVo blogInfoVO) {
-        RedisUtils.setCacheObject(ABOUT, blogInfoVO.getAboutContent());
+    public void updateAbout(BlogInfoVo blogInfoVo) {
+        RedisUtils.setCacheObject(ABOUT, blogInfoVo.getAboutContent());
     }
 
     @Override
