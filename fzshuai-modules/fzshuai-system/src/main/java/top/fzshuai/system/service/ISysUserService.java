@@ -10,15 +10,16 @@ import java.util.List;
 /**
  * 用户 业务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysUserService {
+
     /**
      * 博客前台修改用户信息
-     * @param userInfoVo
+     *
+     * @param userInfoVo 用户信息
      */
     void updateBlogUserInfo(UserInfoVo userInfoVo);
-
 
     TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery);
 

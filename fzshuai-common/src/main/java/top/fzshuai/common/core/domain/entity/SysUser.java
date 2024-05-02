@@ -158,6 +158,16 @@ public class SysUser extends BaseEntity {
     @TableField(exist = false)
     private Long roleId;
 
+    /**
+     * 个人简介
+     */
+    private String intro;
+
+    /**
+     * 个人网站
+     */
+    private String webSite;
+
     public SysUser(Long userId) {
         this.userId = userId;
     }

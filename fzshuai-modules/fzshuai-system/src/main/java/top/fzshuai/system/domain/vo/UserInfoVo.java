@@ -20,6 +20,11 @@ import javax.validation.constraints.NotBlank;
 public class UserInfoVo {
 
     /**
+     * 用户ID
+     */
+    private Long userId;
+
+    /**
      * 用户昵称
      */
     @NotBlank(message = "昵称不能为空")

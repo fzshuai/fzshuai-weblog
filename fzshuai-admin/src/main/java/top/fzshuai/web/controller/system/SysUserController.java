@@ -64,7 +64,7 @@ public class SysUserController extends BaseController {
      * 博客前台用户修改信息
      */
     @SaIgnore
-    @PutMapping("/users/info")
+    @PutMapping("/info")
     public R<Void> updateBlogUserInfo(@Valid @RequestBody UserInfoVo userInfoVo) {
         userService.updateBlogUserInfo(userInfoVo);
         return R.ok();

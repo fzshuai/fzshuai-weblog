@@ -57,7 +57,14 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
 
     @Override
     public void updateBlogUserInfo(UserInfoVo userInfoVo) {
-
+        // 封装用户信息
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(userInfoVo
+            .getUserId());
+        sysUser.setNickName(userInfoVo.getNickname());
+        sysUser.setIntro(userInfoVo.getIntro());
+        sysUser.setWebSite(userInfoVo.getWebSite());
+        baseMapper.updateById(sysUser);
     }
 
     @Override
