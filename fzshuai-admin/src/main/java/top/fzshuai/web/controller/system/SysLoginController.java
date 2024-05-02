@@ -125,6 +125,15 @@ public class SysLoginController {
     }
 
     /**
+     * 博客前台退出登录
+     */
+    @SaIgnore
+    @GetMapping("/blogLogout")
+    public R blogLogout(){
+        return R.ok("退出成功");
+    }
+
+    /**
      * 获取用户信息
      *
      * @return 用户信息

@@ -1,6 +1,5 @@
 package top.fzshuai.system.service;
 
-import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
@@ -13,7 +12,6 @@ import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.constant.Constants;
 import top.fzshuai.common.core.domain.R;
@@ -240,15 +238,6 @@ public class SysLoginService {
             } catch (NotLoginException ignored) {
             }
         }
-    }
-
-    /**
-     * 博客前台退出登录
-     */
-    @SaIgnore
-    @GetMapping("/blog/logout")
-    public R blogLogout(){
-        return R.ok("退出成功");
     }
 
     /**
