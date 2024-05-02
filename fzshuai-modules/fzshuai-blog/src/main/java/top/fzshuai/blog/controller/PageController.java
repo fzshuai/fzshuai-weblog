@@ -45,7 +45,7 @@ public class PageController extends BaseController {
     @SaCheckPermission("blog:page:list")
     @GetMapping("/list")
     public TableDataInfo<PageVo> list(PageBo bo, PageQuery pageQuery) {
-        return iBlogPageService.selectPageList(bo, pageQuery);
+        return iBlogPageService.queryPageList(bo, pageQuery);
     }
 
     /**
@@ -55,7 +55,7 @@ public class PageController extends BaseController {
     @Log(title = "页面", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(PageBo bo, HttpServletResponse response) {
-        List<PageVo> list = iBlogPageService.selectPageList(bo);
+        List<PageVo> list = iBlogPageService.queryPageList(bo);
         ExcelUtil.exportExcel(list, "页面", PageVo.class, response);
     }
 
@@ -68,7 +68,7 @@ public class PageController extends BaseController {
     @GetMapping("/{pageId}")
     public R<PageVo> getInfo(@NotNull(message = "主键不能为空")
                              @PathVariable Long pageId) {
-        return R.ok(iBlogPageService.selectPageById(pageId));
+        return R.ok(iBlogPageService.queryPageById(pageId));
     }
 
     /**

@@ -30,25 +30,25 @@ public class BlogInfoController extends BaseController {
     @SaIgnore
     @GetMapping()
     public R<BlogHomeInfoVo> getBlogHomeInfo() {
-        return R.ok(blogInfoService.selectBlogHomeInfo());
+        return R.ok(blogInfoService.queryBlogHomeInfo());
     }
 
     /**
      * 查看关于我信息
      *
-     * @return {@link R<String>} 关于我信息
+     * @return 关于我信息
      */
     @SaIgnore
     @GetMapping("/about")
     public R<String> getAbout() {
-        return R.ok(blogInfoService.selectAbout());
+        return R.ok(blogInfoService.queryAbout());
     }
 
     /**
      * 修改关于我信息
      *
      * @param blogInfoVO 博客信息
-     * @return {@link R<>}
+     * @return
      */
     @PutMapping("/admin/about")
     public R<?> updateAbout(@Valid @RequestBody BlogInfoVo blogInfoVO) {
@@ -59,7 +59,7 @@ public class BlogInfoController extends BaseController {
     /**
      * 上传访客信息
      *
-     * @return {@link R}
+     * @return
      */
     @SaIgnore
     @PostMapping("/report")

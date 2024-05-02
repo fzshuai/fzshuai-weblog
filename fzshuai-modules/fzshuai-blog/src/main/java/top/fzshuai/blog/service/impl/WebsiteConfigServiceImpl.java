@@ -32,7 +32,7 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVo selectWebsiteConfig() {
+    public WebsiteConfigVo queryWebsiteConfig() {
         WebsiteConfigVo websiteConfigVo;
         // 获取缓存数据
         Object websiteConfig = RedisUtils.getCacheObject(WEBSITE_CONFIG);
@@ -53,7 +53,7 @@ public class WebsiteConfigServiceImpl implements IWebsiteConfigService {
      * @return
      */
     @Override
-    public WebsiteConfigVo selectAdminWebsiteConfig() {
+    public WebsiteConfigVo queryAdminWebsiteConfig() {
         WebsiteConfigVo websiteConfigVo;
         String config = baseMapper.selectById(DEFAULT_CONFIG_ID).getConfig();
         websiteConfigVo = JSON.parseObject(config, WebsiteConfigVo.class);

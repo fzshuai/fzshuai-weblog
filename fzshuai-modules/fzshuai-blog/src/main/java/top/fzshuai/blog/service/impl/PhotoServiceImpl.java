@@ -43,7 +43,7 @@ public class PhotoServiceImpl implements IPhotoService {
     private final AlbumMapper albumMapper;
 
     @Override
-    public FrontPhotoDto selectPhotoByAlbumId(Long albumId, PageQuery pageQuery) {
+    public FrontPhotoDto queryPhotoByAlbumId(Long albumId, PageQuery pageQuery) {
         // 查询相册信息
         Album album = albumMapper.selectOne(new LambdaQueryWrapper<Album>()
             .eq(Album::getAlbumId, albumId)
@@ -66,7 +66,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片
      */
     @Override
-    public PhotoVo selectPhotoById(Long photoId) {
+    public PhotoVo queryPhotoById(Long photoId) {
         return baseMapper.selectVoById(photoId);
     }
 
@@ -74,7 +74,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public TableDataInfo<PhotoVo> selectPhotoPageList(PhotoBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PhotoVo> queryPhotoPageList(PhotoBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
         Page<PhotoVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -84,7 +84,7 @@ public class PhotoServiceImpl implements IPhotoService {
      * 查询照片列表
      */
     @Override
-    public List<PhotoVo> selectPhotoList(PhotoBo bo) {
+    public List<PhotoVo> queryPhotoList(PhotoBo bo) {
         LambdaQueryWrapper<Photo> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

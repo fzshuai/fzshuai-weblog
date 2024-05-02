@@ -23,29 +23,29 @@ public interface ITalkService {
      *
      * @return 说说列表
      */
-    List<String> selectTalkHomeList();
+    List<String> queryTalkHomeList();
 
     /**
      * 获取前端说说列表
      *
      * @return 说说列表
      */
-    PageResultVo<TalkDto> selectTalkPageList();
+    PageResultVo<TalkDto> queryTalkPageList();
 
     /**
      * 查询说说
      */
-    TalkVo selectTalkById(Long talkId);
+    TalkVo queryTalkById(Long talkId);
 
     /**
      * 查询说说列表
      */
-    TableDataInfo<TalkVo> selectTalkPageList(TalkBo bo, PageQuery pageQuery);
+    TableDataInfo<TalkVo> queryTalkPageList(TalkBo bo, PageQuery pageQuery);
 
     /**
      * 查询说说列表
      */
-    List<TalkVo> selectTalkList(TalkBo bo);
+    List<TalkVo> queryTalkList(TalkBo bo);
 
     /**
      * 新增说说

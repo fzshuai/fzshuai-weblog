@@ -50,7 +50,7 @@ public class CommentController extends BaseController {
     @SaIgnore
     @GetMapping("/comments")
     public R<PageResultVo<CommentDto>> listComments(CommentVo commentVO) {
-        return R.ok(commentService.selectCommentList(commentVO));
+        return R.ok(commentService.queryCommentList(commentVO));
     }
 
     /**
@@ -83,7 +83,7 @@ public class CommentController extends BaseController {
     @SaCheckPermission("blog:comment:list")
     @GetMapping("/list")
     public TableDataInfo<CommentVo> list(CommentBo bo, PageQuery pageQuery) {
-        return commentService.selectCommentPageList(bo, pageQuery);
+        return commentService.queryCommentPageList(bo, pageQuery);
     }
 
     /**
@@ -93,7 +93,7 @@ public class CommentController extends BaseController {
     @Log(title = "文章评论", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(CommentBo bo, HttpServletResponse response) {
-        List<CommentVo> list = commentService.selectCommentList(bo);
+        List<CommentVo> list = commentService.queryCommentList(bo);
         ExcelUtil.exportExcel(list, "文章评论", CommentVo.class, response);
     }
 
@@ -107,7 +107,7 @@ public class CommentController extends BaseController {
     @GetMapping("/{commentId}")
     public R<CommentVo> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long commentId) {
-        return R.ok(commentService.selectCommentById(commentId));
+        return R.ok(commentService.queryCommentById(commentId));
     }
 
     /**

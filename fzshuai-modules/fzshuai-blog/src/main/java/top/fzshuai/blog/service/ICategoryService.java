@@ -23,22 +23,22 @@ public interface ICategoryService {
      *
      * @return 分类列表
      */
-    PageResultVo<CategoryDto> selectCategoryList();
+    PageResultVo<CategoryDto> queryCategoryList();
 
     /**
      * 查询文章分类
      */
-    CategoryVo selectCategoryById(Long categoryId);
+    CategoryVo queryCategoryById(Long categoryId);
 
     /**
      * 查询文章分类列表
      */
-    TableDataInfo<CategoryVo> selectCategoryList(CategoryBo bo, PageQuery pageQuery);
+    TableDataInfo<CategoryVo> queryCategoryList(CategoryBo bo, PageQuery pageQuery);
 
     /**
      * 查询文章分类列表
      */
-    List<CategoryVo> selectCategoryList(CategoryBo bo);
+    List<CategoryVo> queryCategoryList(CategoryBo bo);
 
     /**
      * 新增文章分类

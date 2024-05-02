@@ -34,7 +34,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面
      */
     @Override
-    public PageVo selectPageById(Long pageId) {
+    public PageVo queryPageById(Long pageId) {
         return baseMapper.selectVoById(pageId);
     }
 
@@ -42,7 +42,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面列表
      */
     @Override
-    public TableDataInfo<PageVo> selectPageList(PageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<PageVo> queryPageList(PageBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Page> lqw = buildQueryWrapper(bo);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<PageVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -52,7 +52,7 @@ public class PageServiceImpl implements IBlogPageService {
      * 查询博客页面列表
      */
     @Override
-    public List<PageVo> selectPageList(PageBo bo) {
+    public List<PageVo> queryPageList(PageBo bo) {
         LambdaQueryWrapper<Page> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

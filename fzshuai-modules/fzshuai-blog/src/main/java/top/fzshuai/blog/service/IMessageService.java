@@ -28,22 +28,22 @@ public interface IMessageService {
      *
      * @return 留言列表
      */
-    List<MessageVo> selectMessageList();
+    List<MessageVo> queryMessageList();
 
     /**
      * 查询留言
      */
-    MessageVo selectMessageById(Long messageId);
+    MessageVo queryMessageById(Long messageId);
 
     /**
      * 查询留言列表
      */
-    TableDataInfo<MessageVo> selectMessagePageList(MessageBo bo, PageQuery pageQuery);
+    TableDataInfo<MessageVo> queryMessagePageList(MessageBo bo, PageQuery pageQuery);
 
     /**
      * 查询留言列表
      */
-    List<MessageVo> selectMessageList(MessageBo bo);
+    List<MessageVo> queryMessageList(MessageBo bo);
 
     /**
      * 新增留言

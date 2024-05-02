@@ -21,22 +21,22 @@ public interface IFriendLinkService {
      *
      * @return 友链列表
      */
-    List<FriendLinkVo> selectFriendLinkList();
+    List<FriendLinkVo> queryFriendLinkList();
 
     /**
      * 查询友人链接
      */
-    FriendLinkVo selectFriendLinkById(Long friendLinkId);
+    FriendLinkVo queryFriendLinkById(Long friendLinkId);
 
     /**
      * 查询友人链接列表
      */
-    TableDataInfo<FriendLinkVo> selectFriendLinkPageList(FriendLinkBo bo, PageQuery pageQuery);
+    TableDataInfo<FriendLinkVo> queryFriendLinkPageList(FriendLinkBo bo, PageQuery pageQuery);
 
     /**
      * 查询友人链接列表
      */
-    List<FriendLinkVo> selectFriendLinkList(FriendLinkBo bo);
+    List<FriendLinkVo> queryFriendLinkList(FriendLinkBo bo);
 
     /**
      * 新增友人链接

@@ -38,7 +38,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * @return
      */
     @Override
-    public List<FriendLinkVo> selectFriendLinkList() {
+    public List<FriendLinkVo> queryFriendLinkList() {
         // 查询友链列表
         List<FriendLink> friendLinkList = baseMapper.selectList(null);
         return BeanCopyUtils.copyList(friendLinkList, FriendLinkVo.class);
@@ -48,7 +48,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接
      */
     @Override
-    public FriendLinkVo selectFriendLinkById(Long friendLinkId) {
+    public FriendLinkVo queryFriendLinkById(Long friendLinkId) {
         return baseMapper.selectVoById(friendLinkId);
     }
 
@@ -56,7 +56,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public TableDataInfo<FriendLinkVo> selectFriendLinkPageList(FriendLinkBo bo, PageQuery pageQuery) {
+    public TableDataInfo<FriendLinkVo> queryFriendLinkPageList(FriendLinkBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
         Page<FriendLinkVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -66,7 +66,7 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
      * 查询友人链接列表
      */
     @Override
-    public List<FriendLinkVo> selectFriendLinkList(FriendLinkBo bo) {
+    public List<FriendLinkVo> queryFriendLinkList(FriendLinkBo bo) {
         LambdaQueryWrapper<FriendLink> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

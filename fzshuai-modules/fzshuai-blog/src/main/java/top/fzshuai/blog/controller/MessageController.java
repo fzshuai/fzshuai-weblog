@@ -58,7 +58,7 @@ public class MessageController extends BaseController {
     @SaIgnore
     @GetMapping("/messages")
     public R<List<MessageVo>> listMessages() {
-        return R.ok(messageService.selectMessageList());
+        return R.ok(messageService.queryMessageList());
     }
 
     /**
@@ -67,7 +67,7 @@ public class MessageController extends BaseController {
     @SaCheckPermission("blog:message:list")
     @GetMapping("/list")
     public TableDataInfo<MessageVo> list(MessageBo bo, PageQuery pageQuery) {
-        return messageService.selectMessagePageList(bo, pageQuery);
+        return messageService.queryMessagePageList(bo, pageQuery);
     }
 
     /**
@@ -77,7 +77,7 @@ public class MessageController extends BaseController {
     @Log(title = "留言", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(MessageBo bo, HttpServletResponse response) {
-        List<MessageVo> list = messageService.selectMessageList(bo);
+        List<MessageVo> list = messageService.queryMessageList(bo);
         ExcelUtil.exportExcel(list, "留言", MessageVo.class, response);
     }
 
@@ -90,7 +90,7 @@ public class MessageController extends BaseController {
     @GetMapping("/{messageId}")
     public R<MessageVo> getInfo(@NotNull(message = "主键不能为空")
                                 @PathVariable Long messageId) {
-        return R.ok(messageService.selectMessageById(messageId));
+        return R.ok(messageService.queryMessageById(messageId));
     }
 
     /**

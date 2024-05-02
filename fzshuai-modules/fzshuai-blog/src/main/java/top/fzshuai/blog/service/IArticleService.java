@@ -28,14 +28,14 @@ public interface IArticleService {
      *
      * @return 文章归档
      */
-    PageResultVo<ArchiveVo> selectArticleArchiveList();
+    PageResultVo<ArchiveVo> queryArticleArchiveList();
 
     /**
      * 查看博客前端首页文章
      *
      * @return 首页文章
      */
-    List<ArticleHomeVo> selectArticleHomeList();
+    List<ArticleHomeVo> queryArticleHomeList();
 
     /**
      * 博客前端根据id查看文章
@@ -43,7 +43,7 @@ public interface IArticleService {
      * @param articleId 文章id
      * @return 文章信息
      */
-    ArticleDetailVo selectArticleDetailById(Long articleId);
+    ArticleDetailVo queryArticleDetailById(Long articleId);
 
     /**
      * 搜索文章
@@ -59,7 +59,7 @@ public interface IArticleService {
      * @param condition 条件
      * @return 文章列表
      */
-    ArticlePreviewListVo selectArticlePreviewList(ConditionVo condition);
+    ArticlePreviewListVo queryArticlePreviewList(ConditionVo condition);
 
     /**
      * 查询文章
@@ -67,7 +67,7 @@ public interface IArticleService {
      * @param articleId 文章id
      * @return 文章
      */
-    ArticleVo selectArticleById(Long articleId);
+    ArticleVo queryArticleById(Long articleId);
 
     /**
      * 查询文章列表
@@ -76,7 +76,7 @@ public interface IArticleService {
      * @param pageQuery 分页对象
      * @return 文章列表
      */
-    TableDataInfo<ArticleVo> selectArticlePageList(ArticleBo bo, PageQuery pageQuery);
+    TableDataInfo<ArticleVo> queryArticlePageList(ArticleBo bo, PageQuery pageQuery);
 
     /**
      * 查询文章列表
@@ -84,7 +84,7 @@ public interface IArticleService {
      * @param bo 文章对象
      * @return 文章列表
      */
-    List<ArticleVo> selectArticleList(ArticleBo bo);
+    List<ArticleVo> queryArticleList(ArticleBo bo);
 
     /**
      * 新增文章

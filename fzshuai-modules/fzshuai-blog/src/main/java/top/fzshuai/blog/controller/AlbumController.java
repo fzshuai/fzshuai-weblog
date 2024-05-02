@@ -47,7 +47,7 @@ public class AlbumController extends BaseController {
     @SaIgnore
     @GetMapping("/photos/albums")
     public R<List<AlbumVo>> listPhotoAlbums() {
-        return R.ok(albumService.selectAlbumList());
+        return R.ok(albumService.queryAlbumList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class AlbumController extends BaseController {
     @SaCheckPermission("blog:album:list")
     @GetMapping("/list")
     public TableDataInfo<AlbumVo> list(AlbumBo bo, PageQuery pageQuery) {
-        return albumService.selectAlbumPageList(bo, pageQuery);
+        return albumService.queryAlbumPageList(bo, pageQuery);
     }
 
     /**
@@ -66,7 +66,7 @@ public class AlbumController extends BaseController {
     @Log(title = "相册", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(AlbumBo bo, HttpServletResponse response) {
-        List<AlbumVo> list = albumService.selectAlbumList(bo);
+        List<AlbumVo> list = albumService.queryAlbumList(bo);
         ExcelUtil.exportExcel(list, "相册", AlbumVo.class, response);
     }
 
@@ -79,7 +79,7 @@ public class AlbumController extends BaseController {
     @GetMapping("/{albumId}")
     public R<AlbumVo> getInfo(@NotNull(message = "主键不能为空")
                               @PathVariable Long albumId) {
-        return R.ok(albumService.selectAlbumById(albumId));
+        return R.ok(albumService.queryAlbumById(albumId));
     }
 
     /**

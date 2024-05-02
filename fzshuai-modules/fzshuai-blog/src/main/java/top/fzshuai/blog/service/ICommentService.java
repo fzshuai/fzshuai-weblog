@@ -23,7 +23,7 @@ public interface ICommentService {
      *
      * @param commentVO 评论信息
      */
-    PageResultVo<CommentDto> selectCommentList(CommentVo commentVO);
+    PageResultVo<CommentDto> queryCommentList(CommentVo commentVO);
 
     /**
      * 博客前台添加评论
@@ -35,17 +35,17 @@ public interface ICommentService {
     /**
      * 查询文章评论
      */
-    CommentVo selectCommentById(Long commentId);
+    CommentVo queryCommentById(Long commentId);
 
     /**
      * 查询文章评论列表
      */
-    TableDataInfo<CommentVo> selectCommentPageList(CommentBo bo, PageQuery pageQuery);
+    TableDataInfo<CommentVo> queryCommentPageList(CommentBo bo, PageQuery pageQuery);
 
     /**
      * 查询文章评论列表
      */
-    List<CommentVo> selectCommentList(CommentBo bo);
+    List<CommentVo> queryCommentList(CommentBo bo);
 
     /**
      * 新增文章评论

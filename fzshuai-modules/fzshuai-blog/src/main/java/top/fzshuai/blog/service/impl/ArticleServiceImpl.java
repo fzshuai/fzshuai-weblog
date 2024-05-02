@@ -71,7 +71,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public PageResultVo<ArchiveVo> selectArticleArchiveList() {
+    public PageResultVo<ArchiveVo> queryArticleArchiveList() {
         Page<Article> page = new Page<>(BlogPageUtils.getCurrent(), BlogPageUtils.getSize());
         // 获取分页数据
         Page<Article> articlePage = baseMapper.selectPage(page, new LambdaQueryWrapper<Article>()
@@ -84,13 +84,13 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<ArticleHomeVo> selectArticleHomeList() {
+    public List<ArticleHomeVo> queryArticleHomeList() {
         List<ArticleHomeDto> articleHomeDtos = baseMapper.selectArticleHomeList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize());
         return BeanCopyUtils.copyList(articleHomeDtos, ArticleHomeVo.class);
     }
 
     @Override
-    public ArticleDetailVo selectArticleDetailById(Long articleId) {
+    public ArticleDetailVo queryArticleDetailById(Long articleId) {
         // 查询推荐文章
         CompletableFuture<List<ArticleRecommendDto>> recommendArticleList = CompletableFuture
             .supplyAsync(() -> baseMapper.selectRecommendArticleList(articleId));
@@ -162,7 +162,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public ArticlePreviewListVo selectArticlePreviewList(ConditionVo condition) {
+    public ArticlePreviewListVo queryArticlePreviewList(ConditionVo condition) {
         // 查询文章
         List<ArticlePreviewDto> articlePreviewDtoList = baseMapper.selectArticlePreviewList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), condition);
         // 搜索条件对应名(标签或分类名)
@@ -247,7 +247,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public ArticleVo selectArticleById(Long articleId) {
+    public ArticleVo queryArticleById(Long articleId) {
         ArticleVo articleVO = baseMapper.selectVoById(articleId);
         articleVO.setCategoryName(categoryMapper.selectCategoryNameById(articleVO.getCategoryId()));
         articleVO.setTagNameList(articleTagMapper.selectArticleTagNameList(articleId));
@@ -255,7 +255,7 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public TableDataInfo<ArticleVo> selectArticlePageList(ArticleBo articleBo, PageQuery pageQuery) {
+    public TableDataInfo<ArticleVo> queryArticlePageList(ArticleBo articleBo, PageQuery pageQuery) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(articleBo);
         Page<ArticleVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(articleVO -> {
@@ -267,13 +267,12 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<ArticleVo> selectArticleList(ArticleBo bo) {
+    public List<ArticleVo> queryArticleList(ArticleBo bo) {
         LambdaQueryWrapper<Article> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
     private LambdaQueryWrapper<Article> buildQueryWrapper(ArticleBo bo) {
-        Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Article> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, Article::getUserId, bo.getUserId());
         lqw.eq(bo.getCategoryId() != null, Article::getCategoryId, bo.getCategoryId());
@@ -285,6 +284,7 @@ public class ArticleServiceImpl implements IArticleService {
         lqw.eq(bo.getIsTop() != null, Article::getIsTop, bo.getIsTop());
         lqw.eq(bo.getIsDelete() != null, Article::getIsDelete, bo.getIsDelete());
         lqw.eq(bo.getStatus() != null, Article::getStatus, bo.getStatus());
+        lqw.orderByDesc(Article::getCreateTime);
         return lqw;
     }
 

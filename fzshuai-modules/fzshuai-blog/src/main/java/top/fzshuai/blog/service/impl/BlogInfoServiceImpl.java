@@ -51,7 +51,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     private final IWebsiteConfigService websiteConfigService;
 
     @Override
-    public BlogHomeInfoVo selectBlogHomeInfo() {
+    public BlogHomeInfoVo queryBlogHomeInfo() {
         // 查询文章数量
         Long articleCount = articleMapper.selectCount(new LambdaQueryWrapper<Article>()
             .eq(Article::getStatus, PUBLIC.getStatus())
@@ -64,9 +64,9 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
         Object count = RedisUtils.getCacheObject(BLOG_VIEWS_COUNT);
         String viewsCount = Optional.ofNullable(count).orElse(0).toString();
         // 查询网站配置
-        WebsiteConfigVo websiteConfig = websiteConfigService.selectWebsiteConfig();
+        WebsiteConfigVo websiteConfig = websiteConfigService.queryWebsiteConfig();
         // 查询页面图片
-        List<PageVo> pageVoList = pageService.selectPageList(new PageBo());
+        List<PageVo> pageVoList = pageService.queryPageList(new PageBo());
         // 封装数据
         return BlogHomeInfoVo.builder()
             .articleCount(articleCount.intValue())
@@ -79,7 +79,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     }
 
     @Override
-    public String selectAbout() {
+    public String queryAbout() {
         Object value = RedisUtils.getCacheObject(ABOUT);
         return Objects.nonNull(value) ? value.toString() : "";
     }

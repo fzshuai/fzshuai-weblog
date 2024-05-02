@@ -60,7 +60,7 @@ public class CommentServiceImpl implements ICommentService {
      * @param commentVO 评论信息
      */
     @Override
-    public PageResultVo<CommentDto> selectCommentList(CommentVo commentVO) {
+    public PageResultVo<CommentDto> queryCommentList(CommentVo commentVO) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
             .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
@@ -108,7 +108,7 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public void insertComment(CommentVo commentVo) {
         // 判断是否需要审核
-        WebsiteConfigVo websiteConfig = websiteConfigService.selectWebsiteConfig();
+        WebsiteConfigVo websiteConfig = websiteConfigService.queryWebsiteConfig();
         Integer isReview = websiteConfig.getIsCommentReview();
         // 过滤标签
         commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
@@ -134,7 +134,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论
      */
     @Override
-    public CommentVo selectCommentById(Long commentId) {
+    public CommentVo queryCommentById(Long commentId) {
         return baseMapper.selectVoById(commentId);
     }
 
@@ -142,7 +142,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public TableDataInfo<CommentVo> selectCommentPageList(CommentBo bo, PageQuery pageQuery) {
+    public TableDataInfo<CommentVo> queryCommentPageList(CommentBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         Page<CommentVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(commentVo -> {
@@ -157,7 +157,7 @@ public class CommentServiceImpl implements ICommentService {
      * 查询文章评论列表
      */
     @Override
-    public List<CommentVo> selectCommentList(CommentBo bo) {
+    public List<CommentVo> queryCommentList(CommentBo bo) {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

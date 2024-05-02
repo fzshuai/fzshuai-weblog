@@ -46,7 +46,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * @return
      */
     @Override
-    public PageResultVo<TagDto> selectTagList() {
+    public PageResultVo<TagDto> queryTagList() {
         // 查询标签列表
         List<Tag> tagList = baseMapper.selectList(null);
         // 转换DTO
@@ -60,7 +60,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 查询文章标签
      */
     @Override
-    public TagVo selectTagById(Long tagId) {
+    public TagVo queryTagById(Long tagId) {
         return baseMapper.selectVoById(tagId);
     }
 
@@ -68,7 +68,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 查询文章标签列表
      */
     @Override
-    public TableDataInfo<TagVo> selectTagPageList(TagBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TagVo> queryTagPageList(TagBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Tag> lqw = buildQueryWrapper(bo);
         Page<TagVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -78,7 +78,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
      * 查询文章标签列表
      */
     @Override
-    public List<TagVo> selectTagList(TagBo bo) {
+    public List<TagVo> queryTagList(TagBo bo) {
         LambdaQueryWrapper<Tag> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

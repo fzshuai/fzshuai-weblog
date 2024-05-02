@@ -47,7 +47,7 @@ public class FriendLinkController extends BaseController {
     @SaIgnore
     @GetMapping("/links")
     public R<List<FriendLinkVo>> listFriendLinks() {
-        return R.ok(friendLinkService.selectFriendLinkList());
+        return R.ok(friendLinkService.queryFriendLinkList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class FriendLinkController extends BaseController {
     @SaCheckPermission("blog:friendLink:list")
     @GetMapping("/list")
     public TableDataInfo<FriendLinkVo> list(FriendLinkBo bo, PageQuery pageQuery) {
-        return friendLinkService.selectFriendLinkPageList(bo, pageQuery);
+        return friendLinkService.queryFriendLinkPageList(bo, pageQuery);
     }
 
     /**
@@ -66,7 +66,7 @@ public class FriendLinkController extends BaseController {
     @Log(title = "友人链接", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(FriendLinkBo bo, HttpServletResponse response) {
-        List<FriendLinkVo> list = friendLinkService.selectFriendLinkList(bo);
+        List<FriendLinkVo> list = friendLinkService.queryFriendLinkList(bo);
         ExcelUtil.exportExcel(list, "友人链接", FriendLinkVo.class, response);
     }
 
@@ -79,7 +79,7 @@ public class FriendLinkController extends BaseController {
     @GetMapping("/{friendLinkId}")
     public R<FriendLinkVo> getInfo(@NotNull(message = "主键不能为空")
                                    @PathVariable Long friendLinkId) {
-        return R.ok(friendLinkService.selectFriendLinkById(friendLinkId));
+        return R.ok(friendLinkService.queryFriendLinkById(friendLinkId));
     }
 
     /**

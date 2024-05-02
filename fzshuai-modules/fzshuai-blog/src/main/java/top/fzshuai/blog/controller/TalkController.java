@@ -47,7 +47,7 @@ public class TalkController extends BaseController {
     @SaIgnore
     @GetMapping("/home/talks")
     public R<List<String>> listHomeTalks() {
-        return R.ok(talkService.selectTalkHomeList());
+        return R.ok(talkService.queryTalkHomeList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class TalkController extends BaseController {
     @SaIgnore
     @GetMapping("/talks")
     public R<PageResultVo<TalkDto>> listTalks() {
-        return R.ok(talkService.selectTalkPageList());
+        return R.ok(talkService.queryTalkPageList());
     }
 
     /**
@@ -65,7 +65,7 @@ public class TalkController extends BaseController {
     @SaCheckPermission("blog:talk:list")
     @GetMapping("/list")
     public TableDataInfo<TalkVo> list(TalkBo bo, PageQuery pageQuery) {
-        return talkService.selectTalkPageList(bo, pageQuery);
+        return talkService.queryTalkPageList(bo, pageQuery);
     }
 
     /**
@@ -75,7 +75,7 @@ public class TalkController extends BaseController {
     @Log(title = "说说", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(TalkBo bo, HttpServletResponse response) {
-        List<TalkVo> list = talkService.selectTalkList(bo);
+        List<TalkVo> list = talkService.queryTalkList(bo);
         ExcelUtil.exportExcel(list, "说说", TalkVo.class, response);
     }
 
@@ -89,7 +89,7 @@ public class TalkController extends BaseController {
     @GetMapping("/{talkId}")
     public R<TalkVo> getInfo(@NotNull(message = "主键不能为空")
                              @PathVariable Long talkId) {
-        return R.ok(talkService.selectTalkById(talkId));
+        return R.ok(talkService.queryTalkById(talkId));
     }
 
     /**

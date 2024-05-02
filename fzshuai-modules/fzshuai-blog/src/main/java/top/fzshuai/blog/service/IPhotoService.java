@@ -25,22 +25,22 @@ public interface IPhotoService {
      * @param albumId 相册id
      * @return {@link List<FrontPhotoDto>} 照片列表
      */
-    FrontPhotoDto selectPhotoByAlbumId(Long albumId, PageQuery pageQuery);
+    FrontPhotoDto queryPhotoByAlbumId(Long albumId, PageQuery pageQuery);
 
     /**
      * 查询照片
      */
-    PhotoVo selectPhotoById(Long photoId);
+    PhotoVo queryPhotoById(Long photoId);
 
     /**
      * 查询照片列表
      */
-    TableDataInfo<PhotoVo> selectPhotoPageList(PhotoBo bo, PageQuery pageQuery);
+    TableDataInfo<PhotoVo> queryPhotoPageList(PhotoBo bo, PageQuery pageQuery);
 
     /**
      * 查询照片列表
      */
-    List<PhotoVo> selectPhotoList(PhotoBo bo);
+    List<PhotoVo> queryPhotoList(PhotoBo bo);
 
     /**
      * 新增照片

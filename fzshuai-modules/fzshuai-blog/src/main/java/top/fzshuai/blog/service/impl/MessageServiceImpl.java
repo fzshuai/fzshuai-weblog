@@ -49,7 +49,7 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     public void insertMessage(MessageVo messageVO) {
         // 判断是否需要审核
-        Integer isReview = websiteConfigService.selectWebsiteConfig().getIsMessageReview();
+        Integer isReview = websiteConfigService.queryWebsiteConfig().getIsMessageReview();
         // 获取用户ip
         String ipAddress = ServletUtils.getClientIP(request);
         String ipSource = AddressUtils.getRealAddressByIP(ipAddress);
@@ -66,7 +66,7 @@ public class MessageServiceImpl implements IMessageService {
      * @return
      */
     @Override
-    public List<MessageVo> selectMessageList() {
+    public List<MessageVo> queryMessageList() {
         // 查询留言列表
         List<Message> messageList = baseMapper.selectList(new LambdaQueryWrapper<Message>()
             .select(Message::getMessageId, Message::getNickname, Message::getAvatar, Message::getMessageContent, Message::getTime)
@@ -78,7 +78,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言
      */
     @Override
-    public MessageVo selectMessageById(Long messageId) {
+    public MessageVo queryMessageById(Long messageId) {
         return baseMapper.selectVoById(messageId);
     }
 
@@ -86,7 +86,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public TableDataInfo<MessageVo> selectMessagePageList(MessageBo bo, PageQuery pageQuery) {
+    public TableDataInfo<MessageVo> queryMessagePageList(MessageBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
         Page<MessageVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -96,7 +96,7 @@ public class MessageServiceImpl implements IMessageService {
      * 查询留言列表
      */
     @Override
-    public List<MessageVo> selectMessageList(MessageBo bo) {
+    public List<MessageVo> queryMessageList(MessageBo bo) {
         LambdaQueryWrapper<Message> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

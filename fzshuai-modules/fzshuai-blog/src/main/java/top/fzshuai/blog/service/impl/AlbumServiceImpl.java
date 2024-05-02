@@ -40,7 +40,7 @@ public class AlbumServiceImpl implements IAlbumService {
     private final PhotoMapper photoMapper;
 
     @Override
-    public List<AlbumVo> selectAlbumList() {
+    public List<AlbumVo> queryAlbumList() {
         // 查询相册列表
         List<Album> photoAlbumList = baseMapper.selectList(new LambdaQueryWrapper<Album>()
             .eq(Album::getStatus, PUBLIC.getStatus())
@@ -53,7 +53,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册
      */
     @Override
-    public AlbumVo selectAlbumById(Long albumId) {
+    public AlbumVo queryAlbumById(Long albumId) {
         AlbumVo albumVo = baseMapper.selectVoById(albumId);
         if (Objects.isNull(albumVo)) {
             throw new BaseException("相册不存在或已被删除");
@@ -66,7 +66,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public TableDataInfo<AlbumVo> selectAlbumPageList(AlbumBo bo, PageQuery pageQuery) {
+    public TableDataInfo<AlbumVo> queryAlbumPageList(AlbumBo bo, PageQuery pageQuery) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         Page<AlbumVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -76,7 +76,7 @@ public class AlbumServiceImpl implements IAlbumService {
      * 查询相册列表
      */
     @Override
-    public List<AlbumVo> selectAlbumList(AlbumBo bo) {
+    public List<AlbumVo> queryAlbumList(AlbumBo bo) {
         LambdaQueryWrapper<Album> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }

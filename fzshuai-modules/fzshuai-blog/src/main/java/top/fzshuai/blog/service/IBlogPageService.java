@@ -19,17 +19,17 @@ public interface IBlogPageService {
     /**
      * 查询博客页面
      */
-    PageVo selectPageById(Long pageId);
+    PageVo queryPageById(Long pageId);
 
     /**
      * 查询博客页面列表
      */
-    TableDataInfo<PageVo> selectPageList(PageBo bo, PageQuery pageQuery);
+    TableDataInfo<PageVo> queryPageList(PageBo bo, PageQuery pageQuery);
 
     /**
      * 查询博客页面列表
      */
-    List<PageVo> selectPageList(PageBo bo);
+    List<PageVo> queryPageList(PageBo bo);
 
     /**
      * 新增博客页面

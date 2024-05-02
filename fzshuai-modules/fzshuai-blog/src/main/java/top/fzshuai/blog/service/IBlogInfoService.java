@@ -16,14 +16,14 @@ public interface IBlogInfoService {
      *
      * @return 博客首页信息
      */
-    BlogHomeInfoVo selectBlogHomeInfo();
+    BlogHomeInfoVo queryBlogHomeInfo();
 
     /**
      * 查询关于我内容
      *
      * @return 关于我内容
      */
-    String selectAbout();
+    String queryAbout();
 
     /**
      * 修改关于我内容

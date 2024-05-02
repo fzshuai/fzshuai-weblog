@@ -13,16 +13,16 @@ public interface IWebsiteConfigService {
     /**
      * 前端获取网站配置
      *
-     * @return {@link WebsiteConfigVo} 网站配置
+     * @return 网站配置
      */
-    WebsiteConfigVo selectWebsiteConfig();
+    WebsiteConfigVo queryWebsiteConfig();
 
     /**
      * 后台获取网站配置
      *
-     * @return {@link WebsiteConfigVo} 网站配置
+     * @return 网站配置
      */
-    WebsiteConfigVo selectAdminWebsiteConfig();
+    WebsiteConfigVo queryAdminWebsiteConfig();
 
     /**
      * 保存或更新网站配置

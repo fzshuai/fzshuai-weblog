@@ -21,7 +21,7 @@ public interface IAlbumService {
      *
      * @return 相册列表
      */
-    List<AlbumVo> selectAlbumList();
+    List<AlbumVo> queryAlbumList();
 
     /**
      * 查询相册管理
@@ -29,7 +29,7 @@ public interface IAlbumService {
      * @param photoAlbumId 相册id
      * @return 相册
      */
-    AlbumVo selectAlbumById(Long photoAlbumId);
+    AlbumVo queryAlbumById(Long photoAlbumId);
 
     /**
      * 查询相册列表
@@ -38,7 +38,7 @@ public interface IAlbumService {
      * @param pageQuery 分页对象
      * @return 相册列表
      */
-    TableDataInfo<AlbumVo> selectAlbumPageList(AlbumBo bo, PageQuery pageQuery);
+    TableDataInfo<AlbumVo> queryAlbumPageList(AlbumBo bo, PageQuery pageQuery);
 
     /**
      * 查询相册列表
@@ -46,7 +46,7 @@ public interface IAlbumService {
      * @param bo 相册对象
      * @return 相册列表
      */
-    List<AlbumVo> selectAlbumList(AlbumBo bo);
+    List<AlbumVo> queryAlbumList(AlbumBo bo);
 
     /**
      * 新增相册

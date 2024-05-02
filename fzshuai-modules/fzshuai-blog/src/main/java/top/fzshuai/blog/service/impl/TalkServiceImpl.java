@@ -48,7 +48,7 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public List<String> selectTalkHomeList() {
+    public List<String> queryTalkHomeList() {
         // 查询最新10条说说
         return baseMapper.selectList(new LambdaQueryWrapper<Talk>()
                 .orderByDesc(Talk::getIsTop)
@@ -65,7 +65,7 @@ public class TalkServiceImpl implements ITalkService {
      * @return
      */
     @Override
-    public PageResultVo<TalkDto> selectTalkPageList() {
+    public PageResultVo<TalkDto> queryTalkPageList() {
         // 查询说说总量
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
@@ -107,7 +107,7 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说
      */
     @Override
-    public TalkVo selectTalkById(Long talkId) {
+    public TalkVo queryTalkById(Long talkId) {
         TalkVo result = baseMapper.selectAdminTalkById(talkId);
         if (Objects.nonNull(result.getImages())) {
             List<String> list = Arrays.asList(result.getImages().split(","));
@@ -121,7 +121,7 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public TableDataInfo<TalkVo> selectTalkPageList(TalkBo bo, PageQuery pageQuery) {
+    public TableDataInfo<TalkVo> queryTalkPageList(TalkBo bo, PageQuery pageQuery) {
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<>());
         if (count == 0) {
             return new TableDataInfo<>();
@@ -148,7 +148,7 @@ public class TalkServiceImpl implements ITalkService {
      * 查询说说列表
      */
     @Override
-    public List<TalkVo> selectTalkList(TalkBo bo) {
+    public List<TalkVo> queryTalkList(TalkBo bo) {
         LambdaQueryWrapper<Talk> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
