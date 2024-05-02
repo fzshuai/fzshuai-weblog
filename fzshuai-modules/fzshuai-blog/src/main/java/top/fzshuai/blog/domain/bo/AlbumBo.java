@@ -1,13 +1,13 @@
 package top.fzshuai.blog.domain.bo;
 
-import top.fzshuai.common.core.validate.AddGroup;
-import top.fzshuai.common.core.validate.EditGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.validation.constraints.*;
-
 import top.fzshuai.common.core.domain.BaseEntity;
+import top.fzshuai.common.core.validate.AddGroup;
+import top.fzshuai.common.core.validate.EditGroup;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * 相册业务对象 blog_photo_album
@@ -46,7 +46,6 @@ public class AlbumBo extends BaseEntity {
     /**
      * 是否删除
      */
-    @NotNull(message = "是否删除不能为空", groups = {AddGroup.class, EditGroup.class})
     private Integer isDelete;
 
     /**

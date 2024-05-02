@@ -46,7 +46,7 @@ public class PhotoController extends BaseController {
      * 前台根据相册id查看照片列表
      *
      * @param albumId 相册id
-     * @return {@link R<  FrontPhotoDto  >} 照片列表
+     * @return 照片列表
      */
     @SaIgnore
     @GetMapping("/albums/{albumId}/photos")
