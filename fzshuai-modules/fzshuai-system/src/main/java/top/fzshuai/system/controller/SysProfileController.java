@@ -1,4 +1,4 @@
-package top.fzshuai.web.controller.system;
+package top.fzshuai.system.controller;
 
 import cn.dev33.satoken.secure.BCrypt;
 import cn.hutool.core.io.FileUtil;

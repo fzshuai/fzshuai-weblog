@@ -1,6 +1,6 @@
 package top.fzshuai.blog.config;
 
-import top.fzshuai.blog.constant.MQConstant;
+import top.fzshuai.common.constant.MQConstant;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;

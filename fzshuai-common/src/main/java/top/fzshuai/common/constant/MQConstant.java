@@ -1,4 +1,4 @@
-package top.fzshuai.blog.constant;
+package top.fzshuai.common.constant;
 
 /**
  * MQ常量

@@ -1,4 +1,4 @@
-package top.fzshuai.blog.domain.dto;
+package top.fzshuai.system.domain.bo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailDto {
+public class EmailBo {
 
     /**
      * 邮箱号

@@ -1,8 +1,8 @@
 package top.fzshuai.blog.consumer;
 
 import com.alibaba.fastjson.JSON;
-import top.fzshuai.blog.constant.MQConstant;
-import top.fzshuai.blog.domain.dto.EmailDto;
+import top.fzshuai.common.constant.MQConstant;
+import top.fzshuai.system.domain.bo.EmailBo;
 import top.fzshuai.common.utils.email.MailUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -23,9 +23,9 @@ public class EmailConsumer {
 
     @RabbitHandler
     public void process(byte[] data) {
-        EmailDto emailDTO = JSON.parseObject(new String(data), EmailDto.class);
-        log.info(emailDTO.toString());
-        MailUtils.sendText(emailDTO.getEmail(), emailDTO.getSubject(), emailDTO.getContent());
+        EmailBo emailBo = JSON.parseObject(new String(data), EmailBo.class);
+        log.info(emailBo.toString());
+        MailUtils.sendText(emailBo.getEmail(), emailBo.getSubject(), emailBo.getContent());
     }
 
 }

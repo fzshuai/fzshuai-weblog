@@ -1,4 +1,4 @@
-package top.fzshuai.web.controller.system;
+package top.fzshuai.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.lang.tree.Tree;

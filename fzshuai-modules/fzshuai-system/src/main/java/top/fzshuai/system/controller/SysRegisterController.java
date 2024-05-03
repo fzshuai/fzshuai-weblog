@@ -1,4 +1,4 @@
-package top.fzshuai.web.controller.system;
+package top.fzshuai.system.controller;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import com.alibaba.fastjson.JSON;
@@ -11,21 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import top.fzshuai.blog.domain.dto.EmailDto;
+import top.fzshuai.common.constant.MQConstant;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
+import top.fzshuai.system.domain.bo.EmailBo;
 import top.fzshuai.common.core.domain.model.BlogRegisterBody;
 import top.fzshuai.common.core.domain.model.RegisterBody;
 import top.fzshuai.common.exception.base.BaseException;
+import top.fzshuai.common.utils.email.MailUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.system.service.ISysConfigService;
 import top.fzshuai.system.service.SysRegisterService;
 
 import java.time.Duration;
 
-import static top.fzshuai.blog.constant.MQConstant.EMAIL_EXCHANGE;
-import static top.fzshuai.blog.utils.CommonUtil.checkEmail;
-import static top.fzshuai.blog.utils.CommonUtil.getRandomCode;
 import static top.fzshuai.common.constant.BlogConstant.CODE_EXPIRE_TIME;
 import static top.fzshuai.common.constant.BlogConstant.USER_CODE_KEY;
 
@@ -64,18 +63,18 @@ public class SysRegisterController extends BaseController {
     @GetMapping("/blogRegister/code")
     public R<Void> sendCode(String email) {
         // 校验邮箱是否合法
-        if (!checkEmail(email)) {
+        if (!MailUtils.checkEmail(email)) {
             throw new BaseException("请输入正确邮箱");
         }
         // 生成六位随机验证码发送
-        String code = getRandomCode();
+        String code = MailUtils.getRandomCode();
         // 发送验证码
-        EmailDto emailDTO = EmailDto.builder()
+        EmailBo emailBo = EmailBo.builder()
             .email(email)
             .subject("验证码")
             .content("【Fzshuai-Weblog】验证码：" + code + "（15分钟内有效）用于注册账号，请勿泄露。")
             .build();
-        rabbitTemplate.convertAndSend(EMAIL_EXCHANGE, "", new Message(JSON.toJSONBytes(emailDTO), new MessageProperties()));
+        rabbitTemplate.convertAndSend(MQConstant.EMAIL_EXCHANGE, "", new Message(JSON.toJSONBytes(emailBo), new MessageProperties()));
         // 将验证码存入redis，设置过期时间为15分钟
         RedisUtils.setCacheObject(USER_CODE_KEY + email, code, Duration.ofMillis(CODE_EXPIRE_TIME));
         return R.ok();
