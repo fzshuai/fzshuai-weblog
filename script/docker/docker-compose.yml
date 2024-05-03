@@ -18,6 +18,8 @@ services:
       - /docker/mysql/data/:/var/lib/mysql/
       # 配置挂载
       - /docker/mysql/conf/:/etc/mysql/conf.d/
+      # 日志文件
+      - /docker/mysql/log:/var/log/
       # 让容器的时钟与宿主机时钟同步，避免时区的问题，ro是read only的意思，就是只读
       - /etc/localtime:/etc/localtime:ro
     command:
@@ -27,6 +29,7 @@ services:
       --collation-server=utf8mb4_general_ci
       --explicit_defaults_for_timestamp=true
       --lower_case_table_names=1
+      --default-time-zone='Asia/Shanghai'
     deploy:
       resources:
         limits:
@@ -134,7 +137,7 @@ services:
 
 
   fzshuai-server1:
-    image: fzshuai/fzshuai-server:2.1.0
+    image: fzshuai/fzshuai-server:3.0.0
     container_name: fzshuai-server1
     environment:
       # 时区上海
@@ -151,7 +154,7 @@ services:
     network_mode: "host"
 
   fzshuai-server2:
-    image: fzshuai/fzshuai-server:2.1.0
+    image: fzshuai/fzshuai-server:3.0.0
     container_name: fzshuai-server2
     environment:
       # 时区上海
@@ -168,7 +171,7 @@ services:
     network_mode: "host"
 
   fzshuai-monitor-admin:
-    image: fzshuai/fzshuai-monitor-admin:2.1.0
+    image: fzshuai/fzshuai-monitor-admin:3.0.0
     container_name: fzshuai-monitor-admin
     environment:
       # 时区上海
@@ -182,7 +185,7 @@ services:
     network_mode: "host"
 
   fzshuai-xxl-job-admin:
-    image: fzshuai/fzshuai-xxl-job-admin:2.1.0
+    image: fzshuai/fzshuai-xxl-job-admin:3.0.0
     container_name: fzshuai-xxl-job-admin
     environment:
       # 时区上海

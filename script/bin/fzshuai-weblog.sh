@@ -1,5 +1,5 @@
 #!/bin/sh
-# ./fzshuai-blog.sh start 启动 stop 停止 restart 重启 status 状态
+# ./fzshuai-weblog.sh start 启动 stop 停止 restart 重启 status 状态
 AppName=fzshuai-admin.jar
 
 # JVM参数
