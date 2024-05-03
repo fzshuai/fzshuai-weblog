@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 用户权限处理
  *
- * @author ruoyi
+ * @author ruoyi fzshuai
  */
 @RequiredArgsConstructor
 @Service
@@ -25,13 +25,13 @@ public class SysPermissionService {
      * @param user 用户信息
      * @return 角色权限信息
      */
-    public Set<String> getRolePermission(SysUser user) {
+    public Set<String> queryRolePermission(SysUser user) {
         Set<String> roles = new HashSet<>();
         // 管理员拥有所有权限
         if (user.isAdmin()) {
             roles.add("admin");
         } else {
-            roles.addAll(roleService.selectRolePermissionByUserId(user.getUserId()));
+            roles.addAll(roleService.queryRolePermissionByUserId(user.getUserId()));
         }
         return roles;
     }
@@ -42,14 +42,15 @@ public class SysPermissionService {
      * @param user 用户信息
      * @return 菜单权限信息
      */
-    public Set<String> getMenuPermission(SysUser user) {
+    public Set<String> queryMenuPermission(SysUser user) {
         Set<String> perms = new HashSet<>();
         // 管理员拥有所有权限
         if (user.isAdmin()) {
             perms.add("*:*:*");
         } else {
-            perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
+            perms.addAll(menuService.queryMenuPermsByUserId(user.getUserId()));
         }
         return perms;
     }
+
 }

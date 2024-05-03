@@ -37,7 +37,7 @@ public class SysMenuController extends BaseController {
     @SaCheckPermission("system:menu:list")
     @GetMapping("/list")
     public R<List<SysMenu>> list(SysMenu menu) {
-        List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
+        List<SysMenu> menus = menuService.queryMenuList(menu, getUserId());
         return R.ok(menus);
     }
 
@@ -49,7 +49,7 @@ public class SysMenuController extends BaseController {
     @SaCheckPermission("system:menu:query")
     @GetMapping(value = "/{menuId}")
     public R<SysMenu> getInfo(@PathVariable Long menuId) {
-        return R.ok(menuService.selectMenuById(menuId));
+        return R.ok(menuService.queryMenuById(menuId));
     }
 
     /**
@@ -57,7 +57,7 @@ public class SysMenuController extends BaseController {
      */
     @GetMapping("/treeselect")
     public R<List<Tree<Long>>> treeselect(SysMenu menu) {
-        List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
+        List<SysMenu> menus = menuService.queryMenuList(menu, getUserId());
         return R.ok(menuService.buildMenuTreeSelect(menus));
     }
 
@@ -68,9 +68,9 @@ public class SysMenuController extends BaseController {
      */
     @GetMapping(value = "/roleMenuTreeselect/{roleId}")
     public R<Map<String, Object>> roleMenuTreeselect(@PathVariable("roleId") Long roleId) {
-        List<SysMenu> menus = menuService.selectMenuList(getUserId());
+        List<SysMenu> menus = menuService.queryMenuList(getUserId());
         Map<String, Object> ajax = new HashMap<>();
-        ajax.put("checkedKeys", menuService.selectMenuListByRoleId(roleId));
+        ajax.put("checkedKeys", menuService.queryMenuListByRoleId(roleId));
         ajax.put("menus", menuService.buildMenuTreeSelect(menus));
         return R.ok(ajax);
     }

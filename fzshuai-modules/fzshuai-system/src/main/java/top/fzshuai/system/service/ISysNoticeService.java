@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * 公告 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysNoticeService {
 
-
-    TableDataInfo<SysNotice> selectPageNoticeList(SysNotice notice, PageQuery pageQuery);
+    TableDataInfo<SysNotice> queryPageNoticeList(SysNotice notice, PageQuery pageQuery);
 
     /**
      * 查询公告信息
@@ -22,7 +21,7 @@ public interface ISysNoticeService {
      * @param noticeId 公告ID
      * @return 公告信息
      */
-    SysNotice selectNoticeById(Long noticeId);
+    SysNotice queryNoticeById(Long noticeId);
 
     /**
      * 查询公告列表
@@ -30,7 +29,7 @@ public interface ISysNoticeService {
      * @param notice 公告信息
      * @return 公告集合
      */
-    List<SysNotice> selectNoticeList(SysNotice notice);
+    List<SysNotice> queryNoticeList(SysNotice notice);
 
     /**
      * 新增公告
@@ -63,4 +62,5 @@ public interface ISysNoticeService {
      * @return 结果
      */
     int deleteNoticeByIds(Long[] noticeIds);
+
 }

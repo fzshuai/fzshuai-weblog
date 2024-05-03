@@ -26,7 +26,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     private final SysNoticeMapper baseMapper;
 
     @Override
-    public TableDataInfo<SysNotice> selectPageNoticeList(SysNotice notice, PageQuery pageQuery) {
+    public TableDataInfo<SysNotice> queryPageNoticeList(SysNotice notice, PageQuery pageQuery) {
         LambdaQueryWrapper<SysNotice> lqw = new LambdaQueryWrapper<SysNotice>()
             .like(StringUtils.isNotBlank(notice.getNoticeTitle()), SysNotice::getNoticeTitle, notice.getNoticeTitle())
             .eq(StringUtils.isNotBlank(notice.getNoticeType()), SysNotice::getNoticeType, notice.getNoticeType())
@@ -42,7 +42,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
      * @return 公告信息
      */
     @Override
-    public SysNotice selectNoticeById(Long noticeId) {
+    public SysNotice queryNoticeById(Long noticeId) {
         return baseMapper.selectById(noticeId);
     }
 
@@ -53,7 +53,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
      * @return 公告集合
      */
     @Override
-    public List<SysNotice> selectNoticeList(SysNotice notice) {
+    public List<SysNotice> queryNoticeList(SysNotice notice) {
         return baseMapper.selectList(new LambdaQueryWrapper<SysNotice>()
             .like(StringUtils.isNotBlank(notice.getNoticeTitle()), SysNotice::getNoticeTitle, notice.getNoticeTitle())
             .eq(StringUtils.isNotBlank(notice.getNoticeType()), SysNotice::getNoticeType, notice.getNoticeType())

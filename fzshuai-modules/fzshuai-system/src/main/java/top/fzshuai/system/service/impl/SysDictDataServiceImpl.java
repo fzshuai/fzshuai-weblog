@@ -29,7 +29,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     private final SysDictDataMapper baseMapper;
 
     @Override
-    public TableDataInfo<SysDictData> selectPageDictDataList(SysDictData dictData, PageQuery pageQuery) {
+    public TableDataInfo<SysDictData> queryPageDictDataList(SysDictData dictData, PageQuery pageQuery) {
         LambdaQueryWrapper<SysDictData> lqw = new LambdaQueryWrapper<SysDictData>()
             .eq(StringUtils.isNotBlank(dictData.getDictType()), SysDictData::getDictType, dictData.getDictType())
             .like(StringUtils.isNotBlank(dictData.getDictLabel()), SysDictData::getDictLabel, dictData.getDictLabel())
@@ -46,7 +46,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @return 字典数据集合信息
      */
     @Override
-    public List<SysDictData> selectDictDataList(SysDictData dictData) {
+    public List<SysDictData> queryDictDataList(SysDictData dictData) {
         return baseMapper.selectList(new LambdaQueryWrapper<SysDictData>()
             .eq(StringUtils.isNotBlank(dictData.getDictType()), SysDictData::getDictType, dictData.getDictType())
             .like(StringUtils.isNotBlank(dictData.getDictLabel()), SysDictData::getDictLabel, dictData.getDictLabel())
@@ -62,7 +62,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @return 字典标签
      */
     @Override
-    public String selectDictLabel(String dictType, String dictValue) {
+    public String queryDictLabel(String dictType, String dictValue) {
         return baseMapper.selectOne(new LambdaQueryWrapper<SysDictData>()
                 .select(SysDictData::getDictLabel)
                 .eq(SysDictData::getDictType, dictType)
@@ -77,7 +77,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @return 字典数据
      */
     @Override
-    public SysDictData selectDictDataById(Long dictCode) {
+    public SysDictData queryDictDataById(Long dictCode) {
         return baseMapper.selectById(dictCode);
     }
 
@@ -89,7 +89,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     @Override
     public void deleteDictDataByIds(Long[] dictCodes) {
         for (Long dictCode : dictCodes) {
-            SysDictData data = selectDictDataById(dictCode);
+            SysDictData data = queryDictDataById(dictCode);
             baseMapper.deleteById(dictCode);
             CacheUtils.evict(CacheNames.SYS_DICT, data.getDictType());
         }

@@ -21,7 +21,7 @@ public interface ISysUserService {
      */
     void updateBlogUserInfo(UserInfoVo userInfoVo);
 
-    TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery);
+    TableDataInfo<SysUser> queryPageUserList(SysUser user, PageQuery pageQuery);
 
     /**
      * 根据条件分页查询用户列表
@@ -29,7 +29,7 @@ public interface ISysUserService {
      * @param user 用户信息
      * @return 用户信息集合信息
      */
-    List<SysUser> selectUserList(SysUser user);
+    List<SysUser> queryUserList(SysUser user);
 
     /**
      * 根据条件分页查询已分配用户角色列表
@@ -37,7 +37,7 @@ public interface ISysUserService {
      * @param user 用户信息
      * @return 用户信息集合信息
      */
-    TableDataInfo<SysUser> selectAllocatedList(SysUser user, PageQuery pageQuery);
+    TableDataInfo<SysUser> queryAllocatedList(SysUser user, PageQuery pageQuery);
 
     /**
      * 根据条件分页查询未分配用户角色列表
@@ -45,7 +45,7 @@ public interface ISysUserService {
      * @param user 用户信息
      * @return 用户信息集合信息
      */
-    TableDataInfo<SysUser> selectUnallocatedList(SysUser user, PageQuery pageQuery);
+    TableDataInfo<SysUser> queryUnallocatedList(SysUser user, PageQuery pageQuery);
 
     /**
      * 通过用户名查询用户
@@ -53,7 +53,7 @@ public interface ISysUserService {
      * @param userName 用户名
      * @return 用户对象信息
      */
-    SysUser selectUserByUserName(String userName);
+    SysUser queryUserByUserName(String userName);
 
     /**
      * 通过手机号查询用户
@@ -61,7 +61,7 @@ public interface ISysUserService {
      * @param phoneNumber 手机号
      * @return 用户对象信息
      */
-    SysUser selectUserByPhoneNumber(String phoneNumber);
+    SysUser queryUserByPhoneNumber(String phoneNumber);
 
     /**
      * 通过用户ID查询用户
@@ -69,7 +69,7 @@ public interface ISysUserService {
      * @param userId 用户ID
      * @return 用户对象信息
      */
-    SysUser selectUserById(Long userId);
+    SysUser queryUserById(Long userId);
 
     /**
      * 根据用户ID查询用户所属角色组
@@ -77,7 +77,7 @@ public interface ISysUserService {
      * @param userName 用户名
      * @return 结果
      */
-    String selectUserRoleGroup(String userName);
+    String queryUserRoleGroup(String userName);
 
     /**
      * 根据用户ID查询用户所属岗位组
@@ -85,7 +85,7 @@ public interface ISysUserService {
      * @param userName 用户名
      * @return 结果
      */
-    String selectUserPostGroup(String userName);
+    String queryUserPostGroup(String userName);
 
     /**
      * 校验用户名称是否唯一

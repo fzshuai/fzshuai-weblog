@@ -49,7 +49,7 @@ public class SysRegisterController extends BaseController {
     @SaIgnore
     @PostMapping("/register")
     public R<Void> register(@Validated @RequestBody RegisterBody user) {
-        if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
+        if (!("true".equals(configService.queryConfigByKey("sys.account.registerUser")))) {
             return R.fail("当前系统没有开启注册功能！");
         }
         registerService.register(user);

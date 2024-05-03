@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * 文件上传 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysOssService {
 
     TableDataInfo<SysOssVo> queryPageList(SysOssBo sysOss, PageQuery pageQuery);
 
-    List<SysOssVo> listByIds(Collection<Long> ossIds);
+    List<SysOssVo> queryListByIds(Collection<Long> ossIds);
 
     SysOssVo getById(Long ossId);
 

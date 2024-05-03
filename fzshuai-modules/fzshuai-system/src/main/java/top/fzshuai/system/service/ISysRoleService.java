@@ -11,12 +11,11 @@ import java.util.Set;
 /**
  * 角色业务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysRoleService {
 
-
-    TableDataInfo<SysRole> selectPageRoleList(SysRole role, PageQuery pageQuery);
+    TableDataInfo<SysRole> queryPageRoleList(SysRole role, PageQuery pageQuery);
 
     /**
      * 根据条件分页查询角色数据
@@ -24,7 +23,7 @@ public interface ISysRoleService {
      * @param role 角色信息
      * @return 角色数据集合信息
      */
-    List<SysRole> selectRoleList(SysRole role);
+    List<SysRole> queryRoleList(SysRole role);
 
     /**
      * 根据用户ID查询角色列表
@@ -32,7 +31,7 @@ public interface ISysRoleService {
      * @param userId 用户ID
      * @return 角色列表
      */
-    List<SysRole> selectRolesByUserId(Long userId);
+    List<SysRole> queryRolesByUserId(Long userId);
 
     /**
      * 根据用户ID查询角色权限
@@ -40,14 +39,14 @@ public interface ISysRoleService {
      * @param userId 用户ID
      * @return 权限列表
      */
-    Set<String> selectRolePermissionByUserId(Long userId);
+    Set<String> queryRolePermissionByUserId(Long userId);
 
     /**
      * 查询所有角色
      *
      * @return 角色列表
      */
-    List<SysRole> selectRoleAll();
+    List<SysRole> queryRoleAll();
 
     /**
      * 根据用户ID获取角色选择框列表
@@ -55,7 +54,7 @@ public interface ISysRoleService {
      * @param userId 用户ID
      * @return 选中角色ID列表
      */
-    List<Long> selectRoleListByUserId(Long userId);
+    List<Long> queryRoleListByUserId(Long userId);
 
     /**
      * 通过角色ID查询角色
@@ -63,7 +62,7 @@ public interface ISysRoleService {
      * @param roleId 角色ID
      * @return 角色对象信息
      */
-    SysRole selectRoleById(Long roleId);
+    SysRole queryRoleById(Long roleId);
 
     /**
      * 校验角色名称是否唯一
@@ -178,4 +177,5 @@ public interface ISysRoleService {
     int insertAuthUsers(Long roleId, Long[] userIds);
 
     void cleanOnlineUserByRole(Long roleId);
+
 }

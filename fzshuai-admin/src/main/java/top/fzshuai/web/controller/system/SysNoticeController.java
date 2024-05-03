@@ -32,7 +32,7 @@ public class SysNoticeController extends BaseController {
     @SaCheckPermission("system:notice:list")
     @GetMapping("/list")
     public TableDataInfo<SysNotice> list(SysNotice notice, PageQuery pageQuery) {
-        return noticeService.selectPageNoticeList(notice, pageQuery);
+        return noticeService.queryPageNoticeList(notice, pageQuery);
     }
 
     /**
@@ -43,7 +43,7 @@ public class SysNoticeController extends BaseController {
     @SaCheckPermission("system:notice:query")
     @GetMapping(value = "/{noticeId}")
     public R<SysNotice> getInfo(@PathVariable Long noticeId) {
-        return R.ok(noticeService.selectNoticeById(noticeId));
+        return R.ok(noticeService.queryNoticeById(noticeId));
     }
 
     /**

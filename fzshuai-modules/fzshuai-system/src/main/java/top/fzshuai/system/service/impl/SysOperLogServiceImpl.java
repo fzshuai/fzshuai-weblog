@@ -48,7 +48,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
     }
 
     @Override
-    public TableDataInfo<SysOperLog> selectPageOperLogList(SysOperLog operLog, PageQuery pageQuery) {
+    public TableDataInfo<SysOperLog> queryPageOperLogList(SysOperLog operLog, PageQuery pageQuery) {
         Map<String, Object> params = operLog.getParams();
         LambdaQueryWrapper<SysOperLog> lqw = new LambdaQueryWrapper<SysOperLog>()
             .like(StringUtils.isNotBlank(operLog.getOperIp()), SysOperLog::getOperIp, operLog.getOperIp())
@@ -91,7 +91,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @return 操作日志集合
      */
     @Override
-    public List<SysOperLog> selectOperLogList(SysOperLog operLog) {
+    public List<SysOperLog> queryOperLogList(SysOperLog operLog) {
         Map<String, Object> params = operLog.getParams();
         return baseMapper.selectList(new LambdaQueryWrapper<SysOperLog>()
             .like(StringUtils.isNotBlank(operLog.getOperIp()), SysOperLog::getOperIp, operLog.getOperIp())
@@ -129,7 +129,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @return 操作日志对象
      */
     @Override
-    public SysOperLog selectOperLogById(Long operId) {
+    public SysOperLog queryOperLogById(Long operId) {
         return baseMapper.selectById(operId);
     }
 

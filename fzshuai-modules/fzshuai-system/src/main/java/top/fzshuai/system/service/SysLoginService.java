@@ -74,7 +74,7 @@ public class SysLoginService {
      * @return 结果
      */
     public String login(String username, String password, String code, String uuid) {
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        boolean captchaEnabled = configService.queryCaptchaEnabled();
         // 验证码开关
         if (captchaEnabled) {
             validateCaptcha(username, code, uuid);
@@ -366,8 +366,8 @@ public class SysLoginService {
         loginUser.setDeptId(user.getDeptId());
         loginUser.setUsername(user.getUserName());
         loginUser.setUserType(user.getUserType());
-        loginUser.setMenuPermission(permissionService.getMenuPermission(user));
-        loginUser.setRolePermission(permissionService.getRolePermission(user));
+        loginUser.setMenuPermission(permissionService.queryMenuPermission(user));
+        loginUser.setRolePermission(permissionService.queryRolePermission(user));
         loginUser.setDeptName(ObjectUtil.isNull(user.getDept()) ? "" : user.getDept().getDeptName());
         List<RoleDto> roles = BeanUtil.copyToList(user.getRoles(), RoleDto.class);
         loginUser.setRoles(roles);

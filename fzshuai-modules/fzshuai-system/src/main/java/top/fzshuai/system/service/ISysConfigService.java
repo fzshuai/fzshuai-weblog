@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * 参数配置 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysConfigService {
 
 
-    TableDataInfo<SysConfig> selectPageConfigList(SysConfig config, PageQuery pageQuery);
+    TableDataInfo<SysConfig> queryPageConfigList(SysConfig config, PageQuery pageQuery);
 
     /**
      * 查询参数配置信息
@@ -22,7 +22,7 @@ public interface ISysConfigService {
      * @param configId 参数配置ID
      * @return 参数配置信息
      */
-    SysConfig selectConfigById(Long configId);
+    SysConfig queryConfigById(Long configId);
 
     /**
      * 根据键名查询参数配置信息
@@ -30,14 +30,14 @@ public interface ISysConfigService {
      * @param configKey 参数键名
      * @return 参数键值
      */
-    String selectConfigByKey(String configKey);
+    String queryConfigByKey(String configKey);
 
     /**
      * 获取验证码开关
      *
      * @return true开启，false关闭
      */
-    boolean selectCaptchaEnabled();
+    boolean queryCaptchaEnabled();
 
     /**
      * 查询参数配置列表
@@ -45,7 +45,7 @@ public interface ISysConfigService {
      * @param config 参数配置信息
      * @return 参数配置集合
      */
-    List<SysConfig> selectConfigList(SysConfig config);
+    List<SysConfig> queryConfigList(SysConfig config);
 
     /**
      * 新增参数配置

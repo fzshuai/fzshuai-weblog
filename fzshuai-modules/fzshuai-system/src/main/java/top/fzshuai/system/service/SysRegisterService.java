@@ -47,7 +47,7 @@ public class SysRegisterService {
         // 校验用户类型是否存在
         String userType = UserType.getUserType(registerBody.getUserType()).getUserType();
 
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        boolean captchaEnabled = configService.queryCaptchaEnabled();
         // 验证码开关
         if (captchaEnabled) {
             validateCaptcha(username, registerBody.getCode(), registerBody.getUuid());
@@ -140,7 +140,8 @@ public class SysRegisterService {
             throw new BaseException("验证码错误！");
         }
         // 查询用户名是否存在
-        SysUser sysUser = userService.selectUserByUserName(user.getUsername());
+        SysUser sysUser = userService.queryUserByUserName(user.getUsername());
         return Objects.nonNull(sysUser);
     }
+
 }

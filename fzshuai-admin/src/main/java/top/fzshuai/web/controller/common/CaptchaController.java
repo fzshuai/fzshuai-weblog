@@ -103,7 +103,7 @@ public class CaptchaController {
     @GetMapping("/captchaImage")
     public R<Map<String, Object>> getCode() {
         Map<String, Object> ajax = new HashMap<>();
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        boolean captchaEnabled = configService.queryCaptchaEnabled();
         ajax.put("captchaEnabled", captchaEnabled);
         if (!captchaEnabled) {
             return R.ok(ajax);

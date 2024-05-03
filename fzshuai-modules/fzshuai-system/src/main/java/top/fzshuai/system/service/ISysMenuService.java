@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 菜单 业务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysMenuService {
 
@@ -20,7 +20,7 @@ public interface ISysMenuService {
      * @param userId 用户ID
      * @return 菜单列表
      */
-    List<SysMenu> selectMenuList(Long userId);
+    List<SysMenu> queryMenuList(Long userId);
 
     /**
      * 根据用户查询系统菜单列表
@@ -29,7 +29,7 @@ public interface ISysMenuService {
      * @param userId 用户ID
      * @return 菜单列表
      */
-    List<SysMenu> selectMenuList(SysMenu menu, Long userId);
+    List<SysMenu> queryMenuList(SysMenu menu, Long userId);
 
     /**
      * 根据用户ID查询权限
@@ -37,7 +37,7 @@ public interface ISysMenuService {
      * @param userId 用户ID
      * @return 权限列表
      */
-    Set<String> selectMenuPermsByUserId(Long userId);
+    Set<String> queryMenuPermsByUserId(Long userId);
 
     /**
      * 根据角色ID查询权限
@@ -45,7 +45,7 @@ public interface ISysMenuService {
      * @param roleId 角色ID
      * @return 权限列表
      */
-    Set<String> selectMenuPermsByRoleId(Long roleId);
+    Set<String> queryMenuPermsByRoleId(Long roleId);
 
     /**
      * 根据用户ID查询菜单树信息
@@ -53,7 +53,7 @@ public interface ISysMenuService {
      * @param userId 用户ID
      * @return 菜单列表
      */
-    List<SysMenu> selectMenuTreeByUserId(Long userId);
+    List<SysMenu> queryMenuTreeByUserId(Long userId);
 
     /**
      * 根据角色ID查询菜单树信息
@@ -61,7 +61,7 @@ public interface ISysMenuService {
      * @param roleId 角色ID
      * @return 选中菜单列表
      */
-    List<Long> selectMenuListByRoleId(Long roleId);
+    List<Long> queryMenuListByRoleId(Long roleId);
 
     /**
      * 构建前端路由所需要的菜单
@@ -85,7 +85,7 @@ public interface ISysMenuService {
      * @param menuId 菜单ID
      * @return 菜单信息
      */
-    SysMenu selectMenuById(Long menuId);
+    SysMenu queryMenuById(Long menuId);
 
     /**
      * 是否存在菜单子节点
@@ -134,4 +134,5 @@ public interface ISysMenuService {
      * @return 结果
      */
     boolean checkMenuNameUnique(SysMenu menu);
+
 }

@@ -31,7 +31,7 @@ public class SysPostServiceImpl implements ISysPostService {
     private final SysUserPostMapper userPostMapper;
 
     @Override
-    public TableDataInfo<SysPost> selectPagePostList(SysPost post, PageQuery pageQuery) {
+    public TableDataInfo<SysPost> queryPagePostList(SysPost post, PageQuery pageQuery) {
         LambdaQueryWrapper<SysPost> lqw = new LambdaQueryWrapper<SysPost>()
             .like(StringUtils.isNotBlank(post.getPostCode()), SysPost::getPostCode, post.getPostCode())
             .eq(StringUtils.isNotBlank(post.getStatus()), SysPost::getStatus, post.getStatus())
@@ -47,7 +47,7 @@ public class SysPostServiceImpl implements ISysPostService {
      * @return 岗位信息集合
      */
     @Override
-    public List<SysPost> selectPostList(SysPost post) {
+    public List<SysPost> queryPostList(SysPost post) {
         return baseMapper.selectList(new LambdaQueryWrapper<SysPost>()
             .like(StringUtils.isNotBlank(post.getPostCode()), SysPost::getPostCode, post.getPostCode())
             .eq(StringUtils.isNotBlank(post.getStatus()), SysPost::getStatus, post.getStatus())
@@ -60,7 +60,7 @@ public class SysPostServiceImpl implements ISysPostService {
      * @return 岗位列表
      */
     @Override
-    public List<SysPost> selectPostAll() {
+    public List<SysPost> queryPostAll() {
         return baseMapper.selectList();
     }
 
@@ -71,7 +71,7 @@ public class SysPostServiceImpl implements ISysPostService {
      * @return 角色对象信息
      */
     @Override
-    public SysPost selectPostById(Long postId) {
+    public SysPost queryPostById(Long postId) {
         return baseMapper.selectById(postId);
     }
 
@@ -82,7 +82,7 @@ public class SysPostServiceImpl implements ISysPostService {
      * @return 选中岗位ID列表
      */
     @Override
-    public List<Long> selectPostListByUserId(Long userId) {
+    public List<Long> queryPostListByUserId(Long userId) {
         return baseMapper.selectPostListByUserId(userId);
     }
 
@@ -145,7 +145,7 @@ public class SysPostServiceImpl implements ISysPostService {
     @Override
     public int deletePostByIds(Long[] postIds) {
         for (Long postId : postIds) {
-            SysPost post = selectPostById(postId);
+            SysPost post = queryPostById(postId);
             if (countUserPostById(postId) > 0) {
                 throw new ServiceException(String.format("%1$s已分配，不能删除!", post.getPostName()));
             }

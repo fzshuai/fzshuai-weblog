@@ -46,8 +46,8 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单列表
      */
     @Override
-    public List<SysMenu> selectMenuList(Long userId) {
-        return selectMenuList(new SysMenu(), userId);
+    public List<SysMenu> queryMenuList(Long userId) {
+        return queryMenuList(new SysMenu(), userId);
     }
 
     /**
@@ -57,7 +57,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单列表
      */
     @Override
-    public List<SysMenu> selectMenuList(SysMenu menu, Long userId) {
+    public List<SysMenu> queryMenuList(SysMenu menu, Long userId) {
         List<SysMenu> menuList = null;
         // 管理员显示所有菜单信息
         if (LoginHelper.isAdmin(userId)) {
@@ -87,7 +87,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 权限列表
      */
     @Override
-    public Set<String> selectMenuPermsByUserId(Long userId) {
+    public Set<String> queryMenuPermsByUserId(Long userId) {
         List<String> perms = baseMapper.selectMenuPermsByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms) {
@@ -105,7 +105,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 权限列表
      */
     @Override
-    public Set<String> selectMenuPermsByRoleId(Long roleId) {
+    public Set<String> queryMenuPermsByRoleId(Long roleId) {
         List<String> perms = baseMapper.selectMenuPermsByRoleId(roleId);
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms) {
@@ -123,7 +123,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单列表
      */
     @Override
-    public List<SysMenu> selectMenuTreeByUserId(Long userId) {
+    public List<SysMenu> queryMenuTreeByUserId(Long userId) {
         List<SysMenu> menus = null;
         if (LoginHelper.isAdmin(userId)) {
             menus = baseMapper.selectMenuTreeAll();
@@ -140,7 +140,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 选中菜单列表
      */
     @Override
-    public List<Long> selectMenuListByRoleId(Long roleId) {
+    public List<Long> queryMenuListByRoleId(Long roleId) {
         SysRole role = roleMapper.selectById(roleId);
         return baseMapper.selectMenuListByRoleId(roleId, role.getMenuCheckStrictly());
     }
@@ -221,7 +221,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单信息
      */
     @Override
-    public SysMenu selectMenuById(Long menuId) {
+    public SysMenu queryMenuById(Long menuId) {
         return baseMapper.selectById(menuId);
     }
 

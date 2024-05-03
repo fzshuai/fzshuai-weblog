@@ -36,7 +36,7 @@ public class SysOperlogController extends BaseController {
     @SaCheckPermission("monitor:operlog:list")
     @GetMapping("/list")
     public TableDataInfo<SysOperLog> list(SysOperLog operLog, PageQuery pageQuery) {
-        return operLogService.selectPageOperLogList(operLog, pageQuery);
+        return operLogService.queryPageOperLogList(operLog, pageQuery);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SysOperlogController extends BaseController {
     @SaCheckPermission("monitor:operlog:export")
     @PostMapping("/export")
     public void export(SysOperLog operLog, HttpServletResponse response) {
-        List<SysOperLog> list = operLogService.selectOperLogList(operLog);
+        List<SysOperLog> list = operLogService.queryOperLogList(operLog);
         ExcelUtil.exportExcel(list, "操作日志", SysOperLog.class, response);
     }
 

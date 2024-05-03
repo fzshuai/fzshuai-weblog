@@ -141,7 +141,7 @@ public class SysLoginController {
     @GetMapping("getInfo")
     public R<Map<String, Object>> getInfo() {
         LoginUser loginUser = LoginHelper.getLoginUser();
-        SysUser user = userService.selectUserById(loginUser.getUserId());
+        SysUser user = userService.queryUserById(loginUser.getUserId());
         Map<String, Object> ajax = new HashMap<>();
         ajax.put("user", user);
         ajax.put("roles", loginUser.getRolePermission());
@@ -157,7 +157,7 @@ public class SysLoginController {
     @GetMapping("getRouters")
     public R<List<RouterVo>> getRouters() {
         Long userId = LoginHelper.getUserId();
-        List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
+        List<SysMenu> menus = menuService.queryMenuTreeByUserId(userId);
         return R.ok(menuService.buildMenus(menus));
     }
 

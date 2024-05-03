@@ -89,7 +89,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
     }
 
     @Override
-    public TableDataInfo<SysLogininfor> selectPageLogininforList(SysLogininfor logininfor, PageQuery pageQuery) {
+    public TableDataInfo<SysLogininfor> queryPageLogininforList(SysLogininfor logininfor, PageQuery pageQuery) {
         Map<String, Object> params = logininfor.getParams();
         LambdaQueryWrapper<SysLogininfor> lqw = new LambdaQueryWrapper<SysLogininfor>()
             .like(StringUtils.isNotBlank(logininfor.getIpaddr()), SysLogininfor::getIpaddr, logininfor.getIpaddr())
@@ -123,7 +123,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
      * @return 登录记录集合
      */
     @Override
-    public List<SysLogininfor> selectLogininforList(SysLogininfor logininfor) {
+    public List<SysLogininfor> queryLogininforList(SysLogininfor logininfor) {
         Map<String, Object> params = logininfor.getParams();
         return baseMapper.selectList(new LambdaQueryWrapper<SysLogininfor>()
             .like(StringUtils.isNotBlank(logininfor.getIpaddr()), SysLogininfor::getIpaddr, logininfor.getIpaddr())

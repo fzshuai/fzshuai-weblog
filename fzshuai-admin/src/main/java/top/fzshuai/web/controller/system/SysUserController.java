@@ -76,7 +76,7 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:list")
     @GetMapping("/list")
     public TableDataInfo<SysUser> list(SysUser user, PageQuery pageQuery) {
-        return userService.selectPageUserList(user, pageQuery);
+        return userService.queryPageUserList(user, pageQuery);
     }
 
     /**
@@ -86,7 +86,7 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:export")
     @PostMapping("/export")
     public void export(SysUser user, HttpServletResponse response) {
-        List<SysUser> list = userService.selectUserList(user);
+        List<SysUser> list = userService.queryUserList(user);
         List<SysUserExportVo> listVo = BeanUtil.copyToList(list, SysUserExportVo.class);
         for (int i = 0; i < list.size(); i++) {
             SysDept dept = list.get(i).getDept();
@@ -135,13 +135,13 @@ public class SysUserController extends BaseController {
         role.setStatus(UserConstants.ROLE_NORMAL);
         SysPost post = new SysPost();
         post.setStatus(UserConstants.POST_NORMAL);
-        List<SysRole> roles = roleService.selectRoleList(role);
+        List<SysRole> roles = roleService.queryRoleList(role);
         ajax.put("roles", LoginHelper.isAdmin(userId) ? roles : StreamUtils.filter(roles, r -> !r.isAdmin()));
-        ajax.put("posts", postService.selectPostList(post));
+        ajax.put("posts", postService.queryPostList(post));
         if (ObjectUtil.isNotNull(userId)) {
-            SysUser sysUser = userService.selectUserById(userId);
+            SysUser sysUser = userService.queryUserById(userId);
             ajax.put("user", sysUser);
-            ajax.put("postIds", postService.selectPostListByUserId(userId));
+            ajax.put("postIds", postService.queryPostListByUserId(userId));
             ajax.put("roleIds", StreamUtils.toList(sysUser.getRoles(), SysRole::getRoleId));
         }
         return R.ok(ajax);
@@ -234,8 +234,8 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:query")
     @GetMapping("/authRole/{userId}")
     public R<Map<String, Object>> authRole(@PathVariable Long userId) {
-        SysUser user = userService.selectUserById(userId);
-        List<SysRole> roles = roleService.selectRolesByUserId(userId);
+        SysUser user = userService.queryUserById(userId);
+        List<SysRole> roles = roleService.queryRolesByUserId(userId);
         Map<String, Object> ajax = new HashMap<>();
         ajax.put("user", user);
         ajax.put("roles", LoginHelper.isAdmin(userId) ? roles : StreamUtils.filter(roles, r -> !r.isAdmin()));
@@ -263,7 +263,7 @@ public class SysUserController extends BaseController {
     @SaCheckPermission("system:user:list")
     @GetMapping("/deptTree")
     public R<List<Tree<Long>>> deptTree(SysDept dept) {
-        return R.ok(deptService.selectDeptTreeList(dept));
+        return R.ok(deptService.queryDeptTreeList(dept));
     }
 
 }

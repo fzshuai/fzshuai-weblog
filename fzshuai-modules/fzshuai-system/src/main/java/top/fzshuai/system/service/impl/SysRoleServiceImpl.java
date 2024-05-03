@@ -47,7 +47,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     private final SysRoleDeptMapper roleDeptMapper;
 
     @Override
-    public TableDataInfo<SysRole> selectPageRoleList(SysRole role, PageQuery pageQuery) {
+    public TableDataInfo<SysRole> queryPageRoleList(SysRole role, PageQuery pageQuery) {
         Page<SysRole> page = baseMapper.selectPageRoleList(pageQuery.build(), this.buildQueryWrapper(role));
         return TableDataInfo.build(page);
     }
@@ -59,7 +59,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 角色数据集合信息
      */
     @Override
-    public List<SysRole> selectRoleList(SysRole role) {
+    public List<SysRole> queryRoleList(SysRole role) {
         return baseMapper.selectRoleList(this.buildQueryWrapper(role));
     }
 
@@ -84,9 +84,9 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 角色列表
      */
     @Override
-    public List<SysRole> selectRolesByUserId(Long userId) {
+    public List<SysRole> queryRolesByUserId(Long userId) {
         List<SysRole> userRoles = baseMapper.selectRolePermissionByUserId(userId);
-        List<SysRole> roles = selectRoleAll();
+        List<SysRole> roles = queryRoleAll();
         for (SysRole role : roles) {
             for (SysRole userRole : userRoles) {
                 if (role.getRoleId().longValue() == userRole.getRoleId().longValue()) {
@@ -105,7 +105,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 权限列表
      */
     @Override
-    public Set<String> selectRolePermissionByUserId(Long userId) {
+    public Set<String> queryRolePermissionByUserId(Long userId) {
         List<SysRole> perms = baseMapper.selectRolePermissionByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (SysRole perm : perms) {
@@ -122,8 +122,8 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 角色列表
      */
     @Override
-    public List<SysRole> selectRoleAll() {
-        return this.selectRoleList(new SysRole());
+    public List<SysRole> queryRoleAll() {
+        return this.queryRoleList(new SysRole());
     }
 
     /**
@@ -133,7 +133,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 选中角色ID列表
      */
     @Override
-    public List<Long> selectRoleListByUserId(Long userId) {
+    public List<Long> queryRoleListByUserId(Long userId) {
         return baseMapper.selectRoleListByUserId(userId);
     }
 
@@ -144,7 +144,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return 角色对象信息
      */
     @Override
-    public SysRole selectRoleById(Long roleId) {
+    public SysRole queryRoleById(Long roleId) {
         return baseMapper.selectById(roleId);
     }
 
@@ -215,7 +215,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
         if (!LoginHelper.isAdmin()) {
             SysRole role = new SysRole();
             role.setRoleId(roleId);
-            List<SysRole> roles = this.selectRoleList(role);
+            List<SysRole> roles = this.queryRoleList(role);
             if (CollUtil.isEmpty(roles)) {
                 throw new ServiceException("没有权限访问角色数据！");
             }
@@ -362,7 +362,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Transactional(rollbackFor = Exception.class)
     public int deleteRoleByIds(Long[] roleIds) {
         for (Long roleId : roleIds) {
-            SysRole role = selectRoleById(roleId);
+            SysRole role = queryRoleById(roleId);
             checkRoleAllowed(role);
             checkRoleDataScope(roleId);
             if (countUserRoleByRoleId(roleId) > 0) {

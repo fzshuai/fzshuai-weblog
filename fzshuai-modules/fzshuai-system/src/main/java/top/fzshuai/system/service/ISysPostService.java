@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * 岗位信息 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysPostService {
 
-
-    TableDataInfo<SysPost> selectPagePostList(SysPost post, PageQuery pageQuery);
+    TableDataInfo<SysPost> queryPagePostList(SysPost post, PageQuery pageQuery);
 
     /**
      * 查询岗位信息集合
@@ -22,14 +21,14 @@ public interface ISysPostService {
      * @param post 岗位信息
      * @return 岗位列表
      */
-    List<SysPost> selectPostList(SysPost post);
+    List<SysPost> queryPostList(SysPost post);
 
     /**
      * 查询所有岗位
      *
      * @return 岗位列表
      */
-    List<SysPost> selectPostAll();
+    List<SysPost> queryPostAll();
 
     /**
      * 通过岗位ID查询岗位信息
@@ -37,7 +36,7 @@ public interface ISysPostService {
      * @param postId 岗位ID
      * @return 角色对象信息
      */
-    SysPost selectPostById(Long postId);
+    SysPost queryPostById(Long postId);
 
     /**
      * 根据用户ID获取岗位选择框列表
@@ -45,7 +44,7 @@ public interface ISysPostService {
      * @param userId 用户ID
      * @return 选中岗位ID列表
      */
-    List<Long> selectPostListByUserId(Long userId);
+    List<Long> queryPostListByUserId(Long userId);
 
     /**
      * 校验岗位名称
@@ -102,4 +101,5 @@ public interface ISysPostService {
      * @return 结果
      */
     int updatePost(SysPost post);
+
 }

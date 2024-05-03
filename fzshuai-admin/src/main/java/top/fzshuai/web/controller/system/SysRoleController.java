@@ -47,7 +47,7 @@ public class SysRoleController extends BaseController {
     @SaCheckPermission("system:role:list")
     @GetMapping("/list")
     public TableDataInfo<SysRole> list(SysRole role, PageQuery pageQuery) {
-        return roleService.selectPageRoleList(role, pageQuery);
+        return roleService.queryPageRoleList(role, pageQuery);
     }
 
     /**
@@ -57,7 +57,7 @@ public class SysRoleController extends BaseController {
     @SaCheckPermission("system:role:export")
     @PostMapping("/export")
     public void export(SysRole role, HttpServletResponse response) {
-        List<SysRole> list = roleService.selectRoleList(role);
+        List<SysRole> list = roleService.queryRoleList(role);
         ExcelUtil.exportExcel(list, "角色数据", SysRole.class, response);
     }
 
@@ -70,7 +70,7 @@ public class SysRoleController extends BaseController {
     @GetMapping(value = "/{roleId}")
     public R<SysRole> getInfo(@PathVariable Long roleId) {
         roleService.checkRoleDataScope(roleId);
-        return R.ok(roleService.selectRoleById(roleId));
+        return R.ok(roleService.queryRoleById(roleId));
     }
 
     /**
@@ -154,7 +154,7 @@ public class SysRoleController extends BaseController {
     @SaCheckPermission("system:role:query")
     @GetMapping("/optionselect")
     public R<List<SysRole>> optionselect() {
-        return R.ok(roleService.selectRoleAll());
+        return R.ok(roleService.queryRoleAll());
     }
 
     /**
@@ -163,7 +163,7 @@ public class SysRoleController extends BaseController {
     @SaCheckPermission("system:role:list")
     @GetMapping("/authUser/allocatedList")
     public TableDataInfo<SysUser> allocatedList(SysUser user, PageQuery pageQuery) {
-        return userService.selectAllocatedList(user, pageQuery);
+        return userService.queryAllocatedList(user, pageQuery);
     }
 
     /**
@@ -172,7 +172,7 @@ public class SysRoleController extends BaseController {
     @SaCheckPermission("system:role:list")
     @GetMapping("/authUser/unallocatedList")
     public TableDataInfo<SysUser> unallocatedList(SysUser user, PageQuery pageQuery) {
-        return userService.selectUnallocatedList(user, pageQuery);
+        return userService.queryUnallocatedList(user, pageQuery);
     }
 
     /**
@@ -221,8 +221,8 @@ public class SysRoleController extends BaseController {
     @GetMapping(value = "/deptTree/{roleId}")
     public R<Map<String, Object>> roleDeptTreeselect(@PathVariable("roleId") Long roleId) {
         Map<String, Object> ajax = new HashMap<>();
-        ajax.put("checkedKeys", deptService.selectDeptListByRoleId(roleId));
-        ajax.put("depts", deptService.selectDeptTreeList(new SysDept()));
+        ajax.put("checkedKeys", deptService.queryDeptListByRoleId(roleId));
+        ajax.put("depts", deptService.queryDeptTreeList(new SysDept()));
         return R.ok(ajax);
     }
 }

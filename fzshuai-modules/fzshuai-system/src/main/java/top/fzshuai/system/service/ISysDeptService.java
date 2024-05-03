@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 部门管理 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysDeptService {
     /**
@@ -17,7 +17,7 @@ public interface ISysDeptService {
      * @param dept 部门信息
      * @return 部门信息集合
      */
-    List<SysDept> selectDeptList(SysDept dept);
+    List<SysDept> queryDeptList(SysDept dept);
 
     /**
      * 查询部门树结构信息
@@ -25,7 +25,7 @@ public interface ISysDeptService {
      * @param dept 部门信息
      * @return 部门树信息集合
      */
-    List<Tree<Long>> selectDeptTreeList(SysDept dept);
+    List<Tree<Long>> queryDeptTreeList(SysDept dept);
 
     /**
      * 构建前端所需要下拉树结构
@@ -41,7 +41,7 @@ public interface ISysDeptService {
      * @param roleId 角色ID
      * @return 选中部门列表
      */
-    List<Long> selectDeptListByRoleId(Long roleId);
+    List<Long> queryDeptListByRoleId(Long roleId);
 
     /**
      * 根据部门ID查询信息
@@ -49,7 +49,7 @@ public interface ISysDeptService {
      * @param deptId 部门ID
      * @return 部门信息
      */
-    SysDept selectDeptById(Long deptId);
+    SysDept queryDeptById(Long deptId);
 
     /**
      * 根据ID查询所有子部门数（正常状态）
@@ -57,7 +57,7 @@ public interface ISysDeptService {
      * @param deptId 部门ID
      * @return 子部门数
      */
-    long selectNormalChildrenDeptById(Long deptId);
+    long queryNormalChildrenDeptById(Long deptId);
 
     /**
      * 是否存在部门子节点
@@ -112,5 +112,6 @@ public interface ISysDeptService {
      * @param deptId 部门ID
      * @return 结果
      */
-    int deleteDeptById(Long deptId);
+    int deleteDeptById(Long deptId)
+    ;
 }

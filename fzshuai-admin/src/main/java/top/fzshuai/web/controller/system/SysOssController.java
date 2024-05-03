@@ -58,7 +58,7 @@ public class SysOssController extends BaseController {
     @GetMapping("/listByIds/{ossIds}")
     public R<List<SysOssVo>> listByIds(@NotEmpty(message = "主键不能为空")
                                        @PathVariable Long[] ossIds) {
-        List<SysOssVo> list = iSysOssService.listByIds(Arrays.asList(ossIds));
+        List<SysOssVo> list = iSysOssService.queryListByIds(Arrays.asList(ossIds));
         return R.ok(list);
     }
 

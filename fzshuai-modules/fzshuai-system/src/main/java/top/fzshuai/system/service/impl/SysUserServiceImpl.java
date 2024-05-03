@@ -68,7 +68,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
     }
 
     @Override
-    public TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery) {
+    public TableDataInfo<SysUser> queryPageUserList(SysUser user, PageQuery pageQuery) {
         Page<SysUser> page = baseMapper.selectPageUserList(pageQuery.build(), this.buildQueryWrapper(user));
         return TableDataInfo.build(page);
     }
@@ -80,7 +80,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户信息集合信息
      */
     @Override
-    public List<SysUser> selectUserList(SysUser user) {
+    public List<SysUser> queryUserList(SysUser user) {
         return baseMapper.selectUserList(this.buildQueryWrapper(user));
     }
 
@@ -112,7 +112,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户信息集合信息
      */
     @Override
-    public TableDataInfo<SysUser> selectAllocatedList(SysUser user, PageQuery pageQuery) {
+    public TableDataInfo<SysUser> queryAllocatedList(SysUser user, PageQuery pageQuery) {
         QueryWrapper<SysUser> wrapper = Wrappers.query();
         wrapper.eq("u.del_flag", UserConstants.USER_NORMAL)
             .eq(ObjectUtil.isNotNull(user.getRoleId()), "r.role_id", user.getRoleId())
@@ -130,7 +130,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户信息集合信息
      */
     @Override
-    public TableDataInfo<SysUser> selectUnallocatedList(SysUser user, PageQuery pageQuery) {
+    public TableDataInfo<SysUser> queryUnallocatedList(SysUser user, PageQuery pageQuery) {
         List<Long> userIds = userRoleMapper.selectUserIdsByRoleId(user.getRoleId());
         QueryWrapper<SysUser> wrapper = Wrappers.query();
         wrapper.eq("u.del_flag", UserConstants.USER_NORMAL)
@@ -149,7 +149,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserByUserName(String userName) {
+    public SysUser queryUserByUserName(String userName) {
         return baseMapper.selectUserByUserName(userName);
     }
 
@@ -160,7 +160,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserByPhoneNumber(String phoneNumber) {
+    public SysUser queryUserByPhoneNumber(String phoneNumber) {
         return baseMapper.selectUserByPhoneNumber(phoneNumber);
     }
 
@@ -171,7 +171,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserById(Long userId) {
+    public SysUser queryUserById(Long userId) {
         return baseMapper.selectUserById(userId);
     }
 
@@ -182,7 +182,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 结果
      */
     @Override
-    public String selectUserRoleGroup(String userName) {
+    public String queryUserRoleGroup(String userName) {
         List<SysRole> list = roleMapper.selectRolesByUserName(userName);
         if (CollUtil.isEmpty(list)) {
             return StringUtils.EMPTY;
@@ -197,7 +197,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      * @return 结果
      */
     @Override
-    public String selectUserPostGroup(String userName) {
+    public String queryUserPostGroup(String userName) {
         List<SysPost> list = postMapper.selectPostsByUserName(userName);
         if (CollUtil.isEmpty(list)) {
             return StringUtils.EMPTY;
@@ -267,7 +267,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
         if (!LoginHelper.isAdmin()) {
             SysUser user = new SysUser();
             user.setUserId(userId);
-            List<SysUser> users = this.selectUserList(user);
+            List<SysUser> users = this.queryUserList(user);
             if (CollUtil.isEmpty(users)) {
                 throw new ServiceException("没有权限访问用户数据！");
             }

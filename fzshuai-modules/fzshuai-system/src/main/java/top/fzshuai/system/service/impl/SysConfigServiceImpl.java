@@ -38,7 +38,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
     private final SysConfigMapper baseMapper;
 
     @Override
-    public TableDataInfo<SysConfig> selectPageConfigList(SysConfig config, PageQuery pageQuery) {
+    public TableDataInfo<SysConfig> queryPageConfigList(SysConfig config, PageQuery pageQuery) {
         Map<String, Object> params = config.getParams();
         LambdaQueryWrapper<SysConfig> lqw = new LambdaQueryWrapper<SysConfig>()
             .like(StringUtils.isNotBlank(config.getConfigName()), SysConfig::getConfigName, config.getConfigName())
@@ -58,7 +58,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Override
     @DS("master")
-    public SysConfig selectConfigById(Long configId) {
+    public SysConfig queryConfigById(Long configId) {
         return baseMapper.selectById(configId);
     }
 
@@ -70,7 +70,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Cacheable(cacheNames = CacheNames.SYS_CONFIG, key = "#configKey")
     @Override
-    public String selectConfigByKey(String configKey) {
+    public String queryConfigByKey(String configKey) {
         SysConfig retConfig = baseMapper.selectOne(new LambdaQueryWrapper<SysConfig>()
             .eq(SysConfig::getConfigKey, configKey));
         if (ObjectUtil.isNotNull(retConfig)) {
@@ -85,8 +85,8 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      * @return true开启，false关闭
      */
     @Override
-    public boolean selectCaptchaEnabled() {
-        String captchaEnabled = SpringUtils.getAopProxy(this).selectConfigByKey("sys.account.captchaEnabled");
+    public boolean queryCaptchaEnabled() {
+        String captchaEnabled = SpringUtils.getAopProxy(this).queryConfigByKey("sys.account.captchaEnabled");
         if (StringUtils.isEmpty(captchaEnabled)) {
             return true;
         }
@@ -100,7 +100,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      * @return 参数配置集合
      */
     @Override
-    public List<SysConfig> selectConfigList(SysConfig config) {
+    public List<SysConfig> queryConfigList(SysConfig config) {
         Map<String, Object> params = config.getParams();
         LambdaQueryWrapper<SysConfig> lqw = new LambdaQueryWrapper<SysConfig>()
             .like(StringUtils.isNotBlank(config.getConfigName()), SysConfig::getConfigName, config.getConfigName())
@@ -161,7 +161,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
     @Override
     public void deleteConfigByIds(Long[] configIds) {
         for (Long configId : configIds) {
-            SysConfig config = selectConfigById(configId);
+            SysConfig config = queryConfigById(configId);
             if (StringUtils.equals(UserConstants.YES, config.getConfigType())) {
                 throw new ServiceException(String.format("内置参数【%1$s】不能删除 ", config.getConfigKey()));
             }
@@ -175,7 +175,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Override
     public void loadingConfigCache() {
-        List<SysConfig> configsList = selectConfigList(new SysConfig());
+        List<SysConfig> configsList = queryConfigList(new SysConfig());
         configsList.forEach(config ->
             CacheUtils.put(CacheNames.SYS_CONFIG, config.getConfigKey(), config.getConfigValue()));
     }
@@ -221,7 +221,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
      */
     @Override
     public String getConfigValue(String configKey) {
-        return SpringUtils.getAopProxy(this).selectConfigByKey(configKey);
+        return SpringUtils.getAopProxy(this).queryConfigByKey(configKey);
     }
 
 }

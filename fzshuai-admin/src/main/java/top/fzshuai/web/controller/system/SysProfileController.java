@@ -42,11 +42,11 @@ public class SysProfileController extends BaseController {
      */
     @GetMapping
     public R<Map<String, Object>> profile() {
-        SysUser user = userService.selectUserById(getUserId());
+        SysUser user = userService.queryUserById(getUserId());
         Map<String, Object> ajax = new HashMap<>();
         ajax.put("user", user);
-        ajax.put("roleGroup", userService.selectUserRoleGroup(user.getUserName()));
-        ajax.put("postGroup", userService.selectUserPostGroup(user.getUserName()));
+        ajax.put("roleGroup", userService.queryUserRoleGroup(user.getUserName()));
+        ajax.put("postGroup", userService.queryUserPostGroup(user.getUserName()));
         return R.ok(ajax);
     }
 
@@ -82,7 +82,7 @@ public class SysProfileController extends BaseController {
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping("/updatePwd")
     public R<Void> updatePwd(String oldPassword, String newPassword) {
-        SysUser user = userService.selectUserById(LoginHelper.getUserId());
+        SysUser user = userService.queryUserById(LoginHelper.getUserId());
         String userName = user.getUserName();
         String password = user.getPassword();
         if (!BCrypt.checkpw(oldPassword, password)) {

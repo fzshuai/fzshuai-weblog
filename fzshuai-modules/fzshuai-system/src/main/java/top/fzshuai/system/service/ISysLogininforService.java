@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * 系统访问日志情况信息 服务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysLogininforService {
 
-
-    TableDataInfo<SysLogininfor> selectPageLogininforList(SysLogininfor logininfor, PageQuery pageQuery);
+    TableDataInfo<SysLogininfor> queryPageLogininforList(SysLogininfor logininfor, PageQuery pageQuery);
 
     /**
      * 新增系统登录日志
@@ -29,7 +28,7 @@ public interface ISysLogininforService {
      * @param logininfor 访问日志对象
      * @return 登录记录集合
      */
-    List<SysLogininfor> selectLogininforList(SysLogininfor logininfor);
+    List<SysLogininfor> queryLogininforList(SysLogininfor logininfor);
 
     /**
      * 批量删除系统登录日志
@@ -43,4 +42,5 @@ public interface ISysLogininforService {
      * 清空系统登录日志
      */
     void cleanLogininfor();
+
 }

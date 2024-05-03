@@ -36,7 +36,7 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:list")
     @GetMapping("/list")
     public TableDataInfo<SysDictType> list(SysDictType dictType, PageQuery pageQuery) {
-        return dictTypeService.selectPageDictTypeList(dictType, pageQuery);
+        return dictTypeService.queryPageDictTypeList(dictType, pageQuery);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:export")
     @PostMapping("/export")
     public void export(SysDictType dictType, HttpServletResponse response) {
-        List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
+        List<SysDictType> list = dictTypeService.queryDictTypeList(dictType);
         ExcelUtil.exportExcel(list, "字典类型", SysDictType.class, response);
     }
 
@@ -58,7 +58,7 @@ public class SysDictTypeController extends BaseController {
     @SaCheckPermission("system:dict:query")
     @GetMapping(value = "/{dictId}")
     public R<SysDictType> getInfo(@PathVariable Long dictId) {
-        return R.ok(dictTypeService.selectDictTypeById(dictId));
+        return R.ok(dictTypeService.queryDictTypeById(dictId));
     }
 
     /**
@@ -118,7 +118,7 @@ public class SysDictTypeController extends BaseController {
      */
     @GetMapping("/optionselect")
     public R<List<SysDictType>> optionselect() {
-        List<SysDictType> dictTypes = dictTypeService.selectDictTypeAll();
+        List<SysDictType> dictTypes = dictTypeService.queryDictTypeAll();
         return R.ok(dictTypes);
     }
 }

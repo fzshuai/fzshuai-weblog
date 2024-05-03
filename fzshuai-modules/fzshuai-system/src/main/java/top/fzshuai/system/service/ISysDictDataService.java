@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * 字典 业务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysDictDataService {
 
-
-    TableDataInfo<SysDictData> selectPageDictDataList(SysDictData dictData, PageQuery pageQuery);
+    TableDataInfo<SysDictData> queryPageDictDataList(SysDictData dictData, PageQuery pageQuery);
 
     /**
      * 根据条件分页查询字典数据
@@ -22,7 +21,7 @@ public interface ISysDictDataService {
      * @param dictData 字典数据信息
      * @return 字典数据集合信息
      */
-    List<SysDictData> selectDictDataList(SysDictData dictData);
+    List<SysDictData> queryDictDataList(SysDictData dictData);
 
     /**
      * 根据字典类型和字典键值查询字典数据信息
@@ -31,7 +30,7 @@ public interface ISysDictDataService {
      * @param dictValue 字典键值
      * @return 字典标签
      */
-    String selectDictLabel(String dictType, String dictValue);
+    String queryDictLabel(String dictType, String dictValue);
 
     /**
      * 根据字典数据ID查询信息
@@ -39,7 +38,7 @@ public interface ISysDictDataService {
      * @param dictCode 字典数据ID
      * @return 字典数据
      */
-    SysDictData selectDictDataById(Long dictCode);
+    SysDictData queryDictDataById(Long dictCode);
 
     /**
      * 批量删除字典数据信息
@@ -63,4 +62,5 @@ public interface ISysDictDataService {
      * @return 结果
      */
     List<SysDictData> updateDictData(SysDictData dictData);
+
 }

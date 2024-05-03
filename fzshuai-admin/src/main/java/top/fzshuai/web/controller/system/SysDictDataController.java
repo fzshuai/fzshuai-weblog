@@ -40,7 +40,7 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:list")
     @GetMapping("/list")
     public TableDataInfo<SysDictData> list(SysDictData dictData, PageQuery pageQuery) {
-        return dictDataService.selectPageDictDataList(dictData, pageQuery);
+        return dictDataService.queryPageDictDataList(dictData, pageQuery);
     }
 
     /**
@@ -50,7 +50,7 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:export")
     @PostMapping("/export")
     public void export(SysDictData dictData, HttpServletResponse response) {
-        List<SysDictData> list = dictDataService.selectDictDataList(dictData);
+        List<SysDictData> list = dictDataService.queryDictDataList(dictData);
         ExcelUtil.exportExcel(list, "字典数据", SysDictData.class, response);
     }
 
@@ -62,7 +62,7 @@ public class SysDictDataController extends BaseController {
     @SaCheckPermission("system:dict:query")
     @GetMapping(value = "/{dictCode}")
     public R<SysDictData> getInfo(@PathVariable Long dictCode) {
-        return R.ok(dictDataService.selectDictDataById(dictCode));
+        return R.ok(dictDataService.queryDictDataById(dictCode));
     }
 
     /**
@@ -72,7 +72,7 @@ public class SysDictDataController extends BaseController {
      */
     @GetMapping(value = "/type/{dictType}")
     public R<List<SysDictData>> dictType(@PathVariable String dictType) {
-        List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);
+        List<SysDictData> data = dictTypeService.queryDictDataByType(dictType);
         if (ObjectUtil.isNull(data)) {
             data = new ArrayList<>();
         }

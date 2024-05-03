@@ -10,12 +10,11 @@ import java.util.List;
 /**
  * 字典 业务层
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 public interface ISysDictTypeService {
 
-
-    TableDataInfo<SysDictType> selectPageDictTypeList(SysDictType dictType, PageQuery pageQuery);
+    TableDataInfo<SysDictType> queryPageDictTypeList(SysDictType dictType, PageQuery pageQuery);
 
     /**
      * 根据条件分页查询字典类型
@@ -23,14 +22,14 @@ public interface ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 字典类型集合信息
      */
-    List<SysDictType> selectDictTypeList(SysDictType dictType);
+    List<SysDictType> queryDictTypeList(SysDictType dictType);
 
     /**
      * 根据所有字典类型
      *
      * @return 字典类型集合信息
      */
-    List<SysDictType> selectDictTypeAll();
+    List<SysDictType> queryDictTypeAll();
 
     /**
      * 根据字典类型查询字典数据
@@ -38,7 +37,7 @@ public interface ISysDictTypeService {
      * @param dictType 字典类型
      * @return 字典数据集合信息
      */
-    List<SysDictData> selectDictDataByType(String dictType);
+    List<SysDictData> queryDictDataByType(String dictType);
 
     /**
      * 根据字典类型ID查询信息
@@ -46,7 +45,7 @@ public interface ISysDictTypeService {
      * @param dictId 字典类型ID
      * @return 字典类型
      */
-    SysDictType selectDictTypeById(Long dictId);
+    SysDictType queryDictTypeById(Long dictId);
 
     /**
      * 根据字典类型查询信息
@@ -54,7 +53,7 @@ public interface ISysDictTypeService {
      * @param dictType 字典类型
      * @return 字典类型
      */
-    SysDictType selectDictTypeByType(String dictType);
+    SysDictType queryDictTypeByType(String dictType);
 
     /**
      * 批量删除字典信息
@@ -101,4 +100,5 @@ public interface ISysDictTypeService {
      * @return 结果
      */
     boolean checkDictTypeUnique(SysDictType dictType);
+
 }

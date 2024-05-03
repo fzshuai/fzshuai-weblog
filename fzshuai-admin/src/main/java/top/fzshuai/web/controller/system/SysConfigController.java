@@ -36,7 +36,7 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:list")
     @GetMapping("/list")
     public TableDataInfo<SysConfig> list(SysConfig config, PageQuery pageQuery) {
-        return configService.selectPageConfigList(config, pageQuery);
+        return configService.queryPageConfigList(config, pageQuery);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:export")
     @PostMapping("/export")
     public void export(SysConfig config, HttpServletResponse response) {
-        List<SysConfig> list = configService.selectConfigList(config);
+        List<SysConfig> list = configService.queryConfigList(config);
         ExcelUtil.exportExcel(list, "参数数据", SysConfig.class, response);
     }
 
@@ -58,7 +58,7 @@ public class SysConfigController extends BaseController {
     @SaCheckPermission("system:config:query")
     @GetMapping(value = "/{configId}")
     public R<SysConfig> getInfo(@PathVariable Long configId) {
-        return R.ok(configService.selectConfigById(configId));
+        return R.ok(configService.queryConfigById(configId));
     }
 
     /**
@@ -68,7 +68,7 @@ public class SysConfigController extends BaseController {
      */
     @GetMapping(value = "/configKey/{configKey}")
     public R<Void> getConfigKey(@PathVariable String configKey) {
-        return R.ok(configService.selectConfigByKey(configKey));
+        return R.ok(configService.queryConfigByKey(configKey));
     }
 
     /**

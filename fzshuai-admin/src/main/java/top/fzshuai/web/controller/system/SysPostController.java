@@ -37,7 +37,7 @@ public class SysPostController extends BaseController {
     @SaCheckPermission("system:post:list")
     @GetMapping("/list")
     public TableDataInfo<SysPost> list(SysPost post, PageQuery pageQuery) {
-        return postService.selectPagePostList(post, pageQuery);
+        return postService.queryPagePostList(post, pageQuery);
     }
 
     /**
@@ -47,7 +47,7 @@ public class SysPostController extends BaseController {
     @SaCheckPermission("system:post:export")
     @PostMapping("/export")
     public void export(SysPost post, HttpServletResponse response) {
-        List<SysPost> list = postService.selectPostList(post);
+        List<SysPost> list = postService.queryPostList(post);
         ExcelUtil.exportExcel(list, "岗位数据", SysPost.class, response);
     }
 
@@ -59,7 +59,7 @@ public class SysPostController extends BaseController {
     @SaCheckPermission("system:post:query")
     @GetMapping(value = "/{postId}")
     public R<SysPost> getInfo(@PathVariable Long postId) {
-        return R.ok(postService.selectPostById(postId));
+        return R.ok(postService.queryPostById(postId));
     }
 
     /**
@@ -114,7 +114,7 @@ public class SysPostController extends BaseController {
     public R<List<SysPost>> optionselect() {
         SysPost post = new SysPost();
         post.setStatus(UserConstants.POST_NORMAL);
-        List<SysPost> posts = postService.selectPostList(post);
+        List<SysPost> posts = postService.queryPostList(post);
         return R.ok(posts);
     }
 }
