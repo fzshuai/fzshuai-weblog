@@ -17,6 +17,7 @@ public class RuoYiApplication {
         SpringApplication application = new SpringApplication(RuoYiApplication.class);
         application.setApplicationStartup(new BufferingApplicationStartup(2048));
         application.run(args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  Fzshuai-Blog 启动成功   ლ(´ڡ`ლ)ﾞ");
+        System.out.println("(♥◠‿◠)ﾉﾞ  Fzshuai-Weblog 启动成功   ლ(´ڡ`ლ)ﾞ");
     }
+
 }
