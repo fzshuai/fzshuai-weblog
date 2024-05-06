@@ -14,15 +14,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import top.fzshuai.common.constant.CacheConstants;
 import top.fzshuai.common.constant.Constants;
-import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.dto.RoleDto;
 import top.fzshuai.common.core.domain.entity.SysUser;
 import top.fzshuai.common.core.domain.event.LogininforEvent;
+import top.fzshuai.common.core.domain.model.BlogLoginUser;
 import top.fzshuai.common.core.domain.model.LoginUser;
 import top.fzshuai.common.core.domain.model.XcxLoginUser;
 import top.fzshuai.common.enums.DeviceType;
 import top.fzshuai.common.enums.LoginType;
 import top.fzshuai.common.enums.UserStatus;
+import top.fzshuai.common.exception.ServiceException;
 import top.fzshuai.common.exception.user.CaptchaException;
 import top.fzshuai.common.exception.user.CaptchaExpireException;
 import top.fzshuai.common.exception.user.UserException;
@@ -34,7 +35,6 @@ import top.fzshuai.common.utils.StringUtils;
 import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.common.utils.spring.SpringUtils;
 import top.fzshuai.system.domain.bo.SysSocialUserBo;
-import top.fzshuai.system.domain.vo.BlogUserVo;
 import top.fzshuai.system.domain.vo.SysSocialUserVo;
 import top.fzshuai.system.mapper.SysUserMapper;
 
@@ -92,16 +92,16 @@ public class SysLoginService {
         return StpUtil.getTokenValue();
     }
 
-    public BlogUserVo blogLogin(String username, String password) {
+    public BlogLoginUser blogLogin(String username, String password) {
         SysUser user = loadUserByUsername(username);
         checkLogin(LoginType.PASSWORD, username, () -> !BCrypt.checkpw(password, user.getPassword()));
         // 构建博客用户登录对象
-        BlogUserVo blogUser = new BlogUserVo();
+        BlogLoginUser blogUser = new BlogLoginUser();
         blogUser.setUserId(user.getUserId());
         blogUser.setEmail(user.getEmail());
         blogUser.setAvatar(user.getAvatar());
         blogUser.setNickname(user.getNickName());
-        blogUser.setIpAddress(user.getLoginIp());
+        blogUser.setIpaddr(user.getLoginIp());
         blogUser.setUsername(user.getUserName());
 
         recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
@@ -171,26 +171,63 @@ public class SysLoginService {
      * @param authUser 授权响应实体
      * @return 统一响应实体
      */
-    public R<String> socialLogin(String source, AuthResponse<AuthUser> authUser) {
+    public String socialLogin(String source, AuthResponse<AuthUser> authUser) {
         // 判断授权响应是否成功
         if (!authUser.ok()) {
-            return R.fail("对不起，授权信息验证不通过，请退出重试！");
+            return "对不起，授权信息验证不通过，请退出重试！";
         }
         AuthUser authUserData = authUser.getData();
-        SysSocialUserVo user = socialUserService.selectByAuthId(authUserData.getSource() + authUserData.getUuid());
+        SysSocialUserVo user = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
         if (ObjectUtil.isNotNull(user)) {
             // 执行登录和记录登录信息操作
             return loginAndRecord(user.getUserName());
         } else {
             // 判断是否已登录
             if (!StpUtil.isLogin()) {
-                return R.fail("授权失败，请先登录才能绑定");
+                return "授权失败，请先登录才能绑定";
             }
             // 注册第三方社交用户
             socialRegister(authUserData);
             SysUser sysUser = loadUserByUsername(LoginHelper.getUsername());
             // 执行登录和记录登录信息操作
             return loginAndRecord(sysUser.getUserName());
+        }
+    }
+
+    /**
+     * 社交用户登录
+     *
+     * @param authUser 授权响应实体
+     * @return 统一响应实体
+     */
+    public BlogLoginUser blogSocialLogin(AuthResponse<AuthUser> authUser) {
+        // 判断授权响应是否成功
+        if (!authUser.ok()) {
+            throw new ServiceException("对不起，授权信息验证不通过，请退出重试！");
+        }
+        AuthUser authUserData = authUser.getData();
+        SysSocialUserVo user = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
+        if (ObjectUtil.isNotNull(user)) {
+            // 执行登录和记录登录信息操作
+            loginAndRecord(user.getUserName());
+            BlogLoginUser blogLoginUser = new BlogLoginUser();
+            blogLoginUser.setUserId(user.getUserId());
+            blogLoginUser.setUsername(user.getUserName());
+            blogLoginUser.setNickname(user.getNickName());
+            blogLoginUser.setAvatar(user.getAvatar());
+            blogLoginUser.setEmail(user.getEmail());
+            return blogLoginUser;
+        } else {
+            // 注册第三方社交用户
+            socialRegister(authUserData);
+            // 执行登录和记录登录信息操作
+            loginAndRecord(authUserData.getUsername());
+            BlogLoginUser blogLoginUser = new BlogLoginUser();
+            blogLoginUser.setUsername(authUserData.getUsername());
+            blogLoginUser.setNickname(authUserData.getNickname());
+            blogLoginUser.setAvatar(authUserData.getAvatar());
+            blogLoginUser.setEmail(authUserData.getEmail());
+            return blogLoginUser;
         }
     }
 
@@ -207,6 +244,7 @@ public class SysLoginService {
         bo.setOpenId(authUserData.getUuid());
         bo.setUserName(authUserData.getUsername());
         bo.setNickName(authUserData.getNickname());
+        bo.setAvatar(authUserData.getAvatar());
         socialUserService.insertByBo(bo);
     }
 
@@ -216,12 +254,12 @@ public class SysLoginService {
      * @param userName 用户名
      * @return 统一响应实体
      */
-    private R<String> loginAndRecord(String userName) {
+    private String loginAndRecord(String userName) {
         SysUser dbUser = loadUserByUsername(userName);
         LoginHelper.loginByDevice(buildLoginUser(dbUser), DeviceType.SOCIAL);
         recordLogininfor(userName, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(dbUser.getUserId(), dbUser.getUserName());
-        return R.ok(StpUtil.getTokenValue());
+        return StpUtil.getTokenValue();
     }
 
     /**

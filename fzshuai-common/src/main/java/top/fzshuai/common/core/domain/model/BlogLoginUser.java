@@ -1,20 +1,22 @@
-package top.fzshuai.system.domain.vo;
+package top.fzshuai.common.core.domain.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
- * 博客用户信息
+ * 登录用户身份权限
  *
  * @author fzshuai
- * @date 2024/04/18 22:01
+ * @date 2024/05/04 13:00
  * @since 1.0
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class BlogUserVo {
+public class BlogLoginUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户id
@@ -34,7 +36,7 @@ public class BlogUserVo {
     /**
      * 用户ip
      */
-    private String ipAddress;
+    private String ipaddr;
 
     /**
      * 用户昵称

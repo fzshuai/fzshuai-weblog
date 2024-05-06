@@ -17,6 +17,7 @@ import top.fzshuai.common.config.properties.SocialLoginConfigProperties;
 import top.fzshuai.common.config.properties.SocialProperties;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
+import top.fzshuai.common.core.domain.model.BlogLoginUser;
 import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.helper.LoginHelper;
@@ -106,7 +107,30 @@ public class SysSocialUserController extends BaseController {
             obj.getClientSecret(),
             obj.getRedirectUri());
         AuthResponse<AuthUser> response = authRequest.login(callback);
-        return loginService.socialLogin(source, response);
+        return R.ok(loginService.socialLogin(source, response));
+    }
+
+    /**
+     * 第三方登录回调业务处理
+     *
+     * @param source   登录来源
+     * @param callback 授权响应实体
+     * @return 结果
+     */
+    @SaIgnore
+    @GetMapping("/blog-social-callback/{source}")
+    public R<BlogLoginUser> blogSocialCallback(@PathVariable("source") String source, AuthCallback callback) {
+        SocialLoginConfigProperties obj = socialProperties.getType().get(source);
+        if (ObjectUtil.isNull(obj)) {
+            return R.fail(source + "平台账号暂不支持");
+        }
+        // 获取第三方登录信息
+        AuthRequest authRequest = SocialUtils.getAuthRequest(source,
+            obj.getClientId(),
+            obj.getClientSecret(),
+            obj.getRedirectUri());
+        AuthResponse<AuthUser> response = authRequest.login(callback);
+        return R.ok(loginService.blogSocialLogin(response));
     }
 
     /**

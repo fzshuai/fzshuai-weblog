@@ -13,12 +13,4 @@ import top.fzshuai.system.domain.vo.SysSocialUserVo;
  */
 public interface SysSocialUserMapper extends BaseMapperPlus<SysSocialUserMapper, SysSocialUser, SysSocialUserVo> {
 
-    /**
-     * 根据 authId 查询社交用户
-     *
-     * @param authId 认证 ID
-     * @return SysSocialUser
-     */
-    SysSocialUserVo selectByAuthId(String authId);
-
 }

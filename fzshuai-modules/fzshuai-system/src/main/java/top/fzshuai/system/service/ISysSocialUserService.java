@@ -28,6 +28,11 @@ public interface ISysSocialUserService {
     List<SysSocialUserVo> queryListByUserId(Long userId);
 
     /**
+     * 根据 authId 查询社交用户
+     */
+    SysSocialUserVo queryByAuthId(String authId);
+
+    /**
      * 新增社交用户
      */
     Boolean insertByBo(SysSocialUserBo bo);
@@ -41,10 +46,5 @@ public interface ISysSocialUserService {
      * 删除社交用户
      */
     Boolean deleteWithValidById(Long id);
-
-    /**
-     * 根据 authId 查询社交用户
-     */
-    SysSocialUserVo selectByAuthId(String authId);
 
 }

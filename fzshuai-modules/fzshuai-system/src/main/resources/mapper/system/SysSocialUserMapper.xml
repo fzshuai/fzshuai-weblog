@@ -28,15 +28,4 @@
         <id property="oauthTokenSecret" column="oauth_token_secret"/>
     </resultMap>
 
-    <select id="selectByAuthId" parameterType="String" resultMap="SocialUserAuthResult">
-        select b.user_id,
-               b.user_name,
-               b.password,
-               a.auth_id,
-               a.source
-        from sys_social_user a
-                 left join sys_user b on a.user_id = b.user_id
-        where a.auth_id = #{authId}
-    </select>
-
 </mapper>

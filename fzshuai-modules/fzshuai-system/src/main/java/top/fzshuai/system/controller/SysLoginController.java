@@ -11,12 +11,8 @@ import top.fzshuai.common.constant.Constants;
 import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.entity.SysMenu;
 import top.fzshuai.common.core.domain.entity.SysUser;
-import top.fzshuai.common.core.domain.model.EmailLoginBody;
-import top.fzshuai.common.core.domain.model.LoginBody;
-import top.fzshuai.common.core.domain.model.LoginUser;
-import top.fzshuai.common.core.domain.model.SmsLoginBody;
+import top.fzshuai.common.core.domain.model.*;
 import top.fzshuai.common.helper.LoginHelper;
-import top.fzshuai.system.domain.vo.BlogUserVo;
 import top.fzshuai.system.domain.vo.RouterVo;
 import top.fzshuai.system.service.ISysMenuService;
 import top.fzshuai.system.service.ISysUserService;
@@ -63,7 +59,7 @@ public class SysLoginController {
      */
     @SaIgnore
     @PostMapping("/blogLogin")
-    public R<BlogUserVo> blogLogin(String username, String password) {
+    public R<BlogLoginUser> blogLogin(String username, String password) {
         return R.ok(loginService.blogLogin(username, password));
     }
 
@@ -129,7 +125,7 @@ public class SysLoginController {
      */
     @SaIgnore
     @GetMapping("/blogLogout")
-    public R blogLogout(){
+    public R<Void> blogLogout() {
         return R.ok("退出成功");
     }
 

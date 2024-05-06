@@ -49,6 +49,17 @@ public class SysSocialUserServiceImpl implements ISysSocialUserService {
     }
 
     /**
+     * 根据 authId 查询社交用户
+     *
+     * @param authId 认证id
+     * @return 社交用户
+     */
+    @Override
+    public SysSocialUserVo queryByAuthId(String authId) {
+        return baseMapper.selectVoOne(new LambdaQueryWrapper<SysSocialUser>().eq(SysSocialUser::getAuthId, authId));
+    }
+
+    /**
      * 新增社交用户
      */
     @Override
@@ -89,17 +100,6 @@ public class SysSocialUserServiceImpl implements ISysSocialUserService {
     @Override
     public Boolean deleteWithValidById(Long id) {
         return baseMapper.deleteById(id) > 0;
-    }
-
-    /**
-     * 根据 authId 查询社交用户
-     *
-     * @param authId 认证id
-     * @return 社交用户
-     */
-    @Override
-    public SysSocialUserVo selectByAuthId(String authId) {
-        return baseMapper.selectByAuthId(authId);
     }
 
 }
