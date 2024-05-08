@@ -8,6 +8,8 @@ import top.fzshuai.common.utils.redis.RedisUtils;
 import java.time.Duration;
 
 /**
+ * 授权状态缓存
+ *
  * @author fzshuai
  * @date 2024/04/11 20:47
  * @since 1.0
@@ -61,4 +63,5 @@ public class AuthRedisStateCache implements AuthStateCache {
     public boolean containsKey(String key) {
         return RedisUtils.hasKey(key);
     }
+
 }

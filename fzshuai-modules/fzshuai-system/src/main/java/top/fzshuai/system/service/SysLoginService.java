@@ -96,18 +96,7 @@ public class SysLoginService {
         SysUser user = loadUserByUsername(username);
         checkLogin(LoginType.PASSWORD, username, () -> !BCrypt.checkpw(password, user.getPassword()));
         // 构建博客用户登录对象
-        BlogLoginUser blogUser = new BlogLoginUser();
-        blogUser.setUserId(user.getUserId());
-        blogUser.setEmail(user.getEmail());
-        blogUser.setAvatar(user.getAvatar());
-        blogUser.setNickname(user.getNickName());
-        blogUser.setIpaddr(user.getLoginIp());
-        blogUser.setUsername(user.getUserName());
-
-        recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
-        recordLoginInfo(user.getUserId(), username);
-
-        return blogUser;
+        return buildBlogLoginUser(user);
 
     }
 
@@ -167,18 +156,18 @@ public class SysLoginService {
     /**
      * 社交用户登录
      *
-     * @param source   登录来源
      * @param authUser 授权响应实体
      * @return 统一响应实体
      */
-    public String socialLogin(String source, AuthResponse<AuthUser> authUser) {
+    public String socialLogin(AuthResponse<AuthUser> authUser) {
         // 判断授权响应是否成功
         if (!authUser.ok()) {
             return "对不起，授权信息验证不通过，请退出重试！";
         }
         AuthUser authUserData = authUser.getData();
-        SysSocialUserVo user = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
-        if (ObjectUtil.isNotNull(user)) {
+        SysSocialUserVo socialUser = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
+        if (ObjectUtil.isNotNull(socialUser)) {
+            SysUser user = userService.queryUserById(socialUser.getUserId());
             // 执行登录和记录登录信息操作
             return loginAndRecord(user.getUserName());
         } else {
@@ -206,29 +195,13 @@ public class SysLoginService {
             throw new ServiceException("对不起，授权信息验证不通过，请退出重试！");
         }
         AuthUser authUserData = authUser.getData();
-        SysSocialUserVo user = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
-        if (ObjectUtil.isNotNull(user)) {
-            // 执行登录和记录登录信息操作
-            loginAndRecord(user.getUserName());
-            BlogLoginUser blogLoginUser = new BlogLoginUser();
-            blogLoginUser.setUserId(user.getUserId());
-            blogLoginUser.setUsername(user.getUserName());
-            blogLoginUser.setNickname(user.getNickName());
-            blogLoginUser.setAvatar(user.getAvatar());
-            blogLoginUser.setEmail(user.getEmail());
-            return blogLoginUser;
-        } else {
+        SysSocialUserVo socialUser = socialUserService.queryByAuthId(authUserData.getSource() + authUserData.getUuid());
+        if (!ObjectUtil.isNotNull(socialUser)) {
             // 注册第三方社交用户
             socialRegister(authUserData);
-            // 执行登录和记录登录信息操作
-            loginAndRecord(authUserData.getUsername());
-            BlogLoginUser blogLoginUser = new BlogLoginUser();
-            blogLoginUser.setUsername(authUserData.getUsername());
-            blogLoginUser.setNickname(authUserData.getNickname());
-            blogLoginUser.setAvatar(authUserData.getAvatar());
-            blogLoginUser.setEmail(authUserData.getEmail());
-            return blogLoginUser;
         }
+        SysUser user = BeanUtil.toBean(authUserData, SysUser.class);
+        return buildBlogLoginUser(user);
     }
 
     /**
@@ -410,6 +383,19 @@ public class SysLoginService {
         List<RoleDto> roles = BeanUtil.copyToList(user.getRoles(), RoleDto.class);
         loginUser.setRoles(roles);
         return loginUser;
+    }
+
+    /**
+     * 构建博客登录用户
+     */
+    private BlogLoginUser buildBlogLoginUser(SysUser user) {
+        BlogLoginUser blogLoginUser = new BlogLoginUser();
+        blogLoginUser.setUserId(user.getUserId());
+        blogLoginUser.setUsername(user.getUserName());
+        blogLoginUser.setNickname(user.getNickName());
+        blogLoginUser.setAvatar(user.getAvatar());
+        blogLoginUser.setEmail(user.getEmail());
+        return blogLoginUser;
     }
 
     /**

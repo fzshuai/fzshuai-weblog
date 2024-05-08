@@ -1,8 +1,14 @@
 package top.fzshuai.common.utils.social;
 
+import cn.hutool.core.util.ObjectUtil;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;
+import me.zhyd.oauth.model.AuthCallback;
+import me.zhyd.oauth.model.AuthResponse;
+import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.*;
+import top.fzshuai.common.config.properties.SocialLoginConfigProperties;
+import top.fzshuai.common.config.properties.SocialProperties;
 
 /**
  * @author fzshuai
@@ -11,10 +17,22 @@ import me.zhyd.oauth.request.*;
  */
 public class SocialUtils {
 
-    public static AuthRequest getAuthRequest(String source,
-                                             String clientId,
-                                             String clientSecret,
-                                             String redirectUri) throws AuthException {
+    public static AuthResponse<AuthUser> loginAuth(String source, String code, String state, SocialProperties socialProperties) throws AuthException {
+        AuthRequest authRequest = getAuthRequest(source, socialProperties);
+        AuthCallback callback = new AuthCallback();
+        callback.setCode(code);
+        callback.setState(state);
+        return authRequest.login(callback);
+    }
+
+    public static AuthRequest getAuthRequest(String source, SocialProperties socialProperties) throws AuthException {
+        SocialLoginConfigProperties obj = socialProperties.getType().get(source);
+        if (ObjectUtil.isNull(obj)) {
+            throw new AuthException("不支持的第三方登录类型");
+        }
+        String clientId = obj.getClientId();
+        String clientSecret = obj.getClientSecret();
+        String redirectUri = obj.getRedirectUri();
         AuthRequest authRequest = null;
         switch (source.toLowerCase()) {
             case "dingtalk":
@@ -147,5 +165,5 @@ public class SocialUtils {
         }
         return authRequest;
     }
-}
 
+}

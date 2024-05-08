@@ -4,7 +4,6 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.core.util.ObjectUtil;
 import lombok.RequiredArgsConstructor;
-import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
@@ -18,6 +17,7 @@ import top.fzshuai.common.config.properties.SocialProperties;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.R;
 import top.fzshuai.common.core.domain.model.BlogLoginUser;
+import top.fzshuai.common.core.domain.model.SocialLoginBody;
 import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.helper.LoginHelper;
@@ -79,10 +79,7 @@ public class SysSocialUserController extends BaseController {
         if (ObjectUtil.isNull(obj)) {
             return R.fail(source + "平台账号暂不支持");
         }
-        AuthRequest authRequest = SocialUtils.getAuthRequest(source,
-            obj.getClientId(),
-            obj.getClientSecret(),
-            obj.getRedirectUri());
+        AuthRequest authRequest = SocialUtils.getAuthRequest(source, socialProperties);
         String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
         return R.ok(authorizeUrl);
     }
@@ -90,46 +87,36 @@ public class SysSocialUserController extends BaseController {
     /**
      * 第三方登录回调业务处理
      *
-     * @param source   登录来源
-     * @param callback 授权响应实体
-     * @return 结果
+     * @param loginBody 请求体
+     * @return 回调地址
      */
     @SaIgnore
-    @GetMapping("/social-callback/{source}")
-    public R<String> socialCallback(@PathVariable("source") String source, AuthCallback callback) {
-        SocialLoginConfigProperties obj = socialProperties.getType().get(source);
-        if (ObjectUtil.isNull(obj)) {
-            return R.fail(source + "平台账号暂不支持");
-        }
+    @GetMapping("/callback")
+    public R<String> socialCallback(@RequestBody SocialLoginBody loginBody) {
         // 获取第三方登录信息
-        AuthRequest authRequest = SocialUtils.getAuthRequest(source,
-            obj.getClientId(),
-            obj.getClientSecret(),
-            obj.getRedirectUri());
-        AuthResponse<AuthUser> response = authRequest.login(callback);
-        return R.ok(loginService.socialLogin(source, response));
+        AuthResponse<AuthUser> response = SocialUtils.loginAuth(loginBody.getSource(), loginBody.getCode(), loginBody.getState(), socialProperties);
+        // 判断授权响应是否成功
+        if (!response.ok()) {
+            return R.fail(response.getMsg());
+        }
+        return R.ok(loginService.socialLogin(response));
     }
 
     /**
      * 第三方登录回调业务处理
      *
-     * @param source   登录来源
-     * @param callback 授权响应实体
-     * @return 结果
+     * @param loginBody 请求体
+     * @return 回调地址
      */
     @SaIgnore
-    @GetMapping("/blog-social-callback/{source}")
-    public R<BlogLoginUser> blogSocialCallback(@PathVariable("source") String source, AuthCallback callback) {
-        SocialLoginConfigProperties obj = socialProperties.getType().get(source);
-        if (ObjectUtil.isNull(obj)) {
-            return R.fail(source + "平台账号暂不支持");
-        }
+    @PostMapping("/blog/callback")
+    public R<BlogLoginUser> blogSocialCallback(@RequestBody SocialLoginBody loginBody) {
         // 获取第三方登录信息
-        AuthRequest authRequest = SocialUtils.getAuthRequest(source,
-            obj.getClientId(),
-            obj.getClientSecret(),
-            obj.getRedirectUri());
-        AuthResponse<AuthUser> response = authRequest.login(callback);
+        AuthResponse<AuthUser> response = SocialUtils.loginAuth(loginBody.getSource(), loginBody.getCode(), loginBody.getState(), socialProperties);
+        // 判断授权响应是否成功
+        if (!response.ok()) {
+            return R.fail(response.getMsg());
+        }
         return R.ok(loginService.blogSocialLogin(response));
     }
 

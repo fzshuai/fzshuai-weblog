@@ -8,6 +8,8 @@ import top.fzshuai.common.config.properties.SocialProperties;
 import top.fzshuai.common.utils.social.AuthRedisStateCache;
 
 /**
+ * 配置属性
+ *
  * @author fzshuai
  * @date 2024/04/11 20:49
  * @since 1.0
