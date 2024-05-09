@@ -165,6 +165,17 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
     }
 
     /**
+     * 通过邮箱查询用户
+     *
+     * @param email 邮箱
+     * @return 用户对象信息
+     */
+    @Override
+    public SysUser queryUserByEmail(String email) {
+        return baseMapper.selectUserByEmail(email);
+    }
+
+    /**
      * 通过用户ID查询用户
      *
      * @param userId 用户ID

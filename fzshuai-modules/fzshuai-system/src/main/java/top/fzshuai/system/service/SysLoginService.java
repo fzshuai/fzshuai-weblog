@@ -5,7 +5,6 @@ import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthResponse;
@@ -36,7 +35,6 @@ import top.fzshuai.common.utils.redis.RedisUtils;
 import top.fzshuai.common.utils.spring.SpringUtils;
 import top.fzshuai.system.domain.bo.SysSocialUserBo;
 import top.fzshuai.system.domain.vo.SysSocialUserVo;
-import top.fzshuai.system.mapper.SysUserMapper;
 
 import java.time.Duration;
 import java.util.List;
@@ -52,7 +50,6 @@ import java.util.function.Supplier;
 @Service
 public class SysLoginService {
 
-    private final SysUserMapper userMapper;
     private final ISysConfigService configService;
     private final ISysSocialUserService socialUserService;
     private final ISysUserService userService;
@@ -86,7 +83,6 @@ public class SysLoginService {
         LoginUser loginUser = buildLoginUser(user);
         // 生成token
         LoginHelper.loginByDevice(loginUser, DeviceType.PC);
-
         recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getUserId(), username);
         return StpUtil.getTokenValue();
@@ -103,13 +99,11 @@ public class SysLoginService {
     public String smsLogin(String phonenumber, String smsCode) {
         // 通过手机号查找用户
         SysUser user = loadUserByPhoneNumber(phonenumber);
-
         checkLogin(LoginType.SMS, user.getUserName(), () -> !validateSmsCode(phonenumber, smsCode));
         // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
         LoginUser loginUser = buildLoginUser(user);
         // 生成token
         LoginHelper.loginByDevice(loginUser, DeviceType.APP);
-
         recordLogininfor(user.getUserName(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getUserId(), user.getUserName());
         return StpUtil.getTokenValue();
@@ -118,13 +112,11 @@ public class SysLoginService {
     public String emailLogin(String email, String emailCode) {
         // 通过手邮箱查找用户
         SysUser user = loadUserByEmail(email);
-
         checkLogin(LoginType.EMAIL, user.getUserName(), () -> !validateEmailCode(email, emailCode));
         // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
         LoginUser loginUser = buildLoginUser(user);
         // 生成token
         LoginHelper.loginByDevice(loginUser, DeviceType.APP);
-
         recordLogininfor(user.getUserName(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getUserId(), user.getUserName());
         return StpUtil.getTokenValue();
@@ -135,10 +127,8 @@ public class SysLoginService {
         // todo 以下自行实现
         // 校验 appid + appsrcret + xcxCode 调用登录凭证校验接口 获取 session_key 与 openid
         String openid = "";
-
         // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
         SysUser user = loadUserByOpenid(openid);
-
         // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
         XcxLoginUser loginUser = new XcxLoginUser();
         loginUser.setUserId(user.getUserId());
@@ -147,7 +137,6 @@ public class SysLoginService {
         loginUser.setOpenid(openid);
         // 生成token
         LoginHelper.loginByDevice(loginUser, DeviceType.XCX);
-
         recordLogininfor(user.getUserName(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getUserId(), user.getUserName());
         return StpUtil.getTokenValue();
@@ -313,9 +302,7 @@ public class SysLoginService {
     }
 
     private SysUser loadUserByUsername(String username) {
-        SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-            .select(SysUser::getUserName, SysUser::getStatus)
-            .eq(SysUser::getUserName, username));
+        SysUser user = userService.queryUserByUserName(username);
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", username);
             throw new UserException("user.not.exists", username);
@@ -323,13 +310,11 @@ public class SysLoginService {
             log.info("登录用户：{} 已被停用.", username);
             throw new UserException("user.blocked", username);
         }
-        return userMapper.selectUserByUserName(username);
+        return user;
     }
 
     private SysUser loadUserByPhoneNumber(String phoneNumber) {
-        SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-            .select(SysUser::getPhoneNumber, SysUser::getStatus)
-            .eq(SysUser::getPhoneNumber, phoneNumber));
+        SysUser user = userService.queryUserByPhoneNumber(phoneNumber);
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", phoneNumber);
             throw new UserException("user.not.exists", phoneNumber);
@@ -337,13 +322,11 @@ public class SysLoginService {
             log.info("登录用户：{} 已被停用.", phoneNumber);
             throw new UserException("user.blocked", phoneNumber);
         }
-        return userMapper.selectUserByPhoneNumber(phoneNumber);
+        return user;
     }
 
     private SysUser loadUserByEmail(String email) {
-        SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-            .select(SysUser::getPhoneNumber, SysUser::getStatus)
-            .eq(SysUser::getEmail, email));
+        SysUser user = userService.queryUserByEmail(email);
         if (ObjectUtil.isNull(user)) {
             log.info("登录用户：{} 不存在.", email);
             throw new UserException("user.not.exists", email);
@@ -351,7 +334,7 @@ public class SysLoginService {
             log.info("登录用户：{} 已被停用.", email);
             throw new UserException("user.blocked", email);
         }
-        return userMapper.selectUserByEmail(email);
+        return user;
     }
 
     private SysUser loadUserByOpenid(String openid) {
@@ -409,7 +392,7 @@ public class SysLoginService {
         sysUser.setLoginIp(ServletUtils.getClientIP());
         sysUser.setLoginDate(DateUtils.getNowDate());
         sysUser.setUpdateBy(username);
-        userMapper.updateById(sysUser);
+        userService.updateUser(sysUser);
     }
 
     /**
@@ -418,7 +401,6 @@ public class SysLoginService {
     private void checkLogin(LoginType loginType, String username, Supplier<Boolean> supplier) {
         String errorKey = CacheConstants.PWD_ERR_CNT_KEY + username;
         String loginFail = Constants.LOGIN_FAIL;
-
         // 获取用户登录错误次数，默认为0 (可自定义限制策略 例如: key + username + ip)
         int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
         // 锁定时间内登录 则踢出
@@ -441,7 +423,6 @@ public class SysLoginService {
                 throw new UserException(loginType.getRetryLimitCount(), errorNumber);
             }
         }
-
         // 登录成功 清空错误次数
         RedisUtils.deleteObject(errorKey);
     }

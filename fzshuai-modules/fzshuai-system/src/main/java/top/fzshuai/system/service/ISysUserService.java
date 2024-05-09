@@ -64,6 +64,14 @@ public interface ISysUserService {
     SysUser queryUserByPhoneNumber(String phoneNumber);
 
     /**
+     * 通过邮箱查询用户
+     *
+     * @param email 邮箱
+     * @return 用户对象信息
+     */
+    SysUser queryUserByEmail(String email);
+
+    /**
      * 通过用户ID查询用户
      *
      * @param userId 用户ID
