@@ -24,11 +24,11 @@
 
     <select id="selectCommentList" resultType="top.fzshuai.blog.domain.dto.CommentDto">
         SELECT
-        u.nickname,
+        u.nick_name,
         u.avatar,
         u.web_site,
         c.user_id,
-        c.id,
+        c.comment_id,
         c.comment_content,
         c.create_time
         FROM
@@ -43,7 +43,7 @@
             AND parent_id IS NULL
         </where>
         ORDER BY
-        c.id DESC
+        c.comment_id DESC
         LIMIT #{current},#{size}
     </select>
 
@@ -60,7 +60,7 @@
         c.reply_user_id,
         r.nick_name AS reply_nickname,
         r.web_site AS reply_web_site,
-        c.id,
+        c.comment_id,
         c.parent_id,
         c.comment_content,
         c.create_time,
@@ -85,8 +85,8 @@
 
     <select id="selectReplyCountByIds" resultType="top.fzshuai.blog.domain.dto.ReplyCountDto">
         SELECT
-        parent_id as comment_id,
-        count(1) AS reply_count
+        parent_id AS comment_id,
+        count(*) AS reply_count
         FROM
         blog_comment
         WHERE
@@ -102,8 +102,8 @@
 
     <select id="selectCommentCountByTopicIds" resultType="top.fzshuai.blog.domain.dto.CommentCountDto">
         SELECT
-        topic_id as id,
-        COUNT( 1 ) AS comment_count
+        topic_id AS comment_id,
+        COUNT(*) AS comment_count
         FROM
         blog_comment
         WHERE
@@ -115,6 +115,27 @@
         parent_id IS NULL
         GROUP BY
         topic_id
+    </select>
+
+    <select id="selectReplieListByCommentId" resultType="top.fzshuai.blog.domain.dto.ReplyDto">
+        SELECT c.user_id,
+               u.nick_name,
+               u.avatar,
+               u.web_site,
+               c.reply_user_id,
+               r.nick_name as reply_nickname,
+               r.web_site as reply_web_site,
+               c.comment_id,
+               c.parent_id,
+               c.comment_content,
+               c.create_time
+        FROM blog_comment c
+                 JOIN sys_user u ON c.user_id = u.user_id
+                 JOIN sys_user r ON c.reply_user_id = r.user_id
+        WHERE c.is_review = 1
+          AND parent_id = #{commentId}
+        ORDER BY c.comment_id ASC
+            LIMIT #{current}, #{size}
     </select>
 
 </mapper>

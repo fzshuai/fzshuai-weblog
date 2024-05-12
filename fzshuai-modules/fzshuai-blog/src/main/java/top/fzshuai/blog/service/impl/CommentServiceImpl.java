@@ -57,21 +57,21 @@ public class CommentServiceImpl implements ICommentService {
     /**
      * 查询博客前台评论
      *
-     * @param commentVO 评论信息
+     * @param commentVo 评论信息
      */
     @Override
-    public PageResultVo<CommentDto> queryCommentList(CommentVo commentVO) {
+    public PageResultVo<CommentDto> queryCommentList(CommentVo commentVo) {
         // 查询评论量
         Long commentCount = baseMapper.selectCount(new LambdaQueryWrapper<Comment>()
-            .eq(Objects.nonNull(commentVO.getTopicId()), Comment::getTopicId, commentVO.getTopicId())
-            .eq(Comment::getType, commentVO.getType())
+            .eq(Objects.nonNull(commentVo.getTopicId()), Comment::getTopicId, commentVo.getTopicId())
+            .eq(Comment::getType, commentVo.getType())
             .isNull(Comment::getParentId)
             .eq(Comment::getState, STATE));
         if (commentCount == 0) {
             return new PageResultVo<>();
         }
         // 分页查询评论数据
-        List<CommentDto> commentDtoList = baseMapper.selectCommentList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVO);
+        List<CommentDto> commentDtoList = baseMapper.selectCommentList(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentVo);
         if (CollectionUtils.isEmpty(commentDtoList)) {
             return new PageResultVo<>();
         }
@@ -98,36 +98,6 @@ public class CommentServiceImpl implements ICommentService {
             item.setReplyCount(replyCountMap.get(item.getCommentId()));
         });
         return new PageResultVo<>(commentDtoList, Integer.parseInt(String.valueOf(commentCount)));
-    }
-
-    /**
-     * 博客前台添加评论
-     *
-     * @param commentVo 评论对象
-     */
-    @Override
-    public void insertComment(CommentVo commentVo) {
-        // 判断是否需要审核
-        WebsiteConfigVo websiteConfig = websiteConfigService.queryWebsiteConfig();
-        Integer isReview = websiteConfig.getIsCommentReview();
-        // 过滤标签
-        commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
-        Comment comment = Comment.builder()
-            .userId(commentVo.getUserId())
-            .replyUserId(commentVo.getReplyUserId())
-            .topicId(commentVo.getTopicId())
-            .commentContent(commentVo.getCommentContent())
-            .parentId(commentVo.getParentId())
-            .type(commentVo.getType())
-            .ipAddress(ServletUtils.getClientIP())
-            .ipSource(AddressUtils.getRealAddressByIP(ServletUtils.getClientIP()))
-            .state(isReview == TRUE ? 2 : 1)
-            .build();
-        baseMapper.insert(comment);
-        // 判断是否开启邮箱通知,通知用户
-        // if (websiteConfig.getIsEmailNotice().equals(TRUE)) {
-        //     CompletableFuture.runAsync(() -> notice(comment));
-        // }
     }
 
     /**
@@ -162,6 +132,17 @@ public class CommentServiceImpl implements ICommentService {
         return baseMapper.selectVoList(lqw);
     }
 
+    @Override
+    public List<ReplyDto> queryReplieListByCommentId(Long commentId) {
+        // 转换页码查询评论下的回复
+        List<ReplyDto> replyDtoList = baseMapper.selectReplieListByCommentId(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentId);
+        // 查询redis的评论点赞数据
+        Map<String, Object> likeCountMap = RedisUtils.getCacheMap(COMMENT_LIKE_COUNT);
+        // 封装点赞数据
+        replyDtoList.forEach(item -> item.setLikeCount((Integer) likeCountMap.get(item.getCommentId().toString())));
+        return replyDtoList;
+    }
+
     private LambdaQueryWrapper<Comment> buildQueryWrapper(CommentBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<Comment> lqw = Wrappers.lambdaQuery();
@@ -176,6 +157,36 @@ public class CommentServiceImpl implements ICommentService {
         lqw.eq(StringUtils.isNotBlank(bo.getIpSource()), Comment::getIpSource, bo.getIpSource());
         lqw.eq(bo.getState() != null, Comment::getState, bo.getState());
         return lqw;
+    }
+
+    /**
+     * 博客前台添加评论
+     *
+     * @param commentVo 评论对象
+     */
+    @Override
+    public void insertComment(CommentVo commentVo) {
+        // 判断是否需要审核
+        WebsiteConfigVo websiteConfig = websiteConfigService.queryWebsiteConfig();
+        Integer isReview = websiteConfig.getIsCommentReview();
+        // 过滤标签
+        commentVo.setCommentContent(HTMLUtils.deleteTag(commentVo.getCommentContent()));
+        Comment comment = Comment.builder()
+            .userId(commentVo.getUserId())
+            .replyUserId(commentVo.getReplyUserId())
+            .topicId(commentVo.getTopicId())
+            .commentContent(commentVo.getCommentContent())
+            .parentId(commentVo.getParentId())
+            .type(commentVo.getType())
+            .ipAddress(ServletUtils.getClientIP())
+            .ipSource(AddressUtils.getRealAddressByIP(ServletUtils.getClientIP()))
+            .state(isReview == TRUE ? 2 : 1)
+            .build();
+        baseMapper.insert(comment);
+        // 判断是否开启邮箱通知,通知用户
+        // if (websiteConfig.getIsEmailNotice().equals(TRUE)) {
+        //     CompletableFuture.runAsync(() -> notice(comment));
+        // }
     }
 
     /**

@@ -1,11 +1,12 @@
 package top.fzshuai.blog.service;
 
-import top.fzshuai.blog.domain.dto.CommentDto;
-import top.fzshuai.blog.domain.vo.CommentVo;
 import top.fzshuai.blog.domain.bo.CommentBo;
+import top.fzshuai.blog.domain.dto.CommentDto;
+import top.fzshuai.blog.domain.dto.ReplyDto;
+import top.fzshuai.blog.domain.vo.CommentVo;
 import top.fzshuai.blog.domain.vo.PageResultVo;
-import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.domain.PageQuery;
+import top.fzshuai.common.core.page.TableDataInfo;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,13 +27,6 @@ public interface ICommentService {
     PageResultVo<CommentDto> queryCommentList(CommentVo commentVO);
 
     /**
-     * 博客前台添加评论
-     *
-     * @param commentVO 评论对象
-     */
-    void insertComment(CommentVo commentVO);
-
-    /**
      * 查询文章评论
      */
     CommentVo queryCommentById(Long commentId);
@@ -46,6 +40,22 @@ public interface ICommentService {
      * 查询文章评论列表
      */
     List<CommentVo> queryCommentList(CommentBo bo);
+
+    /**
+     * 查看评论下的回复
+     *
+     * @param commentId 评论主键
+     * @return 回复列表
+     */
+    List<ReplyDto> queryReplieListByCommentId(Long commentId);
+
+    /**
+     * 博客前台添加评论
+     *
+     * @param commentVO 评论对象
+     */
+    void insertComment(CommentVo commentVO);
+
 
     /**
      * 新增文章评论

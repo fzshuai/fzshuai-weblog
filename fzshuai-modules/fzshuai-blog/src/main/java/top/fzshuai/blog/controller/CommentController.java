@@ -2,8 +2,12 @@ package top.fzshuai.blog.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import top.fzshuai.blog.domain.bo.CommentBo;
 import top.fzshuai.blog.domain.dto.CommentDto;
+import top.fzshuai.blog.domain.dto.ReplyDto;
 import top.fzshuai.blog.domain.vo.CommentVo;
 import top.fzshuai.blog.domain.vo.PageResultVo;
 import top.fzshuai.blog.service.ICommentService;
@@ -17,9 +21,6 @@ import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.core.validate.EditGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.utils.poi.ExcelUtil;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -45,12 +46,12 @@ public class CommentController extends BaseController {
     /**
      * 查询博客前台评论
      *
-     * @param commentVO 评论信息
+     * @param commentVo 评论信息
      */
     @SaIgnore
     @GetMapping("/comments")
-    public R<PageResultVo<CommentDto>> listComments(CommentVo commentVO) {
-        return R.ok(commentService.queryCommentList(commentVO));
+    public R<PageResultVo<CommentDto>> listComments(CommentVo commentVo) {
+        return R.ok(commentService.queryCommentList(commentVo));
     }
 
     /**
@@ -66,9 +67,21 @@ public class CommentController extends BaseController {
     }
 
     /**
+     * 查询评论下的回复
+     *
+     * @param commentId 评论主键
+     * @return 回复列表
+     */
+    @SaIgnore
+    @GetMapping("/comments/{commentId}/replies")
+    public R<List<ReplyDto>> listRepliesByCommentId(@PathVariable("commentId") Long commentId) {
+        return R.ok(commentService.queryReplieListByCommentId(commentId));
+    }
+
+    /**
      * 评论点赞
      *
-     * @param commentId 评论id
+     * @param commentId 评论主键
      */
     @PostMapping("/comments/{commentId}/like")
     public R<?> saveCommentLike(@PathVariable("commentId") Long commentId) {

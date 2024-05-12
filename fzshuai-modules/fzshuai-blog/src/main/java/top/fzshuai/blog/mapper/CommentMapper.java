@@ -24,10 +24,10 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      *
      * @param current   当前页码
      * @param size      大小
-     * @param commentVO 评论信息
+     * @param commentVo 评论信息
      * @return 评论集合
      */
-    List<CommentDto> selectCommentList(@Param("current") Long current, @Param("size") Long size, @Param("commentVO") CommentVo commentVO);
+    List<CommentDto> selectCommentList(@Param("current") Long current, @Param("size") Long size, @Param("commentVo") CommentVo commentVo);
 
     /**
      * 查看评论id集合下的回复
@@ -51,6 +51,15 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param topicIdList 说说id列表
      * @return 说说评论量
      */
-    List<CommentCountDto> selectCommentCountByTopicIds(List<Long> topicIdList);
+    List<CommentCountDto> selectCommentCountByTopicIds(@Param("topicIdList") List<Long> topicIdList);
 
+    /**
+     * 查看当条评论下的回复
+     *
+     * @param commentId 评论id
+     * @param current   当前页码
+     * @param size      大小
+     * @return 回复集合
+     */
+    List<ReplyDto> selectReplieListByCommentId(@Param("current") Long current, @Param("size") Long size, @Param("commentId") Long commentId);
 }
