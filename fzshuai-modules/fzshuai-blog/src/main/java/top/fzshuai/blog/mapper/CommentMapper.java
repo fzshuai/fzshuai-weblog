@@ -1,5 +1,6 @@
 package top.fzshuai.blog.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.fzshuai.blog.domain.Comment;
 import top.fzshuai.blog.domain.dto.CommentCountDto;
 import top.fzshuai.blog.domain.dto.CommentDto;
@@ -7,7 +8,6 @@ import top.fzshuai.blog.domain.dto.ReplyCountDto;
 import top.fzshuai.blog.domain.dto.ReplyDto;
 import top.fzshuai.blog.domain.vo.CommentVo;
 import top.fzshuai.common.core.mapper.BaseMapperPlus;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -61,5 +61,22 @@ public interface CommentMapper extends BaseMapperPlus<CommentMapper, Comment, Co
      * @param size      大小
      * @return 回复集合
      */
-    List<ReplyDto> selectReplieListByCommentId(@Param("current") Long current, @Param("size") Long size, @Param("commentId") Long commentId);
+    List<ReplyDto> selectReplyListById(@Param("current") Long current, @Param("size") Long size, @Param("commentId") Long commentId);
+
+    /**
+     * 根据评论id查询用户昵称
+     *
+     * @param userId 评论id
+     * @return 用户昵称
+     */
+    String selectNickNameByUserId(@Param("userId") Long userId);
+
+    /**
+     * 根据评论主题id获取文章标题
+     *
+     * @param topicId 评论主题id
+     * @return 文章表体
+     */
+    String selectArticleTitleByTopicId(@Param("topicId") Long topicId);
+
 }

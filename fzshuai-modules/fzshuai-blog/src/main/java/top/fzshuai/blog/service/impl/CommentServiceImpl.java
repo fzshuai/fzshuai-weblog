@@ -116,9 +116,9 @@ public class CommentServiceImpl implements ICommentService {
         LambdaQueryWrapper<Comment> lqw = buildQueryWrapper(bo);
         Page<CommentVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         result.getRecords().forEach(commentVo -> {
-            commentVo.setNickname(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getNickName());
-            commentVo.setArticleTitle(articleMapper.selectById(commentVo.getTopicId()).getArticleTitle());
-            commentVo.setReplyUserName(sysUserMapper.selectVoById(commentVo.getReplyUserId()).getUserName());
+            commentVo.setNickname(baseMapper.selectNickNameByUserId(commentVo.getUserId()));
+            commentVo.setArticleTitle(baseMapper.selectArticleTitleByTopicId(commentVo.getTopicId()));
+            commentVo.setReplyUserName(baseMapper.selectNickNameByUserId(commentVo.getUserId()));
         });
         return TableDataInfo.build(result);
     }
@@ -135,7 +135,7 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public List<ReplyDto> queryReplieListByCommentId(Long commentId) {
         // 转换页码查询评论下的回复
-        List<ReplyDto> replyDtoList = baseMapper.selectReplieListByCommentId(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentId);
+        List<ReplyDto> replyDtoList = baseMapper.selectReplyListById(BlogPageUtils.getLimitCurrent(), BlogPageUtils.getSize(), commentId);
         // 查询redis的评论点赞数据
         Map<String, Object> likeCountMap = RedisUtils.getCacheMap(COMMENT_LIKE_COUNT);
         // 封装点赞数据

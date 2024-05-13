@@ -117,14 +117,14 @@
         topic_id
     </select>
 
-    <select id="selectReplieListByCommentId" resultType="top.fzshuai.blog.domain.dto.ReplyDto">
+    <select id="selectReplyListById" resultType="top.fzshuai.blog.domain.dto.ReplyDto">
         SELECT c.user_id,
                u.nick_name,
                u.avatar,
                u.web_site,
                c.reply_user_id,
                r.nick_name as reply_nickname,
-               r.web_site as reply_web_site,
+               r.web_site  as reply_web_site,
                c.comment_id,
                c.parent_id,
                c.comment_content,
@@ -132,10 +132,21 @@
         FROM blog_comment c
                  JOIN sys_user u ON c.user_id = u.user_id
                  JOIN sys_user r ON c.reply_user_id = r.user_id
-        WHERE c.is_review = 1
-          AND parent_id = #{commentId}
+        WHERE parent_id = #{commentId}
         ORDER BY c.comment_id ASC
             LIMIT #{current}, #{size}
+    </select>
+
+    <select id="selectNickNameByUserId" resultType="java.lang.String">
+        SELECT u.nick_name
+        FROM sys_user u
+        WHERE u.user_id = #{userId}
+    </select>
+
+    <select id="selectArticleTitleByTopicId" resultType="java.lang.String">
+        SELECT a.article_title as articleTitle
+        FROM blog_article a
+        WHERE a.article_id = #{topicId}
     </select>
 
 </mapper>
