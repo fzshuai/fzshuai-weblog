@@ -26,12 +26,12 @@
                t.create_time
         FROM blog_talk t
                  JOIN sys_user u ON t.user_id = u.user_id
-        ORDER BY t.id DESC
+        ORDER BY t.talk_id DESC
             LIMIT #{current}, #{size}
     </select>
 
     <select id="selectAdminTalkList" resultType="top.fzshuai.blog.domain.vo.TalkVo">
-        SELECT t.id,
+        SELECT t.talk_id,
                t.content,
                t.images,
                t.create_time,
@@ -43,7 +43,7 @@
     </select>
 
     <select id="selectAdminTalkById" parameterType="Long" resultType="top.fzshuai.blog.domain.vo.TalkVo">
-        SELECT t.id,
+        SELECT t.talk_id,
                t.content,
                t.images,
                t.create_time,
@@ -52,7 +52,7 @@
                t.create_by
         FROM blog_talk t
                  LEFT JOIN sys_user u ON t.user_id = u.user_id
-        WHERE t.id = #{id}
+        WHERE t.talk_id = #{id}
     </select>
 
 </mapper>

@@ -87,18 +87,18 @@ public class TalkServiceImpl implements ITalkService {
             item.setLikeCount((Integer) likeCountMap.get(item.getTalkId().toString()));
             item.setCommentCount(commentCountMap.get(item.getTalkId()));
             // 转换图片格式
-            if (Objects.nonNull(item.getImages())) {
-                List<String> list = Arrays.asList(item.getImages().split(","));
-                // 将图片转换为url路径
-                List<String> urlList = new ArrayList<>();
-                for (int i = 0; i < list.size(); i++) {
-                    String url = ossMapper.selectVoById(Long.parseLong(list.get(i))).getUrl();
-                    urlList.add(url);
-                    item.setImages(url);
-                }
-                item.setImgList(urlList);
-
-            }
+            // if (Objects.nonNull(item.getImages())) {
+            //     List<String> list = Arrays.asList(item.getImages().split(","));
+            //     // 将图片转换为url路径
+            //     List<String> urlList = new ArrayList<>();
+            //     for (int i = 0; i < list.size(); i++) {
+            //         String url = ossMapper.selectVoById(Long.parseLong(list.get(i))).getUrl();
+            //         urlList.add(url);
+            //         item.setImages(url);
+            //     }
+            //     item.setImgList(urlList);
+            //
+            // }
         });
         return new PageResultVo<>(result, Integer.parseInt(String.valueOf(count)));
     }
