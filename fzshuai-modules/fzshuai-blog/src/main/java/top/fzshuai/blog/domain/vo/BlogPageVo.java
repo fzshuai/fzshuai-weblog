@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @ExcelIgnoreUnannotated
-public class PageVo implements Serializable {
+public class BlogPageVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

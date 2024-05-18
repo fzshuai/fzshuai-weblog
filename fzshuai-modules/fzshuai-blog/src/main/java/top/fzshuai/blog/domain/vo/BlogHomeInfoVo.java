@@ -49,6 +49,6 @@ public class BlogHomeInfoVo implements Serializable {
     /**
      * 页面列表
      */
-    private List<PageVo> pageList;
+    private List<BlogPageVo> blogPageList;
 
 }

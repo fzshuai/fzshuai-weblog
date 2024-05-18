@@ -45,7 +45,7 @@ public class MessageController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/messages")
-    public R<?> saveMessage(@Valid @RequestBody MessageVo messageVo) {
+    public R<Void> saveMessage(@Valid @RequestBody MessageVo messageVo) {
         messageService.insertMessage(messageVo);
         return R.ok();
     }

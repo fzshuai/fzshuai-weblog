@@ -61,7 +61,7 @@ public class CommentController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/comments")
-    public R<?> saveComment(@Valid @RequestBody CommentVo commentVO) {
+    public R<Void> saveComment(@Valid @RequestBody CommentVo commentVO) {
         commentService.insertComment(commentVO);
         return R.ok();
     }
@@ -84,7 +84,7 @@ public class CommentController extends BaseController {
      * @param commentId 评论主键
      */
     @PostMapping("/comments/{commentId}/like")
-    public R<?> saveCommentLike(@PathVariable("commentId") Long commentId) {
+    public R<Void> saveCommentLike(@PathVariable("commentId") Long commentId) {
         commentService.likeComment(commentId);
         return R.ok();
     }

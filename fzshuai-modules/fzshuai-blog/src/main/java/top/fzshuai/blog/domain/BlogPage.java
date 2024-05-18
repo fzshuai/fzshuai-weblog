@@ -15,7 +15,7 @@ import top.fzshuai.common.core.domain.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("blog_page")
-public class Page extends BaseEntity {
+public class BlogPage extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 

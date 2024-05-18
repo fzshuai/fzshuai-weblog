@@ -116,4 +116,5 @@ public class AlbumController extends BaseController {
                           @PathVariable Long[] albumIds) {
         return toAjax(albumService.deleteWithValidByIds(Arrays.asList(albumIds), true));
     }
+
 }

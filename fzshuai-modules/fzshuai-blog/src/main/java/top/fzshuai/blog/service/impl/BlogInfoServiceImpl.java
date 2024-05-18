@@ -3,11 +3,11 @@ package top.fzshuai.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import top.fzshuai.blog.domain.Article;
-import top.fzshuai.blog.domain.bo.PageBo;
+import top.fzshuai.blog.domain.bo.BlogPageBo;
 import top.fzshuai.blog.domain.dto.ArticleRankDto;
 import top.fzshuai.blog.domain.vo.BlogHomeInfoVo;
 import top.fzshuai.blog.domain.vo.BlogInfoVo;
-import top.fzshuai.blog.domain.vo.PageVo;
+import top.fzshuai.blog.domain.vo.BlogPageVo;
 import top.fzshuai.blog.domain.vo.WebsiteConfigVo;
 import top.fzshuai.blog.mapper.ArticleMapper;
 import top.fzshuai.blog.mapper.CategoryMapper;
@@ -47,7 +47,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
     private final CategoryMapper categoryMapper;
     private final TagMapper tagMapper;
     private final HttpServletRequest request;
-    private final IBlogPageService pageService;
+    private final IBlogPageService blogPageService;
     private final IWebsiteConfigService websiteConfigService;
 
     @Override
@@ -66,7 +66,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
         // 查询网站配置
         WebsiteConfigVo websiteConfig = websiteConfigService.queryWebsiteConfig();
         // 查询页面图片
-        List<PageVo> pageVoList = pageService.queryPageList(new PageBo());
+        List<BlogPageVo> blogPageVoList = blogPageService.queryPageList(new BlogPageBo());
         // 封装数据
         return BlogHomeInfoVo.builder()
             .articleCount(articleCount.intValue())
@@ -74,7 +74,7 @@ public class BlogInfoServiceImpl implements IBlogInfoService {
             .tagCount(tagCount.intValue())
             .viewsCount(viewsCount)
             .websiteConfig(websiteConfig)
-            .pageList(pageVoList)
+            .blogPageList(blogPageVoList)
             .build();
     }
 

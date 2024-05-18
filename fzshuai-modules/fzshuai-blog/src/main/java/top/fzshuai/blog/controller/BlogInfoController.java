@@ -52,7 +52,7 @@ public class BlogInfoController extends BaseController {
      */
     @SaIgnore
     @PutMapping("/admin/about")
-    public R<?> updateAbout(@Valid @RequestBody BlogInfoVo blogInfoVO) {
+    public R<Void> updateAbout(@Valid @RequestBody BlogInfoVo blogInfoVO) {
         blogInfoService.updateAbout(blogInfoVO);
         return R.ok();
     }
@@ -64,7 +64,7 @@ public class BlogInfoController extends BaseController {
      */
     @SaIgnore
     @PostMapping("/report")
-    public R<?> report() {
+    public R<Void> report() {
         blogInfoService.reportVisitor();
         return R.ok();
     }

@@ -1,30 +1,29 @@
 package top.fzshuai.blog.controller;
 
-import java.util.List;
-import java.util.Arrays;
-
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaIgnore;
 import lombok.RequiredArgsConstructor;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.*;
-
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
-import top.fzshuai.common.annotation.RepeatSubmit;
+import org.springframework.web.bind.annotation.*;
+import top.fzshuai.blog.domain.bo.ArticleBo;
+import top.fzshuai.blog.domain.vo.*;
+import top.fzshuai.blog.service.IArticleService;
 import top.fzshuai.common.annotation.Log;
+import top.fzshuai.common.annotation.RepeatSubmit;
 import top.fzshuai.common.core.controller.BaseController;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.domain.R;
+import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.validate.AddGroup;
 import top.fzshuai.common.core.validate.EditGroup;
 import top.fzshuai.common.enums.BusinessType;
 import top.fzshuai.common.utils.poi.ExcelUtil;
-import top.fzshuai.blog.domain.bo.ArticleBo;
-import top.fzshuai.blog.service.IArticleService;
-import top.fzshuai.common.core.page.TableDataInfo;
-import top.fzshuai.blog.domain.vo.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 文章
@@ -104,7 +103,7 @@ public class ArticleController extends BaseController {
      * @return R
      */
     @PostMapping("/articles/{articleId}/like")
-    public R<?> saveArticleLike(@PathVariable("articleId") Long articleId) {
+    public R<Void> saveArticleLike(@PathVariable("articleId") Long articleId) {
         articleService.likeArticle(articleId);
         return R.ok();
     }
