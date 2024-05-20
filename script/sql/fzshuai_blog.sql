@@ -148,6 +148,8 @@ CREATE TABLE `blog_friend_link`
     `link_intro`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '链接介绍',
     `create_time`    datetime(0) NOT NULL COMMENT '创建时间',
     `update_time`    datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+    `create_by`      varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建者',
+    `update_by`      varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新者',
     PRIMARY KEY (`friend_link_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '友人链接表' ROW_FORMAT = Dynamic;
 
