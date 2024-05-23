@@ -40,7 +40,7 @@ public class BlogPageBo extends BaseEntity {
     /**
      * 页面封面
      */
-    // @NotBlank(message = "页面封面不能为空", groups = { AddGroup.class, EditGroup.class })
+    @NotBlank(message = "页面封面不能为空", groups = { AddGroup.class, EditGroup.class })
     private String pageCover;
 
 }

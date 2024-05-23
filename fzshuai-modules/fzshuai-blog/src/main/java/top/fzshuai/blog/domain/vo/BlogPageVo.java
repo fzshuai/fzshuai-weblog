@@ -8,7 +8,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-
 /**
  * 页面视图对象 blog_page
  *

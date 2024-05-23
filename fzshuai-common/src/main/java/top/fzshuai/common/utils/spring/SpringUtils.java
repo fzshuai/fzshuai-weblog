@@ -76,7 +76,7 @@ public final class SpringUtils extends SpringUtil {
     /**
      * 获取当前的环境配置，当有多个环境配置时，只获取第一个
      */
-    public static String getActiveProfile(){
+    public static String getActiveProfile() {
         String[] activeProfiles = context().getEnvironment().getActiveProfiles();
         return StringUtils.isNotEmpty(activeProfiles) ? activeProfiles[0] : null;
     }
