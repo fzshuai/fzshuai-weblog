@@ -61,6 +61,10 @@ user:
 search:
   mode: mysql
 
+# 翻译oss存储的文件地址，是否将http替换为https
+oss-url-translation:
+  http-to-https: true
+
 # Spring配置
 spring:
   application:

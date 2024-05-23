@@ -5,11 +5,13 @@ import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import top.fzshuai.common.utils.StringUtils;
+
 
 /**
  * spring工具类
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @Component
 public final class SpringUtils extends SpringUtil {
@@ -69,6 +71,14 @@ public final class SpringUtils extends SpringUtil {
      */
     public static ApplicationContext context() {
         return getApplicationContext();
+    }
+
+    /**
+     * 获取当前的环境配置，当有多个环境配置时，只获取第一个
+     */
+    public static String getActiveProfile(){
+        String[] activeProfiles = context().getEnvironment().getActiveProfiles();
+        return StringUtils.isNotEmpty(activeProfiles) ? activeProfiles[0] : null;
     }
 
 }

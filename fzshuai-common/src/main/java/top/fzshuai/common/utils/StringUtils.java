@@ -53,6 +53,16 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * * 判断一个字符串数组是否非空
+     *
+     * @param strs 字符串数组
+     * @return true：非空 false：为空
+     */
+    public static boolean isNotEmpty(String[] strs) {
+        return strs != null && strs.length > 0;
+    }
+
+    /**
      * 去空格
      */
     public static String trim(String str) {

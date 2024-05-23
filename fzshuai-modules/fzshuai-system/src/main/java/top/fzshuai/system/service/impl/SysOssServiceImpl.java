@@ -7,7 +7,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Value;
 import top.fzshuai.common.constant.CacheNames;
+import top.fzshuai.common.constant.Constants;
 import top.fzshuai.common.core.domain.PageQuery;
 import top.fzshuai.common.core.page.TableDataInfo;
 import top.fzshuai.common.core.service.OssService;
@@ -43,13 +45,16 @@ import java.util.stream.Collectors;
 /**
  * 文件上传 服务层实现
  *
- * @author Lion Li
+ * @author Lion Li fzshuai
  */
 @RequiredArgsConstructor
 @Service
 public class SysOssServiceImpl implements ISysOssService, OssService {
 
     private final SysOssMapper baseMapper;
+
+    @Value("${oss-url-translation.http-to-https}")
+    private Boolean isHttpToHttps;
 
     @Override
     public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
@@ -84,7 +89,11 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
             SysOssVo vo = SpringUtils.getAopProxy(this).getById(id);
             if (ObjectUtil.isNotNull(vo)) {
                 try {
-                    list.add(this.matchingUrl(vo).getUrl());
+                    if (Constants.PROD.equals(SpringUtils.getActiveProfile()) && isHttpToHttps) {
+                        list.add(this.matchingUrl(vo).getUrl().replace(Constants.HTTP, Constants.HTTPS));
+                    } else {
+                        list.add(this.matchingUrl(vo).getUrl());
+                    }
                 } catch (Exception ignored) {
                     // 如果oss异常无法连接则将数据直接返回
                     list.add(vo.getUrl());
@@ -123,7 +132,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         FileUtils.setAttachmentResponseHeader(response, sysOss.getOriginalName());
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE + "; charset=UTF-8");
         OssClient storage = OssFactory.instance(sysOss.getService());
-        try(InputStream inputStream = storage.getObjectContent(sysOss.getUrl())) {
+        try (InputStream inputStream = storage.getObjectContent(sysOss.getUrl())) {
             int available = inputStream.available();
             IoUtil.copy(inputStream, response.getOutputStream(), available);
             response.setContentLength(available);
@@ -196,4 +205,5 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         }
         return oss;
     }
+
 }

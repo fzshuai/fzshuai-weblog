@@ -31,7 +31,6 @@ public interface ISysOssConfigService {
      */
     TableDataInfo<SysOssConfigVo> queryPageList(SysOssConfigBo bo, PageQuery pageQuery);
 
-
     /**
      * 根据新增业务对象插入对象存储配置
      *

@@ -81,4 +81,10 @@ public interface Constants {
      * 令牌
      */
     String TOKEN = "token";
+
+    /**
+     * 生产环境
+     */
+    String PROD = "prod";
+
 }
