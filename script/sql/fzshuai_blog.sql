@@ -1522,7 +1522,7 @@ DROP TABLE IF EXISTS `sys_social_user`;
 CREATE TABLE `sys_social_user`
 (
     `social_id`          bigint(0) UNSIGNED NOT NULL COMMENT '主键',
-    `user_id`            bigint(0) NOT NULL COMMENT '用户ID',
+    `user_id`            bigint(0) COMMENT '用户ID',
     `auth_id`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '授权+授权openid',
     `source`             varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户来源',
     `open_id`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '原生open id',
