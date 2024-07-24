@@ -12,4 +12,12 @@ import top.fzshuai.common.core.mapper.BaseMapperPlus;
  */
 public interface TagMapper extends BaseMapperPlus<TagMapper, Tag, TagVo> {
 
+    /**
+     * 根据id查询标签名称
+     *
+     * @param tagId 标签id
+     * @return 标签名称
+     */
+    String selectTagNameById(Long tagId);
+
 }

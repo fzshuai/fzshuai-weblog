@@ -13,12 +13,10 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="selectTagNamesByArticleId" parameterType="long" resultType="String">
+    <select id="selectTagNameById" resultType="String">
         select tag_name
-        from blog_tag t
-                 join blog_article_tag at
-        on t.tag_id = at.tag_id
-        where article_id = #{articleId}
+        from blog_tag
+        where tag_id = #{tagId}
     </select>
 
 </mapper>

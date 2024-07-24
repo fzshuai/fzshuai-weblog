@@ -79,6 +79,7 @@ public class ArticleController extends BaseController {
      * @param condition 条件
      * @return 文章列表
      */
+    @SaIgnore
     @GetMapping("/articles/condition")
     public R<ArticlePreviewListVo> listArticlesByCondition(ConditionVo condition) {
         return R.ok(articleService.queryArticlePreviewList(condition));

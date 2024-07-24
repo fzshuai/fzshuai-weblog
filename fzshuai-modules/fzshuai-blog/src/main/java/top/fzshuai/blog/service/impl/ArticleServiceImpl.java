@@ -168,15 +168,9 @@ public class ArticleServiceImpl implements IArticleService {
         // 搜索条件对应名(标签或分类名)
         String name;
         if (Objects.nonNull(condition.getCategoryId())) {
-            name = categoryMapper.selectOne(new LambdaQueryWrapper<Category>()
-                    .select(Category::getCategoryName)
-                    .eq(Category::getCategoryId, condition.getCategoryId()))
-                .getCategoryName();
+            name = categoryMapper.selectCategoryNameById(condition.getCategoryId());
         } else {
-            name = tagMapper.selectVoOne(new LambdaQueryWrapper<Tag>()
-                    .select(Tag::getTagName)
-                    .eq(Tag::getTagId, condition.getTagId()))
-                .getTagName();
+            name = tagMapper.selectTagNameById(condition.getTagId());
         }
         return ArticlePreviewListVo.builder()
             .articlePreviewDtoList(articlePreviewDtoList)
