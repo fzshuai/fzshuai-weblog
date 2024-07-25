@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.fzshuai.common.annotation.Translation;
+import top.fzshuai.common.constant.TransConstant;
 
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,12 @@ public class ArticlePreviewDto {
      * 文章缩略图
      */
     private String articleCover;
+
+    /**
+     * 文章缩略图url
+     */
+    @Translation(type = TransConstant.OSS_ID_TO_URL, mapper = "articleCover")
+    private String articleCoverUrl;
 
     /**
      * 标题
