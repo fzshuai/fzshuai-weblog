@@ -324,7 +324,10 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int updateUser(SysUser user) {
+    public int updateUser(SysUser user, Boolean isLogin) {
+        if (!isLogin) {
+            return updateUser(user);
+        }
         Long userId = user.getUserId();
         // 删除用户与角色关联
         userRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, userId));
@@ -334,6 +337,10 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
         userPostMapper.delete(new LambdaQueryWrapper<SysUserPost>().eq(SysUserPost::getUserId, userId));
         // 新增用户与岗位管理
         insertUserPost(user);
+        return baseMapper.updateById(user);
+    }
+
+    public int updateUser(SysUser user) {
         return baseMapper.updateById(user);
     }
 

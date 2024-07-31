@@ -183,7 +183,7 @@ public class SysUserController extends BaseController {
         } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
             return R.fail("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        return toAjax(userService.updateUser(user));
+        return toAjax(userService.updateUser(user, true));
     }
 
     /**

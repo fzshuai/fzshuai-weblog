@@ -153,9 +153,10 @@ public interface ISysUserService {
      * 修改用户信息
      *
      * @param user 用户信息
+     * @param isLogin 是否登录
      * @return 结果
      */
-    int updateUser(SysUser user);
+    int updateUser(SysUser user, Boolean isLogin);
 
     /**
      * 用户授权角色

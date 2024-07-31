@@ -387,12 +387,12 @@ public class SysLoginService {
      * @param userId 用户ID
      */
     public void recordLoginInfo(Long userId, String username) {
-        SysUser sysUser = new SysUser();
-        sysUser.setUserId(userId);
-        sysUser.setLoginIp(ServletUtils.getClientIP());
-        sysUser.setLoginDate(DateUtils.getNowDate());
-        sysUser.setUpdateBy(username);
-        userService.updateUser(sysUser);
+        SysUser user = new SysUser();
+        user.setUserId(userId);
+        user.setLoginIp(ServletUtils.getClientIP());
+        user.setLoginDate(DateUtils.getNowDate());
+        user.setUpdateBy(username);
+        userService.updateUser(user, false);
     }
 
     /**
